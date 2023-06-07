@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
+import { getTargetWindow } from './window-monitor';
 
 // The built directory structure
 //
@@ -17,7 +18,7 @@ let win: BrowserWindow | null;
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
-function createWindow() {
+async function createWindow() {
     win = new BrowserWindow({
         icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
         webPreferences: {
@@ -36,6 +37,10 @@ function createWindow() {
         // win.loadFile('dist/index.html')
         win.loadFile(path.join(process.env.DIST, 'index.html'));
     }
+
+    const res = await getTargetWindow({});
+    console.log('res', res);
+
 }
 
 app.on('window-all-closed', () => {

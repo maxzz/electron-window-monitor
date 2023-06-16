@@ -1,6 +1,6 @@
 import path from 'node:path';
-import { BrowserWindow, app } from "electron";
-import { getIniOptions, saveIniOptions } from './utils/app-ini-options';
+import { BrowserWindow, app, shell } from "electron";
+import { getIniOptions, saveIniOptions } from '../utils/app-ini-options';
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
@@ -27,6 +27,13 @@ export async function createWindow() {
     }
 
     winApp.once('ready-to-show', () => winApp?.show());
+
+    winApp.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
+        if (url.startsWith('https:')) {
+            shell.openExternal(url);
+        }
+        return { action: 'deny' };
+    });
 
     winApp.on('close', () => {
         winApp && saveIniOptions(winApp);

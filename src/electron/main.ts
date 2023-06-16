@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { app } from 'electron';
-import { connect_ListenersForCallFromRenderer, connect_MainWindowListeners, createWindow } from './app/create-main-window';
+import { connect_ListenersForCallFromRenderer, connect_MainWindowListeners, createWindow } from './app/start-main-window/create-main-window';
 // import { getTargetWindow } from './window-monitor';
 
 // The built directory structure

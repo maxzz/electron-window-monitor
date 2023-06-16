@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'node:path';
-import { getTargetWindow } from './window-monitor';
+// import { getTargetWindow } from './window-monitor';
 
 // The built directory structure
 //
@@ -38,8 +38,8 @@ async function createWindow() {
         win.loadFile(path.join(process.env.DIST, 'index.html'));
     }
 
-    const res = await getTargetWindow({});
-    console.log('res', res);
+    // const res = await getTargetWindow({});
+    // console.log('res', res);
 
 }
 

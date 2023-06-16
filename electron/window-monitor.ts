@@ -1,6 +1,9 @@
 import { createRequire } from 'module';
+console.log('import.meta.url',import.meta.url);
+
 const require = createRequire(import.meta.url);
-const addon = require('../public/plugins/pmat_plugin_nodejs');
+const addon = require('./plugins/pmat_plugin_nodejs');
+//const addon = require('../public/plugins/pmat_plugin_nodejs');
 
 export function getTargetWindow(dataIn: object | string): Promise<string> {
     return new Promise<string>(

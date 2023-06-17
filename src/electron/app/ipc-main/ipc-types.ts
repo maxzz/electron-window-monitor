@@ -1,4 +1,4 @@
-export namespace M2R {
+export namespace M2R { // Main to Renderer
 
     // menu commands
 
@@ -19,7 +19,7 @@ export namespace M2R {
     export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles;
 }
 
-export namespace M4R {
+export namespace M4R { // Main from Renderer
     export type NotifyMessage = {
         type: 'notify';
         message: string;
@@ -30,10 +30,14 @@ export namespace M4R {
         active: boolean;
     }
 
-    export type ToMainCalls = NotifyMessage | DarkMode;
+    export type GetSecondWindow = {
+        type: 'get-second-window';
+    };
+
+    export type ToMainCalls = NotifyMessage | DarkMode | GetSecondWindow;
 }
 
-export namespace M4RInvoke {
+export namespace M4RInvoke { // Main from Renderer invoke and get result
     type DoLoadfiles = {
         type: 'load-files';
         filenames: string[];

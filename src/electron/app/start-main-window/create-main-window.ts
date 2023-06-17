@@ -1,6 +1,9 @@
 import path from 'node:path';
-import { BrowserWindow, app, shell } from "electron";
+import { BrowserWindow, IpcMainEvent, IpcMainInvokeEvent, app, ipcMain, shell } from "electron";
 import { getIniOptions, saveIniOptions } from '../utils/app-ini-options';
+import { callFromRendererToMain } from '../ipc-main/ipc-calls';
+import { M4R, M4RInvoke } from '../ipc-main';
+import { invokeFromRendererToMain } from '../ipc-main/ipc-invoke';
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
@@ -9,8 +12,9 @@ export let winApp: BrowserWindow | null;
 
 export async function createWindow() {
     const iniOptions = getIniOptions();
+    const preload = path.join(__dirname, 'preload.js');
 
-    console.log('iniOptions', iniOptions);
+    console.log('__dirname', __dirname);
 
     winApp = new BrowserWindow({
         title: 'PMAT Monitor',
@@ -18,7 +22,7 @@ export async function createWindow() {
         show: false,
         icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: preload,
             nodeIntegration: false, //https://www.electronjs.org/docs/latest/tutorial/security process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
             contextIsolation: true, //https://www.electronjs.org/docs/latest/tutorial/context-isolation
             //...(iniOptions?.devTools && { devTools: iniOptions.devTools }) enable during runtime
@@ -65,4 +69,21 @@ export function connect_MainWindowListeners() {
 }
 
 export function connect_ListenersForCallFromRenderer() {
+    // call
+    function cc(_event: IpcMainEvent, data: any) {
+        callFromRendererToMain(data as M4R.ToMainCalls);
+    }
+    function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
+        ipcMain.on(channel, handler);
+    }
+    connect_CallMain('call-main', cc);
+
+    // invoke
+    function ii(_event: IpcMainInvokeEvent, data: any): any {
+        return invokeFromRendererToMain(data as M4RInvoke.InvokeCalls);
+    }
+    function connect_InvokeMain(channel: PreloadChannels, handler: (event: IpcMainInvokeEvent, data: any) => any) {
+        ipcMain.handle(channel, handler);
+    }
+    connect_InvokeMain('invoke-main', ii);
 }

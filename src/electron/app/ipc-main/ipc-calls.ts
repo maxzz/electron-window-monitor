@@ -1,5 +1,5 @@
 import { Notification } from "electron";
-import { M4R } from ".";
+import { M4R } from "./ipc-types";
 
 export function callFromRendererToMain(d: M4R.ToMainCalls) {
     switch (d.type) {
@@ -9,6 +9,10 @@ export function callFromRendererToMain(d: M4R.ToMainCalls) {
         }
         case 'dark-mode': {
             d.active;
+            break;
+        }
+        case 'get-second-window': {
+            console.log('get-second-window');
             break;
         }
         default: {

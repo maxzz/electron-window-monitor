@@ -1,4 +1,4 @@
-import { M4RInvoke } from ".";
+import { M4RInvoke } from "./ipc-types";
 import { loadFilesContent } from "../utils/load-files";
 
 export function invokeFromRendererToMain(d: M4RInvoke.InvokeCalls): any {

@@ -1,9 +1,11 @@
 import { createRequire } from 'module';
-console.log('import.meta.url',import.meta.url);
+console.log('import.meta.url', import.meta.url);
 
 const require = createRequire(import.meta.url);
 const addon = require('./plugins/pmat_plugin_nodejs');
 //const addon = require('../public/plugins/pmat_plugin_nodejs');
+
+//TODO: what are params for getTargetWindow(dataIn: object | string)
 
 export function getTargetWindow(dataIn: object | string): Promise<string> {
     return new Promise<string>(
@@ -13,16 +15,31 @@ export function getTargetWindow(dataIn: object | string): Promise<string> {
                 strParam = JSON.stringify(dataIn);
             }
 
-            addon.getTargetWindow(strParam, (err: string, data: string) => {
-                if (err) {
-                    //console.error(err);
-                    reject(err);
-                }
-                else {
-                    //console.log(data);
-                    resolve(data);
-                }
-            });
+            addon.getTargetWindow(strParam,
+                (err: string, data: string) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
+        });
+}
+
+export function getWindowContent(hwnd: string): Promise<string> {
+    return new Promise<string>(
+        (resolve, reject) => {
+            const hwndStr = JSON.stringify({ hwnd });
+            const collector = new addon.CWindowControlsCollector();
+            
+            collector.collect(hwndStr,
+                (err: any, data: string) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(data);
+                    }
+                });
         });
 }
 

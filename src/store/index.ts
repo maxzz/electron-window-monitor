@@ -1,2 +1,3 @@
 export * from './ipc-renderer';
-export * from './dropFiles';
+export * from './atom-doDroppedFiles';
+export * from './atom-secondActiveWindowAtom';

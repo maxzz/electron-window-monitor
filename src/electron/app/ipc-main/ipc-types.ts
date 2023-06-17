@@ -54,7 +54,11 @@ export namespace M4RInvoke { // Main from Renderer invoke and get result
         filenames: string[];
     };
     
-    export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/;
+    type GetSecondWindowResult = {
+        type: 'get-second-window-result';
+    };
+
+    export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/ | GetSecondWindowResult;
 
     export type FileContent = {
         name: string;                   // file name wo/ path

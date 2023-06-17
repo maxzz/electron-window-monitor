@@ -8,7 +8,7 @@
 
 type TmApi = {
     callMain: (data: any) => void;
-    invokeMain: (data: any) => any;
+    invokeMain: (data: any) => Promise<any>;
     setCbCallFromMain: (callback: (event: /*IpcRendererEvent*/any, data: any) => void) => void;
 }
 

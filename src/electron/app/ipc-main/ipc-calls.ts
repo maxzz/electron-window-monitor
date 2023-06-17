@@ -1,7 +1,8 @@
 import { Notification } from "electron";
 import { M4R } from "./ipc-types";
+import { getTargetWindow } from "../windows-napi-calls/window-monitor";
 
-export function callFromRendererToMain(d: M4R.ToMainCalls) {
+export async function callFromRendererToMain(d: M4R.ToMainCalls) {
     switch (d.type) {
         case 'notify': {
             new Notification({ title: 'My Noti', body: d.message }).show();
@@ -13,6 +14,8 @@ export function callFromRendererToMain(d: M4R.ToMainCalls) {
         }
         case 'get-second-window': {
             console.log('get-second-window');
+            let data1 = await getTargetWindow({});
+            console.log('------------------------', data1);
             break;
         }
         default: {

@@ -21,8 +21,8 @@ export function sendToMain(data: M4R.ToMainCalls): void {
 
 // invoke
 
-export function invokeMain(data: any): void {
-    return mainApi?.invokeMain(data);
+export async function invokeMain(data: any) {
+    return await mainApi?.invokeMain(data);
 }
 
 export function invokeLoadFiles(filenames: string[], allowedExt?: string[]): Promise<M4RInvoke.FileContent[]> {

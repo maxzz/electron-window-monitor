@@ -14,7 +14,7 @@ export async function createWindow() {
     const iniOptions = getIniOptions();
     const preload = path.join(__dirname, 'preload.js');
 
-    console.log('__dirname', __dirname);
+    //console.log('__dirname', __dirname);
 
     winApp = new BrowserWindow({
         title: 'PMAT Monitor',

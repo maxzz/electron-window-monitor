@@ -12,7 +12,6 @@ export async function invokeFromRendererToMain(d: M4RInvoke.InvokeCalls): Promis
         }
         case 'get-second-window-handle': {
             const res = await getTargetWindow({});
-            console.log('get-second-window-result', JSON.stringify(JSON.parse(res), null, 4));
             return res;
         }
         case 'get-second-window-content': {
@@ -21,7 +20,7 @@ export async function invokeFromRendererToMain(d: M4RInvoke.InvokeCalls): Promis
         }
         default: {
             const really: never = d;
-            throw new Error(really);
+            throw new Error(`\nUnknown IPC invoke: ${JSON.stringify(really)}\n`);
         }
     }
 }

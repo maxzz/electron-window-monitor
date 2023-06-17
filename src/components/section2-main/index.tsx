@@ -1,20 +1,34 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { invokeMain, secondActiveWindowAtom } from "@/store";
 
+const buttonClasses = "px-4 py-3 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] transition-transform";
+
 function ButtonGetSecondWindow() {
     const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
     async function sendRequest() {
-        const res = await invokeMain({ type: 'get-second-window-result' });
+        const res = await invokeMain({ type: 'get-second-window-handle' });
         const obj = JSON.parse(res || '{}');
-        console.log('res ----------', obj);
+        console.log('ButtonGetSecondWindow', obj);
         setSecondActiveWindow(obj);
     }
     return (
-        <button
-            className="px-4 py-3 border-primary-400 hover:bg-primary-500 border rounded shadow active:scale-[.97] transition-transform"
-            onClick={sendRequest}
-        >
+        <button className={buttonClasses} onClick={sendRequest}>
             Get Second Window
+        </button>
+    );
+}
+
+function ButtonGetSecondWindowContent() {
+    const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
+    async function sendRequest() {
+        const res = await invokeMain({ type: 'get-second-window-handle' });
+        const obj = JSON.parse(res || '{}');
+        console.log('ButtonGetSecondWindowContent', obj);
+        setSecondActiveWindow(obj);
+    }
+    return (
+        <button className={buttonClasses} onClick={sendRequest}>
+            Get Second Window Content
         </button>
     );
 }
@@ -56,8 +70,9 @@ function SecondWindowContent() {
 
 export function Section2Main() {
     return (
-        <div className="m-4 text-primary-900">
+        <div className="m-4 text-primary-900 space-x-2">
             <ButtonGetSecondWindow />
+            <ButtonGetSecondWindowContent />
             <SecondWindowResult />
             <SecondWindowContent />
         </div>

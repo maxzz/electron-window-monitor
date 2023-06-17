@@ -16,12 +16,34 @@ export function getTargetWindow(dataIn: object | string): Promise<string> {
     );
 }
 
+// export function getWindowContent(hwnd: string): Promise<string> {
+//     return new Promise<string>(
+//         (resolve, reject) => {
+//             const param = JSON.stringify({ hwnd });
+//             const collector = new addon.CWindowControlsCollector();
+//             collector.collect(param, (err: any, data: string) => err ? reject(err) : resolve(data));
+//         }
+//     );
+// }
+
 export function getWindowContent(hwnd: string): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
             const param = JSON.stringify({ hwnd });
             const collector = new addon.CWindowControlsCollector();
-            collector.collect(param, (err: any, data: string) => err ? reject(err) : resolve(data));
+            collector.collect(param, (err: any, data: string) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                const res: /*{ state: 'progress' | 'done'; progress: number; } |*/ { pool: string; controls: string[]; } = JSON.parse(data);
+                
+                if (res.controls) {
+                    resolve(data);
+                }
+
+                console.log('cb:', JSON.stringify(res));
+            });
         }
     );
 }

@@ -21,7 +21,7 @@ export function sendToMain(data: M4R.ToMainCalls): void {
 
 // invoke
 
-export async function invokeMain(data: any) {
+export async function invokeMain<TResult>(data: M4RInvoke.InvokeCalls): Promise<TResult> {
     return await mainApi?.invokeMain(data);
 }
 

@@ -1,12 +1,12 @@
 import { useAtomValue, useSetAtom } from "jotai";
-import { invokeMain, secondActiveWindowAtom } from "@/store";
+import { invokeMain, secondActiveContentAtom, secondActiveWindowAtom } from "@/store";
 
-const buttonClasses = "px-4 py-3 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] transition-transform";
+const buttonClasses = "px-4 py-3 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
 function ButtonGetSecondWindow() {
     const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
     async function sendRequest() {
-        const res = await invokeMain({ type: 'get-second-window-handle' });
+        const res = await invokeMain<string>({ type: 'get-second-window-handle' });
         const obj = JSON.parse(res || '{}');
         console.log('ButtonGetSecondWindow', obj);
         setSecondActiveWindow(obj);
@@ -19,15 +19,19 @@ function ButtonGetSecondWindow() {
 }
 
 function ButtonGetSecondWindowContent() {
-    const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
+    const setSecondActiveContent = useSetAtom(secondActiveContentAtom);
+    const secondActiveWindow = useAtomValue(secondActiveWindowAtom);
+    const hwnd = secondActiveWindow?.hwnd;
     async function sendRequest() {
-        const res = await invokeMain({ type: 'get-second-window-handle' });
-        const obj = JSON.parse(res || '{}');
-        console.log('ButtonGetSecondWindowContent', obj);
-        setSecondActiveWindow(obj);
+        if (hwnd) {
+            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
+            const obj = JSON.parse(res || '{}');
+            console.log('ButtonGetSecondWindowContent', obj);
+            setSecondActiveContent(res);
+        }
     }
     return (
-        <button className={buttonClasses} onClick={sendRequest}>
+        <button className={buttonClasses} disabled={!hwnd} onClick={sendRequest}>
             Get Second Window Content
         </button>
     );

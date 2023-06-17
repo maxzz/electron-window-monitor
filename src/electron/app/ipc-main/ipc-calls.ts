@@ -12,12 +12,6 @@ export async function callFromRendererToMain(d: M4R.ToMainCalls) {
             d.active;
             break;
         }
-        case 'get-second-window': {
-            console.log('get-second-window');
-            let data1 = await getTargetWindow({});
-            console.log('------------------------', data1);
-            break;
-        }
         default: {
             const really: never = d;
             throw new Error(really);

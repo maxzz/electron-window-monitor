@@ -8,3 +8,5 @@ export type SecondActiveWindowReply = {
 };
 
 export const secondActiveWindowAtom = atom<SecondActiveWindowReply | null>(null);
+
+export const secondActiveContentAtom = atom<string | null>(null);

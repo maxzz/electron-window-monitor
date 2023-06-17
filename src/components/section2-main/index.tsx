@@ -4,7 +4,6 @@ import { invokeMain, secondActiveWindowAtom } from "@/store";
 function ButtonGetSecondWindow() {
     const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
     async function sendRequest() {
-        // sendToMain({ type: 'get-second-window' });
         const res = await invokeMain({ type: 'get-second-window-result' });
         const obj = JSON.parse(res || '{}');
         console.log('res ----------', obj);

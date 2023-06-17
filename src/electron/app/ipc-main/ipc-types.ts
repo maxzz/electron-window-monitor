@@ -30,11 +30,7 @@ export namespace M4R { // Main from Renderer
         active: boolean;
     }
 
-    export type GetSecondWindow = {
-        type: 'get-second-window';
-    };
-
-    export type ToMainCalls = NotifyMessage | DarkMode | GetSecondWindow;
+    export type ToMainCalls = NotifyMessage | DarkMode;
 }
 
 export namespace M4RInvoke { // Main from Renderer invoke and get result
@@ -54,11 +50,16 @@ export namespace M4RInvoke { // Main from Renderer invoke and get result
         filenames: string[];
     };
     
-    type GetSecondWindowResult = {
-        type: 'get-second-window-result';
+    type GetSecondWindowHandle = {
+        type: 'get-second-window-handle';
     };
 
-    export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/ | GetSecondWindowResult;
+    type GetSecondWindowContent = {
+        type: 'get-second-window-content';
+        hwnd: string;
+    };
+
+    export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/ | GetSecondWindowHandle | GetSecondWindowContent;
 
     export type FileContent = {
         name: string;                   // file name wo/ path

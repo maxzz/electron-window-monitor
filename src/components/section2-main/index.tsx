@@ -1,6 +1,5 @@
-import { invokeMain, sendToMain } from "@/store";
-import { secondActiveWindowAtom } from "@/store";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
+import { invokeMain, secondActiveWindowAtom } from "@/store";
 
 function ButtonGetSecondWindow() {
     const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
@@ -29,7 +28,7 @@ function Row({ name, value }: { name: string; value: string; }) {
 }
 
 function SecondWindowResult() {
-    const [secondActiveWindow, setSecondActiveWindow] = useAtom(secondActiveWindowAtom);
+    const secondActiveWindow = useAtomValue(secondActiveWindowAtom);
     return (
         <div className="my-4">
             <div className="py-4 font-semibold">Window</div>

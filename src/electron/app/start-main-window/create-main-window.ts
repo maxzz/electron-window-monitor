@@ -5,10 +5,12 @@ import { getIniOptions, saveIniOptions } from '../utils/app-ini-options';
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
-let winApp: BrowserWindow | null;
+export let winApp: BrowserWindow | null;
 
 export async function createWindow() {
     const iniOptions = getIniOptions();
+
+    console.log('iniOptions', iniOptions);
 
     winApp = new BrowserWindow({
         title: 'PMAT Monitor',
@@ -17,6 +19,9 @@ export async function createWindow() {
         icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
+            nodeIntegration: false, //https://www.electronjs.org/docs/latest/tutorial/security process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+            contextIsolation: true, //https://www.electronjs.org/docs/latest/tutorial/context-isolation
+            //...(iniOptions?.devTools && { devTools: iniOptions.devTools }) enable during runtime
         },
     });
 
@@ -26,7 +31,12 @@ export async function createWindow() {
         winApp.loadFile(path.join(process.env.DIST, 'index.html'));
     }
 
-    winApp.once('ready-to-show', () => winApp?.show());
+    winApp.once('ready-to-show', () => {
+        if (iniOptions?.devTools && winApp && !winApp.webContents.isDevToolsOpened()) {
+            winApp.webContents.toggleDevTools();
+        }
+        winApp?.show();
+    });
 
     winApp.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
         if (url.startsWith('https:')) {

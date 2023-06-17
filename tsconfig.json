@@ -19,7 +19,7 @@
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true,
-        
+
         "paths": {
             "@/*": [ "./src/*" ],
         }
@@ -27,7 +27,7 @@
     "include": [
         "src",
         "src/electron"
-    ],
+, "vite-preload-calls.d.ts"    ],
     "references": [
         {
             "path": "./tsconfig.node.json"

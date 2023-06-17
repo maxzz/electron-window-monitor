@@ -1,0 +1,1 @@
+type PreloadChannels = 'invoke-main' | 'call-main' | 'send-to-renderer';

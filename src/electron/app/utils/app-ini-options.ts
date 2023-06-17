@@ -9,13 +9,14 @@ export type IniOptions = {
     devTools: boolean;  // is devTools open
 };
 
-function fixBounds(bounds: Rectangle): Rectangle | undefined {
+function fixBounds(bounds?: Rectangle): Rectangle | undefined {
     if (bounds) {
         const area = screen.getDisplayMatching(bounds).workArea;
         if (isInsideRect(bounds, area)) {
             return bounds;
         }
     }
+
     function isInsideRect(bounds: Rectangle, area: Rectangle) {
         return bounds.x >= area.x &&
             bounds.y >= area.y &&

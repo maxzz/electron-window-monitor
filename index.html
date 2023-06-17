@@ -7,6 +7,16 @@
     <title>Vite + React + TS</title>
   </head>
   <body>
+    <script>
+        (function () {
+            const orginalInfo = console.info;
+            console.info = function (message) {
+                if (!/Download the React DevTools/.test(message)) {
+                    orginalInfo.apply(console, arguments);
+                }
+            };
+        })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

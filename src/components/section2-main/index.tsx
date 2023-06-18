@@ -1,5 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { invokeMain, secondActiveContentAtom, secondActiveWindowAtom } from "@/store";
+import { SecondWindowResult, SecondWindowContent } from "./result-displays";
 
 const buttonClasses = "px-4 py-3 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
@@ -32,46 +33,18 @@ function ButtonGetSecondWindowContent() {
     }
     return (
         <button className={buttonClasses} disabled={!hwnd} onClick={sendRequest}>
-            Get Second Window Content
+            Get Content
         </button>
     );
 }
 
-function Row({ name, value }: { name: string; value: string; }) {
-    return (<>
-        <div className="py-1.5 px-2 h-full border-primary-500 border-b text-xs ">{name}</div>
-        <div className="py-1 border-primary-500 border-l border-b px-2">{value}</div>
-    </>);
-}
-
-function SecondWindowResult() {
-    const secondActiveWindow = useAtomValue(secondActiveWindowAtom);
+function ButtonStartTimer() {
+    async function sendRequest() {
+    }
     return (
-        <div className="my-4">
-            <div className="py-4 font-semibold">
-                Window
-            </div>
-
-            <div className="max-w-[max-content] text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
-                {secondActiveWindow && (<>
-                    <Row name="hwnd"      /**/ value={secondActiveWindow.hwnd} />
-                    <Row name="caption"   /**/ value={secondActiveWindow.caption} />
-                    <Row name="classname" /**/ value={secondActiveWindow.classname} />
-                    <Row name="process"   /**/ value={secondActiveWindow.process} />
-                </>)}
-            </div>
-        </div>
-    );
-}
-
-function SecondWindowContent() {
-    return (
-        <div className="my-4">
-            <div className="py-4 font-semibold">Content</div>
-            <div className="text-sm grid grid-cols-[auto_1fr] gap-x-2">
-                Not now
-            </div>
-        </div>
+        <button className={buttonClasses} onClick={sendRequest}>
+            Start Monitor
+        </button>
     );
 }
 
@@ -80,6 +53,7 @@ export function Section2Main() {
         <div className="m-4 text-primary-900 space-x-2">
             <ButtonGetSecondWindow />
             <ButtonGetSecondWindowContent />
+            <ButtonStartTimer />
             <SecondWindowResult />
             <SecondWindowContent />
         </div>

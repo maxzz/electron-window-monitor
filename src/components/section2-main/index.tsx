@@ -1,21 +1,15 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { doGetWindowContentAtom, doMonitoringAtom, invokeMain, secondActiveWindowAtom } from "@/store";
+import { doGetSawHandleAtom, doGetWindowContentAtom, doMonitoringAtom, invokeMain, sawHandleAtom } from "@/store";
 import { SecondWindowResult, SecondWindowContent } from "./result-displays";
 import { useState } from "react";
 
 const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
 function ButtonGetSecondWindow() {
+    const doGetSawHandle = useSetAtom(doGetSawHandleAtom);
     const isMonitoring = useAtomValue(doMonitoringAtom);
-    const setSecondActiveWindow = useSetAtom(secondActiveWindowAtom);
-    async function sendRequest() {
-        const res = await invokeMain<string>({ type: 'get-second-window-handle' });
-        const obj = JSON.parse(res || '{}');
-        console.log('ButtonGetSecondWindow', obj);
-        setSecondActiveWindow(obj);
-    }
     return (
-        <button className={buttonClasses} disabled={isMonitoring} onClick={sendRequest}>
+        <button className={buttonClasses} disabled={isMonitoring} onClick={doGetSawHandle}>
             Get Second Window
         </button>
     );
@@ -23,8 +17,8 @@ function ButtonGetSecondWindow() {
 
 function ButtonGetSecondWindowContent() {
     const doGetWindowContent = useSetAtom(doGetWindowContentAtom);
-    const secondActiveWindow = useAtomValue(secondActiveWindowAtom);
-    const hwnd = secondActiveWindow?.hwnd || '';
+    const secondActiveWindow = useAtomValue(sawHandleAtom);
+    const hwnd = secondActiveWindow?.hwnd;
     return (
         <button className={buttonClasses} disabled={!hwnd} onClick={() => doGetWindowContent(hwnd)}>
             Get Content

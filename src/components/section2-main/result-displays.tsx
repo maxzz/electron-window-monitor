@@ -1,4 +1,4 @@
-import { sawContentStrAtom, secondActiveWindowAtom } from "@/store";
+import { sawContentStrAtom, sawHandleAtom } from "@/store";
 import { useAtomValue } from "jotai";
 
 function RowWindowInfo({ name, value }: { name: string; value: string; }) {
@@ -9,7 +9,7 @@ function RowWindowInfo({ name, value }: { name: string; value: string; }) {
 }
 
 export function SecondWindowResult() {
-    const secondActiveWindow = useAtomValue(secondActiveWindowAtom);
+    const secondActiveWindow = useAtomValue(sawHandleAtom);
     return (
         <div className="my-4">
             <div className="pt-4 pb-1 font-semibold">

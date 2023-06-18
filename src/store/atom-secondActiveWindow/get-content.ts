@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "..";
+import { invokeMain } from "../ipc-renderer";
 
 /* order sent by napi plugin
 export type EngineControl = {
@@ -57,6 +57,6 @@ export const doGetWindowContentAtom = atom(
         set(sawContentStrAtom, res);
 
         const obj = JSON.parse(res || '{}');
-        console.log('ButtonGetSecondWindowContent', obj);
+        console.log('doGetWindowContentAtom.set', obj);
     }
 );

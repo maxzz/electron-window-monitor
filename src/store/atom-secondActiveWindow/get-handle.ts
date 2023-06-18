@@ -11,6 +11,14 @@ export type SawHandle = {   // SAW - Second Active Window
 export const sawHandleAtom = atom<SawHandle | null>(null);
 export const sawHandleStrAtom = atom('');
 
+export const doClearSawHandleAtom = atom(
+    null,
+    (get, set) => {
+        set(sawHandleAtom, null);
+        set(sawHandleStrAtom, '');
+    }
+);
+
 export const doGetSawHandleAtom = atom(
     null,
     async (get, set): Promise<void> => {

@@ -1,5 +1,6 @@
-import { monitoringCounterAtom, sawContentStrAtom, sawHandleAtom, sawHandleStrAtom } from "@/store";
-import { useAtomValue } from "jotai";
+import { doClearSawHandleAtom, monitoringCounterAtom, sawContentStrAtom, sawHandleAtom, sawHandleStrAtom } from "@/store";
+import { classNames } from "@/utils";
+import { useAtomValue, useSetAtom } from "jotai";
 
 function RowWindowInfo({ name, value }: { name: string; value: string; }) {
     return (<>
@@ -8,23 +9,40 @@ function RowWindowInfo({ name, value }: { name: string; value: string; }) {
     </>);
 }
 
+const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
+
+function SawHandlePanelButtons() {
+    const doClearSawHandle = useSetAtom(doClearSawHandleAtom);
+    const raw = useAtomValue(sawHandleStrAtom);
+    if (!raw) {
+        return null;
+    }
+    return (
+        <div className="flex items-center space-x-1">
+            <button className={classNames(borderClasses, "active:scale-[.97] transition-transform")} onClick={doClearSawHandle}>
+                Clear
+            </button>
+
+            <div className="relative group cursor-default">
+                <div className={borderClasses}>Raw</div>
+                <div className="absolute hidden group-hover:block right-0 py-1">
+                    <div className="px-2 py-1 text-xs bg-primary-100 rounded">{`"${raw}"`}</div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
-    const raw = useAtomValue(sawHandleStrAtom);
+
     return (
         <div className="my-4">
             <div className="pt-4 pb-1 flex items-center justify-between">
                 <div className="font-semibold">
                     Second Window
                 </div>
-                {raw && (
-                    <div className="relative group cursor-default">
-                        <div className="px-2 py-1 text-xs border-primary-500 border rounded">Raw</div>
-                        <div className="absolute hidden group-hover:block right-0 py-1">
-                            <div className="px-2 py-1 text-xs bg-primary-100 rounded">{`"${raw}"`}</div>
-                        </div>
-                    </div>
-                )}
+                <SawHandlePanelButtons />
             </div>
 
             <div className="max-w-[max-content] text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">

@@ -11,19 +11,20 @@ function RowWindowInfo({ name, value }: { name: string; value: string; }) {
 export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const raw = useAtomValue(sawHandleStrAtom);
-    //console.log('aaaaaaa11111111a');
     return (
         <div className="my-4">
             <div className="pt-4 pb-1 flex items-center justify-between">
                 <div className="font-semibold">
                     Second Window
                 </div>
-                <div className="relative group cursor-default">
-                    <div className="px-2 py-1 text-xs border-primary-500 border rounded">Raw</div>
-                    <div className="absolute hidden group-hover:block right-0 py-1">
-                        <div className="px-2 py-1 text-xs bg-primary-100 rounded">{`"${raw}"`}</div>
+                {raw && (
+                    <div className="relative group cursor-default">
+                        <div className="px-2 py-1 text-xs border-primary-500 border rounded">Raw</div>
+                        <div className="absolute hidden group-hover:block right-0 py-1">
+                            <div className="px-2 py-1 text-xs bg-primary-100 rounded">{`"${raw}"`}</div>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
 
             <div className="max-w-[max-content] text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">

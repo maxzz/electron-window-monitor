@@ -58,19 +58,37 @@ export const sawContentAtom = atom<SawContentReply | null>(null);
 
 //
 
-export const isMonitoringAtom = atom(false);
+let monitorTimerId: ReturnType<typeof setTimeout> | undefined;
 
-export const doMonitoringAtom = atom(null,
-    (get, set, doStart: boolean) => {
-        const isMonitoring = get(isMonitoringAtom);
+const _isMonitoringAtom = atom(false);
+
+export const doMonitoringAtom = atom(
+    (get) => get(_isMonitoringAtom),
+    (get, set, {doStart, callback}: {doStart: boolean, callback: Function}) => {
+        const isMonitoring = get(_isMonitoringAtom);
 
         if (isMonitoring) {
             if (!doStart) {
-                set(isMonitoringAtom, false);
+                set(_isMonitoringAtom, false);
+                if (monitorTimerId) {
+                    clearTimeout(monitorTimerId);
+                    monitorTimerId = undefined;
+                }
             }
         } else {
             if (doStart) {
-                set(isMonitoringAtom, true);
+                set(_isMonitoringAtom, true);
+
+                if (monitorTimerId) {
+                    clearTimeout(monitorTimerId);
+                    monitorTimerId = undefined;
+                }
+
+                function runTimeout() {
+                    callback();
+                    monitorTimerId = setTimeout(runTimeout, 1000);
+                }
+                monitorTimerId = setTimeout(runTimeout, 1000);
             }
         }
     }

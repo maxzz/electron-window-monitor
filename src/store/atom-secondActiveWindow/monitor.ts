@@ -2,6 +2,8 @@ import { atom } from "jotai";
 
 let monitorTimerId: ReturnType<typeof setTimeout> | undefined;
 
+export const monitoringCounterAtom = atom(-1);
+
 const _isMonitoringAtom = atom(false);
 
 export const doMonitoringAtom = atom(
@@ -12,6 +14,8 @@ export const doMonitoringAtom = atom(
         if (isMonitoring) {
             if (!doStart) {
                 set(_isMonitoringAtom, false);
+                set(monitoringCounterAtom, -1);
+
                 if (monitorTimerId) {
                     clearTimeout(monitorTimerId);
                     monitorTimerId = undefined;
@@ -28,8 +32,12 @@ export const doMonitoringAtom = atom(
 
                 function runTimeout() {
                     callback();
+
+                    set(monitoringCounterAtom, get(monitoringCounterAtom) + 1);
                     monitorTimerId = setTimeout(runTimeout, 1000);
                 }
+
+                set(monitoringCounterAtom, 1);
                 monitorTimerId = setTimeout(runTimeout, 1000);
             }
         }

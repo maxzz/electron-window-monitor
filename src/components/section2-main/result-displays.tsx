@@ -1,4 +1,4 @@
-import { sawContentStrAtom, sawHandleAtom } from "@/store";
+import { monitoringCounterAtom, sawContentStrAtom, sawHandleAtom } from "@/store";
 import { useAtomValue } from "jotai";
 
 function RowWindowInfo({ name, value }: { name: string; value: string; }) {
@@ -39,6 +39,20 @@ export function SecondWindowContent() {
 
             <div className="text-sm grid grid-cols-[auto_1fr] gap-x-2">
                 Not now
+            </div>
+        </div>
+    );
+}
+
+export function MonitoringCounter() {
+    const monitoringCounter = useAtomValue(monitoringCounterAtom);
+    if (monitoringCounter < 0) {
+        return null;
+    }
+    return (
+        <div className="my-4 absolute left-0 bottom-0">
+            <div className="pt-4 pb-1 text-5xl font-mono font-semibold">
+                {`${monitoringCounter}`.padStart(2, '0')}
             </div>
         </div>
     );

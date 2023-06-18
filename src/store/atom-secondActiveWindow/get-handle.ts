@@ -17,6 +17,6 @@ export const doGetSawHandleAtom = atom(
         const obj = JSON.parse(res || '{}');
         set(sawHandleAtom, obj);
 
-        console.log('doGetSawHandleAtom.set', obj);
+        console.log('doGetSawHandleAtom.set', JSON.stringify(obj, null, 4));
     }
 );

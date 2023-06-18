@@ -57,6 +57,6 @@ export const doGetWindowContentAtom = atom(
         set(sawContentStrAtom, res);
 
         const obj = JSON.parse(res || '{}');
-        console.log('doGetWindowContentAtom.set', obj);
+        console.log('doGetWindowContentAtom.set', JSON.stringify(obj, null, 4));
     }
 );

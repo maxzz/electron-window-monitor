@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { doGetSawHandleAtom, doGetWindowContentAtom, doMonitoringAtom, invokeMain, sawHandleAtom } from "@/store";
-import { SecondWindowResult, SecondWindowContent } from "./result-displays";
+import { doGetSawHandleAtom, doGetWindowContentAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
+import { SecondWindowResult, SecondWindowContent, MonitoringCounter } from "./result-displays";
 import { useState } from "react";
 
 const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
@@ -27,30 +27,29 @@ function ButtonGetSecondWindowContent() {
 }
 
 function ButtonStartTimer() {
-    const [time, setTime] = useState(0);
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
     async function sendRequest() {
         function callback() {
             console.log('callback');
-            setTime((v) => ++v);
         }
         setIsMonitoring({ doStart: !isMonitoring, callback });
     }
     return (
         <button className={buttonClasses} onClick={sendRequest}>
-            {isMonitoring ? `Stop Monitor ${time}` : 'Start Monitor'}
+            {isMonitoring ? `Stop Monitor` : 'Start Monitor'}
         </button>
     );
 }
 
 export function Section2Main() {
     return (
-        <div className="m-4 text-primary-900 space-x-2">
+        <div className="relative m-4 text-primary-900 space-x-2">
             <ButtonGetSecondWindow />
             <ButtonGetSecondWindowContent />
             <ButtonStartTimer />
             <SecondWindowResult />
             <SecondWindowContent />
+            <MonitoringCounter />
         </div>
     );
 }

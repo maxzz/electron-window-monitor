@@ -46,13 +46,13 @@ function ButtonStartTimer() {
     async function sendRequest() {
         function callback() {
             console.log('callback');
-            setTime((v) => v++);
+            setTime((v) => ++v);
         }
         setIsMonitoring({ doStart: !isMonitoring, callback });
     }
     return (
         <button className={buttonClasses} onClick={sendRequest}>
-            {isMonitoring ? 'Stop Monitor' : 'Start Monitor'} {time}
+            {isMonitoring ? `Stop Monitor ${time}` : 'Start Monitor'}
         </button>
     );
 }

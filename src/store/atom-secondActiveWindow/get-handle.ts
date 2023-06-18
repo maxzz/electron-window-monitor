@@ -9,14 +9,22 @@ export type SawHandle = {   // SAW - Second Active Window
 };
 
 export const sawHandleAtom = atom<SawHandle | null>(null);
+export const sawHandleStrAtom = atom('');
 
 export const doGetSawHandleAtom = atom(
     null,
     async (get, set): Promise<void> => {
-        const res = await invokeMain<string>({ type: 'get-second-window-handle' });
-        const obj = JSON.parse(res || '{}');
-        set(sawHandleAtom, obj);
+        try {
+            const res = await invokeMain<string>({ type: 'get-second-window-handle' });
+            set(sawHandleStrAtom, res);
 
-        console.log('doGetSawHandleAtom.set', JSON.stringify(obj, null, 4));
+            const obj = JSON.parse(res || '{}');
+            set(sawHandleAtom, obj);
+
+            console.log('doGetSawHandleAtom.set', JSON.stringify(obj, null, 4));
+        } catch (error) {
+            set(sawHandleStrAtom, '');
+            console.error(`call 'get-second-window-handle' failed`);
+        }
     }
 );

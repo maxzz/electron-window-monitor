@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { doGetSawHandleAtom, doGetWindowContentAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
-import { SecondWindowResult, SecondWindowContent, MonitoringCounter } from "./result-displays";
+import { SawHandlePanel, SawContentPanel, MonitoringCounter } from "./result-displays";
 import { useState } from "react";
 
 const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
@@ -27,10 +27,12 @@ function ButtonGetSecondWindowContent() {
 }
 
 function ButtonStartTimer() {
+    const doGetSawHandle = useSetAtom(doGetSawHandleAtom);
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
     async function sendRequest() {
         function callback() {
             console.log('callback');
+            doGetSawHandle();
         }
         setIsMonitoring({ doStart: !isMonitoring, callback });
     }
@@ -47,8 +49,8 @@ export function Section2Main() {
             <ButtonGetSecondWindow />
             <ButtonGetSecondWindowContent />
             <ButtonStartTimer />
-            <SecondWindowResult />
-            <SecondWindowContent />
+            <SawHandlePanel />
+            <SawContentPanel />
             <MonitoringCounter />
         </div>
     );

@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { doMonitoringAtom, invokeMain, sawContentStrAtom, secondActiveWindowAtom } from "@/store";
+import { doGetWindowContentAtom, doMonitoringAtom, invokeMain, secondActiveWindowAtom } from "@/store";
 import { SecondWindowResult, SecondWindowContent } from "./result-displays";
 import { useState } from "react";
 
@@ -22,19 +22,11 @@ function ButtonGetSecondWindow() {
 }
 
 function ButtonGetSecondWindowContent() {
-    const setSawContentStr = useSetAtom(sawContentStrAtom);
+    const doGetWindowContent = useSetAtom(doGetWindowContentAtom);
     const secondActiveWindow = useAtomValue(secondActiveWindowAtom);
-    const hwnd = secondActiveWindow?.hwnd;
-    async function sendRequest() {
-        if (hwnd) {
-            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
-            const obj = JSON.parse(res || '{}');
-            console.log('ButtonGetSecondWindowContent', obj);
-            setSawContentStr(res);
-        }
-    }
+    const hwnd = secondActiveWindow?.hwnd || '';
     return (
-        <button className={buttonClasses} disabled={!hwnd} onClick={sendRequest}>
+        <button className={buttonClasses} disabled={!hwnd} onClick={() => doGetWindowContent(hwnd)}>
             Get Content
         </button>
     );

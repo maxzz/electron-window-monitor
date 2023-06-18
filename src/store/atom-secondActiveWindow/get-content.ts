@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { invokeMain } from "..";
 
 /* order sent by napi plugin
 export type EngineControl = {
@@ -44,3 +45,18 @@ export type SawContentReply = {
 
 export const sawContentStrAtom = atom<string | null>(null);
 export const sawContentAtom = atom<SawContentReply | null>(null);
+
+export const doGetWindowContentAtom = atom(
+    null,
+    async (get, set, hwnd: string | undefined): Promise<void> => {
+        if (!hwnd) {
+            throw new Error('No hwnd');
+        }
+
+        const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
+        set(sawContentStrAtom, res);
+
+        const obj = JSON.parse(res || '{}');
+        console.log('ButtonGetSecondWindowContent', obj);
+    }
+);

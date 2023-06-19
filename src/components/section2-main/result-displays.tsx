@@ -19,7 +19,11 @@ function SawHandlePanelButtons() {
     }
     return (
         <div className="flex items-center space-x-1">
-            <button className={classNames(borderClasses, "active:scale-[.97] transition-transform")} onClick={doClearSawHandle}>
+            <button
+                className={classNames(borderClasses, "hover:border-primary-600 hover:shadow active:scale-[.97] transition-transform")}
+                onClick={doClearSawHandle}
+                title="Clear Second Active Window handle"
+            >
                 Clear
             </button>
 
@@ -37,15 +41,15 @@ export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
 
     return (
-        <div className="my-4">
-            <div className="pt-4 pb-1 flex items-center justify-between">
+        <div className="my-4 max-w-[max-content]">
+            <div className="max-w-3xl pt-4 pb-1 flex items-center justify-between">
                 <div className="font-semibold">
                     Second Window
                 </div>
                 <SawHandlePanelButtons />
             </div>
 
-            <div className="max-w-[max-content] text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
+            <div className="text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
                 {secondActiveWindow && (
                     <>
                         <RowWindowInfo name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />

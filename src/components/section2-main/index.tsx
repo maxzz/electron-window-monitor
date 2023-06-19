@@ -31,7 +31,6 @@ function ButtonStartTimer() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
     async function sendRequest() {
         function callback() {
-            console.log('callback');
             doGetSawHandle();
         }
         setIsMonitoring({ doStart: !isMonitoring, callback });
@@ -45,10 +44,12 @@ function ButtonStartTimer() {
 
 export function Section2Main() {
     return (
-        <div className="relative m-4 text-primary-900 space-x-2">
-            <ButtonGetSecondWindow />
-            <ButtonGetSecondWindowContent />
-            <ButtonStartTimer />
+        <div className="relative m-4 text-primary-900">
+            <div className="flex flex-wrap gap-2">
+                <ButtonGetSecondWindow />
+                <ButtonGetSecondWindowContent />
+                <ButtonStartTimer />
+            </div>
             <SawHandlePanel />
             <SawContentPanel />
             <MonitoringCounter />

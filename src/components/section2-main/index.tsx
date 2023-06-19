@@ -22,6 +22,7 @@ function ButtonGetSecondWindowContent() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const hwnd = secondActiveWindow?.hwnd;
     return (
+        // <button className={buttonClasses} disabled={!hwnd || isMonitoring} onClick={() => doGetWindowContent({ hwnd })}> // object could not be cloned.
         <button className={buttonClasses} disabled={!hwnd || isMonitoring} onClick={() => doGetWindowContent(hwnd)}>
             Get Content
         </button>

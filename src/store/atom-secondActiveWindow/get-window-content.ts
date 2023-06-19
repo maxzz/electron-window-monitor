@@ -43,17 +43,25 @@ export type SawContentReply = {
     controls: EngineControl[];
 };
 
+//export const sawContentProgressStrAtom = atom('');
 export const sawContentStrAtom = atom('');
 export const sawContentAtom = atom<SawContentReply | null>(null);
 
 export const doGetSawContentAtom = atom(
     null,
+    // async (get, set, { hwnd }: { hwnd: string | undefined; }): Promise<void> => {
     async (get, set, hwnd: string | undefined): Promise<void> => {
         try {
             if (!hwnd) {
                 throw new Error('No hwnd');
             }
 
+            // object could not be cloned.
+            // function callback(str: string) {
+            //     console.log('build callback', str);
+            // }
+
+            //const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd, callback }); // object could not be cloned.
             const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
             const prev = get(sawContentStrAtom);
             if (prev === res) {
@@ -71,7 +79,7 @@ export const doGetSawContentAtom = atom(
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
-            console.error(`call 'get-second-window-content' failed`);
+            console.error(`call 'get-second-window-content' failed`, error);
         }
     }
 );

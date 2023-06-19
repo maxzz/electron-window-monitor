@@ -5,12 +5,28 @@
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "YourAppID",
   "asar": true,
+  "asarUnpack": "**\\*.{node,dll}",
   "directories": {
     "output": "release/${version}"
   },
   "files": [
     "dist-electron",
-    "dist"
+    "dist",
+    {
+        "from": "./src/electron/app/plugins/bin",
+        "to": ".",
+        "filter": ["**/*", "!*.dll"]
+    }
+    // {
+    //     "from": "./src/electron/app/plugins/bin",
+    //     "to": ".",
+    //     //"filter": ["**/*", "!*.dll"]
+    // }
+    // {
+    //     "from": "./src/electron/app/plugins/bin/dpnodehelper.dll",
+    //     "to": "./dpnodehelper.dll",
+    //     "filter": ["**/*", "!*.dll"]
+    // }
   ],
   "mac": {
     "artifactName": "${productName}_${version}.${ext}",

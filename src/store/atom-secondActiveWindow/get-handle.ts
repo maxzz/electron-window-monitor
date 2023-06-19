@@ -24,9 +24,8 @@ export const doGetSawHandleAtom = atom(
     async (get, set): Promise<void> => {
         try {
             const res = await invokeMain<string>({ type: 'get-second-window-handle' });
-
             const prev = get(sawHandleStrAtom);
-            if (res === prev) {
+            if (prev === res) {
                 return;
             }
 
@@ -38,6 +37,7 @@ export const doGetSawHandleAtom = atom(
             console.log('doGetSawHandleAtom.set', JSON.stringify(obj, null, 4));
         } catch (error) {
             set(sawHandleStrAtom, '');
+            set(sawHandleAtom, null);
             console.error(`call 'get-second-window-handle' failed`);
         }
     }

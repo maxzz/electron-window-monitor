@@ -43,20 +43,35 @@ export type SawContentReply = {
     controls: EngineControl[];
 };
 
-export const sawContentStrAtom = atom<string | null>(null);
+export const sawContentStrAtom = atom('');
 export const sawContentAtom = atom<SawContentReply | null>(null);
 
-export const doGetWindowContentAtom = atom(
+export const doGetSawContentAtom = atom(
     null,
     async (get, set, hwnd: string | undefined): Promise<void> => {
-        if (!hwnd) {
-            throw new Error('No hwnd');
+        try {
+            if (!hwnd) {
+                throw new Error('No hwnd');
+            }
+
+            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
+            const prev = get(sawContentStrAtom);
+            if (prev === res) {
+                return;
+            }
+
+            set(sawContentStrAtom, res);
+
+            const obj = JSON.parse(res || '{}') as SawContentReply;
+
+            console.log('doGetWindowContentAtom.set', JSON.stringify(obj, null, 4));
+
+            const final = obj.pool && obj.controls?.length ? obj : null;
+            set(sawContentAtom, final);
+        } catch (error) {
+            set(sawContentStrAtom, '');
+            set(sawContentAtom, null);
+            console.error(`call 'get-second-window-content' failed`);
         }
-
-        const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
-        set(sawContentStrAtom, res);
-
-        const obj = JSON.parse(res || '{}');
-        console.log('doGetWindowContentAtom.set', JSON.stringify(obj, null, 4));
     }
 );

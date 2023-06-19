@@ -48,16 +48,14 @@ export function SawHandlePanel() {
                 <SawHandlePanelButtons />
             </div>
 
-            <div className="text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
-                {secondActiveWindow && (
-                    <>
-                        <RowWindowInfo name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
-                        <RowWindowInfo name="caption"   /**/ value={secondActiveWindow.caption} />
-                        <RowWindowInfo name="classname" /**/ value={secondActiveWindow.classname} />
-                        <RowWindowInfo name="process"   /**/ value={secondActiveWindow.process} />
-                    </>
-                )}
-            </div>
+            {secondActiveWindow && (
+                <div className="text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
+                    <RowWindowInfo name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
+                    <RowWindowInfo name="caption"   /**/ value={secondActiveWindow.caption} />
+                    <RowWindowInfo name="classname" /**/ value={secondActiveWindow.classname} />
+                    <RowWindowInfo name="process"   /**/ value={secondActiveWindow.process} />
+                </div>
+            )}
         </div>
     );
 }

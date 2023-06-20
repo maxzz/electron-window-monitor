@@ -8,7 +8,7 @@ export function MonitoringCounter() {
     }
     return (
         <div className="my-4 absolute left-0 bottom-0">
-            <div className="pt-4 pb-1 text-5xl font-mono font-semibold text-primary-900/30 [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#0da50d]">
+            <div className="pt-4 pb-1 text-3xl font-mono font-semibold text-transparent [-webkit-text-stroke-width:1px] [-webkit-text-stroke-color:#0da50d]">
                 {`${monitoringCounter}`.padStart(2, '0')}
             </div>
         </div>

@@ -4,11 +4,10 @@ import { filesContentAtom } from "../atom-doDroppedFiles";
 
 export const doFromMainAtom = atom(
     null,
-    (get, set, data: any) => {
-        const d = data as M2R.RendererCalls;
-        switch (d.type) {
+    (get, set, data: M2R.RendererCalls) => {
+        switch (data.type) {
             case 'dark-mode': {
-                console.log('case dark-mode, active', d.active);
+                console.log('case dark-mode, active', data.active);
                 break;
             }
             case 'reload-files': {
@@ -16,11 +15,11 @@ export const doFromMainAtom = atom(
                 break;
             }
             case 'opened-files': {
-                set(filesContentAtom, d.filesCnt);
+                set(filesContentAtom, data.filesCnt);
                 break;
             }
             default: {
-                const really: never = d;
+                const really: never = data;
                 throw new Error(really);
             }
         }

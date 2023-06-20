@@ -49,7 +49,6 @@ export const sawContentAtom = atom<SawContentReply | null>(null);
 
 export const doGetSawContentAtom = atom(
     null,
-    // async (get, set, { hwnd }: { hwnd: string | undefined; }): Promise<void> => {
     async (get, set, hwnd: string | undefined): Promise<void> => {
         try {
             if (!hwnd) {
@@ -57,19 +56,18 @@ export const doGetSawContentAtom = atom(
             }
 
             const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
+
             const prev = get(sawContentStrAtom);
             if (prev === res) {
                 return;
             }
-
             set(sawContentStrAtom, res);
 
             const obj = JSON.parse(res || '{}') as SawContentReply;
-
-            console.log('doGetWindowContentAtom.set', JSON.stringify(obj, null, 4));
-
             const final = obj.pool && obj.controls?.length ? obj : null;
             set(sawContentAtom, final);
+
+            console.log('doGetWindowContentAtom.set', JSON.stringify(obj, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);

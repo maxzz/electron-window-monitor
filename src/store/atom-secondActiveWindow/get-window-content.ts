@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "../ipc-client/ipc-renderer";
+import { invokeMain } from "../ipc-client";
 
 /* order sent by napi plugin
 export type EngineControl = {

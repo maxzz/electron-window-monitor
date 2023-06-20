@@ -1,7 +1,7 @@
 import { BrowserWindow, dialog } from "electron";
 import { winApp } from "../start-main-window/create-main-window";
 import { M2R, M4RInvoke } from "./ipc-types";
-import { loadFilesContent } from "../utils/load-files";
+import { loadFilesContent } from "../utils-main/load-files";
 
 export function mainToRanderer(data: M2R.RendererCalls) {
     const channel: PreloadChannels = 'send-to-renderer';

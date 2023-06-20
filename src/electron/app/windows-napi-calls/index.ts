@@ -16,15 +16,17 @@ export function getTargetWindow(dataIn: object | string): Promise<string> {
     );
 }
 
-// export function getWindowContent(hwnd: string): Promise<string> {
-//     return new Promise<string>(
-//         (resolve, reject) => {
-//             const param = JSON.stringify({ hwnd });
-//             const collector = new addon.CWindowControlsCollector();
-//             collector.collect(param, (err: any, data: string) => err ? reject(err) : resolve(data));
-//         }
-//     );
-// }
+type CollectProgressData = {
+    state: 'progress' | 'done';
+    progress: number;
+};
+
+type CollectFinalData = {
+    pool: string;
+    controls: string[];
+};
+
+type CollectResult = CollectProgressData | CollectFinalData;
 
 export function getWindowContent(hwnd: string): Promise<string> {
     return new Promise<string>(
@@ -36,15 +38,21 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     reject(err);
                     return;
                 }
-                const res: /*{ state: 'progress' | 'done'; progress: number; } |*/ { pool: string; controls: string[]; } = JSON.parse(data);
+
+                const res: CollectResult = JSON.parse(data);
 
                 //collector.cancel();
+
+                if ('state' in res) {
+                    console.log('cb:', JSON.stringify(res));    
+                    return;
+                }
                 
                 if (res.controls) {
                     resolve(data);
                 }
 
-                console.log('cb:', JSON.stringify(res));
+                console.log('final:', JSON.stringify(res));
             });
         }
     );

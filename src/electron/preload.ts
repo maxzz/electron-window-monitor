@@ -2,17 +2,17 @@ import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
 
 const api: TmApi = {
     callMain: (data: any): void => {
-        const channel: PreloadChannels = 'call-main';
+        const channel: PreloadChannelNames = 'call-main';
         ipcRenderer.send(channel, data);
     },
 
     invokeMain: (data: any): any => {
-        const channel: PreloadChannels = 'invoke-main';
+        const channel: PreloadChannelNames = 'invoke-main';
         return ipcRenderer.invoke(channel, data);
     },
 
     setCbCallFromMain: (callback: (event: IpcRendererEvent, data: any) => void) => {
-        const channel: PreloadChannels = 'send-to-renderer';
+        const channel: PreloadChannelNames = 'send-to-renderer';
         ipcRenderer.removeAllListeners(channel);
         ipcRenderer.on(channel, callback);
     },

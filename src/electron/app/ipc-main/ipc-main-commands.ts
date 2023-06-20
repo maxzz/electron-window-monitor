@@ -4,7 +4,7 @@ import { M2R, M4RInvoke } from "./ipc-types";
 import { loadFilesContent } from "../utils-main/load-files";
 
 export function mainToRanderer(data: M2R.RendererCalls) {
-    const channel: PreloadChannels = 'send-to-renderer';
+    const channel: PreloadChannelNames = 'send-to-renderer';
     winApp?.webContents.send(channel, data);
 }
 

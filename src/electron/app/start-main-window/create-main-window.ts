@@ -54,34 +54,33 @@ export async function createWindow() {
     winApp.webContents.on('did-finish-load', () => {
         winApp?.webContents.send('main-process-message', (new Date).toLocaleString()); // Test active push message to Renderer-process.
     });
-
-    // const res = await getTargetWindow({});
-    // console.log('res', res);
 }
 
 export function connect_MainWindowListeners() {
     app.on('window-all-closed', () => {
         winApp = null;
-        if (process.platform !== 'darwin') { app.quit(); }
+        if (process.platform !== 'darwin') {
+            app.quit();
+        }
     });
 }
 
 export function connect_ListenersForCallFromRenderer() {
-    // call
+    connect_CallMain('call-main', cc);
+    connect_InvokeMain('invoke-main', ii);
+
+    // 1. call handlers
     function cc(_event: IpcMainEvent, data: any) {
         callFromRendererToMain(data as M4R.ToMainCalls);
     }
-    function connect_CallMain(channel: PreloadChannels, handler: (event: IpcMainEvent, data: any) => void) {
+    function connect_CallMain(channel: PreloadChannelNames, handler: (event: IpcMainEvent, data: any) => void) {
         ipcMain.on(channel, handler);
     }
-    connect_CallMain('call-main', cc);
-
-    // invoke
+    // 2. invoke handlers
     function ii(_event: IpcMainInvokeEvent, data: any): any {
         return invokeFromRendererToMain(data as M4RInvoke.InvokeCalls);
     }
-    function connect_InvokeMain(channel: PreloadChannels, handler: (event: IpcMainInvokeEvent, data: any) => any) {
+    function connect_InvokeMain(channel: PreloadChannelNames, handler: (event: IpcMainInvokeEvent, data: any) => any) {
         ipcMain.handle(channel, handler);
     }
-    connect_InvokeMain('invoke-main', ii);
 }

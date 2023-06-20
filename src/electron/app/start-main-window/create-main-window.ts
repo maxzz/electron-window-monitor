@@ -1,9 +1,8 @@
 import path from 'node:path';
 import { BrowserWindow, IpcMainEvent, IpcMainInvokeEvent, app, ipcMain, shell } from "electron";
-import { M4R, M4RInvoke } from '../ipc-main/ipc-types';
+import { M4R, M4RInvoke } from '@/electron/app/ipc-types';
+import { callFromRendererToMain, invokeFromRendererToMain } from '../ipc-main';
 import { getIniOptions, saveIniOptions } from '../utils-main/app-ini-options';
-import { callFromRendererToMain } from '../ipc-main/ipc-incoming-calls';
-import { invokeFromRendererToMain } from '../ipc-main/ipc-incoming-invoke';
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];

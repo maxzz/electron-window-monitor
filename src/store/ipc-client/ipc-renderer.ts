@@ -1,4 +1,4 @@
-import { M4RInvoke, M4R } from "@/electron/app/ipc-main/ipc-types";
+import { M4RInvoke, M4R } from "@/electron/app/ipc-types";
 import { worldStore } from "./ipc-react-listener";
 
 // main process APIs

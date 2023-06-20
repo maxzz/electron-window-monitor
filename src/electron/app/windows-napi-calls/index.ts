@@ -1,5 +1,5 @@
 import { createRequire } from 'module';
-//import { mainToRanderer } from '../ipc-main/ipc-main-commands';
+//import { mainToRanderer } from '../ipc-main';
 console.log(`window-monitor.ts:import.meta.url = "${import.meta.url}"`);
 
 const require = createRequire(import.meta.url);
@@ -24,7 +24,7 @@ type CollectProgressData = {
     progress: number;
 };
 
-type CollectFinalData = {
+export type CollectFinalData = {
     pool: string;
     controls: string[];
 };
@@ -37,28 +37,48 @@ export function getWindowContent(hwnd: string): Promise<string> {
             const param = JSON.stringify({ hwnd });
             const collector = new addon.CWindowControlsCollector();
 
-            collector.collect(param, (err: any, data: string) => {
+            collector.collect(param, (err: any, str: string) => {
                 if (err) {
                     reject(err);
                     return;
                 }
 
-                const res: CollectResult = JSON.parse(data);
+                //console.log('cb:', str);
 
-                //collector.cancel();
+                try {
+                    const res: CollectResult = JSON.parse(str);
 
-                if ('state' in res) {
-                    console.log('cb:', JSON.stringify(res));
-                    //mainToRanderer({ type: 'detection-progress', progress: res.progress });
-                    //controlsCheckProgress.foundCounter = res.progress; //TODO: need to send message
-                    return;
+                    //collector.cancel();
+
+                    if ('state' in res) {
+                        //console.log('cb:', JSON.stringify(res));
+                        //mainToRanderer({ type: 'detection-progress', progress: res.progress });
+                        //controlsCheckProgress.foundCounter = res.progress; //TODO: need to send message
+                        return;
+                    }
+
+                    //if (res.controls) {
+                    resolve(str);
+                    //console.log('final:', JSON.stringify(res));
+                    //}
+                } catch (error) {
+                    const msg = error instanceof Error ? error.message : `${error}`;
+
+                    const m = msg.match(/Bad escaped character in JSON at position (\d+)$/);
+
+                    if (m) {
+                        const n = +m[1];
+                        const pos1 = Math.max(n - 20, 0);
+                        const s1 = str.substring(pos1, n - 1);
+                        const s2 = str.substring(n, n + 1);
+                        const s3 = str.substring(n + 1, n + 100);
+
+                        console.error(`tm: Bad JSON at pos ${n}:\n${pos1}-${n-1}:-->${s1}<--\n${n}-${n+1}:-->${s2}<--\n${n+1}-${n+100}:-->${s3}<--\n`);
+                        //console.log('str\n', str);
+                    }
+
+                    reject(msg);
                 }
-
-                if (res.controls) {
-                    resolve(data);
-                }
-
-                console.log('final:', JSON.stringify(res));
             });
         }
     );

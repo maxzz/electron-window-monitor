@@ -1,4 +1,4 @@
-import { M2R } from "@/electron/app/ipc-main/ipc-types";
+import { M2R } from "@/electron/app/ipc-types";
 import { atom } from "jotai";
 import { filesContentAtom } from "../atom-dropped-files";
 

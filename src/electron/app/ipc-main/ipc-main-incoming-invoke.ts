@@ -1,4 +1,4 @@
-import { M4RInvoke } from "./ipc-types";
+import { M4RInvoke } from "@/electron/app/ipc-types";
 import { loadFilesContent } from "../utils-main/load-files";
 import { getTargetWindow, getWindowContent } from "../windows-napi-calls";
 

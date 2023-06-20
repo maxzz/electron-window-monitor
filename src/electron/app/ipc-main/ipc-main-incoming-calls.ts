@@ -1,5 +1,5 @@
 import { Notification } from "electron";
-import { M4R } from "./ipc-types";
+import { M4R } from "@/electron/app/ipc-types";
 
 export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<void> {
     switch (data.type) {

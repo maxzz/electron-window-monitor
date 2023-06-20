@@ -5,6 +5,8 @@ const require = createRequire(import.meta.url);
 const addon = require('./plugins/pmat_plugin_nodejs');
 //const addon = require('../public/plugins/pmat_plugin_nodejs');
 
+import { controlsCheckProgress } from "@/store/app-state";
+
 //TODO: what are params for getTargetWindow(dataIn: object | string)
 
 export function getTargetWindow(dataIn: object | string): Promise<string> {
@@ -44,10 +46,11 @@ export function getWindowContent(hwnd: string): Promise<string> {
                 //collector.cancel();
 
                 if ('state' in res) {
-                    console.log('cb:', JSON.stringify(res));    
+                    console.log('cb:', JSON.stringify(res));
+                    controlsCheckProgress.foundCounter = res.progress;
                     return;
                 }
-                
+
                 if (res.controls) {
                     resolve(data);
                 }

@@ -37,6 +37,8 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     return;
                 }
                 const res: /*{ state: 'progress' | 'done'; progress: number; } |*/ { pool: string; controls: string[]; } = JSON.parse(data);
+
+                //collector.cancel();
                 
                 if (res.controls) {
                     resolve(data);

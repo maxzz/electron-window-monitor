@@ -1,6 +1,6 @@
 import { M4RInvoke } from "./ipc-types";
 import { loadFilesContent } from "../utils/load-files";
-import { getTargetWindow, getWindowContent } from "../windows-napi-calls/window-monitor";
+import { getTargetWindow, getWindowContent } from "../windows-napi-calls";
 
 export async function invokeFromRendererToMain(d: M4RInvoke.InvokeCalls): Promise<any> {
     switch (d.type) {

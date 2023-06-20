@@ -1,6 +1,5 @@
 import { Notification } from "electron";
 import { M4R } from "./ipc-types";
-import { getTargetWindow } from "../windows-napi-calls/window-monitor";
 
 export async function callFromRendererToMain(d: M4R.ToMainCalls) {
     switch (d.type) {

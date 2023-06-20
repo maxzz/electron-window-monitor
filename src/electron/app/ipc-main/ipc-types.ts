@@ -57,7 +57,6 @@ export namespace M4RInvoke { // Main from Renderer invoke and get result
     type GetSecondWindowContent = {
         type: 'get-second-window-content';
         hwnd: string;
-        //callback?: (str: string) => void; // object could not be cloned.
     };
 
     export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/ | GetSecondWindowHandle | GetSecondWindowContent;

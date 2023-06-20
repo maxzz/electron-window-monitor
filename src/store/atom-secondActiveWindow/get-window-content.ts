@@ -56,12 +56,6 @@ export const doGetSawContentAtom = atom(
                 throw new Error('No hwnd');
             }
 
-            // object could not be cloned.
-            // function callback(str: string) {
-            //     console.log('build callback', str);
-            // }
-
-            //const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd, callback }); // object could not be cloned.
             const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
             const prev = get(sawContentStrAtom);
             if (prev === res) {

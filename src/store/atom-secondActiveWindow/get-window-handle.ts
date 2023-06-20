@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "../ipc-renderer";
+import { invokeMain } from "../ipc/ipc-renderer";
 
 export type SawHandle = {   // SAW - Second Active Window
     hwnd: string;           // "000000000014103E",

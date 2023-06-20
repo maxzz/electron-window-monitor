@@ -1,6 +1,6 @@
 import { M2R } from "@/electron/app/ipc-main";
 import { atom } from "jotai";
-import { filesContentAtom } from "./atom-doDroppedFiles";
+import { filesContentAtom } from "../atom-doDroppedFiles";
 
 export const doFromMainAtom = atom(
     null,

@@ -1,3 +1,3 @@
 export * from './ipc-client';
-export * from './atom-doDroppedFiles';
-export * from './atom-secondActiveWindow';
+export * from './atom-dropped-files';
+export * from './atom-second-active-window';

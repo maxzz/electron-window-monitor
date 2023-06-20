@@ -16,7 +16,12 @@ export namespace M2R { // Main to Renderer
         filesCnt: M4RInvoke.FileContent[];
     };
 
-    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles;
+    export type DetectionProgress = {
+        type: 'detection-progress';
+        progress: number;
+    };
+
+    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles | DetectionProgress;
 }
 
 export namespace M4R { // Main from Renderer

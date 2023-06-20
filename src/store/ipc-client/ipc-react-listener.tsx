@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
-import { M2R } from "@/electron/app/ipc-main";
+import { M2R } from "@/electron/app/ipc-main/ipc-types";
 import { doFromMainAtom } from "./ipc-react-listener-atom";
 
 export const worldStore = {

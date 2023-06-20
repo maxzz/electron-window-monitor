@@ -1,6 +1,6 @@
 import { basename, extname, join, normalize } from 'node:path';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { M4RInvoke } from '../ipc-main';
+import { M4RInvoke } from '../ipc-main/ipc-types';
 
 function collect(filenames: string[], rv: Partial<M4RInvoke.FileContent>[]) {
     (filenames || []).forEach((filename) => {

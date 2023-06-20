@@ -1,4 +1,5 @@
 import { createRequire } from 'module';
+//import { mainToRanderer } from '../ipc-main/ipc-main-commands';
 console.log(`window-monitor.ts:import.meta.url = "${import.meta.url}"`);
 
 const require = createRequire(import.meta.url);
@@ -35,7 +36,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
         (resolve, reject) => {
             const param = JSON.stringify({ hwnd });
             const collector = new addon.CWindowControlsCollector();
-            
+
             collector.collect(param, (err: any, data: string) => {
                 if (err) {
                     reject(err);
@@ -48,6 +49,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
 
                 if ('state' in res) {
                     console.log('cb:', JSON.stringify(res));
+                    //mainToRanderer({ type: 'detection-progress', progress: res.progress });
                     //controlsCheckProgress.foundCounter = res.progress; //TODO: need to send message
                     return;
                 }

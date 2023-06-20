@@ -20,7 +20,7 @@ export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Pro
         }
         default: {
             const really: never = data;
-            throw new Error(`\nUnknown IPC invoke: ${JSON.stringify(really)}\n`);
+            throw new Error(`\nUnknown IPC-invoke: ${JSON.stringify(really)}\n`);
         }
     }
 }

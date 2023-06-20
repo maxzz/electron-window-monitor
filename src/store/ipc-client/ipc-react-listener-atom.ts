@@ -1,4 +1,4 @@
-import { M2R } from "@/electron/app/ipc-main";
+import { M2R } from "@/electron/app/ipc-main/ipc-types";
 import { atom } from "jotai";
 import { filesContentAtom } from "../atom-dropped-files";
 
@@ -18,9 +18,13 @@ export const doFromMainAtom = atom(
                 set(filesContentAtom, data.filesCnt);
                 break;
             }
+            case 'detection-progress': {
+                console.log('TODO:');
+                break;
+            }
             default: {
                 const really: never = data;
-                throw new Error(really);
+                throw new Error(`\nUnknown IPC-listener: ${JSON.stringify(really)}\n`);
             }
         }
     }

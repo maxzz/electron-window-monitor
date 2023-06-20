@@ -1,4 +1,4 @@
-import { M4RInvoke } from "@/electron/app/ipc-main";
+import { M4RInvoke } from "@/electron/app/ipc-main/ipc-types";
 import { ext } from "./os-utils";
 import { fileEntryToFile, getAllFileEntries } from "./web-data-transfer-item-list";
 

@@ -2,6 +2,7 @@ import { useSnapshot } from 'valtio';
 import { clientState } from "@/store/app-state";
 import { sawContentStrAtom } from '@/store';
 import { useAtomValue } from 'jotai';
+import { IconCopy } from '@/components/ui/icons';
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
@@ -49,30 +50,28 @@ function PanelBuildProcess() {
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
 
-function ButtonRawContent() {
+function ButtonCopyContent() {
     const raw = useAtomValue(sawContentStrAtom);
     if (!raw) {
         return null;
     }
     return (
-        <div className="relative group cursor-default">
-            <div className={borderClasses}>Raw</div>
-            <div className="absolute hidden group-hover:block -left-40 py-1">
-                <div className="px-2 py-1 w-96 max-w-sm h-56 overflow-auto text-xs bg-primary-100 rounded">{`"${raw}"`}</div>
-            </div>
+        <div className="" onClick={() => navigator.clipboard.writeText(raw)}>
+            <IconCopy className="w-4 h-4 text-primary-800/80" />
         </div>
     );
 }
 
 export function HeaderPanel() {
     return (
-        <div className="pt-4 pb-1 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+            <div className="py-2 flex items-center gap-2">
                 <div className="font-semibold">
                     Second Window Content
                 </div>
-                <ButtonRawContent />
+                <ButtonCopyContent />
             </div>
+
             <PanelBuildProcess />
         </div>
     );

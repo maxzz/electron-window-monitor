@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
+import { sawContentAtom, sawContentStrAtom } from ".";
 
 export type SawHandle = {   // SAW - Second Active Window
     hwnd: string;           // "000000000014103E",
@@ -24,12 +25,15 @@ export const doGetSawHandleAtom = atom(
     async (get, set): Promise<void> => {
         try {
             const res = await invokeMain<string>({ type: 'get-second-window-handle' });
+
             const prev = get(sawHandleStrAtom);
             if (prev === res) {
                 return;
             }
-
             set(sawHandleStrAtom, res);
+
+            set(sawContentStrAtom, undefined);
+            set(sawContentAtom, null);
 
             const obj = JSON.parse(res || '{}');
             set(sawHandleAtom, obj);

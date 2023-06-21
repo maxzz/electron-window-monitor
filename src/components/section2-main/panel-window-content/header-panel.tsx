@@ -54,9 +54,10 @@ const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"ho
 
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
     const transitions = useTransition(Number(show), {
-        from: { scale: 0, opacity: 0, },
-        enter: { scale: 1, opacity: 1, config: { duration: 150, easing: easings.easeOutQuad }, },
-        leave: { scale: 0, opacity: 0, delay: 100, config: { duration: 150, easing: easings.easeOutQuad }, },
+        from: { opacity: 0, x: 0 },
+        enter: { opacity: 1, x: 0,  config: { duration: 150, easing: easings.easeOutQuad }, },
+        leave: { opacity: 0, x: 100, delay: 100, config: { duration: 150, easing: easings.easeOutQuad }, },
+        // exitBeforeEnter: true,
         onRest: ({ finished }) => show && finished && setShow?.(false),
     });
     return transitions((styles, item) => (
@@ -84,7 +85,7 @@ function ButtonCopyContent() {
                 //     <IconCopy className="w-4 h-4 text-primary-800/80 bg-primary-400" />
                 //     <div className="">copied</div>
                 // </div>,
-                <div className="absolute -top-0 left-4">copied</div>,
+                // <div className="absolute -top-0 left-4">copied</div>,
             ]} />
         </button>
     );

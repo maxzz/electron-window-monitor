@@ -55,12 +55,12 @@ const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"ho
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
     const transitions = useTransition(Number(show), {
         from: { scale: 0, opacity: 0, },
-        enter: { scale: 1, opacity: 1, },
-        leave: { scale: 0, opacity: 0, delay: 100, config: { duration: 200, easing: easings.easeOutQuad }, },
+        enter: { scale: 1, opacity: 1, config: { duration: 150, easing: easings.easeOutQuad }, },
+        leave: { scale: 0, opacity: 0, delay: 100, config: { duration: 150, easing: easings.easeOutQuad }, },
         onRest: ({ finished }) => show && finished && setShow?.(false),
     });
     return transitions((styles, item) => (
-        <a.div style={styles} className="absolute left-0 top-0"> {items[item]} </a.div>
+        <a.div style={styles} className="absolute left-0 top-0 origin-center"> {items[item]} </a.div>
     ));
 }
 
@@ -80,9 +80,12 @@ function ButtonCopyContent() {
         >
             <MountCopyNotice show={showNotice} setShow={setShowNotice} items={[
                 <IconCopy className="w-4 h-4 text-primary-800/80" />,
-                <div className="absolute -top-1">copied</div>,
+                // <div className="absolute -top-1 flex items-center">
+                //     <IconCopy className="w-4 h-4 text-primary-800/80 bg-primary-400" />
+                //     <div className="">copied</div>
+                // </div>,
+                <div className="absolute -top-0 left-4">copied</div>,
             ]} />
-            
         </button>
     );
 }

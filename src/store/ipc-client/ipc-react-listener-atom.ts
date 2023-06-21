@@ -23,6 +23,10 @@ export const doFromMainAtom = atom(
                 clientState.buildCounter = data.progress;
                 break;
             }
+            case 'failed-raw-content': {
+                clientState.buildFailedBody = data.body;
+                break;
+            }
             default: {
                 const really: never = data;
                 throw new Error(`\nUnknown IPC-listener: ${JSON.stringify(really)}\n`);

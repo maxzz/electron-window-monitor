@@ -76,6 +76,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     // }
 
                     reject(msg);
+                    mainToRenderer({ type: 'failed-raw-content', body: str });
                 }
             });
         }

@@ -51,12 +51,12 @@ function PanelBuildProcess() {
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
 
 function ButtonCopyContent() {
-    const raw = useAtomValue(sawContentStrAtom);
-    if (!raw) {
+    const {buildFailedBody} = useSnapshot(clientState);
+    if (!buildFailedBody) {
         return null;
     }
     return (
-        <div className="" onClick={() => navigator.clipboard.writeText(raw)}>
+        <div className="" title="copy server reply" onClick={() => navigator.clipboard.writeText(buildFailedBody)}>
             <IconCopy className="w-4 h-4 text-primary-800/80" />
         </div>
     );

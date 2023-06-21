@@ -23,5 +23,10 @@ export namespace M2R { // Main to Renderer
         progress: number;
     };
 
-    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles | DetectionProgress;
+    export type FailedRawContent = {
+        type: 'failed-raw-content';
+        body: string;
+    };
+
+    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles | DetectionProgress | FailedRawContent;
 }

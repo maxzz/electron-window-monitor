@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
+import { controlsCheckProgress } from "../app-state";
 
 /* order sent by napi plugin
 export type EngineControl = {
@@ -43,7 +44,6 @@ export type SawContentReply = {
     controls: EngineControl[];
 };
 
-//export const sawContentProgressStrAtom = atom('');
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<SawContentReply | null>(null);
 
@@ -59,6 +59,7 @@ export const doGetSawContentAtom = atom(
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
+                controlsCheckProgress.foundCounter = 0;
                 return;
             }
             set(sawContentStrAtom, res);
@@ -73,5 +74,7 @@ export const doGetSawContentAtom = atom(
             set(sawContentAtom, null);
             console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
         }
+
+        controlsCheckProgress.foundCounter = 0;
     }
 );

@@ -54,14 +54,13 @@ const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"ho
 
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
     const transitions = useTransition(Number(show), {
-        from: { opacity: 0, x: 0 },
-        enter: { opacity: 1, x: 0,  config: { duration: 150, easing: easings.easeOutQuad }, },
-        leave: { opacity: 0, x: 100, delay: 100, config: { duration: 150, easing: easings.easeOutQuad }, },
-        // exitBeforeEnter: true,
+        from: { opacity: 1, y: 0, },
+        enter: { opacity: 1, y: 0, config: { duration: 0 }, },
+        leave: { opacity: 0, y: -25, config: { duration: 350, easing: easings.easeOutQuad }, },
         onRest: ({ finished }) => show && finished && setShow?.(false),
     });
     return transitions((styles, item) => (
-        <a.div style={styles} className="absolute left-0 top-0 origin-center"> {items[item]} </a.div>
+        <a.div style={styles} className="absolute -left-5 -top-7"> {items[item]} </a.div>
     ));
 }
 
@@ -79,14 +78,13 @@ function ButtonCopyContent() {
                 setShowNotice(true);
             }}
         >
-            <MountCopyNotice show={showNotice} setShow={setShowNotice} items={[
-                <IconCopy className="w-4 h-4 text-primary-800/80" />,
-                // <div className="absolute -top-1 flex items-center">
-                //     <IconCopy className="w-4 h-4 text-primary-800/80 bg-primary-400" />
-                //     <div className="">copied</div>
-                // </div>,
-                // <div className="absolute -top-0 left-4">copied</div>,
-            ]} />
+            <IconCopy className="w-4 h-4 text-primary-800/80" />
+            <MountCopyNotice
+                show={showNotice}
+                setShow={setShowNotice}
+                items={['💎', <div className="px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>]}
+            />
+            
         </button>
     );
 }

@@ -56,6 +56,9 @@ export const doGetSawContentAtom = atom(
                 throw new Error('No hwnd');
             }
 
+            clientState.buildCounter = 0;
+            clientState.buildError = '';
+
             const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
 
             const prev = get(sawContentStrAtom);

@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
-import { controlsCheckProgress } from "../app-state";
+import { clientState } from "../app-state";
 
 /* order sent by napi plugin
 export type EngineControl = {
@@ -59,7 +59,7 @@ export const doGetSawContentAtom = atom(
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
-                controlsCheckProgress.foundCounter = 0;
+                clientState.buildCounter = 0;
                 return;
             }
             set(sawContentStrAtom, res);
@@ -75,6 +75,6 @@ export const doGetSawContentAtom = atom(
             console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
         }
 
-        controlsCheckProgress.foundCounter = 0;
+        clientState.buildCounter = 0;
     }
 );

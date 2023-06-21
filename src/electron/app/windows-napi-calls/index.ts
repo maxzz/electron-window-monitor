@@ -49,7 +49,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     if ('state' in res) {
                         if (res.progress > 1000) {
                             collector.cancel();
-                            reject('too-many-controls');
+                            reject('>>>Too many controls');
                         }
 
                         //console.log('cb:', JSON.stringify(res));
@@ -60,7 +60,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     resolve(str);
                     //console.log('final:', JSON.stringify(res));
                 } catch (error) {
-                    const msg = error instanceof Error ? error.message : `${error}`;
+                    const msg = `>>>${error instanceof Error ? error.message : `${error}`}`;
 
                     // const m = msg.match(/Bad escaped character in JSON at position (\d+)$/);
 

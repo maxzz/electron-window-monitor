@@ -4,8 +4,8 @@ import { clientState } from "@/store/app-state";
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
 export function PanelBuildProcess() {
-    const { buildCounter } = useSnapshot(clientState);
-    if (!buildCounter) {
+    const { buildCounter, buildError } = useSnapshot(clientState);
+    if (!buildCounter && !buildError) {
         return null;
     }
     return (
@@ -22,6 +22,7 @@ export function PanelBuildProcess() {
             >
                 Cancel
             </button>
+            <div className="">ee{buildError}</div>
         </div>
     );
 }

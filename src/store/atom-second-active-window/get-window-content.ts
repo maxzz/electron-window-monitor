@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
 import { clientState } from "../app-state";
+import { getSubError } from "@/utils";
 
 /* order sent by napi plugin
 export type EngineControl = {
@@ -60,18 +61,22 @@ export const doGetSawContentAtom = atom(
             const prev = get(sawContentStrAtom);
             if (prev === res) {
                 clientState.buildCounter = 0;
+                clientState.buildError = '';
                 return;
             }
             set(sawContentStrAtom, res);
 
-            const obj = JSON.parse(res || '{}') as SawContentReply;
-            const final = obj.pool && obj.controls?.length ? obj : null;
+            const reply = JSON.parse(res || '{}') as SawContentReply;
+            const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawContentAtom, final);
 
-            console.log('doGetWindowContentAtom.set', JSON.stringify(obj, null, 4));
+            clientState.buildError = '';
+
+            console.log('doGetWindowContentAtom.set', JSON.stringify(reply, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
+            clientState.buildError = getSubError(error);
             console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
         }
 

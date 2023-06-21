@@ -60,7 +60,7 @@ function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v
         onRest: ({ finished }) => show && finished && setShow?.(false),
     });
     return transitions((styles, item) => (
-        <a.div style={styles} className="absolute -left-5 -top-7"> {items[item]} </a.div>
+        <a.div style={styles} className="absolute"> {items[item]} </a.div>
     ));
 }
 
@@ -82,9 +82,13 @@ function ButtonCopyContent() {
             <MountCopyNotice
                 show={showNotice}
                 setShow={setShowNotice}
-                items={['💎', <div className="px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>]}
+                items={[
+                    <div className="absolute -left-5 -top-12 text-xs opacity-25">💎</div>,
+                    <div className="absolute -left-5 -top-11 px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>
+                ]}
+            // items={['💎', <div className="px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>]}
             />
-            
+
         </button>
     );
 }

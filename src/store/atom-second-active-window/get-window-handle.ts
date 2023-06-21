@@ -9,7 +9,7 @@ export type SawHandle = {   // SAW - Second Active Window
 };
 
 export const sawHandleAtom = atom<SawHandle | null>(null);
-export const sawHandleStrAtom = atom('');
+export const sawHandleStrAtom = atom<string | undefined>('');
 
 export const doClearSawHandleAtom = atom(
     null,
@@ -38,7 +38,7 @@ export const doGetSawHandleAtom = atom(
         } catch (error) {
             set(sawHandleStrAtom, '');
             set(sawHandleAtom, null);
-            console.error(`call 'get-second-window-handle' failed`);
+            console.error(`Failed.'get-second-window-handle'\n${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );

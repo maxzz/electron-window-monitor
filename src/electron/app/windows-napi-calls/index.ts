@@ -43,42 +43,37 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     return;
                 }
 
-                //console.log('cb:', str);
-
                 try {
-                    // str = str.replace(/\\/g, '\\\\');
-                    // console.log('in:', str);
-
                     const res: CollectResult = JSON.parse(str);
 
-                    //collector.cancel();
-
                     if ('state' in res) {
+                        if (res.progress > 1000) {
+                            collector.cancel();
+                            reject('too-many-controls');
+                        }
+
                         //console.log('cb:', JSON.stringify(res));
                         mainToRenderer({ type: 'detection-progress', progress: res.progress });
-                        //controlsCheckProgress.foundCounter = res.progress; //TODO: need to send message
                         return;
                     }
 
-                    //if (res.controls) {
                     resolve(str);
                     //console.log('final:', JSON.stringify(res));
-                    //}
                 } catch (error) {
                     const msg = error instanceof Error ? error.message : `${error}`;
 
-                    const m = msg.match(/Bad escaped character in JSON at position (\d+)$/);
+                    // const m = msg.match(/Bad escaped character in JSON at position (\d+)$/);
 
-                    if (m) {
-                        const n = +m[1];
-                        const pos1 = Math.max(n - 20, 0);
-                        const s1 = str.substring(pos1, n - 1);
-                        const s2 = str.substring(n, n + 1);
-                        const s3 = str.substring(n + 1, n + 100);
+                    // if (m) {
+                    //     const n = +m[1];
+                    //     const pos1 = Math.max(n - 20, 0);
+                    //     const s1 = str.substring(pos1, n - 1);
+                    //     const s2 = str.substring(n, n + 1);
+                    //     const s3 = str.substring(n + 1, n + 100);
 
-                        console.error(`tm: Bad JSON at pos ${n}:\n${pos1}-${n-1}:-->${s1}<--\n${n}-${n+1}:-->${s2}<--\n${n+1}-${n+100}:-->${s3}<--\n`);
-                        console.log('str\n', str);
-                    }
+                    //     console.error(`tm: Bad JSON at pos ${n}:\n${pos1}-${n-1}:-->${s1}<--\n${n}-${n+1}:-->${s2}<--\n${n+1}-${n+100}:-->${s3}<--\n`);
+                    //     console.log('str\n', str);
+                    // }
 
                     reject(msg);
                 }

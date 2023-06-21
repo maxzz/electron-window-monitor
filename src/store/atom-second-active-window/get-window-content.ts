@@ -44,7 +44,7 @@ export type SawContentReply = {
 };
 
 //export const sawContentProgressStrAtom = atom('');
-export const sawContentStrAtom = atom('');
+export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<SawContentReply | null>(null);
 
 export const doGetSawContentAtom = atom(
@@ -71,7 +71,7 @@ export const doGetSawContentAtom = atom(
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
-            console.error(`call 'get-second-window-content' failed`, error);
+            console.error(`Failed.'get-second-window-content'\n${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );

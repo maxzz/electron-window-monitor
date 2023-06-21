@@ -56,15 +56,13 @@ export const doGetSawContentAtom = atom(
                 throw new Error('No hwnd');
             }
 
-            clientState.buildCounter = 0;
-            clientState.buildError = '';
+            clientState.clearBuildResults();
 
             const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
-                clientState.buildCounter = 0;
-                clientState.buildError = '';
+                clientState.clearBuildResults();
                 return;
             }
             set(sawContentStrAtom, res);
@@ -73,16 +71,17 @@ export const doGetSawContentAtom = atom(
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawContentAtom, final);
 
-            clientState.buildError = '';
+            clientState.clearBuildResults();
 
             console.log('doGetWindowContentAtom.set', JSON.stringify(reply, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
+
+            clientState.buildCounter = 0;
             clientState.buildError = getSubError(error);
+
             console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
         }
-
-        clientState.buildCounter = 0;
     }
 );

@@ -11,6 +11,8 @@ function RowWindowInfo({ name, value }: { name: string; value: string; }) {
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
 
+//TODO: show clear/raw for content
+
 function SawHandlePanelButtons() {
     const doClearSawHandle = useSetAtom(doClearSawHandleAtom);
     const raw = useAtomValue(sawHandleStrAtom);

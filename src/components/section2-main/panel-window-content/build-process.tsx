@@ -30,7 +30,9 @@ function BuildError() {
         return null;
     }
     return (
-        <div className="pt-0.5">{buildError}</div>
+        <div className="px-2 py-1 bg-red-600 text-white rounded-sm">
+            {buildError}
+        </div>
     );
 }
 

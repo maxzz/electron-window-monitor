@@ -40,7 +40,7 @@ function SawHandlePanelButtons() {
 export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     return (
-        <div className="my-4 max-w-[max-content]">
+        <div className="my-4 w-full max-w-xl">
             <div className="max-w-3xl pt-4 pb-1 flex items-center justify-between">
                 <div className="font-semibold">
                     Second Window

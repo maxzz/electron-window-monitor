@@ -38,7 +38,7 @@ export const doGetSawHandleAtom = atom(
         } catch (error) {
             set(sawHandleStrAtom, '');
             set(sawHandleAtom, null);
-            console.error(`Failed.'get-second-window-handle'\n${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'get-saw-handle' ${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );

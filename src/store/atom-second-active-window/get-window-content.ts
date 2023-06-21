@@ -71,7 +71,7 @@ export const doGetSawContentAtom = atom(
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
-            console.error(`Failed.'get-second-window-content'\n${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );

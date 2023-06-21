@@ -1,5 +1,5 @@
 import { createRequire } from 'module';
-//import { mainToRanderer } from '../ipc-main';
+import { mainToRenderer } from '../ipc-main';
 console.log(`window-monitor.ts:import.meta.url = "${import.meta.url}"`);
 
 const require = createRequire(import.meta.url);
@@ -46,13 +46,16 @@ export function getWindowContent(hwnd: string): Promise<string> {
                 //console.log('cb:', str);
 
                 try {
+                    // str = str.replace(/\\/g, '\\\\');
+                    // console.log('in:', str);
+
                     const res: CollectResult = JSON.parse(str);
 
                     //collector.cancel();
 
                     if ('state' in res) {
                         //console.log('cb:', JSON.stringify(res));
-                        //mainToRanderer({ type: 'detection-progress', progress: res.progress });
+                        mainToRenderer({ type: 'detection-progress', progress: res.progress });
                         //controlsCheckProgress.foundCounter = res.progress; //TODO: need to send message
                         return;
                     }
@@ -74,7 +77,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                         const s3 = str.substring(n + 1, n + 100);
 
                         console.error(`tm: Bad JSON at pos ${n}:\n${pos1}-${n-1}:-->${s1}<--\n${n}-${n+1}:-->${s2}<--\n${n+1}-${n+100}:-->${s3}<--\n`);
-                        //console.log('str\n', str);
+                        console.log('str\n', str);
                     }
 
                     reject(msg);

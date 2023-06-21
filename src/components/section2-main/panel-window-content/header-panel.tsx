@@ -36,11 +36,22 @@ function BuildError() {
     );
 }
 
-export function PanelBuildProcess() {
+function PanelBuildProcess() {
     return (
         <div className="text-xs text-primary-700 flex items-center gap-x-1">
             <BuildCounter />
             <BuildError />
+        </div>
+    );
+}
+
+export function HeaderPanel() {
+    return (
+        <div className="pt-4 pb-1 flex items-center justify-between gap-2">
+            <div className="font-semibold">
+                Second Window Content
+            </div>
+            <PanelBuildProcess />
         </div>
     );
 }

@@ -1,18 +1,7 @@
-import { sawContentAtom, sawContentStrAtom, sawHandleStrAtom } from "@/store";
+import { sawHandleStrAtom } from "@/store";
 import { useAtomValue } from "jotai";
-import { ControlsGrid } from "./controls-grid";
-import { PanelBuildProcess } from "./build-process";
-
-export function ContentPanel() {
-    const sawContent = useAtomValue(sawContentAtom);
-    const controls = sawContent?.controls;
-    return (<>
-        {controls
-            ? <ControlsGrid controls={controls} />
-            : <div className="text-sm"> No controls detected </div>
-        }
-    </>);
-}
+import { ContentPanel } from "./content-panel";
+import { HeaderPanel } from "./header-panel";
 
 export function SawContentPanel() {
     const sawHandleStr = useAtomValue(sawHandleStrAtom);
@@ -21,13 +10,7 @@ export function SawContentPanel() {
     }
     return (
         <div className="my-4 w-full max-w-xl">
-            <div className="pt-4 pb-1 flex items-center justify-between gap-2">
-                <div className="font-semibold">
-                    Second Window Content
-                </div>
-                <PanelBuildProcess />
-            </div>
-
+            <HeaderPanel />
             <ContentPanel />
         </div>
     );

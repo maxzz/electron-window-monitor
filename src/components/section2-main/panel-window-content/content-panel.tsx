@@ -1,11 +1,12 @@
 import { Fragment } from "react";
+import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
-import { EngineControl } from "@/store";
+import { EngineControl, sawContentAtom } from "@/store";
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
 const vlineClasses = "[&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
 
-export function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
+function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     return (
         <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5", vlineClasses, borderClasses)}>
             {controls.map((control, idx) => (
@@ -19,4 +20,15 @@ export function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
             ))}
         </div>
     );
+}
+
+export function ContentPanel() {
+    const sawContent = useAtomValue(sawContentAtom);
+    const controls = sawContent?.controls;
+    return (<>
+        {controls
+            ? <ControlsGrid controls={controls} />
+            : <div className="text-sm"> No controls detected </div>
+        }
+    </>);
 }

@@ -13,8 +13,12 @@ export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<voi
             break;
         }
         case 'set-client-options': {
-            console.log('data.state.maxControls', data.state.maxControls);
             mainStore.maxControls = data.state.maxControls;
+            break;
+        }
+        case 'cancel-detection': {
+            console.log('cancel-detection');
+            mainStore.cancelDetection = true;
             break;
         }
         default: {

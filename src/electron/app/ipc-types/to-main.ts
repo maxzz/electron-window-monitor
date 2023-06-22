@@ -18,7 +18,11 @@ export namespace M4R { // Main from Renderer
         state: ClientOptions;
     };
 
-    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions;
+    type CancelDetection = {
+        type: 'cancel-detection';
+    };
+
+    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions | CancelDetection;
 }
 
 export namespace M4RInvoke { // Main from Renderer invoke and get result

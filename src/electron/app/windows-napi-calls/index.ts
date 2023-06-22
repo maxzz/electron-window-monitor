@@ -47,10 +47,18 @@ export function getWindowContent(hwnd: string): Promise<string> {
                 try {
                     const res: CollectResult = JSON.parse(str);
 
+                    if (mainStore.cancelDetection) {
+                        collector.cancel();
+                        mainStore.cancelDetection = false;
+                        reject(`>>>Canceled by user`);
+                        return;
+                    }
+
                     if ('state' in res) {
                         if (mainStore.maxControls !== 0 && res.progress > mainStore.maxControls) {
                             collector.cancel();
                             reject(`>>>Too many controls (more then ${mainStore.maxControls})`);
+                            return;
                         }
 
                         //console.log('cb:', JSON.stringify(res));

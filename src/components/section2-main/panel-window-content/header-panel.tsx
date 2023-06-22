@@ -1,10 +1,9 @@
-import { useSnapshot } from 'valtio';
-import { clientState } from "@/store/app-state";
-import { sawContentStrAtom } from '@/store';
-import { useAtomValue } from 'jotai';
-import { IconCopy } from '@/components/ui/icons';
-import { a, easings, useTransition } from '@react-spring/web';
 import { ReactNode, useState } from 'react';
+import { useSnapshot } from 'valtio';
+import { a, easings, useTransition } from '@react-spring/web';
+import { sendToMain } from '@/store';
+import { clientState } from "@/store/app-state";
+import { IconCopy } from '@/components/ui/icons';
 import { classNames } from '@/utils';
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
@@ -18,13 +17,12 @@ function BuildCounter() {
         <div className="pt-0.5">
             controls detection progress
         </div>
-        <div className="pt-0.5 min-w-[2.5rem]">{buildCounter}</div>
-        <button
-            className={buttonClasses}
-            onClick={() => {
-                clientState.buildCounter = buildCounter + 1;
-            }}
-        >
+
+        <div className="pt-0.5 min-w-[2.5rem]">
+            {buildCounter}
+        </div>
+
+        <button className={buttonClasses} onClick={() => sendToMain({ type: 'cancel-detection' })}>
             Cancel
         </button>
     </>);

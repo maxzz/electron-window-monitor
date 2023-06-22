@@ -5,11 +5,11 @@ import { MonitoringCounter } from "./panel-monitor";
 
 export function Section2Main() {
     return (
-        <div className="relative m-4 text-primary-900">
+        <div className="relative m-4 min-h-0 flex flex-col text-primary-900">
             <MainActionsPanel />
             <SawHandlePanel />
             <SawContentPanel />
             <MonitoringCounter />
         </div>
     );
-}
+} 

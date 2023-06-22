@@ -8,7 +8,7 @@ const vlineClasses = "[&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&
 
 function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     return (
-        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5", vlineClasses, borderClasses)}>
+        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5 h-full overflow-auto", vlineClasses, borderClasses)}>
             {controls.map((control, idx) => (
                 <Fragment key={idx}>
                     <div className="text-end !pl-0 border-none">{control.memid}</div>

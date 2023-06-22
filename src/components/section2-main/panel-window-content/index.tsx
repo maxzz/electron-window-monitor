@@ -9,7 +9,7 @@ export function SawContentPanel() {
         return null;
     }
     return (
-        <div className="my-4 w-full max-w-xl">
+        <div className="my-4 min-h-0 w-full max-w-xl flex flex-col">
             <HeaderPanel />
             <ContentPanel />
         </div>

@@ -31,10 +31,14 @@ export function WorldToReactListener() {
 
 // Initial state exchange with main
 
+export function sendClientOptions() {
+    sendToMain({ type: 'set-client-options', state: { maxControls: appUi.uiState.maxControls } });
+}
+
 export function OnAppMount() {
     useEffect(() => {
-        sendToMain({ type: 'set-client-options', state: { maxControls: appUi.uiState.maxControls } });
+        sendClientOptions();
     }, []);
 
     return null;
-};
+}

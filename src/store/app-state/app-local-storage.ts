@@ -1,6 +1,7 @@
 import { proxy, subscribe } from 'valtio';
 import { initializeUiState } from './app-initial-state';
 import { mergeDefaultAndLoaded } from '@/utils';
+import { sendClientOptions } from '..';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:ui';
 const STORAGE_UI_VER = 'v1';
@@ -50,5 +51,6 @@ function loadUiInitialState(): AppUi {
 subscribe(appUi.uiState, () => {
     //console.log('store ui  ', appUi.uiState);
 
+    sendClientOptions();
     localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appUi.uiState }));
 });

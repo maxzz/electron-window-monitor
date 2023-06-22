@@ -48,7 +48,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     const res: CollectResult = JSON.parse(str);
 
                     if ('state' in res) {
-                        if (res.progress > mainStore.maxControls) {
+                        if (mainStore.maxControls !== 0 && res.progress > mainStore.maxControls) {
                             collector.cancel();
                             reject(`>>>Too many controls (more then ${mainStore.maxControls})`);
                         }

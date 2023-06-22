@@ -5,7 +5,7 @@ import { IconPlayStop, IconPlayStart } from "../ui/icons";
 
 const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
-function ButtonGetSecondWindow() {
+function ButtonGetWindowHandle() {
     const doGetSawHandle = useSetAtom(doGetSawHandleAtom);
     const isMonitoring = useAtomValue(doMonitoringAtom);
     return (
@@ -15,13 +15,19 @@ function ButtonGetSecondWindow() {
     );
 }
 
-function ButtonGetSecondWindowContent() {
+function ButtonGetWindowContent() {
     const doGetWindowContent = useSetAtom(doGetSawContentAtom);
-    const isMonitoring = useAtomValue(doMonitoringAtom);
+    const setIsMonitoring = useSetAtom(doMonitoringAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const hwnd = secondActiveWindow?.hwnd;
     return (
-        <button className={buttonClasses} disabled={!hwnd || isMonitoring} onClick={() => doGetWindowContent(hwnd)}>
+        <button
+            className={buttonClasses} disabled={!hwnd}
+            onClick={() => {
+                setIsMonitoring({ doStart: false });
+                doGetWindowContent(hwnd);
+            }}
+        >
             Get Content
         </button>
     );
@@ -49,8 +55,8 @@ function ButtonStartTimer() {
 export function MainActionsPanel() {
     return (
         <div className="flex flex-wrap gap-2">
-            <ButtonGetSecondWindow />
-            <ButtonGetSecondWindowContent />
+            <ButtonGetWindowHandle />
+            <ButtonGetWindowContent />
             <ButtonStartTimer />
         </div>
     );

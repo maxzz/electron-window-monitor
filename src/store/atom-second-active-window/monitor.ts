@@ -8,7 +8,7 @@ const _isMonitoringAtom = atom(false);
 
 export const doMonitoringAtom = atom(
     (get) => get(_isMonitoringAtom),
-    (get, set, {doStart, callback}: {doStart: boolean, callback: Function}) => {
+    (get, set, {doStart, callback}: {doStart: boolean, callback?: Function}) => {
         const isMonitoring = get(_isMonitoringAtom);
 
         if (isMonitoring) {
@@ -31,7 +31,7 @@ export const doMonitoringAtom = atom(
                 }
 
                 function runTimeout() {
-                    callback();
+                    callback?.();
 
                     set(monitoringCounterAtom, get(monitoringCounterAtom) + 1);
                     monitorTimerId = setTimeout(runTimeout, 1000);

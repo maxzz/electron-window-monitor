@@ -3,6 +3,8 @@ import { doGetSawHandleAtom, doGetSawContentAtom, doMonitoringAtom, sawHandleAto
 import { SawContentPanel } from "./panel-window-content";
 import { SawHandlePanel } from "./panel-window-handle";
 import { MonitoringCounter } from "./panel-monitor";
+import { IconPlayStart, IconPlayStop } from "../ui/icons";
+import { classNames } from "@/utils";
 
 const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
@@ -38,8 +40,11 @@ function ButtonStartTimer() {
         setIsMonitoring({ doStart: !isMonitoring, callback });
     }
     return (
-        <button className={buttonClasses} onClick={sendRequest}>
-            {isMonitoring ? `Stop Monitor` : 'Start Monitor'}
+        <button className={classNames("", buttonClasses)} onClick={sendRequest}>
+            {isMonitoring
+                ? <div className="flex items-center gap-1"><IconPlayStop className="w-4 h-4 pt-0.5" />Stop Monitor</div>
+                : <div className="flex items-center gap-1"><IconPlayStart className="w-4 h-4 pt-0.5" />Start Monitor</div>
+            }
         </button>
     );
 }

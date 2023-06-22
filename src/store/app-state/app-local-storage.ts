@@ -7,6 +7,7 @@ const STORAGE_UI_VER = 'v1';
 
 export type UiState = {
     darkMode: boolean;
+    maxControls: number; // max # of controls before detection canceled. 0 is unlimited
 };
 
 type AppUi = {
@@ -16,6 +17,7 @@ type AppUi = {
 const initialAppUi: AppUi = {
     uiState: {
         darkMode: true,
+        maxControls: 0,
     },
 };
 

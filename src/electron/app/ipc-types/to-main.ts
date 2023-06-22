@@ -1,4 +1,8 @@
 export namespace M4R { // Main from Renderer
+    export type ClientOptions = {
+        maxControls: number;
+    }
+
     export type NotifyMessage = {
         type: 'notify';
         message: string;
@@ -9,7 +13,12 @@ export namespace M4R { // Main from Renderer
         active: boolean;
     };
 
-    export type ToMainCalls = NotifyMessage | DarkMode;
+    type SetClientOptions = {
+        type: 'set-client-options';
+        state: ClientOptions;
+    };
+
+    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions;
 }
 
 export namespace M4RInvoke { // Main from Renderer invoke and get result

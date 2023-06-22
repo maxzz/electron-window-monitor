@@ -1,5 +1,6 @@
 import { createRequire } from 'module';
 import { mainToRenderer } from '../ipc-main';
+import { mainStore } from '../store-main';
 console.log(`window-monitor.ts:import.meta.url = "${import.meta.url}"`);
 
 const require = createRequire(import.meta.url);
@@ -47,9 +48,9 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     const res: CollectResult = JSON.parse(str);
 
                     if ('state' in res) {
-                        if (res.progress > 1000) {
+                        if (res.progress > mainStore.maxControls) {
                             collector.cancel();
-                            reject('>>>Too many controls');
+                            reject(`>>>Too many controls (more then ${mainStore.maxControls})`);
                         }
 
                         //console.log('cb:', JSON.stringify(res));

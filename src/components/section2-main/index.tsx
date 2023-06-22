@@ -1,4 +1,4 @@
-import { MainActionsPanel } from "./main-actions-panel";
+import { MainActionsPanel } from "./panel-main-actions";
 import { SawHandlePanel } from "./panel-window-handle";
 import { SawContentPanel } from "./panel-window-content";
 import { MonitoringCounter } from "./panel-monitor";

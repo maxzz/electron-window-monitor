@@ -2,10 +2,10 @@ import { useSetAtom, useAtomValue } from "jotai";
 import { doClearSawHandleAtom, sawHandleStrAtom, sawHandleAtom } from "@/store";
 import { classNames } from "@/utils";
 
-function RowWindowInfo({ name, value }: { name: string; value: string; }) {
+function RowWindowInfo({ name, value, className, highlight }: { name: string; value: string; className?: string; highlight?: boolean; }) {
     return (<>
-        <div className="py-1.5 px-2 h-full border-primary-500 border-b text-xs ">{name}</div>
-        <div className="py-1 border-primary-500 border-l border-b px-2">{value}</div>
+        <div className="px-2 py-1.5 h-full border-primary-500 border-b text-xs ">{name}</div>
+        <div className={classNames("py-1.5 border-primary-500 border-l border-b px-2", highlight && value && "bg-primary-300", className)}>{value}</div>
     </>);
 }
 
@@ -61,10 +61,10 @@ export function SawHandlePanel() {
 
             {secondActiveWindow && (
                 <div className="text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
-                    <RowWindowInfo name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
-                    <RowWindowInfo name="caption"   /**/ value={secondActiveWindow.caption} />
+                    <RowWindowInfo name="caption"   /**/ value={secondActiveWindow.caption} className="font-semibold" highlight={true} />
                     <RowWindowInfo name="classname" /**/ value={secondActiveWindow.classname} />
                     <RowWindowInfo name="process"   /**/ value={secondActiveWindow.process} />
+                    <RowWindowInfo name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
                 </div>
             )}
         </div>

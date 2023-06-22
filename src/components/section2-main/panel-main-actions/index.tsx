@@ -1,7 +1,7 @@
 import { doGetSawHandleAtom, doMonitoringAtom, doGetSawContentAtom, sawHandleAtom } from "@/store";
 import { classNames } from "@/utils";
 import { useSetAtom, useAtomValue, useAtom } from "jotai";
-import { IconPlayStop, IconPlayStart } from "../ui/icons";
+import { IconPlayStop, IconPlayStart } from "../../ui/icons";
 
 const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 

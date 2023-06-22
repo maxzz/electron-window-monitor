@@ -5,6 +5,7 @@ import { useAtomValue } from 'jotai';
 import { IconCopy } from '@/components/ui/icons';
 import { a, easings, useTransition } from '@react-spring/web';
 import { ReactNode, useState } from 'react';
+import { classNames } from '@/utils';
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
@@ -50,7 +51,7 @@ function PanelBuildProcess() {
     );
 }
 
-const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
+const borderClasses = `border-primary-500 border rounded ${"hover:bg-primary-500 hover:border-primary-600 select-none shadow-sm"}`;
 
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
     const transitions = useTransition(Number(show), {
@@ -72,7 +73,7 @@ function ButtonCopyContent() {
     }
     return (
         <button
-            className="relative w-4 h-4" title="copy server reply"
+            className={classNames(borderClasses, "relative p-1.5 py-1 active:scale-[.97]")} title="copy server reply"
             onClick={() => {
                 navigator.clipboard.writeText(buildFailedBody);
                 setShowNotice(true);
@@ -84,9 +85,8 @@ function ButtonCopyContent() {
                 setShow={setShowNotice}
                 items={[
                     <div className="absolute -left-5 -top-12 text-xs opacity-25">💎</div>,
-                    <div className="absolute -left-5 -top-11 px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>
+                    <div className="absolute -left-5 -top-12 px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>
                 ]}
-            // items={['💎', <div className="px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>]}
             />
 
         </button>

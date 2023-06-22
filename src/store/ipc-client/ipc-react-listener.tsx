@@ -3,6 +3,9 @@ import { useSetAtom } from "jotai";
 import { M2R } from "@/electron/app/ipc-types";
 import { doFromMainAtom } from "./ipc-react-listener-atom";
 
+import { sendToMain } from "..";
+import { appUi } from "../app-state";
+
 export const worldStore = {
     listeners: new Set<(data: unknown) => void>(),
     update(data?: unknown) {
@@ -12,8 +15,9 @@ export const worldStore = {
 
 // React connector
 
-export const WorldToReactListener = () => {
+export function WorldToReactListener() {
     const doFromMain = useSetAtom(doFromMainAtom);
+
     useEffect(() => {
         const cb = (data?: unknown) => data && doFromMain(data as M2R.RendererCalls);
         worldStore.listeners.add(cb);
@@ -21,5 +25,16 @@ export const WorldToReactListener = () => {
             worldStore.listeners.delete(cb); // TODO: we can remove all listeners from HMR.
         };
     }, [doFromMain]);
+
+    return null;
+}
+
+// Initial state exchange with main
+
+export function OnAppMount() {
+    useEffect(() => {
+        sendToMain({ type: 'set-client-options', state: { maxControls: appUi.uiState.maxControls } });
+    }, []);
+
     return null;
 };

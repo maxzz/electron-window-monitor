@@ -1,4 +1,3 @@
-import { sendToMain } from "..";
 import { UiState } from "./app-local-storage";
 
 export function setAppDarkMode(isDark: boolean) {
@@ -7,7 +6,4 @@ export function setAppDarkMode(isDark: boolean) {
 
 export function initializeUiState(initialUiState: UiState) {
     setAppDarkMode(initialUiState.darkMode);
-
-    console.log('initialUiState.maxControls', initialUiState.maxControls);
-    sendToMain({ type: 'set-client-options', state: { maxControls: initialUiState.maxControls } });
 }

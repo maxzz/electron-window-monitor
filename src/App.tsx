@@ -1,7 +1,7 @@
 import { Section1Header } from "./components/section1-header";
 import { Section2Main } from "./components/section2-main";
 import { Section3Footer } from "./components/section3-footer";
-import { WorldToReactListener } from "./store/ipc-client/ipc-react-listener";
+import { OnAppMount, WorldToReactListener } from "./store/ipc-client/ipc-react-listener";
 
 export function App() {
     return (<>
@@ -12,5 +12,6 @@ export function App() {
         </div>
 
         <WorldToReactListener />
+        <OnAppMount />
     </>);
 }

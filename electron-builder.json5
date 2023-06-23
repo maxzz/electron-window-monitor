@@ -12,11 +12,13 @@
   "files": [
     "dist-electron",
     "dist",
-    {
-        "from": "./src/electron/app/plugins/bin",
-        "to": ".",
-        "filter": ["**/*", "!*.dll"]
-    }
+    //ok
+    // {
+    //     "from": "./src/electron/app/plugins/bin",
+    //     "to": "./dist-electron/plugins",
+    //     "filter": ["**/*"]
+    // }
+    //no
     // {
     //     "from": "./src/electron/app/plugins/bin",
     //     "to": ".",

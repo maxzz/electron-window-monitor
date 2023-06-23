@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
-import { EngineControl, sawContentAtom } from "@/store";
+import { EngineControl, sawContentAtom, sawContentStrAtom } from "@/store";
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
 const vlineClasses = "[&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
@@ -23,12 +23,11 @@ function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
 }
 
 export function ContentPanel() {
+    const sawContentStr = useAtomValue(sawContentStrAtom);
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
     return (<>
-        {controls
-            ? <ControlsGrid controls={controls} />
-            : <div className="text-sm"> No controls detected </div>
-        }
+        {controls && <ControlsGrid controls={controls} />}
+        {!controls && sawContentStr && <div className="text-sm"> No controls detected </div>}
     </>);
 }

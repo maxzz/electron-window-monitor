@@ -43,6 +43,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                     reject(err);
                     return;
                 }
+                //console.log('plugin:', str);
 
                 try {
                     const res: CollectResult = JSON.parse(str);

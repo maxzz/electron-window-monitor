@@ -60,7 +60,7 @@ function RowWindowInfo({ name, value, className, highlight }: { name: string; va
 export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     return (
-        <div className="my-4 w-full max-w-xl">
+        <div className="w-full max-w-xl">
             <HeaderButtons />
 
             {secondActiveWindow && (

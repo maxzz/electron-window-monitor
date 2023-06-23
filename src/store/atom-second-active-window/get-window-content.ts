@@ -89,3 +89,5 @@ export const doGetSawContentAtom = atom(
         }
     }
 );
+
+//TODO: cancel build request if app is closed by user

@@ -16,7 +16,7 @@ function BuildCounter() {
             controls detection progress
         </div>
 
-        <div className="pt-0.5 min-w-[2.5rem]">
+        <div className="pt-0.5 min-w-[2.5rem] font-semibold font-mono">
             {buildCounter}
         </div>
 

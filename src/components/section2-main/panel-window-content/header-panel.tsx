@@ -49,8 +49,9 @@ function PanelBuildProcess() {
 
 function HeaderTitle() {
     const sawContentStr = useAtomValue(sawContentStrAtom);
+    const { buildError, buildCounter } = useSnapshot(clientState);
     return (<>
-        {!!sawContentStr &&
+        {(!!sawContentStr || buildCounter > 0 || buildError) &&
             <div className="py-2 flex items-center gap-2">
                 <div className="font-semibold">
                     Second Window Content

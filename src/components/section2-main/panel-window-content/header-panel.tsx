@@ -1,10 +1,8 @@
-import { ReactNode, useState } from 'react';
+import { useAtomValue } from 'jotai';
 import { useSnapshot } from 'valtio';
-import { a, easings, useTransition } from '@react-spring/web';
-import { sendToMain } from '@/store';
+import { sawContentStrAtom, sendToMain } from '@/store';
 import { clientState } from "@/store/app-state";
-import { IconCopy } from '@/components/ui/icons';
-import { classNames } from '@/utils';
+import { ButtonCopyContent } from './btn-copy';
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
 
@@ -49,57 +47,24 @@ function PanelBuildProcess() {
     );
 }
 
-const borderClasses = `border-primary-500 border rounded ${"hover:bg-primary-500 hover:border-primary-600 select-none shadow-sm"}`;
-
-function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
-    const transitions = useTransition(Number(show), {
-        from: { opacity: 0, y: 0, },
-        enter: { opacity: 1, y: 0, config: { duration: 300 }, },
-        leave: { opacity: 0, y: -25, config: { duration: 350, easing: easings.easeOutQuad }, },
-        onRest: ({ finished }) => show && finished && setShow?.(false),
-    });
-    return transitions((styles, item) => (
-        <a.div style={styles} className="absolute"> {items[item]} </a.div>
-    ));
-}
-
-function ButtonCopyContent() {
-    const [showNotice, setShowNotice] = useState(false);
-    const { buildFailedBody } = useSnapshot(clientState);
-    if (!buildFailedBody) {
-        return null;
-    }
-    return (
-        <button
-            className={classNames(borderClasses, "relative p-1.5 py-1 active:scale-[.97]")} title="copy server reply"
-            onClick={() => {
-                navigator.clipboard.writeText(buildFailedBody);
-                setShowNotice(true);
-            }}
-        >
-            <IconCopy className="w-4 h-4 text-primary-800/80" />
-            <MountCopyNotice
-                show={showNotice}
-                setShow={setShowNotice}
-                items={[
-                    '', // <div className="absolute -left-5 -top-12 text-xs opacity-25">💎</div>,
-                    <div className="absolute -left-5 -top-[50px] px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">Copied</div>
-                ]}
-            />
-        </button>
-    );
-}
-
-export function HeaderPanel() {
-    return (
-        <div className="flex items-center justify-between gap-2">
+function HeaderTitle() {
+    const sawContentStr = useAtomValue(sawContentStrAtom);
+    return (<>
+        {!!sawContentStr &&
             <div className="py-2 flex items-center gap-2">
                 <div className="font-semibold">
                     Second Window Content
                 </div>
                 <ButtonCopyContent />
             </div>
+        }
+    </>);
+}
 
+export function HeaderPanel() {
+    return (
+        <div className="flex items-center justify-between gap-2">
+            <HeaderTitle />
             <PanelBuildProcess />
         </div>
     );

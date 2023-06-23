@@ -59,10 +59,13 @@ export const doGetSawContentAtom = atom(
             clientState.clearBuildResults();
             clientState.buildFailedBody = '';
 
-            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
-
             const prev = get(sawContentStrAtom);
+            set(sawContentStrAtom, '');
+
+            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
+            
             if (prev === res) {
+                set(sawContentStrAtom, prev);
                 clientState.clearBuildResults();
                 return;
             }

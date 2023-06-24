@@ -80,6 +80,7 @@ export const doGetSawContentAtom = atom(
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawContentAtom, final);
 
+            clientState.buildRunning = false;
             clientState.buildCounter = 0;
             clientState.buildError = '';
 

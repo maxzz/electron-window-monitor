@@ -39,6 +39,5 @@ export function OnAppMount() {
     useEffect(() => {
         sendClientOptions();
     }, []);
-
     return null;
 }

@@ -4,11 +4,10 @@ import { sawContentStrAtom, sendToMain } from '@/store';
 import { clientState } from "@/store/app-state";
 import { ButtonCopyContent } from './btn-copy';
 
-const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
+const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
 function BuildCounter() {
     const { buildError, buildCounter } = useSnapshot(clientState);
-    console.log('BuildCounter', buildError, buildCounter);
     if (buildError || buildCounter < 200) {
         return null;
     }

@@ -3,8 +3,10 @@ import { classNames } from "@/utils";
 import { useSetAtom, useAtomValue, useAtom } from "jotai";
 import { IconPlayStop, IconPlayStart } from "../../ui/icons";
 import { HTMLAttributes } from "react";
+import { useSnapshot } from "valtio";
+import { clientState } from "@/store/app-state";
 
-const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 disabled:opacity-20 border rounded shadow active:scale-[.97] transition-transform";
+const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
 function ButtonRunMonitor() {
     const doGetSawHandle = useSetAtom(doGetSawHandleAtom);
@@ -29,10 +31,15 @@ function ButtonGetContent() {
     const doGetWindowContent = useSetAtom(doGetSawContentAtom);
     const setIsMonitoring = useSetAtom(doMonitoringAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
+    const { buildRunning } = useSnapshot(clientState);
     const hwnd = secondActiveWindow?.hwnd;
+    const isDisabled = !hwnd || buildRunning;
+    const title = !hwnd ? 'Get the second active window first' : buildRunning ? 'Build already started' : 'Get the second active window content';
     return (
         <button
-            className={buttonClasses} disabled={!hwnd}
+            className={classNames(buttonClasses, "")}
+            disabled={isDisabled}
+            title={title}
             onClick={() => {
                 setIsMonitoring({ doStart: false });
                 doGetWindowContent(hwnd);

@@ -4,6 +4,8 @@ import { easings, a, useTransition } from "@react-spring/web";
 import { clientState } from "@/store/app-state";
 import { classNames } from "@/utils";
 import { IconCopy } from "@/components/ui/icons";
+import { useAtomValue } from "jotai";
+import { sawContentStrAtom } from "@/store";
 
 const borderClasses = `border-primary-500 border rounded ${"hover:bg-primary-500 hover:border-primary-600 select-none shadow-sm"}`;
 
@@ -21,15 +23,17 @@ function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v
 
 export function ButtonCopyContent() {
     const [showNotice, setShowNotice] = useState(false);
+    const sawContentStr = useAtomValue(sawContentStrAtom);
     const { buildFailedBody } = useSnapshot(clientState);
-    if (!buildFailedBody) {
+    const msg = buildFailedBody || sawContentStr;
+    if (!msg) {
         return null;
     }
     return (
         <button
             className={classNames(borderClasses, "relative p-1.5 py-1 active:scale-[.97]")} title="copy server reply"
             onClick={() => {
-                navigator.clipboard.writeText(buildFailedBody);
+                navigator.clipboard.writeText(msg);
                 setShowNotice(true);
             }}
         >

@@ -8,6 +8,7 @@ const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hov
 
 function BuildCounter() {
     const { buildError, buildCounter } = useSnapshot(clientState);
+    console.log('BuildCounter', buildError, buildCounter);
     if (buildError || buildCounter < 200) {
         return null;
     }

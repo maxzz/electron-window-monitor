@@ -1,4 +1,3 @@
-import { Fragment, ReactNode } from 'react';
 import { useAtomValue } from 'jotai';
 import { EngineControl, sawContentAtom } from '@/store';
 import { classNames } from '@/utils';
@@ -14,6 +13,32 @@ function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
             <ControlsGridItems controls={controls} />
         </div>
     );
+}
+
+// export function ContentScrollArea({ children }: { children: ReactNode; }) {
+export function ContentScrollArea() {
+    const sawContent = useAtomValue(sawContentAtom);
+    const controls = sawContent?.controls;
+    return (<>
+        {controls &&
+            <div className={classNames("min-h-0", gridBorderClasses)}>
+                <ScrollArea.Root className="w-full h-full" type="always">
+                    <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
+                        <ControlsGrid controls={controls || []} />
+                    </ScrollArea.Viewport>
+
+                    <ScrollArea.Scrollbar className={barClasses} orientation="vertical">
+                        <ScrollArea.Thumb className={thumbClasses} />
+                    </ScrollArea.Scrollbar>
+
+                    <ScrollArea.Scrollbar className={barClasses} orientation="horizontal">
+                        <ScrollArea.Thumb className={thumbClasses} />
+                    </ScrollArea.Scrollbar>
+
+                </ScrollArea.Root>
+            </div>
+        }
+    </>);
 }
 
 const barClasses = "\
@@ -51,29 +76,3 @@ before:h-full \
 before:min-w-[44px] \
 before:min-h-[44px] \
 ";
-
-// export function ContentScrollArea({ children }: { children: ReactNode; }) {
-export function ContentScrollArea() {
-    const sawContent = useAtomValue(sawContentAtom);
-    const controls = sawContent?.controls;
-    return (<>
-        {controls &&
-            <div className={classNames("min-h-0", gridBorderClasses)}>
-                <ScrollArea.Root className="w-full h-full" type="always">
-                    <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
-                        <ControlsGrid controls={controls || []} />
-                    </ScrollArea.Viewport>
-
-                    <ScrollArea.Scrollbar className={barClasses} orientation="vertical">
-                        <ScrollArea.Thumb className={thumbClasses} />
-                    </ScrollArea.Scrollbar>
-
-                    <ScrollArea.Scrollbar className={barClasses} orientation="horizontal">
-                        <ScrollArea.Thumb className={thumbClasses} />
-                    </ScrollArea.Scrollbar>
-
-                </ScrollArea.Root>
-            </div>
-        }
-    </>);
-}

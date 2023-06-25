@@ -3,6 +3,7 @@ import { useAtomValue } from 'jotai';
 import { EngineControl, sawContentAtom } from '@/store';
 import { classNames } from '@/utils';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import { ControlsGridItems } from './content-panel';
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
 const vlineClasses = "[&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
@@ -10,32 +11,25 @@ const vlineClasses = "[&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&
 function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     return (
         <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5 h-full overflow-auto", vlineClasses, borderClasses)}>
-            {controls.map((control, idx) => (
-                <Fragment key={idx}>
-                    <div className="text-end !pl-0 border-none">{control.memid}</div>
-                    <div className="text-end">{control.orderid}</div>
-                    <div className="">{control.type}</div>
-                    <div className="w-max">{control.dispname}</div>
-                    <div className="text-[.6rem]">{control.path}</div>
-                </Fragment>
-            ))}
+            <ControlsGridItems controls={controls} />
         </div>
     );
 }
 
 const barClasses = "\
-flex \
-select-none \
-touch-none \
 p-0.5 \
 bg-primary-500 \
-hover:bg-primary-600 \
-transition-colors \
-duration-[160ms] ease-out \
+hover:bg-primary-500 \
 \
 data-[orientation=vertical]:w-2.5 \
-data-[orientation=horizontal]:flex-col \
 data-[orientation=horizontal]:h-2.5 \
+data-[orientation=horizontal]:flex-col \
+\
+flex \
+transition-colors \
+duration-[160ms] ease-out \
+select-none \
+touch-none \
 ";
 
 const thumbClasses = "\
@@ -64,7 +58,7 @@ export function ContentScrollArea() {
     const controls = sawContent?.controls;
     return (
         <div className="">
-            <ScrollArea.Root className="w-full h-24" type="always">
+            <ScrollArea.Root className="w-full h-full" type="always">
                 <ScrollArea.Viewport className="w-full h-full py-4">
                     <ControlsGrid controls={controls || []} />
                 </ScrollArea.Viewport>

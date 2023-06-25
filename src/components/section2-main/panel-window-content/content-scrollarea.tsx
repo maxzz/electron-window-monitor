@@ -10,7 +10,7 @@ const vlineClasses = "[&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l [&>*]
 
 function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     return (
-        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 overflow-auto", vlineClasses, )}>
+        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 overflow-auto", vlineClasses,)}>
             <ControlsGridItems controls={controls} />
         </div>
     );
@@ -56,22 +56,24 @@ before:min-h-[44px] \
 export function ContentScrollArea() {
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
-    return (
-        <div className={classNames("min-h-0",gridBorderClasses)}>
-            <ScrollArea.Root className="w-full h-full" type="always">
-                <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
-                    <ControlsGrid controls={controls || []} />
-                </ScrollArea.Viewport>
+    return (<>
+        {controls &&
+            <div className={classNames("min-h-0", gridBorderClasses)}>
+                <ScrollArea.Root className="w-full h-full" type="always">
+                    <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
+                        <ControlsGrid controls={controls || []} />
+                    </ScrollArea.Viewport>
 
-                <ScrollArea.Scrollbar className={barClasses} orientation="vertical">
-                    <ScrollArea.Thumb className={thumbClasses} />
-                </ScrollArea.Scrollbar>
+                    <ScrollArea.Scrollbar className={barClasses} orientation="vertical">
+                        <ScrollArea.Thumb className={thumbClasses} />
+                    </ScrollArea.Scrollbar>
 
-                <ScrollArea.Scrollbar className={barClasses} orientation="horizontal">
-                    <ScrollArea.Thumb className={thumbClasses} />
-                </ScrollArea.Scrollbar>
+                    <ScrollArea.Scrollbar className={barClasses} orientation="horizontal">
+                        <ScrollArea.Thumb className={thumbClasses} />
+                    </ScrollArea.Scrollbar>
 
-            </ScrollArea.Root>
-        </div>
-    );
+                </ScrollArea.Root>
+            </div>
+        }
+    </>);
 }

@@ -5,12 +5,12 @@ import { classNames } from '@/utils';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { ControlsGridItems } from './content-panel';
 
-const gridBorderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
-const vlineClasses = "[&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
+const gridBorderClasses = `pl-2 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
+const vlineClasses = "[&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
 
 function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     return (
-        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5 h-full overflow-auto", vlineClasses, gridBorderClasses)}>
+        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5 h-full overflow-auto", vlineClasses, )}>
             <ControlsGridItems controls={controls} />
         </div>
     );
@@ -18,7 +18,7 @@ function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
 
 const barClasses = "\
 p-0.5 \
-bg-primary-500 \
+bg-primary-500/50 \
 hover:bg-primary-500 \
 \
 data-[orientation=vertical]:w-2.5 \
@@ -35,7 +35,7 @@ touch-none \
 const thumbClasses = "\
 relative \
 flex-1 \
-bg-primary-800 \
+bg-primary-700/70 \
 rounded-[10px] \
 \
 before:content-[''] \
@@ -57,9 +57,9 @@ export function ContentScrollArea() {
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
     return (
-        <div className="">
+        <div className={gridBorderClasses}>
             <ScrollArea.Root className="w-full h-full" type="always">
-                <ScrollArea.Viewport className="w-full h-full py-4">
+                <ScrollArea.Viewport className="pb-4 w-full h-40">
                     <ControlsGrid controls={controls || []} />
                 </ScrollArea.Viewport>
 

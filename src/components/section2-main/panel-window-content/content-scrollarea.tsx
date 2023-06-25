@@ -4,7 +4,7 @@ import { EngineControl, sawContentAtom } from '@/store';
 import { classNames } from '@/utils';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { barClasses, thumbClasses } from './styles-scrollbar';
-import { ControlsGridItems } from './content-panel';
+import { ControlsGridItems } from './content-items';
 
 const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;
 const vlineClasses = "[&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b

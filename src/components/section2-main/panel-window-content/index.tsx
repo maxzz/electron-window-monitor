@@ -1,6 +1,6 @@
 import { sawHandleStrAtom } from "@/store";
 import { useAtomValue } from "jotai";
-import { ContentPanel } from "./content-panel";
+import { ContentPanel } from "./nun/content-scrollclassic";
 import { HeaderPanel } from "./header-panel";
 import { ContentScrollArea } from "./content-scrollarea";
 

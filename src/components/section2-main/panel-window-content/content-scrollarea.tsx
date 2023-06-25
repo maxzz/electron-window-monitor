@@ -28,8 +28,8 @@ flex \
 select-none \
 touch-none \
 p-0.5 \
-bg-blackA6 \
-hover:bg-blackA8 \
+bg-primary-500 \
+hover:bg-primary-600 \
 transition-colors \
 duration-[160ms] ease-out \
 \
@@ -41,7 +41,7 @@ data-[orientation=horizontal]:h-2.5 \
 const thumbClasses = "\
 relative \
 flex-1 \
-bg-mauve10 \
+bg-primary-800 \
 rounded-[10px] \
 \
 before:content-[''] \
@@ -64,8 +64,8 @@ export function ContentScrollArea() {
     const controls = sawContent?.controls;
     return (
         <div className="">
-            <ScrollArea.Root>
-                <ScrollArea.Viewport>
+            <ScrollArea.Root className="w-full h-24" type="always">
+                <ScrollArea.Viewport className="w-full h-full py-4">
                     <ControlsGrid controls={controls || []} />
                 </ScrollArea.Viewport>
 

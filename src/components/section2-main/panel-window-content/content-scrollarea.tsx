@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useAtomValue } from 'jotai';
-import { EngineControl, sawContentAtom } from '@/store';
+import { EngineControl, sawContentAtom, sawContentStrAtom } from '@/store';
 import { classNames } from '@/utils';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { barClasses, thumbClasses } from './styles-scrollbar';
@@ -36,6 +36,7 @@ export function ScrollBox({ children }: { children: ReactNode; }) {
 }
 
 export function ContentScrollArea() {
+    const sawContentStr = useAtomValue(sawContentStrAtom);
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
     return (<>
@@ -44,6 +45,12 @@ export function ContentScrollArea() {
                 <ScrollBox>
                     <ControlsGrid controls={controls || []} />
                 </ScrollBox>
+            </div>
+        }
+
+        {!controls && sawContentStr &&
+            <div className="text-sm">
+                No controls detected
             </div>
         }
     </>);

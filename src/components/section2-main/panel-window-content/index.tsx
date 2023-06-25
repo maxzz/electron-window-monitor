@@ -10,9 +10,9 @@ export function SawContentPanel() {
         return null;
     }
     return (
-        <div className="min-h-0 w-full max-w-xl flex flex-col">
+        <div className="w-full min-h-0 max-w-xl flex flex-col">
             <HeaderPanel />
-            <ContentPanel />
+            {/* <ContentPanel /> */}
             <ContentScrollArea />
         </div>
     );

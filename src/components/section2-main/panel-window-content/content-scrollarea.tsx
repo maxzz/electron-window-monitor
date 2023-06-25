@@ -5,12 +5,12 @@ import { classNames } from '@/utils';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { ControlsGridItems } from './content-panel';
 
-const gridBorderClasses = `pl-2 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
+const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;
 const vlineClasses = "[&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
 
 function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     return (
-        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 gap-y-0.5 h-full overflow-auto", vlineClasses, )}>
+        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 overflow-auto", vlineClasses, )}>
             <ControlsGridItems controls={controls} />
         </div>
     );
@@ -57,9 +57,9 @@ export function ContentScrollArea() {
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
     return (
-        <div className={gridBorderClasses}>
+        <div className={classNames("min-h-0",gridBorderClasses)}>
             <ScrollArea.Root className="w-full h-full" type="always">
-                <ScrollArea.Viewport className="pb-4 w-full h-40">
+                <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
                     <ControlsGrid controls={controls || []} />
                 </ScrollArea.Viewport>
 

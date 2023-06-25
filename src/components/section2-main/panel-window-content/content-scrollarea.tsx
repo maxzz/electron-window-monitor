@@ -1,7 +1,9 @@
+import { ReactNode } from 'react';
 import { useAtomValue } from 'jotai';
 import { EngineControl, sawContentAtom } from '@/store';
 import { classNames } from '@/utils';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import { barClasses, thumbClasses } from './styles-scrollbar';
 import { ControlsGridItems } from './content-panel';
 
 const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;
@@ -15,64 +17,34 @@ function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
     );
 }
 
-// export function ContentScrollArea({ children }: { children: ReactNode; }) {
+export function ScrollBox({ children }: { children: ReactNode; }) {
+    return (
+        <ScrollArea.Root className="w-full h-full" type="always">
+            <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
+                {children}
+            </ScrollArea.Viewport>
+
+            <ScrollArea.Scrollbar className={barClasses} orientation="vertical">
+                <ScrollArea.Thumb className={thumbClasses} />
+            </ScrollArea.Scrollbar>
+
+            <ScrollArea.Scrollbar className={barClasses} orientation="horizontal">
+                <ScrollArea.Thumb className={thumbClasses} />
+            </ScrollArea.Scrollbar>
+        </ScrollArea.Root>
+    );
+}
+
 export function ContentScrollArea() {
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
     return (<>
         {controls &&
             <div className={classNames("min-h-0", gridBorderClasses)}>
-                <ScrollArea.Root className="w-full h-full" type="always">
-                    <ScrollArea.Viewport className="pb-4 w-full h-full min-h-0">
-                        <ControlsGrid controls={controls || []} />
-                    </ScrollArea.Viewport>
-
-                    <ScrollArea.Scrollbar className={barClasses} orientation="vertical">
-                        <ScrollArea.Thumb className={thumbClasses} />
-                    </ScrollArea.Scrollbar>
-
-                    <ScrollArea.Scrollbar className={barClasses} orientation="horizontal">
-                        <ScrollArea.Thumb className={thumbClasses} />
-                    </ScrollArea.Scrollbar>
-
-                </ScrollArea.Root>
+                <ScrollBox>
+                    <ControlsGrid controls={controls || []} />
+                </ScrollBox>
             </div>
         }
     </>);
 }
-
-const barClasses = "\
-p-0.5 \
-bg-primary-500/50 \
-hover:bg-primary-500 \
-\
-data-[orientation=vertical]:w-2.5 \
-data-[orientation=horizontal]:h-2.5 \
-data-[orientation=horizontal]:flex-col \
-\
-flex \
-transition-colors \
-duration-[160ms] ease-out \
-select-none \
-touch-none \
-";
-
-const thumbClasses = "\
-relative \
-flex-1 \
-bg-primary-700/70 \
-rounded-[10px] \
-\
-before:content-[''] \
-before:absolute \
-before:top-1/2 \
-before:left-1/2 \
-before:-translate-x-1/2 \
-before:-translate-y-1/2 \
-\
-before:w-full \
-before:h-full \
-\
-before:min-w-[44px] \
-before:min-h-[44px] \
-";

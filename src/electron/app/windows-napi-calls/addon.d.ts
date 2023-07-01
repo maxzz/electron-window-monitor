@@ -1,0 +1,25 @@
+declare module "*pmat_plugin_nodejs.node" {
+    
+    type PluginErrorCallback = (err: string) => void;
+    type PluginDataCallback = (err: string, data: string) => void;
+
+    async function getTargetWindow(dataIn: object | string, cb: PluginDataCallback): Promise<string>;
+    
+    declare class CWindowControlsCollector {
+        CWindowControlsCollector();
+        async collect(param: string, cb: PluginDataCallback): Promise<string>;
+        cancel();
+    }
+
+    async function initGdi(cd: PluginErrorCallback);
+
+    async function getWindowIcon(paramsStr: string, cb: PluginDataCallback);
+
+    async function termGdi(cb: () => void);
+        
+    declare class CManifestForWindowCreator {
+        CWindowControlsCollector();
+        async create(param: string, cb: PluginDataCallback): Promise<string>;
+        cancel();
+    }
+}

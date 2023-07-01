@@ -4,9 +4,6 @@ import electron from 'vite-plugin-electron';
 import renderer from 'vite-plugin-electron-renderer';
 import react from '@vitejs/plugin-react';
 
-console.log('----------------- __dirname', __dirname);
-console.log('----------------- __dist:el', path.join(__dirname, 'dist-electron'));
-
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
@@ -29,16 +26,6 @@ export default defineConfig({
 
         renderer(),
     ],
-    optimizeDeps: {
-        exclude: ["pmat_plugin_nodejs"],
-    },    
-    build: {
-        rollupOptions: {
-            // external: [/pmat_plugin_nodejs/]
-            // external: ['./plugins/pmat_plugin_nodejs.node']
-            external: [/\.node$/]
-        }
-    },
     resolve: {
         alias: {
             '@': path.join(__dirname, 'src'),

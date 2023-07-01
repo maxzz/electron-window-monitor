@@ -9,12 +9,6 @@
             "@/*": [
                 "./src/*"
             ],
-            "~node/*": [
-                "./dist-electron/*"
-            ],
-            "./plugins/*": [
-                "./dist-electron/plugins/*"
-            ],
         }
     },
     "include": [

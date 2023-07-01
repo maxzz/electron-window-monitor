@@ -24,5 +24,6 @@ declare module "*pmat_plugin_nodejs.node" {
     }
 }
 
-type PluginErrorCallback = (err: string) => void;
-declare const addon: PluginErrorCallback;
+// type AddonTypes = {
+//     a: number;
+// }

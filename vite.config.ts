@@ -29,6 +29,11 @@ export default defineConfig({
 
         renderer(),
     ],
+    build: {
+        rollupOptions: {
+            external: ['*.node']
+        }
+    },
     resolve: {
         alias: {
             '@': path.join(__dirname, 'src'),

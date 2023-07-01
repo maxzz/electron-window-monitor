@@ -5,7 +5,10 @@ const require = createRequire(import.meta.url);
 
 //export const addon = require('./plugins/pmat_plugin_nodejs');
 
-import * as addon2 from './plugins/pmat_plugin_nodejs.node';
+// import * as addon2 from './plugins/pmat_plugin_nodejs.node';
+// export const addon = addon2;
+
+import * as addon2 from '~node/plugins/pmat_plugin_nodejs.node';
 export const addon = addon2;
 
 export * from './get-active-window';

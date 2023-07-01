@@ -1,4 +1,5 @@
-declare module "*pmat_plugin_nodejs.node" {
+// declare module "*pmat_plugin_nodejs.node" {
+declare namespace PMAT_PLUGIN_NODEJS {
     
     type PluginErrorCallback = (err: string) => void;
     type PluginDataCallback = (err: string, data: string) => void;

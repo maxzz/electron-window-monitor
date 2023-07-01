@@ -55,6 +55,7 @@ const require = createRequire(import.meta.url);
 // import addon2 from './plugins/pmat_plugin_nodejs.node';
 // export const addon = addon2;
 
+/// <reference types="./addon.d.ts" />
 export const addon = require('./plugins/pmat_plugin_nodejs');
 
 export * from './get-active-window';

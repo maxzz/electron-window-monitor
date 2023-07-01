@@ -17,12 +17,12 @@ const require = createRequire(import.meta.url);
 
 
 // module Addon {
-    
+
 //     export type PluginErrorCallback = (err: string) => void;
 //     export type PluginDataCallback = (err: string, data: string) => void;
 
 //     export declare function getTargetWindow(dataIn: object | string, cb: PluginDataCallback): Promise<string>;
-    
+
 //     // declare class CWindowControlsCollector {
 //     //     // CWindowControlsCollector();
 //     //     collect(param: string, cb: PluginDataCallback): Promise<string>;
@@ -34,7 +34,7 @@ const require = createRequire(import.meta.url);
 //     export declare function getWindowIcon(paramsStr: string, cb: PluginDataCallback): void;
 
 //     export declare function termGdi(cb: () => void): void;
-        
+
 //     // declare class CManifestForWindowCreator {
 //     //     CWindowControlsCollector();
 //     //     async create(param: string, cb: PluginDataCallback): Promise<string>;
@@ -48,15 +48,33 @@ const require = createRequire(import.meta.url);
 
 //export const addon = require('./plugins/pmat_plugin_nodejs.node');
 
+
 // import addon2 = require('./plugins/pmat_plugin_nodejs.node');
 // import * as addon2 = require('./plugins/pmat_plugin_nodejs.node');
 // export const addon = addon2;
 
+
 // import addon2 from './plugins/pmat_plugin_nodejs.node';
 // export const addon = addon2;
 
-/// <reference types="./addon.d.ts" />
+
+// /// <reference types="./addon.d.ts" />
+// export const addon = require('./plugins/pmat_plugin_nodejs');
+// console.log('addon2', addon);
+
+type Addons = {
+    // initGdi: PMAT_PLUGIN_NODEJS,
+    // termGdi: [Function (anonymous)],
+    // getWindowIcon: [Function (anonymous)],
+    getTargetWindow: getTargetWindow,
+    // CWindowControlsCollector: [Function: CWindowControlsCollector],
+    // CManifestForWindowCreator: [Function: CManifestForWindowCreator];
+};
+
+
+
 export const addon = require('./plugins/pmat_plugin_nodejs');
+
 
 export * from './get-active-window';
 export * from './get-window-content';

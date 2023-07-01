@@ -66,7 +66,7 @@ type Addons = {
     // initGdi: PMAT_PLUGIN_NODEJS,
     // termGdi: [Function (anonymous)],
     // getWindowIcon: [Function (anonymous)],
-    getTargetWindow: getTargetWindow,
+    getTargetWindow: PMAT_PLUGIN_NODEJS.,
     // CWindowControlsCollector: [Function: CWindowControlsCollector],
     // CManifestForWindowCreator: [Function: CManifestForWindowCreator];
 };

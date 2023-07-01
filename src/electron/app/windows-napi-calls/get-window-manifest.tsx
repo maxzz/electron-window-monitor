@@ -16,4 +16,3 @@ export function createWindowManifestTest(hwnd: number, wantXml: boolean = false)
 
     // collector.cancel();
 }
-

@@ -29,9 +29,14 @@ export default defineConfig({
 
         renderer(),
     ],
+    optimizeDeps: {
+        exclude: ["pmat_plugin_nodejs"],
+    },    
     build: {
         rollupOptions: {
-            external: ['*.node']
+            // external: [/pmat_plugin_nodejs/]
+            // external: ['./plugins/pmat_plugin_nodejs.node']
+            external: [/\.node$/]
         }
     },
     resolve: {

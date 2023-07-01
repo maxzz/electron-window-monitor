@@ -6,7 +6,7 @@ declare module "*pmat_plugin_nodejs.node" {
     async function getTargetWindow(dataIn: object | string, cb: PluginDataCallback): Promise<string>;
     
     declare class CWindowControlsCollector {
-        CWindowControlsCollector();
+        constructor();
         async collect(param: string, cb: PluginDataCallback): Promise<string>;
         cancel();
     }
@@ -18,7 +18,7 @@ declare module "*pmat_plugin_nodejs.node" {
     async function termGdi(cb: () => void);
         
     declare class CManifestForWindowCreator {
-        CWindowControlsCollector();
+        constructor();
         async create(param: string, cb: PluginDataCallback): Promise<string>;
         cancel();
     }

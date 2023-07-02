@@ -23,7 +23,7 @@ export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<voi
         }
         default: {
             const really: never = data;
-            new Error(`\nUnknown IPC-call: ${JSON.stringify(really)}\n`);
+            throw new Error(`\nUnknown IPC-call: ${JSON.stringify(really)}\n`);
         }
     }
 }

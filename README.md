@@ -1,6 +1,8 @@
 #### about
 
-Electron app to test nodejs napi plugins
+Electron app to test nodejs napi plugins and integration with win32 api.
+
+![](src/assets/previews/2023-06-25_16-16-06.png)
 
 #### Links, refs, credits
 

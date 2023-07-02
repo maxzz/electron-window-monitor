@@ -2,6 +2,8 @@ import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
 import { sawContentAtom, sawContentStrAtom } from ".";
 import { GetTargetWindowResult } from "@/electron/app/windows-napi-calls/pmat-plugin-types";
+import { clientState } from "../app-state";
+import { snapshot } from "valtio";
 
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
 export const sawHandleStrAtom = atom<string | undefined>('');
@@ -38,5 +40,16 @@ export const doGetSawHandleAtom = atom(
             set(sawHandleAtom, null);
             console.error(`'get-saw-handle' ${error instanceof Error ? error.message : `${error}`}`);
         }
+    }
+);
+
+export const sawGetDisabledAtom = atom(
+    (get) => {
+        const secondActiveWindow = get(sawHandleAtom);
+        const { buildRunning } = snapshot(clientState);
+        console.log('secondActiveWindow', secondActiveWindow, 'buildRunning', buildRunning);
+        const hwnd = secondActiveWindow?.hwnd;
+        const isDisabled = !hwnd || buildRunning;
+        return isDisabled;
     }
 );

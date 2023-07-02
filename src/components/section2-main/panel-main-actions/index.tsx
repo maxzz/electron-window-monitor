@@ -1,10 +1,13 @@
 import { useAtomValue } from "jotai";
-import { monitoringCounterAtom } from "@/store";
+import { useSnapshot } from "valtio";
+import { monitoringCounterAtom, sawGetDisabledAtom, sawHandleAtom } from "@/store";
 import { ButtonRunMonitor } from "./btn-get-window-monitor";
 import { ButtonGetContent } from "./btn-get-content";
 import { ButtonGetHandle } from "./btn-get-window-manual";
 import { ButtonGetIcon } from "./btn-get-icon";
 import { ButtonGetManifest } from "./btn-get-mani";
+import { clientState } from "@/store/app-state";
+import { classNames } from "@/utils";
 
 export const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
@@ -24,8 +27,13 @@ export function MonitoringCounter() {
 }
 
 function GetActionsGroup() {
+    // const secondActiveWindow = useAtomValue(sawHandleAtom);
+    // const { buildRunning } = useSnapshot(clientState);
+    // const hwnd = secondActiveWindow?.hwnd;
+    // const isDisabled = !hwnd || buildRunning;
+    const isDisabled = useAtomValue(sawGetDisabledAtom);
     return (
-        <div className="relative px-2 border-primary-500/50 border border-b-0 rounded-t shadow-inner flex items-end">
+        <div className={classNames("relative px-2 border-primary-500/50 border border-b-0 rounded-t shadow-inner flex items-end", isDisabled && "invisible")}>
             <div className="absolute left-3 -top-3 px-3 bg-primary-500/50 border-primary-500 border rounded">
                 Get
             </div>

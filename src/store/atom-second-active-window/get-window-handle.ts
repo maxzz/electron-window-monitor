@@ -1,15 +1,9 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
 import { sawContentAtom, sawContentStrAtom } from ".";
+import { GetTargetWindowResult } from "@/electron/app/windows-napi-calls/pmat-plugin-types";
 
-export type SawHandle = {   // SAW - Second Active Window
-    hwnd: string;           // "000000000014103E",
-    caption: string;        // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
-    classname: string;      // "Chrome_WidgetWin_1",
-    process: string;        // "C:\\Program Files\\Microsoft VS Code\\Code.exe"
-};
-
-export const sawHandleAtom = atom<SawHandle | null>(null);
+export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
 export const sawHandleStrAtom = atom<string | undefined>('');
 
 export const doClearSawHandleAtom = atom(

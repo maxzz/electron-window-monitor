@@ -1,5 +1,5 @@
 import { addon } from ".";
-import { WindowIconGetterParams, IconFormatType, WindowIconGetter } from "./plugin-types";
+import { WindowIconGetterParams, IconFormatType, WindowIconGetter } from "./pmat-plugin-types";
 //import fs from 'fs';
 
 function base64Decode(str: string): Buffer {

@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
 import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
-import { WindowIconGetterResult } from "@/electron/app/windows-napi-calls/plugin-types";
+import { WindowIconGetterResult } from "@/electron/app/windows-napi-calls/pmat-plugin-types";
 
 export const sawIconStrAtom = atom<string | undefined>('');
 export const sawIconAtom = atom<HTMLImageElement | null>(null);

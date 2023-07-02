@@ -1,11 +1,21 @@
-export type PluginErrorCallback = (err: string) => void;
 export type PluginDataCallback = (err: string, data: string) => void;
+export type PluginErrorCallback = (err: string) => void;
 
 /////////////////////////////////////////////////////////////////////////////
 // Get Target Window
 
+export type GetTargetWindowParams = {   // i.e. empty object like this '{}'
+}
+
+export type GetTargetWindowResult = {   // SAW - Second Active Window
+    hwnd: string;                       // "000000000014103E",
+    caption: string;                    // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
+    classname: string;                  // "Chrome_WidgetWin_1",
+    process: string;                    // "C:\\Program Files\\Microsoft VS Code\\Code.exe"
+};
+
 export interface getTargetWindow {
-    (params: string, cb: PluginDataCallback): void;
+    (getTargetWindowParams: string, cb: PluginDataCallback): void;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -15,7 +25,7 @@ export type IconFormatType = 'png' | 'jpeg' | 'bmp';
 export type Base64String = string;
 
 export type WindowIconGetterParams = {
-    hwnd: string;
+    hwnd: string;               // hwnd should be string because int64 and js number types are different
     iconFormat: IconFormatType;
 }
 

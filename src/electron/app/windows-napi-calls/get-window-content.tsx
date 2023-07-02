@@ -1,7 +1,7 @@
 import { addon } from ".";
 import { mainToRenderer } from "../ipc-main";
 import { mainStore } from "../store-main";
-import { WindowControlsCollectorCollectResult, WindowControlsCollectorCollectParams } from "./plugin-types";
+import { WindowControlsCollectorCollectResult, WindowControlsCollectorCollectParams } from "./pmat-plugin-types";
 
 export function getWindowContent(hwnd: string): Promise<string> {
     return new Promise<string>(

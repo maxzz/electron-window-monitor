@@ -1,5 +1,5 @@
 import { addon } from ".";
-import { ManifestForWindowCreator } from "./plugin-types";
+import { ManifestForWindowCreator } from "./pmat-plugin-types";
 
 const manifestForWindowCreator: ManifestForWindowCreator | null = null;
 

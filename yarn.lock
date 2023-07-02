@@ -1893,6 +1893,11 @@ jiti@^1.18.2:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.18.2.tgz#80c3ef3d486ebf2450d9335122b32d121f2a83cd"
   integrity sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==
 
+jotai-valtio@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/jotai-valtio/-/jotai-valtio-0.3.0.tgz#21a6ad615cca901c8a5e68c6199d0611c527394f"
+  integrity sha512-fN8IaL3pVZoILk8plucDSLo4WkfD2edTpqoeFzDqVKrAjQ11wt1xaABK2tqchqA0cbPSvN/UBxYO0GnX21yv/g==
+
 jotai@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.2.1.tgz#0a95b88c5f3ea4fd656b5f79af6f84e895f84f5a"

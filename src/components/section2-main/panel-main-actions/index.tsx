@@ -31,6 +31,8 @@ function GetActionsGroup() {
     // const { buildRunning } = useSnapshot(clientState);
     // const hwnd = secondActiveWindow?.hwnd;
     // const isDisabled = !hwnd || buildRunning;
+    console.log('------------------ GetActionsGroup');
+    
     const isDisabled = useAtomValue(sawGetDisabledAtom);
     return (
         <div className={classNames("relative px-2 border-primary-500/50 border border-b-0 rounded-t shadow-inner flex items-end", isDisabled && "invisible")}>

@@ -3,7 +3,8 @@ import { invokeMain } from "../ipc-client";
 import { sawContentAtom, sawContentStrAtom } from ".";
 import { GetTargetWindowResult } from "@/electron/app/windows-napi-calls/pmat-plugin-types";
 import { clientState } from "../app-state";
-import { snapshot } from "valtio";
+import { snapshot, useSnapshot } from "valtio";
+import { atomWithProxy } from "jotai-valtio";
 
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
 export const sawHandleStrAtom = atom<string | undefined>('');
@@ -43,13 +44,26 @@ export const doGetSawHandleAtom = atom(
     }
 );
 
+const clientStateAtom = atomWithProxy(clientState);
+
 export const sawGetDisabledAtom = atom(
     (get) => {
         const secondActiveWindow = get(sawHandleAtom);
-        const { buildRunning } = snapshot(clientState);
+        const { buildRunning } = get(clientStateAtom);
         console.log('secondActiveWindow', secondActiveWindow, 'buildRunning', buildRunning);
         const hwnd = secondActiveWindow?.hwnd;
         const isDisabled = !hwnd || buildRunning;
         return isDisabled;
     }
 );
+// export const sawGetDisabledAtom = atom(
+//     (get) => {
+//         const secondActiveWindow = get(sawHandleAtom);
+//         const { buildRunning } = snapshot(clientState);
+//         //const { buildRunning } = useSnapshot(clientState);
+//         console.log('secondActiveWindow', secondActiveWindow, 'buildRunning', buildRunning);
+//         const hwnd = secondActiveWindow?.hwnd;
+//         const isDisabled = !hwnd || buildRunning;
+//         return isDisabled;
+//     }
+// );

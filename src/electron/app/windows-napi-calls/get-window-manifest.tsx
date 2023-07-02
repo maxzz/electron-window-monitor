@@ -4,7 +4,7 @@ export function createWindowManifestTest(hwnd: number, wantXml: boolean = false)
     const paramsObj = { hwnd: hwnd, wantXml: wantXml };
     const paramsStr = JSON.stringify(paramsObj);
 
-    let collector = new addon.CManifestForWindowCreator();
+    let collector = new addon.ManifestForWindowCreator();
     collector.create(paramsStr, (err: any, data: string) => {
         if (err) {
             console.error(err);

@@ -18,7 +18,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
             const param = JSON.stringify({ hwnd });
-            const collector = new addon.CWindowControlsCollector();
+            const collector = new addon.WindowControlsCollector();
 
             collector.collect(param, (err: any, str: string) => {
                 if (err) {

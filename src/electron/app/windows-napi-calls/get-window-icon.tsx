@@ -1,5 +1,10 @@
 import { addon } from ".";
 
+function base64Decode(str: string): Buffer {
+    return Buffer.from(str, 'base64');
+}
+
+/*
 export function getWindowIcon(hwnd: number, iconFormat: string): Promise<string> {
     const paramsObj = { hwnd: hwnd, iconFormat: iconFormat }; // Other supported formats are 'png' and 'bmp'.
     const paramsStr = JSON.stringify(paramsObj);
@@ -17,57 +22,77 @@ export function getWindowIcon(hwnd: number, iconFormat: string): Promise<string>
         });
     });
 }
-
-function base64Decode(str: string): Buffer {
-    return Buffer.from(str, 'base64');
-}
-
+*/
 
 ///
-/// This function starts GDI in a separate call, gets Window icon using that initialized ahead of time GDI
-/// and stops GDI after.
-/// In real program you would start GDI sometime at the beginning, call addon.getWindowIcon multiple times
-/// and stop GDI at the end.
+/// Class for getting window icon. Instantiate once and call getIcon multiple times.
 ///
-/// It also demonstrates how to to use simple callbacks instead of promises.
-function getIconOfWindowInitGdiTest(hwnd: number) {
-    const paramsObj = { "hwnd": hwnd };
+/// During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times, 
+/// it will be expensive.
+///
+/// Usage:
+/// let getter = new WindowIconGetter();
+/// let [iconBinaryBmp, iconTypeBmp] = await getter.getIcon(0x1114C, 'png');
+///
+type iconFormat_t = 'png' | 'jpeg' | 'bmp';
+
+class WindowIconGetter {
+  constructor() {
+    this.iconGetter = new addon.WindowIconGetter();
+    this.constructed = true;
+  }
+
+  destruct() {
+    delete this.iconGetter;
+    this.constructed = false;
+  }
+
+  /// Demonstrates how to use Promise to get Window icon from pmat_plugin_nodejs.node
+  async getIcon(hwnd: number, iconFormat: iconFormat_t) : Promise<[Buffer, iconFormat_t]> {
+    if (!this.constructed)
+      throw new Error('Attempting call on destructed object');
+
+    const paramsObj = { hwnd: hwnd, iconFormat: iconFormat };
     const paramsStr = JSON.stringify(paramsObj);
-
-    addon.initGdi((err: string) => {
+  
+    return new Promise<[Buffer, iconFormat_t]>((resolve: (arg0:[Buffer, iconFormat_t])=>void, reject: (arg0:string)=>void) => {
+      this.iconGetter.getWindowIcon(paramsStr, (err: any, data: string) => {
         if (err) {
-            console.error('ERROR in initGdi:', err);
+          //console.error(err);
+          reject(err);
         }
         else {
-            addon.getWindowIcon(paramsStr, (err: any, data: string) => {
-                if (err) {
-                    console.error('ERROR in getWindowIcon:', err);
-                }
-                else {
-                    console.log('Icon received');
-
-                    addon.termGdi(() => {
-                        let iconContentObj = JSON.parse(data);
-                        let iconBase64 = iconContentObj.data;
-                        let iconBinary = base64Decode(iconContentObj.data);
-//                        fs.writeFileSync('ImportedIcon.jpg', iconBinary);
-
-                        console.log('Done');
-                    });
-                }
-            });
+          //console.log(data);
+          let iconContentObj = JSON.parse(data);
+          let iconBinary = base64Decode(iconContentObj.data);
+          resolve([iconBinary, iconContentObj.type]);
         }
+      });
     });
+  }
+
+  private iconGetter: any;
+  private constructed: boolean;
 }
 
-///
-/// This function starts GDI and stops GDI internally, every time it is called.
-/// This happens if you do not start GDI using addon.initGdi ahead of calling addon.getWindowIcon
-/// This is easier, but involves overhead of starting and stopping SGI every time
-///
-/// It also demonstrates how to use promise with await for this purpose.
-async function getIconOfWindowTest(hwnd: number, iconFormat: string): Promise<[Buffer, string]> {
-    let iconContentJson = await getWindowIcon(hwnd, iconFormat);
-    let iconContentObj = JSON.parse(iconContentJson);
-    return [base64Decode(iconContentObj.data), iconContentObj.type];
+/*
+async function doWork() {
+  try {
+    //let hwnd = await getTargetWindow();
+    //console.log('HWND:', hwnd);
+
+    //let getter = new WindowIconGetter();
+    //let [iconBinaryBmp, iconTypeBmp] = await getter.getIcon(0x1114C, 'png');
+    //fs.writeFileSync('ImportedIcon.' + iconTypeBmp, iconBinaryBmp);
+    //getter.destruct();
+
+    //collectWindowControlsTest(0x1114C);
+
+    createWindowManifestTest(0x1114C);       // Will create JSON manifest
+    //createWindowManifestTest(0x1114C, true); // Will create XML manifest
+  }
+  catch (err) {
+    console.log(err);
+  }
 }
+*/

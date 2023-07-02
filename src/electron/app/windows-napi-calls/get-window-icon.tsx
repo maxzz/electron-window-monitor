@@ -1,8 +1,11 @@
 import { addon } from ".";
+import { IconFormatType, WindowIconGetterBody } from "./plugin-types";
 
 function base64Decode(str: string): Buffer {
     return Buffer.from(str, 'base64');
 }
+
+let gManifestForWindowCreator: WindowIconGetterBody | null = null;
 
 /*
 export function getWindowIcon(hwnd: number, iconFormat: string): Promise<string> {
@@ -24,55 +27,73 @@ export function getWindowIcon(hwnd: number, iconFormat: string): Promise<string>
 }
 */
 
+export async function getIcon(hwnd: number, iconFormat: IconFormatType): Promise<[Buffer, IconFormatType]> {
+
+    if (!gManifestForWindowCreator) {
+        gManifestForWindowCreator = new addon.WindowIconGetter();
+    }
+
+    const params = JSON.stringify({ hwnd: hwnd, iconFormat: iconFormat });
+
+    return new Promise<[Buffer, IconFormatType]>(
+        (resolve: (arg0: [Buffer, IconFormatType]) => void, reject: (arg0: string) => void) => {
+            if (!gManifestForWindowCreator) {
+                throw new Error('no gManifestForWindowCreator');
+            }
+
+            gManifestForWindowCreator.getWindowIcon(params, (err: any, data: string) => {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    //console.log(data);
+                    let iconContentObj = JSON.parse(data);
+                    let iconBinary = base64Decode(iconContentObj.data);
+                    resolve([iconBinary, iconContentObj.type]);
+                }
+            });
+        });
+}
+
 ///
-/// Class for getting window icon. Instantiate once and call getIcon multiple times.
 ///
-/// During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times, 
-/// it will be expensive.
-///
-/// Usage:
-/// let getter = new WindowIconGetter();
-/// let [iconBinaryBmp, iconTypeBmp] = await getter.getIcon(0x1114C, 'png');
-///
-type iconFormat_t = 'png' | 'jpeg' | 'bmp';
+class WindowIconGetter2 {
+    constructor() {
+        this.iconGetter = new addon.WindowIconGetter();
+        this.constructed = true;
+    }
 
-class WindowIconGetter {
-  constructor() {
-    this.iconGetter = new addon.WindowIconGetter();
-    this.constructed = true;
-  }
+    destruct() {
+        delete this.iconGetter;
+        this.constructed = false;
+    }
 
-  destruct() {
-    delete this.iconGetter;
-    this.constructed = false;
-  }
+    /// Demonstrates how to use Promise to get Window icon from pmat_plugin_nodejs.node
+    async getIcon(hwnd: number, iconFormat: IconFormatType): Promise<[Buffer, IconFormatType]> {
+        if (!this.constructed)
+            throw new Error('Attempting call on destructed object');
 
-  /// Demonstrates how to use Promise to get Window icon from pmat_plugin_nodejs.node
-  async getIcon(hwnd: number, iconFormat: iconFormat_t) : Promise<[Buffer, iconFormat_t]> {
-    if (!this.constructed)
-      throw new Error('Attempting call on destructed object');
+        const paramsObj = { hwnd: hwnd, iconFormat: iconFormat };
+        const paramsStr = JSON.stringify(paramsObj);
 
-    const paramsObj = { hwnd: hwnd, iconFormat: iconFormat };
-    const paramsStr = JSON.stringify(paramsObj);
-  
-    return new Promise<[Buffer, iconFormat_t]>((resolve: (arg0:[Buffer, iconFormat_t])=>void, reject: (arg0:string)=>void) => {
-      this.iconGetter.getWindowIcon(paramsStr, (err: any, data: string) => {
-        if (err) {
-          //console.error(err);
-          reject(err);
-        }
-        else {
-          //console.log(data);
-          let iconContentObj = JSON.parse(data);
-          let iconBinary = base64Decode(iconContentObj.data);
-          resolve([iconBinary, iconContentObj.type]);
-        }
-      });
-    });
-  }
+        return new Promise<[Buffer, IconFormatType]>((resolve: (arg0: [Buffer, IconFormatType]) => void, reject: (arg0: string) => void) => {
+            this.iconGetter.getWindowIcon(paramsStr, (err: any, data: string) => {
+                if (err) {
+                    //console.error(err);
+                    reject(err);
+                }
+                else {
+                    //console.log(data);
+                    let iconContentObj = JSON.parse(data);
+                    let iconBinary = base64Decode(iconContentObj.data);
+                    resolve([iconBinary, iconContentObj.type]);
+                }
+            });
+        });
+    }
 
-  private iconGetter: any;
-  private constructed: boolean;
+    private iconGetter: any;
+    private constructed: boolean;
 }
 
 /*

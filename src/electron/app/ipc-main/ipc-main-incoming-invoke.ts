@@ -18,6 +18,14 @@ export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Pro
             const res = await getWindowContent(data.hwnd);
             return res;
         }
+        case 'get-second-window-icon': {
+            const res = await getWindowContent(data.hwnd);
+            return res;
+        }
+        case 'get-second-window-mani': {
+            const res = await getWindowContent(data.hwnd);
+            return res;
+        }
         default: {
             const really: never = data;
             throw new Error(`\nUnknown IPC-invoke: ${JSON.stringify(really)}\n`);

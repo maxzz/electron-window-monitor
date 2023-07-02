@@ -1,13 +1,14 @@
 import { useAtomValue } from 'jotai';
 import { useSnapshot } from 'valtio';
 import { sawContentStrAtom, sendToMain } from '@/store';
-import { clientState } from "@/store/app-state";
+import { buildState, clientState } from "@/store/app-state";
 import { ButtonCopyContent } from './btn-copy';
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
 function BuildCounter() {
-    const { buildError, buildCounter } = useSnapshot(clientState);
+    const { buildError } = useSnapshot(clientState);
+    const { buildCounter } = useSnapshot(buildState);
     if (buildError || buildCounter < 200) {
         return null;
     }
@@ -49,7 +50,8 @@ function PanelBuildProcess() {
 
 function HeaderTitle() {
     const sawContentStr = useAtomValue(sawContentStrAtom);
-    const { buildError, buildCounter } = useSnapshot(clientState);
+    const { buildError } = useSnapshot(clientState);
+    const { buildCounter } = useSnapshot(buildState);
     return (<>
         {(!!sawContentStr || buildCounter > 0 || buildError) &&
             <div className="py-2 flex items-center gap-2">

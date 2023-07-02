@@ -1,7 +1,7 @@
 import { M2R } from "@/electron/app/ipc-types";
 import { atom } from "jotai";
 import { filesContentAtom } from "../atom-dropped-files";
-import { clientState } from "../app-state";
+import { buildState, clientState } from "../app-state";
 
 export const doFromMainAtom = atom(
     null,
@@ -20,7 +20,7 @@ export const doFromMainAtom = atom(
                 break;
             }
             case 'detection-progress': {
-                clientState.buildCounter = data.progress;
+                buildState.buildCounter = data.progress;
                 break;
             }
             case 'failed-raw-content': {

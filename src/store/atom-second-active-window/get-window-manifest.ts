@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
-import { clientState } from "../app-state";
+import { buildState, clientState } from "../app-state";
 import { getSubError } from "@/utils";
 
 /* order sent by napi plugin
@@ -61,7 +61,7 @@ export const doGetSawContentAtom = atom(
             }
 
             clientState.buildRunning = true;
-            clientState.buildCounter = 0;
+            buildState.buildCounter = 0;
             clientState.buildError = '';
             clientState.buildFailedBody = '';
 
@@ -70,7 +70,7 @@ export const doGetSawContentAtom = atom(
             const prev = get(sawContentStrAtom);
             if (prev === res) {
                 clientState.buildRunning = false;
-                clientState.buildCounter = 0;
+                buildState.buildCounter = 0;
                 clientState.buildError = '';
                 return;
             }
@@ -81,7 +81,7 @@ export const doGetSawContentAtom = atom(
             set(sawContentAtom, final);
 
             clientState.buildRunning = false;
-            clientState.buildCounter = 0;
+            buildState.buildCounter = 0;
             clientState.buildError = '';
 
             console.log('doGetWindowContentAtom.set', JSON.stringify(reply, null, 4));
@@ -90,7 +90,7 @@ export const doGetSawContentAtom = atom(
             set(sawContentAtom, null);
 
             clientState.buildRunning = false;
-            clientState.buildCounter = 0;
+            buildState.buildCounter = 0;
             clientState.buildError = getSubError(error);
 
             console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);

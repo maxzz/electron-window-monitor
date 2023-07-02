@@ -1,4 +1,4 @@
-import { M4RInvoke } from "./to-main-calls";
+import { M4RInvoke } from "./to-main-invoke";
 
 export namespace M2R { // Main to Renderer
 

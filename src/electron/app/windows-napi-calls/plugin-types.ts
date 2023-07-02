@@ -29,10 +29,7 @@ export type GetWindowIconResult = {
  */
 
 export interface WindowIconGetter {
-    new(): WindowIconGetterBody;
-}
-
-export interface WindowIconGetterBody {
+    new(): WindowIconGetter;
     getWindowIcon(getWindowIconParams: string, cb: PluginDataCallback): void;
 }
 
@@ -44,10 +41,7 @@ export type ManifestForWindowCreatorParams = {
 }
 
 export interface ManifestForWindowCreator {
-    new(): ManifestForWindowCreatorBody;
-}
-
-export interface ManifestForWindowCreatorBody {
+    new(): ManifestForWindowCreator;
     create(manifestForWindowCreatorParams: string, cb: PluginDataCallback): void;
     cancel(): void;
 }
@@ -60,10 +54,7 @@ export type WindowControlsCollectorCollectParams = {
 }
 
 export interface WindowControlsCollector {
-    new(): WindowControlsCollectorBody;
-}
-
-export interface WindowControlsCollectorBody {
+    new(): WindowControlsCollector;
     collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;
     cancel(): void;
 }

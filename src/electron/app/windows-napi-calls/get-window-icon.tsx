@@ -1,12 +1,12 @@
 import { addon } from ".";
-import { GetWindowIconParams, IconFormatType, WindowIconGetterBody } from "./plugin-types";
+import { GetWindowIconParams, IconFormatType, WindowIconGetter } from "./plugin-types";
 //import fs from 'fs';
 
 function base64Decode(str: string): Buffer {
     return Buffer.from(str, 'base64');
 }
 
-let gManifestForWindowCreator: WindowIconGetterBody | null = null;
+let gManifestForWindowCreator: WindowIconGetter | null = null;
 
 export async function getIcon(hwnd: string, iconFormat: IconFormatType = 'png'): Promise<string> {
     if (!gManifestForWindowCreator) {

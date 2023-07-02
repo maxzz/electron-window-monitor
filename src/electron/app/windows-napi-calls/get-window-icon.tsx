@@ -1,6 +1,6 @@
 import { addon } from ".";
 import { GetWindowIconParams, IconFormatType, WindowIconGetterBody } from "./plugin-types";
-import fs from 'fs';
+//import fs from 'fs';
 
 function base64Decode(str: string): Buffer {
     return Buffer.from(str, 'base64');

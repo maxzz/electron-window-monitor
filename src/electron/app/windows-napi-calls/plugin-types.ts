@@ -5,10 +5,16 @@ export type PluginDataCallback = (err: string, data: string) => void;
 // Get Icon
 
 export type IconFormatType = 'png' | 'jpeg' | 'bmp';
+export type Base64String = string;
 
 export type GetWindowIconParams = {
     hwnd: string;
     iconFormat: IconFormatType;
+}
+
+export type GetWindowIconResult = {
+    data: Base64String;
+    type: IconFormatType;
 }
 
 /**

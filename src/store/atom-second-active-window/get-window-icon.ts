@@ -4,6 +4,7 @@ import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
 
 export const sawIconStrAtom = atom<string | undefined>('');
+export const sawIconAtom = atom<HTMLImageElement | null>(null);
 
 export const doGetSawIconAtom = atom(
     null,
@@ -16,6 +17,10 @@ export const doGetSawIconAtom = atom(
             const res = await invokeMain<string>({ type: 'get-second-window-icon', hwnd });
 
             set(sawIconStrAtom, res);
+
+            var image = new Image();
+            image.src = `data:image/png;base64,${res}`;
+            set(sawIconAtom, image);
 
             clientState.buildRunning = false;
             clientState.buildCounter = 0;

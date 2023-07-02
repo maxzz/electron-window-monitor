@@ -2,6 +2,7 @@ import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
 import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
+import { GetWindowIconResult } from "@/electron/app/windows-napi-calls/plugin-types";
 
 export const sawIconStrAtom = atom<string | undefined>('');
 export const sawIconAtom = atom<HTMLImageElement | null>(null);
@@ -18,8 +19,11 @@ export const doGetSawIconAtom = atom(
 
             set(sawIconStrAtom, res);
 
+            const img = JSON.parse(res || '') as GetWindowIconResult;
+
+
             var image = new Image();
-            image.src = `data:image/png;base64,${res}`;
+            image.src = `data:image/png;base64,${img.data}`;
             set(sawIconAtom, image);
 
             clientState.buildRunning = false;

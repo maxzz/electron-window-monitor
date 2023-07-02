@@ -9,10 +9,6 @@ function ImagePanel() {
     const image = useAtomValue(sawIconAtom);
     const refParent = useRef<HTMLDivElement>(null);
 
-    if (!image) {
-        return null;
-    }
-
     useEffect(() => {
         if (!refParent.current || !image) {
             return;
@@ -25,6 +21,10 @@ function ImagePanel() {
             parent.removeChild(image);
         };
     }, [image]);
+
+    if (!image) {
+        return null;
+    }
 
     return (
         <div ref={refParent} className="">

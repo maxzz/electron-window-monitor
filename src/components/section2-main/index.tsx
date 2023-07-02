@@ -31,6 +31,8 @@ function ImagePanel() {
         </div>
     );
 }
+//TODO: add icons cache
+//TODO: we need to get the website icon from the active tab for browser windows
 
 export function Section2Main() {
     return (

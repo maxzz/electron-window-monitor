@@ -1,6 +1,7 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { doClearSawHandleAtom, sawHandleStrAtom, sawHandleAtom, doMonitoringAtom } from "@/store";
 import { classNames } from "@/utils";
+import { ImagePanel } from "../panel-window-icon";
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
 
@@ -61,6 +62,7 @@ export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     return (
         <div className="w-full max-w-xl">
+            <ImagePanel />
             <HeaderButtons />
 
             {secondActiveWindow && (

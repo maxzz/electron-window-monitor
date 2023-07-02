@@ -1,4 +1,4 @@
-export const barClasses = "\
+export const scrollbarClasses = "\
 p-0.5 \
 bg-primary-500/50 \
 hover:bg-primary-500 \
@@ -14,7 +14,7 @@ select-none \
 touch-none \
 ";
 
-export const thumbClasses = "\
+export const scrollbarThumbClasses = "\
 relative \
 flex-1 \
 bg-primary-700/70 \

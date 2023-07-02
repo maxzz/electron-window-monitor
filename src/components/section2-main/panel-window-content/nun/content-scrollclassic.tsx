@@ -1,7 +1,7 @@
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { EngineControl, sawContentAtom, sawContentStrAtom } from "@/store";
-import { ControlsGridItems } from "../content-items";
+import { ControlsGridItems } from "../body-elements/content-items";
 
 const gridBorderClasses = `pl-2 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;
 const vlineClasses = "[&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b

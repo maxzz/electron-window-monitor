@@ -1,8 +1,8 @@
 import { sawHandleStrAtom } from "@/store";
 import { useAtomValue } from "jotai";
 import { ContentPanel } from "./nun/content-scrollclassic";
-import { HeaderPanel } from "./header-panel";
-import { ContentScrollArea } from "./content-scrollarea";
+import { HeaderPanel } from "./header/header-panel";
+import { ContentScrollArea } from "./body-elements/content-scrollarea";
 
 export function SawContentPanel() {
     const sawHandleStr = useAtomValue(sawHandleStrAtom);

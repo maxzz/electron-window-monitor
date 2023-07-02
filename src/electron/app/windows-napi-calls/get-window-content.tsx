@@ -1,6 +1,7 @@
 import { addon } from ".";
 import { mainToRenderer } from "../ipc-main";
 import { mainStore } from "../store-main";
+import { WindowControlsCollectorCollectParams } from "./plugin-types";
 
 type CollectProgressData = {
     state: 'progress' | 'done';
@@ -17,7 +18,7 @@ type CollectResult = CollectProgressData | CollectFinalData;
 export function getWindowContent(hwnd: string): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
-            const param = JSON.stringify({ hwnd });
+            const param = JSON.stringify({ hwnd } as WindowControlsCollectorCollectParams);
             const collector = new addon.WindowControlsCollector();
 
             collector.collect(param, (err: any, str: string) => {

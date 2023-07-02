@@ -4,7 +4,7 @@ import { ButtonRunMonitor } from "./btn-get-window-monitor";
 import { ButtonGetContent } from "./btn-get-content";
 import { ButtonGetHandle } from "./btn-get-window-manual";
 import { ButtonGetIcon } from "./btn-get-icon";
-import { ButtonGetManifest } from "./btn-get-manifest";
+import { ButtonGetManifest } from "./btn-get-mani";
 
 export const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 

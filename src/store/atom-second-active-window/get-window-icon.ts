@@ -3,24 +3,6 @@ import { invokeMain } from "../ipc-client";
 import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
 
-/* order sent by napi plugin
-export type EngineControl = {
-    type: string;
-    memid: number;
-    topurl: string;
-    parenturl: string;
-    formname: string;
-    path: string;
-    dispname: string;
-    memvalue: string;
-    choosevalues: string[];
-    orderid: number;
-    hintfromengineuseit: boolean;
-    mfillin_useunicode: boolean;
-    mfillin_wrapkeystate: boolean;
-};
-*/
-
 export type EngineControl = {
     type: string;
     dispname: string;
@@ -48,7 +30,7 @@ export type SawContentReply = {
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<SawContentReply | null>(null);
 
-export const doGetSawContentAtom = atom(
+export const doGetSawIconAtom = atom(
     null,
     async (get, set, hwnd: string | undefined): Promise<void> => {
         try {
@@ -56,24 +38,8 @@ export const doGetSawContentAtom = atom(
                 throw new Error('No hwnd');
             }
 
-            if (clientState.buildRunning) {
-                return;
-            }
+            const res = await invokeMain<string>({ type: 'get-second-window-icon', hwnd });
 
-            clientState.buildRunning = true;
-            clientState.buildCounter = 0;
-            clientState.buildError = '';
-            clientState.buildFailedBody = '';
-
-            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
-
-            const prev = get(sawContentStrAtom);
-            if (prev === res) {
-                clientState.buildRunning = false;
-                clientState.buildCounter = 0;
-                clientState.buildError = '';
-                return;
-            }
             set(sawContentStrAtom, res);
 
             const reply = JSON.parse(res || '{}') as SawContentReply;

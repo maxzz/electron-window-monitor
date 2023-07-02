@@ -1,9 +1,15 @@
 export type PluginErrorCallback = (err: string) => void;
 export type PluginDataCallback = (err: string, data: string) => void;
 
+/////////////////////////////////////////////////////////////////////////////
 // Get Icon
 
 export type IconFormatType = 'png' | 'jpeg' | 'bmp';
+
+export type GetWindowIconParams = {
+    hwnd: string;
+    iconFormat: IconFormatType;
+}
 
 /**
  * Class for getting window icon. Instantiate once and call getIcon multiple times.
@@ -21,37 +27,49 @@ export interface WindowIconGetter {
 }
 
 export interface WindowIconGetterBody {
-    getWindowIcon(paramStr: string, cb: PluginDataCallback): void;
+    getWindowIcon(getWindowIconParams: string, cb: PluginDataCallback): void;
 }
 
+/////////////////////////////////////////////////////////////////////////////
 // Get Manifest
+
+export type ManifestForWindowCreatorParams = {
+    hwnd: string;
+}
 
 export interface ManifestForWindowCreator {
     new(): ManifestForWindowCreatorBody;
 }
 
 export interface ManifestForWindowCreatorBody {
-    create(paramStr: string, cb: PluginDataCallback): void;
+    create(manifestForWindowCreatorParams: string, cb: PluginDataCallback): void;
     cancel(): void;
 }
 
+/////////////////////////////////////////////////////////////////////////////
 // Get Controls
+
+export type WindowControlsCollectorCollectParams = {
+    hwnd: string;
+}
 
 export interface WindowControlsCollector {
     new(): WindowControlsCollectorBody;
 }
 
 export interface WindowControlsCollectorBody {
-    collect(paramStr: string, cb: PluginDataCallback): void;
+    collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;
     cancel(): void;
 }
 
+/////////////////////////////////////////////////////////////////////////////
 // Get Target Window
 
 export interface getTargetWindow {
-    (paramStr: string, cb: PluginDataCallback): void;
+    (params: string, cb: PluginDataCallback): void;
 }
 
+/////////////////////////////////////////////////////////////////////////////
 // All together
 
 export type AddonTypes = {

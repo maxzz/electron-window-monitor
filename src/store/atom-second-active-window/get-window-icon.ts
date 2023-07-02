@@ -4,8 +4,12 @@ import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
 import { WindowIconGetterResult } from "@/electron/app/windows-napi-calls/pmat-plugin-types";
 
-export const sawIconStrAtom = atom<string | undefined>('');
+export const sawIconStrAtom = atom<string | undefined>(undefined);
 export const sawIconAtom = atom<HTMLImageElement | null>(null);
+
+type IconsCache = Map<string, string>; // hwnd -> string with WindowIconGetterResult
+
+const iconsCache: IconsCache = new Map();
 
 export const doGetSawIconAtom = atom(
     null,
@@ -15,22 +19,27 @@ export const doGetSawIconAtom = atom(
                 throw new Error('No hwnd');
             }
 
-            const res = await invokeMain<string>({ type: 'get-second-window-icon', hwnd });
+            const cached = iconsCache.get(hwnd);
 
-            set(sawIconStrAtom, res);
+            const str = cached ? cached : await invokeMain<string>({ type: 'get-second-window-icon', hwnd });
 
-            const img = JSON.parse(res || '') as WindowIconGetterResult;
+            if (str && str !== cached) {
+                iconsCache.set(hwnd, str);
+            }
 
+            const prev = get(sawIconStrAtom);
+            if (prev !== str) {
+                set(sawIconStrAtom, str);
 
-            var image = new Image();
-            image.src = `data:image/png;base64,${img.data}`;
-            set(sawIconAtom, image);
+                const res = JSON.parse(str || '') as WindowIconGetterResult;
+                const image = new Image();
+                image.src = `data:image/png;base64,${res.data}`;
+                set(sawIconAtom, image);
+            }
 
-            clientState.buildRunning = false;
-            clientState.buildCounter = 0;
             clientState.buildError = '';
 
-            console.log('doGetSawIconAtom.set', JSON.stringify(res, null, 4));
+            console.log('doGetSawIconAtom.set', JSON.stringify(str, null, 4));
         } catch (error) {
             set(sawIconStrAtom, '');
 
@@ -40,4 +49,3 @@ export const doGetSawIconAtom = atom(
         }
     }
 );
-

@@ -21,7 +21,7 @@ export async function getIcon(hwnd: string, iconFormat: IconFormatType = 'png'):
                 reject(err);
             } else {
                 resolve(data);
-                //saveIconFile(`test-icon.${iconFormat}`, data); // icon will go to the root folder of the electron-window-monitor project.
+                //saveIconFile(`test-icon.${iconFormat}`, data); // The icon will go to the root folder of the electron-window-monitor project.
             }
         });
     });

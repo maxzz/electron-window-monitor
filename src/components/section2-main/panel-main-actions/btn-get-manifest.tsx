@@ -5,7 +5,7 @@ import { clientState } from "@/store/app-state";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 
-export function ButtonGetContent() {
+export function ButtonGetManifest() {
     const doGetWindowContent = useSetAtom(doGetSawContentAtom);
     const setIsMonitoring = useSetAtom(doMonitoringAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
@@ -23,7 +23,7 @@ export function ButtonGetContent() {
                 doGetWindowContent(hwnd);
             }}
         >
-            Content
+            Manifest
         </button>
     );
 }

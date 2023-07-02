@@ -1,19 +1,7 @@
 import { addon } from ".";
 import { mainToRenderer } from "../ipc-main";
 import { mainStore } from "../store-main";
-import { WindowControlsCollectorCollectParams } from "./plugin-types";
-
-type CollectProgressData = {
-    state: 'progress' | 'done';
-    progress: number;
-};
-
-export type CollectFinalData = {
-    pool: string;
-    controls: string[];
-};
-
-type CollectResult = CollectProgressData | CollectFinalData;
+import { WindowControlsCollectorCollectResult, WindowControlsCollectorCollectParams } from "./plugin-types";
 
 export function getWindowContent(hwnd: string): Promise<string> {
     return new Promise<string>(
@@ -29,7 +17,7 @@ export function getWindowContent(hwnd: string): Promise<string> {
                 //console.log('plugin:', str);
 
                 try {
-                    const res: CollectResult = JSON.parse(str);
+                    const res: WindowControlsCollectorCollectResult = JSON.parse(str);
 
                     if (mainStore.cancelDetection) {
                         collector.cancel();

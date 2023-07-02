@@ -2,17 +2,24 @@ export type PluginErrorCallback = (err: string) => void;
 export type PluginDataCallback = (err: string, data: string) => void;
 
 /////////////////////////////////////////////////////////////////////////////
+// Get Target Window
+
+export interface getTargetWindow {
+    (params: string, cb: PluginDataCallback): void;
+}
+
+/////////////////////////////////////////////////////////////////////////////
 // Get Icon
 
 export type IconFormatType = 'png' | 'jpeg' | 'bmp';
 export type Base64String = string;
 
-export type GetWindowIconParams = {
+export type WindowIconGetterParams = {
     hwnd: string;
     iconFormat: IconFormatType;
 }
 
-export type GetWindowIconResult = {
+export type WindowIconGetterResult = {
     data: Base64String;
     type: IconFormatType;
 }
@@ -30,7 +37,32 @@ export type GetWindowIconResult = {
 
 export interface WindowIconGetter {
     new(): WindowIconGetter;
-    getWindowIcon(getWindowIconParams: string, cb: PluginDataCallback): void;
+    getWindowIcon(windowIconGetterParamsParams: string, cb: PluginDataCallback): void;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Get Controls
+
+export type WindowControlsCollectorCollectParams = {
+    hwnd: string;
+}
+
+export type WindowControlsCollectProgress = {
+    state: 'progress' | 'done';
+    progress: number;
+};
+
+export type WindowControlsCollectFinal = {
+    pool: string;
+    controls: string[];
+};
+
+export type WindowControlsCollectorCollectResult = WindowControlsCollectProgress | WindowControlsCollectFinal;
+
+export interface WindowControlsCollector {
+    new(): WindowControlsCollector;
+    collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;
+    cancel(): void;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -44,26 +76,6 @@ export interface ManifestForWindowCreator {
     new(): ManifestForWindowCreator;
     create(manifestForWindowCreatorParams: string, cb: PluginDataCallback): void;
     cancel(): void;
-}
-
-/////////////////////////////////////////////////////////////////////////////
-// Get Controls
-
-export type WindowControlsCollectorCollectParams = {
-    hwnd: string;
-}
-
-export interface WindowControlsCollector {
-    new(): WindowControlsCollector;
-    collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;
-    cancel(): void;
-}
-
-/////////////////////////////////////////////////////////////////////////////
-// Get Target Window
-
-export interface getTargetWindow {
-    (params: string, cb: PluginDataCallback): void;
 }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 
-let monitorTimerId: ReturnType<typeof setTimeout> | undefined;
-
 export const monitoringCounterAtom = atom(-1);
 
 const _isMonitoringAtom = atom(false);
+
+let monitorTimerId: ReturnType<typeof setTimeout> | undefined;
 
 export const doMonitoringAtom = atom(
     (get) => get(_isMonitoringAtom),

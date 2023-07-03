@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useAtomValue } from "jotai";
-import { sawIconAtom } from "@/store/atom-second-active-window/get-window-icon";
+import { sawIconAtom } from "@/store";
 
 export function ImagePanel() {
     const image = useAtomValue(sawIconAtom);

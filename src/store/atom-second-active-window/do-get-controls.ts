@@ -1,6 +1,6 @@
 import { atom } from "jotai";
-import { invokeMain } from "../ipc-client";
 import { buildState, clientState } from "../app-state";
+import { invokeMain } from "../ipc-client";
 import { getSubError } from "@/utils";
 
 /* order sent by napi plugin
@@ -98,4 +98,4 @@ export const doGetSawContentAtom = atom(
     }
 );
 
-//TODO: cancel build request if app is closed by user
+//TODO: cancel build request if application is closed by user

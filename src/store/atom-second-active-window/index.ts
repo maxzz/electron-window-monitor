@@ -1,5 +1,7 @@
 // Abbreviations: SAW - Second Active Window
 
-export * from './get-window-handle';
-export * from './get-window-content';
-export * from './monitor';
+export * from './do-get-hwnd';
+export * from './do-get-icon';
+export * from './do-get-controls';
+export * from './do-get-mani';
+export * from './do-monitoring';

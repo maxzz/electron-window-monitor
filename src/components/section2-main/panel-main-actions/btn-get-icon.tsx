@@ -1,8 +1,7 @@
 import { useSetAtom, useAtomValue } from "jotai";
-import { sawHandleAtom } from "@/store";
+import { doGetSawIconAtom, sawHandleAtom } from "@/store";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
-import { doGetSawIconAtom } from "@/store/atom-second-active-window/get-window-icon";
 
 export function ButtonGetIcon() {
     const doGetSawIcon = useSetAtom(doGetSawIconAtom);

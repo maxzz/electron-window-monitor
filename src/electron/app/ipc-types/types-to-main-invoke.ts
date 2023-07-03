@@ -16,21 +16,21 @@ export namespace M4RInvoke { // Main from Renderer invoke and get result
     };
 
     type GetSecondWindowHandle = {
-        type: 'get-second-window-handle';
+        type: 'get-target-hwnd';
     };
 
     type GetSecondWindowContent = {
-        type: 'get-second-window-content';
+        type: 'get-window-controls';
         hwnd: string;
     };
 
     type GetSecondWindowIcon = {
-        type: 'get-second-window-icon';
+        type: 'get-window-icon';
         hwnd: string;
     };
 
     type GetSecondWindowMani = {
-        type: 'get-second-window-mani';
+        type: 'get-window-mani';
         hwnd: string;
     };
 

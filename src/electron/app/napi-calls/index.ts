@@ -7,7 +7,7 @@ export const addon: AddonTypes = require('./plugins/pmat_plugin_nodejs');
 //console.log('addon', addon);
 
 export * from './pmat-plugin-types';
-export * from './get-active-window';
-export * from './get-window-content';
+export * from './get-target-hwnd';
+export * from './get-window-controls';
 export * from './get-window-icon';
 export * from './get-window-mani';

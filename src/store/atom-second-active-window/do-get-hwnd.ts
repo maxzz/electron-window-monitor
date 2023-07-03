@@ -19,7 +19,7 @@ export const doGetSawHandleAtom = atom(
     null,
     async (get, set): Promise<void> => {
         try {
-            const res = await invokeMain<string>({ type: 'get-second-window-handle' });
+            const res = await invokeMain<string>({ type: 'get-target-hwnd' });
 
             const prev = get(sawHandleStrAtom);
             if (prev === res) {

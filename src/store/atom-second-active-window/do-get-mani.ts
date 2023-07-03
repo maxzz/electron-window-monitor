@@ -29,7 +29,7 @@ export const doGetSawManiAtom = atom(
             clientState.buildError = '';
             clientState.buildFailedBody = '';
 
-            const res = await invokeMain<string>({ type: 'get-second-window-content', hwnd });
+            const res = await invokeMain<string>({ type: 'get-window-controls', hwnd });
 
             const prev = get(sawManiStrAtom);
             if (prev === res) {

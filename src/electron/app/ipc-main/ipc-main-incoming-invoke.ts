@@ -1,6 +1,6 @@
 import { M4RInvoke } from "@/electron/app/ipc-types";
 import { loadFilesContent } from "../utils-main/load-files";
-import { getWindowIcon, getTargetHwnd, getWindowControls } from "../napi-calls";
+import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani } from "../napi-calls";
 
 export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Promise<any> {
     switch (data.type) {
@@ -10,20 +10,20 @@ export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Pro
         case 'load-files2': {
             return loadFilesContent(data.filenames);
         }
-        case 'get-second-window-handle': {
+        case 'get-target-hwnd': {
             const res = await getTargetHwnd({});
             return res;
         }
-        case 'get-second-window-content': {
+        case 'get-window-controls': {
             const res = await getWindowControls(data.hwnd);
             return res;
         }
-        case 'get-second-window-icon': {
+        case 'get-window-icon': {
             const res = await getWindowIcon(data.hwnd);
             return res;
         }
-        case 'get-second-window-mani': {
-            const res = await getWindowControls(data.hwnd);
+        case 'get-window-mani': {
+            const res = await getWindowMani(data.hwnd);
             return res;
         }
         default: {

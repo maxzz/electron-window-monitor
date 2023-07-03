@@ -69,6 +69,48 @@ export type WindowControlsCollectFinal = {
 
 export type WindowControlsCollectorCollectResult = WindowControlsCollectProgress | WindowControlsCollectFinal;
 
+/* order sent by napi plugin
+export type EngineControl = {
+    type: string;
+    memid: number;
+    topurl: string;
+    parenturl: string;
+    formname: string;
+    path: string;
+    dispname: string;
+    memvalue: string;
+    choosevalues: string[];
+    orderid: number;
+    hintfromengineuseit: boolean;
+    mfillin_useunicode: boolean;
+    mfillin_wrapkeystate: boolean;
+};
+*/
+
+export type EngineControl = {
+    type: string;
+    dispname: string;
+    formname: string;
+    path: string;
+    memvalue: string;
+    choosevalues: string[];
+
+    memid: number;
+    orderid: number;
+
+    topurl: string;
+    parenturl: string;
+
+    hintfromengineuseit: boolean;
+    mfillin_useunicode: boolean;
+    mfillin_wrapkeystate: boolean;
+};
+
+export type WindowControlsCollectorCollectReply = {
+    pool: string;
+    controls: EngineControl[];
+};
+
 export interface WindowControlsCollector {
     new(): WindowControlsCollector;
     collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;

@@ -2,51 +2,10 @@ import { atom } from "jotai";
 import { buildState, clientState } from "../app-state";
 import { invokeMain } from "../ipc-client";
 import { getSubError } from "@/utils";
-
-/* order sent by napi plugin
-export type EngineControl = {
-    type: string;
-    memid: number;
-    topurl: string;
-    parenturl: string;
-    formname: string;
-    path: string;
-    dispname: string;
-    memvalue: string;
-    choosevalues: string[];
-    orderid: number;
-    hintfromengineuseit: boolean;
-    mfillin_useunicode: boolean;
-    mfillin_wrapkeystate: boolean;
-};
-*/
-
-export type EngineControl = {
-    type: string;
-    dispname: string;
-    formname: string;
-    path: string;
-    memvalue: string;
-    choosevalues: string[];
-
-    memid: number;
-    orderid: number;
-
-    topurl: string;
-    parenturl: string;
-
-    hintfromengineuseit: boolean;
-    mfillin_useunicode: boolean;
-    mfillin_wrapkeystate: boolean;
-};
-
-export type SawContentReply = {
-    pool: string;
-    controls: EngineControl[];
-};
+import { WindowControlsCollectorCollectReply } from "@/electron/app/napi-calls/pmat-plugin-types";
 
 export const sawContentStrAtom = atom<string | undefined>('');
-export const sawContentAtom = atom<SawContentReply | null>(null);
+export const sawContentAtom = atom<WindowControlsCollectorCollectReply | null>(null);
 
 export const doGetSawContentAtom = atom(
     null,
@@ -76,7 +35,7 @@ export const doGetSawContentAtom = atom(
             }
             set(sawContentStrAtom, res);
 
-            const reply = JSON.parse(res || '{}') as SawContentReply;
+            const reply = JSON.parse(res || '{}') as WindowControlsCollectorCollectReply;
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawContentAtom, final);
 

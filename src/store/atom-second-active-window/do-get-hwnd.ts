@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { invokeMain } from "../ipc-client";
 import { sawContentAtom, sawContentStrAtom } from ".";
-import { GetTargetWindowResult } from "@/electron/app/windows-napi-calls/pmat-plugin-types";
+import { GetTargetWindowResult } from "@/electron/app/napi-calls/pmat-plugin-types";
 import { clientState } from "../app-state";
 import { snapshot, useSnapshot } from "valtio";
 import { atomWithProxy } from "jotai-valtio";
@@ -56,14 +56,3 @@ export const sawGetDisabledAtom = atom(
         return isDisabled;
     }
 );
-// export const sawGetDisabledAtom = atom(
-//     (get) => {
-//         const secondActiveWindow = get(sawHandleAtom);
-//         const { buildRunning } = snapshot(clientState);
-//         //const { buildRunning } = useSnapshot(clientState);
-//         console.log('secondActiveWindow', secondActiveWindow, 'buildRunning', buildRunning);
-//         const hwnd = secondActiveWindow?.hwnd;
-//         const isDisabled = !hwnd || buildRunning;
-//         return isDisabled;
-//     }
-// );

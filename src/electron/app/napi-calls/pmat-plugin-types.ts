@@ -5,7 +5,7 @@ export type PluginErrorCallback = (err: string) => void;
 // Get Target Window
 
 export type GetTargetWindowParams = {   // i.e. empty object like this '{}'
-}
+};
 
 export type GetTargetWindowResult = {   // SAW - Second Active Window
     hwnd: string;                       // "000000000014103E",
@@ -27,12 +27,12 @@ export type Base64String = string;
 export type WindowIconGetterParams = {
     hwnd: string;               // hwnd should be string because int64 and js number types are different
     iconFormat: IconFormatType;
-}
+};
 
 export type WindowIconGetterResult = {
     data: Base64String;
     type: IconFormatType;
-}
+};
 
 /**
  * Class for getting window icon. Instantiate once and call getIcon multiple times.
@@ -55,7 +55,7 @@ export interface WindowIconGetter {
 
 export type WindowControlsCollectorCollectParams = {
     hwnd: string;
-}
+};
 
 export type WindowControlsCollectProgress = {
     state: 'progress' | 'done';
@@ -68,24 +68,6 @@ export type WindowControlsCollectFinal = {
 };
 
 export type WindowControlsCollectorCollectResult = WindowControlsCollectProgress | WindowControlsCollectFinal;
-
-/* order sent by napi plugin
-export type EngineControl = {
-    type: string;
-    memid: number;
-    topurl: string;
-    parenturl: string;
-    formname: string;
-    path: string;
-    dispname: string;
-    memvalue: string;
-    choosevalues: string[];
-    orderid: number;
-    hintfromengineuseit: boolean;
-    mfillin_useunicode: boolean;
-    mfillin_wrapkeystate: boolean;
-};
-*/
 
 export type EngineControl = {
     type: string;
@@ -122,7 +104,9 @@ export interface WindowControlsCollector {
 
 export type ManifestForWindowCreatorParams = {
     hwnd: string;
-}
+};
+
+export type ManifestForWindowCreatorResult = any;
 
 export interface ManifestForWindowCreator {
     new(): ManifestForWindowCreator;

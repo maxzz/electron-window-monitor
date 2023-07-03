@@ -3,7 +3,7 @@ import { ManifestForWindowCreator } from "./pmat-plugin-types";
 
 const manifestForWindowCreator: ManifestForWindowCreator | null = null;
 
-export function createWindowManifestTest(hwnd: number, wantXml: boolean = false): void {
+export function getWindowMani(hwnd: number, wantXml: boolean = false): void {
     const paramsObj = { hwnd: hwnd, wantXml: wantXml };
     const paramsStr = JSON.stringify(paramsObj);
 

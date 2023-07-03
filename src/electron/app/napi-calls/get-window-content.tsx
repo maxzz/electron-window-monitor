@@ -3,7 +3,7 @@ import { mainToRenderer } from "../ipc-main";
 import { mainStore } from "../store-main";
 import { WindowControlsCollectorCollectResult, WindowControlsCollectorCollectParams } from "./pmat-plugin-types";
 
-export function getWindowContent(hwnd: string): Promise<string> {
+export function getWindowControls(hwnd: string): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
             const param = JSON.stringify({ hwnd } as WindowControlsCollectorCollectParams);

@@ -1,5 +1,6 @@
 import { useAtomValue } from 'jotai';
-import { EngineControl, sawContentAtom, sawContentStrAtom } from '@/store';
+import { sawContentAtom, sawContentStrAtom } from '@/store';
+import { EngineControl } from '@/electron/app/napi-calls';
 import { classNames } from '@/utils';
 import { ControlsGridItems } from './content-items';
 import { ScrollBox } from './scrollbox';

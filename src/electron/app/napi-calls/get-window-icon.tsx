@@ -4,7 +4,7 @@ import fs from 'fs';
 
 let gWindowIconGetter: WindowIconGetter | null = null;
 
-export async function getIcon(hwnd: string, iconFormat: IconFormatType = 'png'): Promise<string> {
+export async function getWindowIcon(hwnd: string, iconFormat: IconFormatType = 'png'): Promise<string> {
     if (!gWindowIconGetter) {
         gWindowIconGetter = new addon.WindowIconGetter();
     }

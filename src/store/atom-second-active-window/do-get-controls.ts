@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { buildState, clientState } from "../app-state";
 import { invokeMain } from "../ipc-client";
 import { getSubError } from "@/utils";
-import { WindowControlsCollectorCollectReply } from "@/electron/app/napi-calls/pmat-plugin-types";
+import { WindowControlsCollectorCollectReply } from "@/electron/app/napi-calls";
 
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<WindowControlsCollectorCollectReply | null>(null);

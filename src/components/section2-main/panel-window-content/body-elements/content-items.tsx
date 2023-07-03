@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { EngineControl } from "@/store";
+import { EngineControl } from "@/electron/app/napi-calls";
 
 export function ControlsGridItems({ controls }: { controls: EngineControl[]; }) {
     return (<>

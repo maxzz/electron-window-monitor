@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
+import { sawContentAtom, sawContentStrAtom } from "@/store";
+import { EngineControl } from "@/electron/app/napi-calls";
 import { classNames } from "@/utils";
-import { EngineControl, sawContentAtom, sawContentStrAtom } from "@/store";
 import { ControlsGridItems } from "../body-elements/content-items";
 
 const gridBorderClasses = `pl-2 text-xs border-primary-500 border rounded ${"select-none shadow-sm"}`;

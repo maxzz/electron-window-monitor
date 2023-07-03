@@ -1,6 +1,6 @@
 import { addon } from ".";
 
-export function getTargetWindow(dataIn: object | string): Promise<string> {
+export function getTargetHwnd(dataIn: object | string): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
             const param = typeof dataIn === 'object' ? JSON.stringify(dataIn) : dataIn;

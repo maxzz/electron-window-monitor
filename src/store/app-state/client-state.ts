@@ -1,3 +1,4 @@
+import { atomWithProxy } from 'jotai-valtio';
 import { proxy } from 'valtio';
 
 type ClientState = {
@@ -11,6 +12,8 @@ export const clientState = proxy<ClientState>({
     buildError: '',
     buildFailedBody: '',
 });
+
+export const clientStateAtom = atomWithProxy(clientState);
 
 type BuildState = {
     buildCounter: number;       // controls detection progress

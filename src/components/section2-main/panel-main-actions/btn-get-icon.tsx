@@ -1,10 +1,10 @@
 import { useSetAtom, useAtomValue } from "jotai";
-import { doGetSawIconAtom, sawHandleAtom } from "@/store";
+import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 
 export function ButtonGetIcon() {
-    const doGetSawIcon = useSetAtom(doGetSawIconAtom);
+    const doGetWindowIcon = useSetAtom(doGetWindowIconAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const hwnd = secondActiveWindow?.hwnd;
     const isDisabled = !hwnd;
@@ -15,7 +15,7 @@ export function ButtonGetIcon() {
             disabled={isDisabled}
             title={title}
             onClick={() => {
-                doGetSawIcon(hwnd);
+                doGetWindowIcon(hwnd);
             }}
         >
             Icon

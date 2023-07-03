@@ -1,14 +1,14 @@
 import { HTMLAttributes } from "react";
 import { useSetAtom, useAtomValue } from "jotai";
-import { doGetSawHandleAtom, doMonitoringAtom } from "@/store";
+import { doGetTargetHwndAtom, doMonitoringAtom } from "@/store";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 
 export function ButtonGetHandle({ className, ...rest }: HTMLAttributes<HTMLButtonElement>) {
-    const doGetSawHandle = useSetAtom(doGetSawHandleAtom);
+    const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
     const isMonitoring = useAtomValue(doMonitoringAtom);
     return (
-        <button className={classNames(buttonClasses, className)} disabled={isMonitoring} onClick={doGetSawHandle} {...rest}>
+        <button className={classNames(buttonClasses, className)} disabled={isMonitoring} onClick={doGetTargetHwnd} {...rest}>
             Get Second Window
         </button>
     );

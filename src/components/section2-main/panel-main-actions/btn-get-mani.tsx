@@ -1,12 +1,12 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
-import { doGetSawContentAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
+import { doGetWindowManiAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
 import { clientState } from "@/store/app-state";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 
 export function ButtonGetManifest() {
-    const doGetWindowContent = useSetAtom(doGetSawContentAtom);
+    const doGetWindowMani = useSetAtom(doGetWindowManiAtom);
     const setIsMonitoring = useSetAtom(doMonitoringAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const { buildRunning } = useSnapshot(clientState);
@@ -20,7 +20,7 @@ export function ButtonGetManifest() {
             title={title}
             onClick={() => {
                 setIsMonitoring({ doStart: false });
-                doGetWindowContent(hwnd);
+                doGetWindowMani(hwnd);
             }}
         >
             Manifest

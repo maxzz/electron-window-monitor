@@ -15,7 +15,7 @@ export const doClearSawHandleAtom = atom(
     }
 );
 
-export const doGetSawHandleAtom = atom(
+export const doGetTargetHwndAtom = atom(
     null,
     async (get, set): Promise<void> => {
         try {
@@ -37,7 +37,7 @@ export const doGetSawHandleAtom = atom(
         } catch (error) {
             set(sawHandleStrAtom, '');
             set(sawHandleAtom, null);
-            console.error(`'get-saw-handle' ${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'doGetTargetHwndAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );

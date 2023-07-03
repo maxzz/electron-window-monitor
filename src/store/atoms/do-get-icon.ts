@@ -11,7 +11,7 @@ type IconsCache = Map<string, string>; // hwnd -> string with WindowIconGetterRe
 
 const iconsCache: IconsCache = new Map();
 
-export const doGetSawIconAtom = atom(
+export const doGetWindowIconAtom = atom(
     null,
     async (get, set, hwnd: string | undefined): Promise<void> => {
         try {
@@ -45,7 +45,7 @@ export const doGetSawIconAtom = atom(
 
             clientState.buildError = getSubError(error);
 
-            console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'doGetWindowIconAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );

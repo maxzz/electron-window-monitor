@@ -1,15 +1,15 @@
 import { useSetAtom, useAtom } from "jotai";
-import { doGetSawHandleAtom, doMonitoringAtom } from "@/store";
+import { doGetTargetHwndAtom, doMonitoringAtom } from "@/store";
 import { IconPlayStop, IconPlayStart } from "@/components/ui/icons";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 
 export function ButtonRunMonitor() {
-    const doGetSawHandle = useSetAtom(doGetSawHandleAtom);
+    const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
     async function sendRequest() {
         function callback() {
-            doGetSawHandle();
+            doGetTargetHwnd();
         }
         setIsMonitoring({ doStart: !isMonitoring, callback });
     }

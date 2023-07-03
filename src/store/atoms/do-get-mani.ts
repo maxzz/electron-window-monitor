@@ -1,13 +1,18 @@
 import { atom } from "jotai";
-import { buildState, clientState } from "../app-state";
 import { invokeMain } from "../ipc-client";
+import { buildState, clientState } from "../app-state";
+import { EngineControl } from "@/electron/app/napi-calls";
 import { getSubError } from "@/utils";
-import { WindowControlsCollectorCollectReply } from "@/electron/app/napi-calls";
 
-export const sawContentStrAtom = atom<string | undefined>('');
-export const sawContentAtom = atom<WindowControlsCollectorCollectReply | null>(null);
+type SawContentReply = {
+    pool: string;
+    controls: EngineControl[];
+};
 
-export const doGetSawContentAtom = atom(
+export const sawManiStrAtom = atom<string | undefined>('');
+export const sawManiAtom = atom<SawContentReply | null>(null);
+
+export const doGetWindowManiAtom = atom(
     null,
     async (get, set, hwnd: string | undefined): Promise<void> => {
         try {
@@ -24,37 +29,37 @@ export const doGetSawContentAtom = atom(
             clientState.buildError = '';
             clientState.buildFailedBody = '';
 
-            const res = await invokeMain<string>({ type: 'get-window-controls', hwnd });
+            const res = await invokeMain<string>({ type: 'get-window-mani', hwnd });
 
-            const prev = get(sawContentStrAtom);
+            const prev = get(sawManiStrAtom);
             if (prev === res) {
                 clientState.buildRunning = false;
                 buildState.buildCounter = 0;
                 clientState.buildError = '';
                 return;
             }
-            set(sawContentStrAtom, res);
+            set(sawManiStrAtom, res);
 
-            const reply = JSON.parse(res || '{}') as WindowControlsCollectorCollectReply;
+            const reply = JSON.parse(res || '{}') as SawContentReply;
             const final = reply.pool && reply.controls?.length ? reply : null;
-            set(sawContentAtom, final);
+            set(sawManiAtom, final);
 
             clientState.buildRunning = false;
             buildState.buildCounter = 0;
             clientState.buildError = '';
 
-            console.log('doGetWindowContentAtom.set', JSON.stringify(reply, null, 4));
+            console.log('doGetWindowManiAtom.set', JSON.stringify(reply, null, 4));
         } catch (error) {
-            set(sawContentStrAtom, '');
-            set(sawContentAtom, null);
+            set(sawManiStrAtom, '');
+            set(sawManiAtom, null);
 
             clientState.buildRunning = false;
             buildState.buildCounter = 0;
             clientState.buildError = getSubError(error);
 
-            console.error(`'get-saw-content' ${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'doGetWindowManiAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }
     }
 );
 
-//TODO: cancel build request if application is closed by user
+//TODO: cancel build request if app is closed by user

@@ -104,9 +104,10 @@ export interface WindowControlsCollector {
 
 export type ManifestForWindowCreatorParams = {
     hwnd: string;
+    wantXml: boolean;
 };
 
-export type ManifestForWindowCreatorResult = any;
+export type ManifestForWindowCreatorResult = any; // TODO: define manifest fields
 
 export interface ManifestForWindowCreator {
     new(): ManifestForWindowCreator;

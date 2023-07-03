@@ -6,9 +6,11 @@ import { WindowControlsCollectorCollectResult, WindowControlsCollectorCollectPar
 export function getWindowControls(hwnd: string): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
-            const param = JSON.stringify({ hwnd } as WindowControlsCollectorCollectParams);
-            const collector = new addon.WindowControlsCollector();
+            const params: WindowControlsCollectorCollectParams = { hwnd };
+            const param = JSON.stringify(params);
 
+            const collector = new addon.WindowControlsCollector();
+            
             collector.collect(param, (err: any, str: string) => {
                 if (err) {
                     reject(err);

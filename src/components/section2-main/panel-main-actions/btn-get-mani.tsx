@@ -20,7 +20,7 @@ export function ButtonGetManifest() {
             title={title}
             onClick={() => {
                 setIsMonitoring({ doStart: false });
-                doGetWindowMani(hwnd);
+                doGetWindowMani({hwnd, wantXml: false});
             }}
         >
             Manifest

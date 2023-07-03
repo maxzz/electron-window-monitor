@@ -11,7 +11,7 @@ export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Pro
             return loadFilesContent(data.filenames);
         }
         case 'get-target-hwnd': {
-            const res = await getTargetHwnd({});
+            const res = await getTargetHwnd();
             return res;
         }
         case 'get-window-controls': {
@@ -23,7 +23,7 @@ export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Pro
             return res;
         }
         case 'get-window-mani': {
-            const res = await getWindowMani(data.hwnd);
+            const res = await getWindowMani(data.hwnd, data.wantXml);
             return res;
         }
         default: {

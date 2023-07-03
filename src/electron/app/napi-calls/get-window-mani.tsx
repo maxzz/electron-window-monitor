@@ -3,10 +3,12 @@ import { mainToRenderer } from "../ipc-main";
 import { mainStore } from "../store-main";
 import { ManifestForWindowCreatorParams, ManifestForWindowCreatorResult } from "./pmat-plugin-types";
 
-export function getWindowMani(hwnd: string): Promise<string> {
+export function getWindowMani(hwnd: string, wantXml: boolean): Promise<string> {
     return new Promise<string>(
         (resolve, reject) => {
-            const param = JSON.stringify({ hwnd } as ManifestForWindowCreatorParams);
+            const params: ManifestForWindowCreatorParams = { hwnd, wantXml, };
+            const param = JSON.stringify(params);
+            
             const collector = new addon.ManifestForWindowCreator();
 
             collector.create(param, (err: any, str: string) => {
@@ -14,7 +16,7 @@ export function getWindowMani(hwnd: string): Promise<string> {
                     reject(err);
                     return;
                 }
-                console.log('plugin:', str);
+                console.log(`parse collector:\n>>>\n${str}\n<<<`);
 
                 try {
                     const res: ManifestForWindowCreatorResult = JSON.parse(str);
@@ -26,17 +28,16 @@ export function getWindowMani(hwnd: string): Promise<string> {
                         return;
                     }
 
-                    // if ('state' in res) {
-                    //     if (mainStore.maxControls !== 0 && res.progress > mainStore.maxControls) {
-                    //         collector.cancel();
-                    //         reject(`>>>Too many controls (more then ${mainStore.maxControls})`);
-                    //         return;
-                    //     }
+                    if ('state' in res) {
+                        if (mainStore.maxControls !== 0 && res.progress > mainStore.maxControls) {
+                            collector.cancel();
+                            reject(`>>>Too many controls (more then ${mainStore.maxControls})`);
+                            return;
+                        }
 
-                    //     //console.log('cb:', JSON.stringify(res));
-                    //     mainToRenderer({ type: 'detection-progress', progress: res.progress });
-                    //     return;
-                    // }
+                        mainToRenderer({ type: 'detection-progress', progress: res.progress });
+                        return;
+                    }
 
                     resolve(str);
                     console.log('final:', JSON.stringify(res));

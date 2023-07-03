@@ -9,14 +9,15 @@ export async function getWindowIcon(hwnd: string, iconFormat: IconFormatType = '
         gWindowIconGetter = new addon.WindowIconGetter();
     }
 
-    const params = JSON.stringify({ hwnd, iconFormat } as WindowIconGetterParams);
+    const params: WindowIconGetterParams = { hwnd, iconFormat };
+    const param = JSON.stringify(params);
 
     return new Promise<string>((resolve, reject) => {
         if (!gWindowIconGetter) {
             throw new Error('no gWindowIconGetter');
         }
 
-        gWindowIconGetter.getWindowIcon(params, (err: any, data: string) => {
+        gWindowIconGetter.getWindowIcon(param, (err: any, data: string) => {
             if (err) {
                 reject(err);
             } else {

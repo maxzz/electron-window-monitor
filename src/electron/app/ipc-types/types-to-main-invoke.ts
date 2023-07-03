@@ -32,6 +32,7 @@ export namespace M4RInvoke { // Main from Renderer invoke and get result
     type GetSecondWindowMani = {
         type: 'get-window-mani';
         hwnd: string;
+        wantXml: boolean;
     };
 
     export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/ | GetSecondWindowHandle | GetSecondWindowContent | GetSecondWindowIcon | GetSecondWindowMani;

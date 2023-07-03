@@ -14,7 +14,7 @@ export const sawManiAtom = atom<SawContentReply | null>(null);
 
 export const doGetWindowManiAtom = atom(
     null,
-    async (get, set, hwnd: string | undefined): Promise<void> => {
+    async (get, set, {hwnd, wantXml}: {hwnd: string | undefined; wantXml: boolean}): Promise<void> => {
         try {
             if (!hwnd) {
                 throw new Error('No hwnd');
@@ -29,7 +29,7 @@ export const doGetWindowManiAtom = atom(
             clientState.buildError = '';
             clientState.buildFailedBody = '';
 
-            const res = await invokeMain<string>({ type: 'get-window-mani', hwnd });
+            const res = await invokeMain<string>({ type: 'get-window-mani', hwnd, wantXml });
 
             const prev = get(sawManiStrAtom);
             if (prev === res) {

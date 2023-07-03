@@ -37,8 +37,9 @@ function HeaderButtons() {
     }
     return (
         <div className="pb-1 h-7 max-w-3xl flex items-center justify-between">
-            <div className="font-semibold">
-                Second Window
+            <div className="flex items-center">
+                <div className="font-semibold">Second Window</div>
+                <ImagePanel className="mx-2 w-5 h-5" />
             </div>
 
             {!isMonitoring &&
@@ -62,7 +63,6 @@ export function SawHandlePanel() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     return (
         <div className="w-full max-w-xl">
-            <ImagePanel />
             <HeaderButtons />
 
             {secondActiveWindow && (

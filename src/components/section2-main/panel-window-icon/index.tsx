@@ -1,8 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
 import { sawIconAtom } from "@/store";
 
-export function ImagePanel() {
+export function ImagePanel(props: HTMLAttributes<HTMLDivElement>) {
     const image = useAtomValue(sawIconAtom);
     const refParent = useRef<HTMLDivElement>(null);
 
@@ -24,7 +24,7 @@ export function ImagePanel() {
     }
 
     return (
-        <div ref={refParent} className="">
+        <div ref={refParent} {...props}>
         </div>
     );
 }

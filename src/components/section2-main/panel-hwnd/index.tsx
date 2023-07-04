@@ -57,10 +57,10 @@ function HeaderButtons() {
 export function SawHandlePanel() {
 
     return (
-        <div className="w-full max-w-xl">
+        <div className="w-full max-w-xl flex flex-col">
             <HeaderButtons />
             <PanelHwndGrid />
-            <PanelBuildProcess />
+            <PanelBuildProcess className="h-10 self-end" />
         </div>
     );
 }

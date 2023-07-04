@@ -1,6 +1,8 @@
+import { HTMLAttributes } from "react";
 import { useSnapshot } from "valtio";
 import { sendToMain } from "@/store";
 import { clientState, buildState } from "@/store/app-state";
+import { classNames } from "@/utils";
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
@@ -37,9 +39,9 @@ function BuildError() {
     );
 }
 
-export function PanelBuildProcess() {
+export function PanelBuildProcess({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className="h-10 text-xs text-primary-700 flex items-center gap-x-1">
+        <div className={classNames("text-xs text-primary-700 flex items-center gap-x-1", className)} {...rest}>
             <BuildCounter />
             <BuildError />
         </div>

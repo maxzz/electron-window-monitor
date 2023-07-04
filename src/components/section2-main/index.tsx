@@ -1,5 +1,5 @@
-import { MainActionsPanel } from "./panel-main-actions";
-import { SawHandlePanel } from "./panel-window-handle";
+import { MainActionsPanel } from "./panel-actions";
+import { SawHandlePanel } from "./panel-hwnd";
 import { SawContentPanel } from "./panel-window-content";
 
 export function Section2Main() {

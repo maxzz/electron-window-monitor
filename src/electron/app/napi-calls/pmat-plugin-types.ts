@@ -58,7 +58,7 @@ export type WindowControlsCollectorCollectParams = {
 };
 
 export type WindowControlsCollectProgress = {
-    state: 'progress' | 'done';
+    state: 'start' | 'progress' | 'done';
     progress: number;
 };
 

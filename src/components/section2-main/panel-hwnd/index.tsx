@@ -1,7 +1,9 @@
 import { useSetAtom, useAtomValue } from "jotai";
-import { doClearSawHandleAtom, sawHandleStrAtom, sawHandleAtom, doMonitoringAtom } from "@/store";
+import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom } from "@/store";
 import { classNames } from "@/utils";
 import { ImagePanel } from "../panel-window-icon";
+import { PanelBuildProcess } from "./panel-build-process";
+import { PanelHwndGrid } from "./panel-grid";
 
 const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
 
@@ -18,7 +20,7 @@ function ButtonClearHandle() {
     );
 }
 
-function ButtonRaw({ raw }: { raw: string; }) {
+function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     return (
         <div className="relative group cursor-default">
             <div className={borderClasses}>Raw</div>
@@ -38,41 +40,27 @@ function HeaderButtons() {
     return (
         <div className="pb-1 h-7 max-w-3xl flex items-center justify-between">
             <div className="flex items-center">
-                <div className="font-semibold">Second Window</div>
+                <div className="font-semibold">Second active window</div>
                 <ImagePanel className="mx-2 w-5 h-5" />
             </div>
 
             {!isMonitoring &&
                 <div className="flex items-center space-x-1">
                     <ButtonClearHandle />
-                    <ButtonRaw raw={raw} />
+                    <ButtonShowReplyRawText raw={raw} />
                 </div>
             }
         </div>
     );
 }
 
-function RowWindowInfo({ name, value, className, highlight }: { name: string; value: string; className?: string; highlight?: boolean; }) {
-    return (<>
-        <div className="px-2 py-1.5 h-full border-primary-500 border-b text-xs ">{name}</div>
-        <div className={classNames("py-1.5 border-primary-500 border-l border-b px-2", className, highlight && value && "bg-primary-300/30")}>{value}</div>
-    </>);
-}
-
 export function SawHandlePanel() {
-    const secondActiveWindow = useAtomValue(sawHandleAtom);
+
     return (
         <div className="w-full max-w-xl">
             <HeaderButtons />
-
-            {secondActiveWindow && (
-                <div className="text-xs border-primary-500 border rounded grid grid-cols-[auto_1fr]">
-                    <RowWindowInfo name="caption"   /**/ value={secondActiveWindow.caption} className="font-semibold" highlight={true} />
-                    <RowWindowInfo name="classname" /**/ value={secondActiveWindow.classname} />
-                    <RowWindowInfo name="process"   /**/ value={secondActiveWindow.process} />
-                    <RowWindowInfo name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
-                </div>
-            )}
+            <PanelHwndGrid />
+            <PanelBuildProcess />
         </div>
     );
 }

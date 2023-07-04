@@ -39,7 +39,7 @@ function BuildError() {
 
 export function PanelBuildProcess() {
     return (
-        <div className="text-xs text-primary-700 flex items-center gap-x-1">
+        <div className="h-10 text-xs text-primary-700 flex items-center gap-x-1">
             <BuildCounter />
             <BuildError />
         </div>

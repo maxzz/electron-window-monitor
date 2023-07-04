@@ -1,18 +1,18 @@
-import { sawHandleStrAtom } from "@/store";
+import { HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
-//import { ContentPanel } from "./nun/content-scrollclassic";
+import { sawHandleStrAtom } from "@/store";
 import { HeaderPanel } from "./header/header-panel";
 import { ContentScrollArea } from "./body-elements/content-scrollarea";
+import { classNames } from "@/utils";
 
-export function SawContentPanel() {
+export function SawContentPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     const sawHandleStr = useAtomValue(sawHandleStrAtom);
     if (!sawHandleStr) {
         return null;
     }
     return (
-        <div className="w-full min-h-0 max-w-xl flex flex-col">
+        <div className={classNames("min-h-0 flex flex-col", className)} {...rest}>
             <HeaderPanel />
-            {/* <ContentPanel /> */}
             <ContentScrollArea />
         </div>
     );

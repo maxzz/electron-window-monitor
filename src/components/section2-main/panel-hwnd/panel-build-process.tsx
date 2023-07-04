@@ -21,7 +21,7 @@ function BuildCounter() {
             {buildCounter}
         </div>
 
-        <button className={buttonClasses} onClick={() => sendToMain({ type: 'cancel-detection' })}>
+        <button className={classNames(buttonClasses, "text-white bg-orange-500")} onClick={() => sendToMain({ type: 'cancel-detection' })}>
             Cancel
         </button>
     </>);

@@ -6,6 +6,7 @@ import { ButtonGetHandle } from "./btn-get-window-manual";
 import { ButtonGetIcon } from "./btn-get-icon";
 import { ButtonGetManifest } from "./btn-get-mani";
 import { classNames } from "@/utils";
+import { HTMLAttributes } from "react";
 
 export const buttonClasses = "px-3 py-2 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
@@ -40,9 +41,9 @@ function GetActionsGroup() {
     );
 }
 
-export function MainActionsPanel() {
+export function MainActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className="w-full max-w-xl text-sm [@media_(min-width:_480px)]:text-base grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none">
+        <div className={classNames("text-sm [@media_(min-width:_480px)]:text-base grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none" , className)} {...rest}>
             <ButtonRunMonitor />
             <GetActionsGroup />
             <MonitoringCounter />

@@ -1,3 +1,4 @@
+import { HTMLAttributes } from "react";
 import { useSetAtom, useAtomValue } from "jotai";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom } from "@/store";
 import { classNames } from "@/utils";
@@ -54,10 +55,9 @@ function HeaderButtons() {
     );
 }
 
-export function SawHandlePanel() {
-
+export function PanelHwnd({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className="w-full max-w-xl flex flex-col">
+        <div className={classNames("flex flex-col", className)} {...rest}>
             <HeaderButtons />
             <PanelHwndGrid />
             <PanelBuildProcess className="h-10 self-end" />

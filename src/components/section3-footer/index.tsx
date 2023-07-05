@@ -7,7 +7,7 @@ export const focusClasses = "focus:ring-primary-600 dark:focus:ring-primary-400 
 const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-500 border border-dotted rounded-sm underline underline-offset-2";
 
 export function Section3Footer() {
-    const { maxControls } = useSnapshot(appUi.uiState);
+    const { maxControls, acquireXml } = useSnapshot(appUi.uiState);
     function setValue(value: string) {
         let n = parseInt(value);
         if (isNaN(n)) {
@@ -16,15 +16,22 @@ export function Section3Footer() {
         appUi.uiState.maxControls = n;
     }
     return (
-        <div className="p-4 flex items-center space-x-4 text-xs">
-            <div className="w-max flex items-center gap-2" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
-                <div className="select-none">Max controls</div>
-                <input className={classNames("px-2 py-1 w-20 text-primary-900 bg-primary-300 rounded-sm", focusClasses)} value={maxControls} onChange={(e) => setValue(e.target.value)} />
-            </div>
+        <div className="p-4 text-xs flex flex-col space-y-2">
             <div className="text-primary-600 flex items-center space-x-1">
                 <div className="">Test web logins:</div>
                 <a className={linkClasses} href="https://tailwindui.com/login" target="_blank">tw</a>
                 <a className={linkClasses} href="https://www.bankofamerica.com" target="_blank">bofa</a>
+            </div>
+
+            <div className="flex gap-x-4">
+                <label className="w-max flex items-center gap-x-2" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
+                    <div className="select-none">Max controls</div>
+                    <input className={classNames("px-2 py-1 w-20 text-primary-900 bg-primary-300 rounded-sm", focusClasses)} value={maxControls} onChange={(e) => setValue(e.target.value)} />
+                </label>
+                <label className="w-max flex accent-primary-500 items-center gap-x-1" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
+                    <input type="checkbox" className={classNames("px-2 py-1 text-primary-900 bg-primary-300 rounded-sm", focusClasses)} checked={acquireXml} onChange={(e) => appUi.uiState.acquireXml = e.target.checked} />
+                    <div className="select-none">Acquire XML</div>
+                </label>
             </div>
         </div>
     );

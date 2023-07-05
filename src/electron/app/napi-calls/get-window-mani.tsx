@@ -19,6 +19,12 @@ export function getWindowMani(hwnd: string, wantXml: boolean): Promise<string> {
                 console.log(`parse collector:\n>>>\n${str}\n<<<`);
 
                 try {
+                    const isFinalResultXml = wantXml && str.charAt(0) === '<'; // oherwise it's progress
+                    if (isFinalResultXml) {
+                        resolve(str);
+                        return;
+                    }
+
                     const res: ManifestForWindowCreatorResult = JSON.parse(str);
 
                     if (mainStore.cancelDetection) {

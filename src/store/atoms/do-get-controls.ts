@@ -3,6 +3,7 @@ import { buildState, clientState } from "../app-state";
 import { invokeMain } from "../ipc-client";
 import { getSubError } from "@/utils";
 import { WindowControlsCollectorCollectReply } from "@/electron/app/napi-calls";
+import { lastBuildProgressAtom } from ".";
 
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<WindowControlsCollectorCollectReply | null>(null);
@@ -39,6 +40,7 @@ export const doGetWindowControlsAtom = atom(
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawContentAtom, final);
 
+            set(lastBuildProgressAtom, buildState.buildCounter);
             clientState.buildRunning = false;
             buildState.buildCounter = 0;
             clientState.buildError = '';
@@ -51,6 +53,8 @@ export const doGetWindowControlsAtom = atom(
             clientState.buildRunning = false;
             buildState.buildCounter = 0;
             clientState.buildError = getSubError(error);
+
+            set(lastBuildProgressAtom, buildState.buildCounter);
 
             console.error(`'doGetWindowControlsAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }

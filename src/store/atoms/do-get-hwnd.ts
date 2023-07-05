@@ -4,8 +4,9 @@ import { GetTargetWindowResult } from "@/electron/app/napi-calls";
 import { sawContentAtom, sawContentStrAtom } from ".";
 import { clientStateAtom } from "../app-state";
 
-export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
 export const sawHandleStrAtom = atom<string | undefined>('');
+export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
+export const lastBuildProgressAtom = atom(0); // last number of build progress or 0
 
 export const doClearSawHandleAtom = atom(
     null,

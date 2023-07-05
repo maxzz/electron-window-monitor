@@ -2,11 +2,11 @@ import { atom } from "jotai";
 import { buildState, clientState } from "../app-state";
 import { invokeMain } from "../ipc-client";
 import { getSubError } from "@/utils";
-import { WindowControlsCollectorCollectReply } from "@/electron/app/napi-calls";
+import { WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
 import { lastBuildProgressAtom } from ".";
 
 export const sawContentStrAtom = atom<string | undefined>('');
-export const sawContentAtom = atom<WindowControlsCollectorCollectReply | null>(null);
+export const sawContentAtom = atom<WindowControlsCollectFinalAfterParse | null>(null);
 
 export const doGetWindowControlsAtom = atom(
     null,
@@ -36,7 +36,7 @@ export const doGetWindowControlsAtom = atom(
             }
             set(sawContentStrAtom, res);
 
-            const reply = JSON.parse(res || '{}') as WindowControlsCollectorCollectReply;
+            const reply = JSON.parse(res || '{}') as WindowControlsCollectFinalAfterParse;
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawContentAtom, final);
 

@@ -69,6 +69,12 @@ export type WindowControlsCollectFinal = {
 
 export type WindowControlsCollectorCollectResult = WindowControlsCollectProgress | WindowControlsCollectFinal;
 
+export interface WindowControlsCollector {
+    new(): WindowControlsCollector;
+    collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;
+    cancel(): void;
+}
+
 export type EngineControl = {
     type: string;
     dispname: string;
@@ -88,16 +94,10 @@ export type EngineControl = {
     mfillin_wrapkeystate: boolean;
 };
 
-export type WindowControlsCollectorCollectReply = {
+export type WindowControlsCollectFinalAfterParse = {
     pool: string;
     controls: EngineControl[];
 };
-
-export interface WindowControlsCollector {
-    new(): WindowControlsCollector;
-    collect(windowControlsCollectorCollectParams: string, cb: PluginDataCallback): void;
-    cancel(): void;
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // Get Manifest
@@ -107,13 +107,17 @@ export type ManifestForWindowCreatorParams = {
     wantXml: boolean;
 };
 
-export type ManifestForWindowCreatorResult = any; // TODO: define manifest fields
+export type ManifestForWindowCreatorResult = WindowControlsCollectProgress | object | string;
 
 export interface ManifestForWindowCreator {
     new(): ManifestForWindowCreator;
     create(manifestForWindowCreatorParams: string, cb: PluginDataCallback): void;
     cancel(): void;
 }
+
+export type ManifestForWindowCreatorFinalAfterParse =
+    | object    // TODO: define manifest fields
+    | string;   // xml string if started with '<' character
 
 /////////////////////////////////////////////////////////////////////////////
 // All together

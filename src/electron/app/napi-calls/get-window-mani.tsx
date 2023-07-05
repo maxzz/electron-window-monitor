@@ -25,7 +25,7 @@ export function getWindowMani(hwnd: string, wantXml: boolean): Promise<string> {
                         return;
                     }
 
-                    const res: ManifestForWindowCreatorResult = JSON.parse(str);
+                    const res: Exclude<ManifestForWindowCreatorResult, string> = JSON.parse(str);
 
                     if (mainStore.cancelDetection) {
                         collector.cancel();

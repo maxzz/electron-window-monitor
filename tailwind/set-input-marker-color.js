@@ -1,10 +1,10 @@
 const plugin = require('tailwindcss/plugin');
 const svgToDataUri = require('mini-svg-data-uri');
 
-const fixInputs = plugin.withOptions(function (options = { color: 'red', darkColor: 'orange' }) {
+const fixInputs = plugin.withOptions(function (options = { light: 'red', dark: 'orange' }) {
     return function ({ addComponents }) {
-        const light = options.color;
-        const dark = options.darkColor;
+        const light = options.light;
+        const dark = options.dark;
         addComponents({
             '.form-checkbox:checked': {
                 'background-image': `url("${svgToDataUri(
@@ -23,7 +23,7 @@ const fixInputs = plugin.withOptions(function (options = { color: 'red', darkCol
             },
             '.dark .form-checkbox:indeterminate': {
                 'background-image': `url("${svgToDataUri(
-                    `<svg xmlns="http://www.w3.org/2000/svg" fill="${light}" viewBox="0 0 16 16"><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h8"/></svg>`
+                    `<svg xmlns="http://www.w3.org/2000/svg" fill="${dark}" viewBox="0 0 16 16"><path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h8"/></svg>`
                 )}")`,
             },
             '.form-radio:checked': {
@@ -33,7 +33,7 @@ const fixInputs = plugin.withOptions(function (options = { color: 'red', darkCol
             },
             '.dark .form-radio:checked': {
                 'background-image': `url("${svgToDataUri(
-                    `<svg viewBox="0 0 16 16" fill="${light}" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="3"/></svg>`
+                    `<svg viewBox="0 0 16 16" fill="${dark}" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="3"/></svg>`
                 )}")`,
             },
         });

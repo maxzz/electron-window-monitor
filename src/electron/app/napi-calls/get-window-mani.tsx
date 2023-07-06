@@ -1,5 +1,5 @@
 import { addon } from ".";
-import { mainToRenderer } from "../../../shared/ipc-main";
+import { mainToRenderer } from "../../shared/ipc-main";
 import { mainStore } from "../store-main";
 import { ManifestForWindowCreatorParams, ManifestForWindowCreatorResult } from "./pmat-plugin-types";
 

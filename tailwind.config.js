@@ -38,6 +38,6 @@ module.exports = {
     },
     plugins: [
         require('@tailwindcss/forms')({ strategy: 'class' }),
-        fixInputs({marker: 'blue'}),
+        fixInputs({marker: twColors.green[800]}),
     ],
 };

@@ -16,10 +16,10 @@ export function getWindowMani(hwnd: string, wantXml: boolean): Promise<string> {
                     reject(err);
                     return;
                 }
-                console.log(`parse collector:\n>>>\n${str}\n<<<`);
+                //console.log(`parse collector:\n>>>\n${str}\n<<<`);
 
                 try {
-                    const isFinalResultXml = wantXml && str.charAt(0) === '<'; // oherwise it's progress
+                    const isFinalResultXml = wantXml && str.charAt(0) === '<'; // otherwise it's progress
                     if (isFinalResultXml) {
                         resolve(str);
                         return;
@@ -46,7 +46,7 @@ export function getWindowMani(hwnd: string, wantXml: boolean): Promise<string> {
                     }
 
                     resolve(str);
-                    console.log('final:', JSON.stringify(res));
+                    //console.log('final:', JSON.stringify(res));
                 } catch (error) {
                     const msg = `>>>${error instanceof Error ? error.message : `${error}`}`;
                     reject(msg);

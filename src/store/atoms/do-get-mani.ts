@@ -45,7 +45,7 @@ export const doGetWindowManiAtom = atom(
             if (wantXml) {
                 set(sawManiXmlAtom, res);
 
-                console.log('doGetWindowManiXmlAtom.set', res);
+                console.log(`doGetWindowManiXmlAtom.set\n${res}`);
             } else {
                 const reply = JSON.parse(res || '{}') as SawContentReply;
                 const final = reply.pool && reply.controls?.length ? reply : null;

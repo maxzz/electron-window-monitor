@@ -35,13 +35,13 @@ export function Section3Footer() {
                     />
                 </label>
 
-                <label className="w-max flex items-center gap-x-1" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
+                <label className="w-max flex items-center gap-x-1" title="The get manifest request format: JSON/XML">
                     <input type="checkbox"
                         className={checkboxClasses}
                         checked={acquireXml}
                         onChange={(e) => appUi.uiState.acquireXml = e.target.checked}
                     />
-                    <div className="select-none">Acquire XML</div>
+                    <div className="select-none">Get manifest in XML format</div>
                 </label>
             </div>
         </div>

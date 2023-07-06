@@ -1,14 +1,12 @@
 import { appUi } from "@/store/app-state";
 import { classNames } from "@/utils";
 import { useSnapshot } from "valtio";
-import { tailwindElementsCheckboxClasses } from "../section2-main/panel-window-content/nun/tailwind-experiments";
 
 export const focusClasses = "focus:ring-primary-600 dark:focus:ring-primary-400 focus:ring-offset-primary-200 dark:focus:ring-offset-primary-800 focus:ring-1 focus:ring-offset-1 focus:outline-none";
 
 const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-500 border border-dotted rounded-sm underline underline-offset-2";
 
-// const checkboxClasses = tailwindElementsCheckboxClasses;
-const checkboxClasses = classNames("form-checkbox [--color:violet] text-primary-500 bg-primary-400 rounded-sm", focusClasses);
+const checkboxClasses = classNames("form-checkbox text-primary-500 bg-primary-400 rounded-sm", focusClasses);
 
 export function Section3Footer() {
     const { maxControls, acquireXml } = useSnapshot(appUi.uiState);

@@ -2,10 +2,33 @@ import { appUi } from "@/store/app-state";
 import { classNames } from "@/utils";
 import { useSnapshot } from "valtio";
 import { focusClasses } from "../section2-main/shared-styles";
+import { useAtomValue, useSetAtom } from "jotai";
+import { doHighlightRectAtom } from "@/store/atoms/do-highlight-rect";
+import { sawHandleAtom } from "@/store";
+import { TargetClientRect } from "@/electron/app/napi-calls";
 
 const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-500 border border-dotted rounded-sm underline underline-offset-2";
 
 const checkboxClasses = classNames("form-checkbox text-primary-500 bg-primary-400 rounded-sm", focusClasses);
+
+function TestHighlight() {
+    const sawHandle = useAtomValue(sawHandleAtom);
+    const doHighlightRect = useSetAtom(doHighlightRectAtom);
+    if (!sawHandle?.hwnd) {
+        return null;
+    }
+    return (
+        <button className={linkClasses} onClick={() => {
+            const rect: TargetClientRect = {
+                left: 0,
+                top: 0,
+                right: 640,
+                bottom: 480,
+            };
+            doHighlightRect({ hwnd: sawHandle.hwnd, rect });
+        }}>hi</button>
+    );
+}
 
 export function Section3Footer() {
     const { maxControls, acquireXml } = useSnapshot(appUi.uiState);
@@ -22,6 +45,7 @@ export function Section3Footer() {
                 <div className="">Test web logins:</div>
                 <a className={linkClasses} href="https://tailwindui.com/login" target="_blank">tw</a>
                 <a className={linkClasses} href="https://www.bankofamerica.com" target="_blank">bofa</a>
+                <TestHighlight />
             </div>
 
             <div className="flex gap-x-4">

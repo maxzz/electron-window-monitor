@@ -29,7 +29,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': path.join(__dirname, 'src'),
-            '~node': path.join(__dirname, 'dist-electron'),
+            //'~node': path.join(__dirname, 'dist-electron'),
         }
     }
 });

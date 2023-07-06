@@ -18,7 +18,7 @@ type AppUi = {
 
 const initialAppUi: AppUi = {
     uiState: {
-        darkMode: true,
+        darkMode: false,
         maxControls: 0,
         acquireXml: false,
     },

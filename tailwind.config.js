@@ -14,6 +14,6 @@ module.exports = {
     },
     plugins: [
         require('@tailwindcss/forms')({ strategy: 'class' }),
-        setInputMarkerColor({ light: twColors.green[100], dark: twColors.green[900] }),
+        setInputMarkerColor({ light: twColors.green[900], dark: twColors.green[100] }),
     ],
 };

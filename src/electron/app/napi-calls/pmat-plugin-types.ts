@@ -53,14 +53,16 @@ export interface WindowIconGetter {
 /////////////////////////////////////////////////////////////////////////////
 // Highlight desktop app window control
 
+export type TargetClientRect = {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+}
+
 export type WindowControlHighlighterParams = {
-    hwnd: string;               // hwnd should be string because int64 and js number types are different
-    rect: {
-        left: number;
-        right: number;
-        top: number;
-        bottom: number;
-    };
+    hwnd: string;
+    rect: TargetClientRect;
 };
 
 /**
@@ -72,11 +74,13 @@ export type WindowControlHighlighterParams = {
  * Usage:
  * let highlighter = new WindowControlHighlighter();
  * highlighter.highlight('{"hwnd":"12345", "rect":{"left":100,"right":200,"top":100,"bottom":200}}');
+ * 
+ * TODO: There is no hide highlighter call. Is that done by timer? How to set timer interval in that case or reset show to see rect again?
  */
 
 export interface WindowControlHighlighter {
     new(): WindowControlHighlighter;
-    highlight(WindowControlHighlighterParams: string): void;
+    highlight(windowControlHighlighterParams: string): void;
 }
 
 /////////////////////////////////////////////////////////////////////////////

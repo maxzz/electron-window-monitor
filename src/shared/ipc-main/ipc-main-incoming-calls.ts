@@ -1,6 +1,7 @@
 import { Notification } from "electron";
 import { M4R } from "@/shared/ipc-types";
 import { mainStore } from "../../electron/app/store-main";
+import { highlightRect } from "@/electron/app/napi-calls";
 
 export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<void> {
     switch (data.type) {
@@ -19,6 +20,11 @@ export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<voi
         case 'cancel-detection': {
             console.log('cancel-detection');
             mainStore.cancelDetection = true;
+            break;
+        }
+        case 'highlight-rect': {
+            console.log('highlight-rect', data.hwnd, data.rect);
+            highlightRect(data.hwnd, data.rect);
             break;
         }
         default: {

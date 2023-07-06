@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
-import { M2R } from "@/electron/shared/ipc-types";
+import { M2R } from "@/shared/ipc-types";
 import { doFromMainAtom } from "./ipc-react-listener-atom";
 
-import { sendToMain } from "../../../store";
-import { appUi } from "../../../store/app-state";
+import { sendToMain } from "../../store";
+import { appUi } from "../../store/app-state";
 
 export const worldStore = {
     listeners: new Set<(data: unknown) => void>(),

@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { hasMain, invokeLoadFiles } from ".";
 import { electronGetPathes, webLoadDataTransferContent, webLoadDialogOpen } from "@/utils";
-import { M4RInvoke } from "@/electron/app/ipc-types";
+import { M4RInvoke } from "@/shared/ipc-types";
 
 export const filesContentAtom = atom<M4RInvoke.FileContent[]>([]);
 

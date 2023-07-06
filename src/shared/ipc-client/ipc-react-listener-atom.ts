@@ -1,7 +1,7 @@
-import { M2R } from "@/electron/app/ipc-types";
+import { M2R } from "@/shared/ipc-types";
 import { atom } from "jotai";
-import { filesContentAtom } from "../atom-dropped-files";
-import { buildState, clientState } from "../app-state";
+import { filesContentAtom } from "../../store/atom-dropped-files";
+import { buildState, clientState } from "../../store/app-state";
 
 export const doFromMainAtom = atom(
     null,

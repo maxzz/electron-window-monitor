@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "../ipc-client";
+import { invokeMain } from "../../shared/ipc-client";
 import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
 import { WindowIconGetterResult } from "@/electron/app/napi-calls";

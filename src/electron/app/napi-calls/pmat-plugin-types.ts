@@ -51,6 +51,35 @@ export interface WindowIconGetter {
 }
 
 /////////////////////////////////////////////////////////////////////////////
+// Highlight desktop app window control
+
+export type WindowControlHighlighterParams = {
+    hwnd: string;               // hwnd should be string because int64 and js number types are different
+    rect: {
+        left: number;
+        right: number;
+        top: number;
+        bottom: number;
+    };
+};
+
+/**
+ * Class for getting window icon. Instantiate once and call getIcon multiple times.
+ * 
+ * During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times, 
+ * it will be expensive.
+
+ * Usage:
+ * let highlighter = new WindowControlHighlighter();
+ * highlighter.highlight('{"hwnd":"12345", "rect":{"left":100,"right":200,"top":100,"bottom":200}}');
+ */
+
+export interface WindowControlHighlighter {
+    new(): WindowControlHighlighter;
+    highlight(WindowControlHighlighterParams: string): void;
+}
+
+/////////////////////////////////////////////////////////////////////////////
 // Get Controls
 
 export type WindowControlsCollectorCollectParams = {
@@ -127,4 +156,5 @@ export type AddonTypes = {
     WindowIconGetter: WindowIconGetter;
     WindowControlsCollector: WindowControlsCollector;
     ManifestForWindowCreator: ManifestForWindowCreator;
+    WindowControlHighlighter: WindowControlHighlighter;
 };

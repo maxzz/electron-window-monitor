@@ -1,8 +1,7 @@
 import { appUi } from "@/store/app-state";
 import { classNames } from "@/utils";
 import { useSnapshot } from "valtio";
-
-export const focusClasses = "focus:ring-primary-600 dark:focus:ring-primary-400 focus:ring-offset-primary-200 dark:focus:ring-offset-primary-800 focus:ring-1 focus:ring-offset-1 focus:outline-none";
+import { focusClasses } from "../section2-main/shared-styles";
 
 const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-500 border border-dotted rounded-sm underline underline-offset-2";
 
@@ -42,7 +41,7 @@ export function Section3Footer() {
                         checked={acquireXml}
                         onChange={(e) => appUi.uiState.acquireXml = e.target.checked}
                     />
-                    <div className="select-none dark:text-red-500">Acquire XML</div>
+                    <div className="select-none">Acquire XML</div>
                 </label>
             </div>
         </div>

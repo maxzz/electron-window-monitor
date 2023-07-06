@@ -11,8 +11,7 @@ flex \
 transition-colors \
 duration-[160ms] ease-out \
 select-none \
-touch-none \
-";
+touch-none";
 
 export const scrollbarThumbClasses = "\
 relative \
@@ -31,5 +30,13 @@ before:w-full \
 before:h-full \
 \
 before:min-w-[44px] \
-before:min-h-[44px] \
-";
+before:min-h-[44px]";
+
+export const focusClasses = "\
+focus:ring-primary-600 \
+dark:focus:ring-primary-400 \
+focus:ring-offset-primary-200 \
+dark:focus:ring-offset-primary-800 \
+focus:ring-1 \
+focus:ring-offset-1 \
+focus:outline-none";

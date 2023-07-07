@@ -18,12 +18,10 @@ export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<voi
             break;
         }
         case 'cancel-detection': {
-            console.log('cancel-detection');
             mainStore.cancelDetection = true;
             break;
         }
         case 'highlight-rect': {
-            console.log('highlight-rect', data.hwnd, data.rect);
             highlightRect(data.hwnd, data.rect);
             break;
         }

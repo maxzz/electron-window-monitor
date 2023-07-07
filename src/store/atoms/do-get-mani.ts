@@ -4,6 +4,7 @@ import { buildState, clientState } from "../app-state";
 import { EngineControl } from "@/electron/app/napi-calls";
 import { getSubError } from "@/utils";
 import { lastBuildProgressAtom } from ".";
+import { Catalog, Mani, Meta, buildCatalogMeta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
 
 type SawContentReply = {
     pool: string;
@@ -16,7 +17,7 @@ export const sawManiXmlAtom = atom<string | undefined>(undefined);
 
 export const doGetWindowManiAtom = atom(
     null,
-    async (get, set, {hwnd, wantXml}: {hwnd: string | undefined; wantXml: boolean}): Promise<void> => {
+    async (get, set, { hwnd, wantXml }: { hwnd: string | undefined; wantXml: boolean; }): Promise<void> => {
         try {
             if (!hwnd) {
                 throw new Error('No hwnd');
@@ -71,4 +72,29 @@ export const doGetWindowManiAtom = atom(
     }
 );
 
-//TODO: cancel build request if app is closed by user
+export type XmlParseResult = {
+    mani: Mani.Manifest | undefined;
+    fcat: Catalog.Root | undefined;
+    meta: Meta.Form[];
+};
+
+function xmlToManifestAndMeta(cnt: string): XmlParseResult {
+    const res = parseXMLFile(cnt);
+    return {
+        mani: res.mani,
+        fcat: res.fcat,
+        meta: buildManiMetaForms(res.mani),
+    }
+}
+
+export const xmlControlsAtom = atom<XmlParseResult | null>(
+    (get) => {
+        const sawManiXml = get(sawManiXmlAtom);
+        if (!sawManiXml) {
+            return null;
+        }
+
+        const res = xmlToManifestAndMeta(sawManiXml);
+        return res;        
+    }
+);

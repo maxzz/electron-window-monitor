@@ -60,5 +60,3 @@ export const doGetWindowControlsAtom = atom(
         }
     }
 );
-
-//TODO: cancel build request if application is closed by user

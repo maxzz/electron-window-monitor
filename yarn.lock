@@ -2250,10 +2250,10 @@ plist@^3.0.1, plist@^3.0.4:
     base64-js "^1.5.1"
     xmlbuilder "^15.1.1"
 
-pm-manifest@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.2.tgz#dd3ce80bf638963dfd02df1569e781027ddb3e18"
-  integrity sha512-8pfiUSs22stmHlLkNKxHNc0/LGlZwBGlfNV8qLDtpM21kCpwS9HP7G0nPMVkkLBILE7KdkEIj5bNHjItYoL9JQ==
+pm-manifest@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.6.tgz#b9d71e83879a5890b3db68eff5d230b2fb878c2b"
+  integrity sha512-KkbHiGyvF2ChgtMO4pOaHc5PGr/LnsLss5762MQAJVbzrXJ3Gx34wMWKZ5bC0nYRAABMjPtgMCnBdELBeFUPYw==
   dependencies:
     fast-xml-parser "^4.2.5"
 

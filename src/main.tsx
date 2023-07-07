@@ -10,3 +10,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 );
 
 postMessage({ payload: 'removeLoading' }, '*');
+
+//TODO: cancel build request if application is closed by user for doGetWindowManiAtom and doGetWindowControlsAtom atoms
+ 

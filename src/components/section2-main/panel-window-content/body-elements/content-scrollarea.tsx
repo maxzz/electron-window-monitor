@@ -20,19 +20,23 @@ export function ContentScrollArea() {
     const sawContentStr = useAtomValue(sawContentStrAtom);
     const sawContent = useAtomValue(sawContentAtom);
     const controls = sawContent?.controls;
-    return (<>
-        {controls &&
-            <div className={classNames("min-h-0", gridBorderClasses)}>
-                <ScrollBox>
-                    <ControlsGrid controls={controls || []} />
-                </ScrollBox>
-            </div>
-        }
 
-        {!controls && sawContentStr &&
-            <div className="text-sm">
-                No controls detected
-            </div>
+    if (!controls) {
+        if (sawContentStr) {
+            return (
+                <div className="text-sm">
+                    No controls detected
+                </div>
+            );
         }
-    </>);
+        return null;
+    }
+
+    return (
+        <div className={classNames("min-h-0", gridBorderClasses)}>
+            <ScrollBox>
+                <ControlsGrid controls={controls} />
+            </ScrollBox>
+        </div>
+    );
 }

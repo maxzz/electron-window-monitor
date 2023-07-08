@@ -6,6 +6,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { doHighlightRectAtom } from "@/store/atoms/do-highlight-rect";
 import { sawHandleAtom } from "@/store";
 import { TargetClientRect } from "@/electron/app/napi-calls";
+import { SymbolFieldBtn } from "pm-manifest-icons";
 
 const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-500 border border-dotted rounded-sm underline underline-offset-2";
 
@@ -58,6 +59,8 @@ export function Section3Footer() {
                         onChange={(e) => setValue(e.target.value)}
                     />
                 </label>
+
+                <SymbolFieldBtn className="w-4 h-4" />
 
                 <label className="w-max flex items-center gap-x-1" title="The get manifest request format: JSON/XML">
                     <input type="checkbox"

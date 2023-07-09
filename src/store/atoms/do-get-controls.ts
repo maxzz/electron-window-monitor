@@ -4,9 +4,10 @@ import { invokeMain } from "../../shared/ipc-client";
 import { getSubError } from "@/utils";
 import { WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
 import { lastBuildProgressAtom } from ".";
+import { EngineControlsWithMeta, controlsReplyToEngineControlWithMeta } from "./engine-controls-io";
 
 export const sawContentStrAtom = atom<string | undefined>('');
-export const sawContentAtom = atom<WindowControlsCollectFinalAfterParse | null>(null);
+export const sawContentAtom = atom<EngineControlsWithMeta | null>(null);
 
 export const doGetWindowControlsAtom = atom(
     null,
@@ -37,7 +38,8 @@ export const doGetWindowControlsAtom = atom(
             set(sawContentStrAtom, res);
 
             const reply = JSON.parse(res || '{}') as WindowControlsCollectFinalAfterParse;
-            const final = reply.pool && reply.controls?.length ? reply : null;
+            const final = controlsReplyToEngineControlWithMeta(reply);
+
             set(sawContentAtom, final);
 
             set(lastBuildProgressAtom, buildState.buildCounter);

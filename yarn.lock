@@ -2234,10 +2234,10 @@ plist@^3.0.1, plist@^3.0.4:
     base64-js "^1.5.1"
     xmlbuilder "^15.1.1"
 
-pm-manifest-icons@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/pm-manifest-icons/-/pm-manifest-icons-1.0.1.tgz#b1bd635147d94cb21f43e7b4df6328ce127223b3"
-  integrity sha512-3X6zhQzBWfWQp23wT/PAPPKVwF1ewaj5916JPldp/twLDj6I+k6U9n3HBp2adIbpvOsrnLkTw1aE9hzhHlbTyw==
+pm-manifest-icons@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/pm-manifest-icons/-/pm-manifest-icons-1.0.3.tgz#a9c6939802398a3705e11265a87f9fa41de7c9a1"
+  integrity sha512-KIYGr2leVRRohxcfi/2doprvF64c7M+8YZcvLNMTT6m8bDqs4EYiK1ZDcMM1M7jbnoigUIVfjU5bzXCndGK1xw==
 
 pm-manifest@^1.0.6:
   version "1.0.6"

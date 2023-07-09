@@ -1,20 +1,10 @@
 import { useAtomValue } from 'jotai';
 import { sawContentAtom, sawContentStrAtom } from '@/store';
-import { EngineControl } from '@/electron/app/napi-calls';
 import { classNames } from '@/utils';
-import { ControlsGridItems } from './content-items';
+import { ControlsGrid } from './content-items';
 import { ScrollBox } from './scrollbox';
 
 const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;
-const vlineClasses = "[&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l [&>*]:pl-2"; // [&>*~*]:border-b
-
-function ControlsGrid({ controls }: { controls: EngineControl[]; }) {
-    return (
-        <div className={classNames("text-xs grid grid-cols-[repeat(5,min-content)] gap-x-2 overflow-auto", vlineClasses,)}>
-            <ControlsGridItems controls={controls} />
-        </div>
-    );
-}
 
 export function ContentScrollArea() {
     const sawContentStr = useAtomValue(sawContentStrAtom);

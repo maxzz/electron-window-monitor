@@ -1,20 +1,23 @@
+import { FC } from 'react';
+import { FieldTyp, Mani } from '@/store/manifest';
 import { EngineControl } from '@/electron/app/napi-calls';
-import { Mani } from '@/store/manifest';
 import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from '@ui/icons';
 
-export const fieldIcons = {
+export const fieldIcons: Record<Exclude<keyof typeof FieldTyp, 'und'>, FC> = {
     edit: SymbolFieldEdt,
     psw: SymbolFieldPsw,
     check: SymbolFieldChk,
+    radio: SymbolFieldChk,
     list: SymbolFieldLst,
     combo: SymbolFieldLst,
     text: SymbolFieldTxt,
     button: SymbolFieldBtn,
+    listbx: SymbolFieldLst,
 };
 
 export type FieldIconTypes = Pick<Mani.Field, 'type' | 'password' | 'choosevalue'>;
 
-export function FormRowTypeIcon({ field, className }: { field: FieldIconTypes; className?: string; }) {
+export function FieldTypeIconComponent({ field, className }: { field: FieldIconTypes; className?: string; }) {
     const type = field.password ? "psw" : field.type as keyof typeof fieldIcons;
     const Icon =
         fieldIcons[type]?.({

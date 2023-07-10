@@ -17,33 +17,6 @@ export type EngineControlsWithMeta = Omit<WindowControlsCollectFinalAfterParse, 
     controls: EngineControlWithMeta[];
 };
 
-//TODO: should go to pm-manifest but wo/ TargetClientRect but w/ tuple [p1.x, p1.y, p2.x, p2.y] 
-// and check p1.x < p2.x and p1.y < p2.y and swap if needed; and check if some are 0 then return undefined
-function getControlRect(pathLoc: string | undefined): TargetClientRect | undefined {
-    const loc = pathLoc?.split('|')?.at(-1);
-    const arr = loc?.split(' ');
-    if (arr?.length === 4) {
-        return {
-            left: +arr[0],      // x1.x
-            top: +arr[1],       // x1.y
-            right: +arr[2],     // x2.x
-            bottom: +arr[3],    // x2.y
-        };
-    }
-}
-
-/*
-        export type RectTuple = readonly [aX: number, aY: number, bX: number, bY: number];
-        
-        export function getControlRect(pathLoc: string | undefined): RectTuple | undefined {
-            const loc = pathLoc?.split('|')?.at(-1);
-            const arr = loc?.split(' ').map((item)=>+item) as unknown as RectTuple;
-            if (arr?.length === 4) {
-                return arr; //TODO: check a.x < b.x and a.y < b.y and swap if needed; and check if some are 0 or NaN then return undefined
-            }
-        }
-*/
-
 export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollectFinalAfterParse): EngineControlsWithMeta | null {
     const final = reply.pool && reply.controls?.length ? reply : null;
     if (!final) {
@@ -62,7 +35,7 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
     function addMetaToEngineControls(pool: string[], controls: EngineControl[]): EngineControlWithMeta[] {
         const rv = controls.map((control) => {
             const path = FieldPath.fieldPathItems(pool, control.path);
-            let rect = getControlRect(path.loc);
+            let rect = getControlTaretRect(path.loc);
             const item = {
                 control,
                 meta: {
@@ -74,5 +47,17 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
             return item;
         });
         return rv;
+    }
+
+    function getControlTaretRect(pathLoc: string | undefined): TargetClientRect | undefined {
+        const loc = FieldPath.loc.getControlRect(pathLoc);
+        if (loc) {
+            return {
+                left: loc[0],      // x1.x
+                top: loc[1],       // x1.y
+                right: loc[2],     // x2.x
+                bottom: loc[3],    // x2.y
+            };
+        }
     }
 }

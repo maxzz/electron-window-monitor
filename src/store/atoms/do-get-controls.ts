@@ -4,7 +4,7 @@ import { invokeMain } from "../../shared/ipc-client";
 import { getSubError } from "@/utils";
 import { WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
 import { lastBuildProgressAtom } from ".";
-import { EngineControlsWithMeta, controlsReplyToEngineControlWithMeta } from "./engine-controls-io";
+import { EngineControlsWithMeta, controlsReplyToEngineControlWithMeta } from "./engine-controls-meta";
 
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<EngineControlsWithMeta | null>(null);

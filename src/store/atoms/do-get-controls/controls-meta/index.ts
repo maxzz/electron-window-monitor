@@ -1,5 +1,5 @@
 import { EngineControl, TargetClientRect, WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
-import { FieldPath, MPath, MSAA_ROLE, Meta, splitPool } from "pm-manifest";
+import { FieldPath, MPath, MSAA_ROLE, MSAA_STATE, Meta, splitPool } from "pm-manifest";
 import { uuid } from "pm-manifest/src/utils";
 
 export type RoleStateNames = {
@@ -70,33 +70,27 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
 
         const roleNum = parseInt(parts[0], 16);
         const roleName = MSAA_ROLE[roleNum];
-        const stateNum = parts[1] || 0;
 
-        // type m = typeof MSAA_ROLE;
-        // type keys = {
-        //     [K in keyof m]: K extends number ? m[K] : never;
-        // };
+        let stateNum = parseInt(parts[1], 16) || 0;
+        let stateStr = ''
+        
+        if (!isNaN(stateNum)) {
 
-        // type keys<T> = {
-        //     [K in keyof T]: K extends number ? T[K] : never;
-        // };
-        // type numbers = keys<typeof MSAA_ROLE>
+            const nums = getEnumNamedEntries(MSAA_STATE) as [string, number][];
+            let key = 0;
 
-        // type keys<T> = {
-        //     [K in keyof T as T[K] extends number ? K : never ]: T[K];
-        // };
-        // type numbers = keys<typeof MSAA_ROLE>
-
-        type keys<T> = {
-            [K in keyof T as K extends string ? K : never ]: T[K];
-        };
-        type numbers = keys<typeof MSAA_ROLE>
-
-        const nums = getEnumNumberEntries<typeof MSAA_ROLE>(MSAA_ROLE);
+            while (stateNum && key < nums.length) {
+                const [k, v] = nums[key++];
+                if ((stateNum & v) !== 0) {
+                    stateNum = stateNum & ~v;
+                    stateStr += k;
+                }
+            }
+        }
 
         return {
             role: roleName,
-            state: `${stateNum}`,
+            state: `${stateStr}`,
         };
     }
 
@@ -113,24 +107,10 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
     }
 }
 
-type NumberKeys<T> = T extends object
-  ? {
-      [K in keyof T]-?: K extends number ? T[K] : never;
-    }[keyof T]
-  : never;
-
 export function getEnumNumberEntries<T extends object>(objEnum: T) {
-    return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => Number.isInteger(+key))) as NumberKeys<T>;
+    return Object.entries(objEnum).filter(([key, val]) => Number.isInteger(+key));
 }
 
-export function getEnumNamedEntries<T extends Record<string| number,  any>>(objEnum: T) {
-    return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key)));
+export function getEnumNamedEntries<T extends object>(objEnum: T) {
+    return Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key));
 }
-
-// export function getEnumNumberEntries<T extends object>(objEnum: T) {
-//     return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => Number.isInteger(+key)));
-// }
-
-// export function getEnumNamedEntries<T extends Record<string| number,  any>>(objEnum: T) {
-//     return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key)));
-// }

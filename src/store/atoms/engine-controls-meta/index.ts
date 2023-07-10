@@ -1,11 +1,12 @@
 import { EngineControl, TargetClientRect, WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
-import { FieldPath, Meta, splitPool } from "pm-manifest";
+import { FieldPath, MPath, MSAA_ROLE, Meta, splitPool } from "pm-manifest";
 import { uuid } from "pm-manifest/src/utils";
 
 export type EngineControlMeta = {
     uuid: number;
     path: Meta.Path;
     rect?: TargetClientRect;
+    role?: string;
 };
 
 export type EngineControlWithMeta = {
@@ -35,18 +36,33 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
     function addMetaToEngineControls(pool: string[], controls: EngineControl[]): EngineControlWithMeta[] {
         const rv = controls.map((control) => {
             const path = FieldPath.fieldPathItems(pool, control.path);
-            let rect = getControlTaretRect(path.loc);
+            const rect = getControlTaretRect(path.loc);
+            const role = getRole(path.p4 || path.p4a);
             const item = {
                 control,
                 meta: {
                     uuid: uuid.asRelativeNumber(),
                     path,
-                    ...(rect && { rect })
+                    ...(rect && { rect }),
+                    ...(role && { role }),
                 }
             };
             return item;
         });
         return rv;
+    }
+
+    function getRole(p4a: MPath.p4a[] | undefined): string | undefined {
+        if (!p4a?.length) {
+            return;
+        }
+        const last = p4a.at(-1);
+        // const parts = last?.roleString?.split('_');
+        // const role = parts?.[0];
+        // if (role) {
+        //     MSAA_ROLE[+role]
+        // }
+        return last?.roleString;
     }
 
     function getControlTaretRect(pathLoc: string | undefined): TargetClientRect | undefined {

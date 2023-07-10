@@ -40,7 +40,7 @@ export const doGetWindowIconAtom = atom(
 
             clientState.buildError = '';
 
-            console.log('doGetSawIconAtom.set', JSON.stringify(str, null, 4));
+            //console.log('doGetSawIconAtom.set', JSON.stringify(str, null, 4));
         } catch (error) {
             set(sawIconStrAtom, '');
 

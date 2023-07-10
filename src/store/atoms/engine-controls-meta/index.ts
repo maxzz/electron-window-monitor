@@ -56,18 +56,18 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         if (!p4a?.length) {
             return;
         }
-        const last = p4a.at(-1);
-        const parts = last?.roleString?.split('_');
-        
-        const role = parts?.[0];
-        if (role) {
-            //const name = MSAA_ROLE['cell'];
-            const name = MSAA_ROLE[+role];
+        const lastP4a = p4a.at(-1);
+        const parts = lastP4a?.roleString?.split('_');
 
-            console.log('----------name', name);
+        if (!lastP4a?.roleString || !parts?.length || !parts[0]) {
+            return;
         }
+        
+        const role = parts[0];
+        const name = MSAA_ROLE[+role];
+        const final = `${lastP4a.roleString} <${name}>`
 
-        return last?.roleString;
+        return final;
     }
 
     function getControlTaretRect(pathLoc: string | undefined): TargetClientRect | undefined {

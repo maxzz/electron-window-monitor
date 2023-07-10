@@ -57,7 +57,6 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         return rv;
     }
 
-//const final = `<${roleName}> state: ${roleStateNum}`;
     function getRole(p4a: MPath.p4a[] | undefined): RoleStateNames | undefined {
         if (!p4a?.length) {
             return;
@@ -72,6 +71,28 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         const roleNum = parseInt(parts[0], 16);
         const roleName = MSAA_ROLE[roleNum];
         const stateNum = parts[1] || 0;
+
+        // type m = typeof MSAA_ROLE;
+        // type keys = {
+        //     [K in keyof m]: K extends number ? m[K] : never;
+        // };
+
+        // type keys<T> = {
+        //     [K in keyof T]: K extends number ? T[K] : never;
+        // };
+        // type numbers = keys<typeof MSAA_ROLE>
+
+        // type keys<T> = {
+        //     [K in keyof T as T[K] extends number ? K : never ]: T[K];
+        // };
+        // type numbers = keys<typeof MSAA_ROLE>
+
+        type keys<T> = {
+            [K in keyof T as K extends string ? K : never ]: T[K];
+        };
+        type numbers = keys<typeof MSAA_ROLE>
+
+        const nums = getEnumNumberEntries<typeof MSAA_ROLE>(MSAA_ROLE);
 
         return {
             role: roleName,
@@ -91,3 +112,25 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         }
     }
 }
+
+type NumberKeys<T> = T extends object
+  ? {
+      [K in keyof T]-?: K extends number ? T[K] : never;
+    }[keyof T]
+  : never;
+
+export function getEnumNumberEntries<T extends object>(objEnum: T) {
+    return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => Number.isInteger(+key))) as NumberKeys<T>;
+}
+
+export function getEnumNamedEntries<T extends Record<string| number,  any>>(objEnum: T) {
+    return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key)));
+}
+
+// export function getEnumNumberEntries<T extends object>(objEnum: T) {
+//     return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => Number.isInteger(+key)));
+// }
+
+// export function getEnumNamedEntries<T extends Record<string| number,  any>>(objEnum: T) {
+//     return Object.fromEntries(Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key)));
+// }

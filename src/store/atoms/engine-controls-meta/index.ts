@@ -2,11 +2,16 @@ import { EngineControl, TargetClientRect, WindowControlsCollectFinalAfterParse }
 import { FieldPath, MPath, MSAA_ROLE, Meta, splitPool } from "pm-manifest";
 import { uuid } from "pm-manifest/src/utils";
 
+export type RoleStateNames = {
+    role: string;
+    state: string;
+};
+
 export type EngineControlMeta = {
     uuid: number;
     path: Meta.Path;
     rect?: TargetClientRect;
-    role?: string;
+    role?: RoleStateNames;
 };
 
 export type EngineControlWithMeta = {
@@ -52,7 +57,8 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         return rv;
     }
 
-    function getRole(p4a: MPath.p4a[] | undefined): string | undefined {
+//const final = `<${roleName}> state: ${roleStateNum}`;
+    function getRole(p4a: MPath.p4a[] | undefined): RoleStateNames | undefined {
         if (!p4a?.length) {
             return;
         }
@@ -63,11 +69,14 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
             return;
         }
 
-        const role = parseInt(parts[0], 16);
-        const name = MSAA_ROLE[role];
-        const final = `${lastP4a.roleString} <${name}>`;
+        const roleNum = parseInt(parts[0], 16);
+        const roleName = MSAA_ROLE[roleNum];
+        const stateNum = parts[1] || 0;
 
-        return final;
+        return {
+            role: roleName,
+            state: `${stateNum}`,
+        };
     }
 
     function getControlTaretRect(pathLoc: string | undefined): TargetClientRect | undefined {

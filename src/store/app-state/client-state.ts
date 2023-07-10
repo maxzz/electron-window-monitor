@@ -15,6 +15,8 @@ export const clientState = proxy<ClientState>({
 
 export const clientStateAtom = atomWithProxy(clientState);
 
+//
+
 type BuildState = {
     buildCounter: number;       // controls detection progress
 };

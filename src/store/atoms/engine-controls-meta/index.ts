@@ -62,10 +62,10 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         if (!lastP4a?.roleString || !parts?.length || !parts[0]) {
             return;
         }
-        
+
         const role = parseInt(parts[0], 16);
         const name = MSAA_ROLE[role];
-        const final = `${lastP4a.roleString} <${name}>`
+        const final = `${lastP4a.roleString} <${name}>`;
 
         return final;
     }

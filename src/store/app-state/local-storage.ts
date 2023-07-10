@@ -1,5 +1,5 @@
 import { proxy, subscribe } from 'valtio';
-import { initializeUiState } from './app-initial-state';
+import { initializeUiState } from './local-storage-utils';
 import { mergeDefaultAndLoaded } from '@/utils';
 import { sendClientOptions } from '..';
 

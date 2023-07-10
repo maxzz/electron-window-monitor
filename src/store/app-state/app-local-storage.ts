@@ -10,6 +10,7 @@ export type UiState = {
     darkMode: boolean;
     maxControls: number; // max # of controls before detection canceled. 0 is unlimited
     acquireXml: boolean;
+    iconAutoUpdate: boolean; // get window icon automatically
 };
 
 type AppUi = {
@@ -21,6 +22,7 @@ const initialAppUi: AppUi = {
         darkMode: false,
         maxControls: 0,
         acquireXml: false,
+        iconAutoUpdate: true,
     },
 };
 

@@ -30,7 +30,7 @@ export function FieldTypeIconComponent({ field, className }: { field: FieldIconT
     return Icon;
 }
 
-export function engineControlToFieldIconTypes(item: EngineControl): FieldIconTypes {
+export function engineControlToFieldIconType(item: EngineControl): FieldIconTypes {
     const isPsw = item.type === 'psw';
     return {
         type: (isPsw ? 'edit' : item.type) as Mani.FieldTypeStr,

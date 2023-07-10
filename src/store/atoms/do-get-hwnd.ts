@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { invokeMain } from "../../shared/ipc-client";
 import { GetTargetWindowResult } from "@/electron/app/napi-calls";
-import { sawContentAtom, sawContentStrAtom } from ".";
-import { clientStateAtom } from "../app-state";
+import { doGetWindowIconAtom, sawContentAtom, sawContentStrAtom } from ".";
+import { appUi, clientStateAtom } from "../app-state";
 
 export const sawHandleStrAtom = atom<string | undefined>('');
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
@@ -31,8 +31,14 @@ export const doGetTargetHwndAtom = atom(
             set(sawContentStrAtom, undefined);
             set(sawContentAtom, null);
 
-            const obj = JSON.parse(res || '{}');
+            const obj = JSON.parse(res || '{}') as GetTargetWindowResult;
             set(sawHandleAtom, obj);
+
+            if (appUi.uiState.iconAutoUpdate) {
+                if (obj.hwnd) {
+                    set(doGetWindowIconAtom, obj.hwnd);
+                }
+            }
 
             //console.log('doGetSawHandleAtom.set', JSON.stringify(obj, null, 4));
         } catch (error) {

@@ -3,6 +3,7 @@ import { invokeMain } from "../../shared/ipc-client";
 import { clientState } from "../app-state";
 import { getSubError } from "@/utils";
 import { WindowIconGetterResult } from "@/electron/app/napi-calls";
+//import { sawHandleAtom } from "./do-get-hwnd";
 
 export const sawIconStrAtom = atom<string | undefined>(undefined);
 export const sawIconAtom = atom<HTMLImageElement | null>(null);
@@ -49,3 +50,13 @@ export const doGetWindowIconAtom = atom(
         }
     }
 );
+
+/* export const currentWindowIconAtom = atom(
+    (get) => {
+        const sawHandle = get(sawHandleAtom);
+        if (sawHandle?.hwnd) {
+            // cannot call set call of doGetWindowIconAtom
+        }
+    }
+)
+ */

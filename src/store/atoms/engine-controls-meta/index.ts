@@ -63,8 +63,8 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
             return;
         }
         
-        const role = parts[0];
-        const name = MSAA_ROLE[+role];
+        const role = parseInt(parts[0], 16);
+        const name = MSAA_ROLE[role];
         const final = `${lastP4a.roleString} <${name}>`
 
         return final;

@@ -57,11 +57,16 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
             return;
         }
         const last = p4a.at(-1);
-        // const parts = last?.roleString?.split('_');
-        // const role = parts?.[0];
-        // if (role) {
-        //     MSAA_ROLE[+role]
-        // }
+        const parts = last?.roleString?.split('_');
+        
+        const role = parts?.[0];
+        if (role) {
+            //const name = MSAA_ROLE['cell'];
+            const name = MSAA_ROLE[+role];
+
+            console.log('----------name', name);
+        }
+
         return last?.roleString;
     }
 

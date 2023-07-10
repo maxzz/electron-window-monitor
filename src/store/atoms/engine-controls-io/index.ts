@@ -32,6 +32,18 @@ function getControlRect(pathLoc: string | undefined): TargetClientRect | undefin
     }
 }
 
+/*
+        export type RectTuple = readonly [aX: number, aY: number, bX: number, bY: number];
+        
+        export function getControlRect(pathLoc: string | undefined): RectTuple | undefined {
+            const loc = pathLoc?.split('|')?.at(-1);
+            const arr = loc?.split(' ').map((item)=>+item) as unknown as RectTuple;
+            if (arr?.length === 4) {
+                return arr; //TODO: check a.x < b.x and a.y < b.y and swap if needed; and check if some are 0 or NaN then return undefined
+            }
+        }
+*/
+
 export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollectFinalAfterParse): EngineControlsWithMeta | null {
     const final = reply.pool && reply.controls?.length ? reply : null;
     if (!final) {

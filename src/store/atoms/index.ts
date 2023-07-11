@@ -7,4 +7,4 @@ export * from './do-get-mani';
 export * from './do-monitoring';
 export * from './do-highlight-rect';
 
-export * from './engine-controls-meta';
+export * from './do-get-controls/controls-meta';

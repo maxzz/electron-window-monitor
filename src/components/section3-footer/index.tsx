@@ -69,7 +69,7 @@ function InputMaxControls() {
     
     function setValue(value: string) {
         let n = parseInt(value);
-        if (isNaN(n)) {
+        if (Number.isNaN(n)) {
             n = 0;
         }
         appUi.uiState.maxControls = n;

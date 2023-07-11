@@ -1,9 +1,9 @@
 import { atom } from "jotai";
-import { invokeMain } from "../../shared/ipc-client";
-import { buildState, clientState } from "../app-state";
+import { invokeMain } from "../../../shared/ipc-client";
+import { buildState, clientState } from "../../app-state";
 import { EngineControl } from "@/electron/app/napi-calls";
 import { getSubError } from "@/utils";
-import { lastBuildProgressAtom } from ".";
+import { lastBuildProgressAtom } from "..";
 import { Catalog, Mani, Meta, buildCatalogMeta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
 
 type SawContentReply = {

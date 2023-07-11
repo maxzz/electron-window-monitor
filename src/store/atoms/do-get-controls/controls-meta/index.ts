@@ -4,7 +4,7 @@ import { uuid } from "pm-manifest/src/utils";
 
 export type RoleStateNames = {
     role: string;
-    state: string;
+    states?: string[];
 };
 
 export type EngineControlMeta = {
@@ -70,27 +70,11 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
 
         const roleNum = parseInt(parts[0], 16);
         const roleName = MSAA_ROLE[roleNum];
-
-        let stateNum = parseInt(parts[1], 16) || 0;
-        let stateStr: string[] = []
-        
-        if (!isNaN(stateNum)) {
-
-            const nums = getEnumNamedEntries(MSAA_STATE) as [string, number][];
-            let key = 0;
-
-            while (stateNum && key < nums.length) {
-                const [k, v] = nums[key++];
-                if ((stateNum & v) !== 0) {
-                    stateNum = stateNum & ~v;
-                    stateStr.push(k);
-                }
-            }
-        }
+        const states = getStateEntries(parts[1])
 
         return {
-            role: roleName,
-            state: `${stateStr.join(', ')}`,
+            role: roleName || '',
+            states,
         };
     }
 
@@ -113,4 +97,29 @@ export function getEnumNumberEntries<T extends object>(objEnum: T) {
 
 export function getEnumNamedEntries<T extends object>(objEnum: T) {
     return Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key));
+}
+
+export function getStateEntries(state: string | undefined) {
+    if (!state) {
+        return;
+    }
+
+    let rv: string[] = [];
+
+    let stateNum = parseInt(state, 16) || 0;
+    if (!isNaN(stateNum)) {
+
+        const nums = getEnumNamedEntries(MSAA_STATE) as [string, number][];
+        let key = 0;
+
+        while (stateNum && key < nums.length) {
+            const [k, v] = nums[key++];
+            if ((stateNum & v) !== 0) {
+                stateNum = stateNum & ~v;
+                rv.push(k);
+            }
+        }
+    }
+
+    return rv.length ? rv : undefined;
 }

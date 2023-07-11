@@ -19,7 +19,7 @@ export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
             <div className={ellipsisClasses}>{item.control.dispname}</div>
             <div className="pr-4 text-[.6rem] flex items-center justify-between">
                 <div className="font-semibold">{item.meta.role?.role}</div>
-                <div className="">{item.meta.role?.state ? `${item.meta.role?.state}` : ''}</div>
+                <div className="">{item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : ''}</div>
             </div>
         </div>
     );

@@ -35,7 +35,19 @@ export namespace M4RInvoke { // Main from Renderer invoke and get result
         wantXml: boolean;
     };
 
-    export type InvokeCalls = DoLoadfiles | DoLoadfiles2/* | DoLoadfiles3*/ | GetSecondWindowHandle | GetSecondWindowContent | GetSecondWindowIcon | GetSecondWindowMani;
+    type GetWindowPos = {
+        type: 'get-window-pos';
+        hwnd: string;
+    };
+
+    export type InvokeCalls =
+        | DoLoadfiles 
+        | DoLoadfiles2/* | DoLoadfiles3*/ 
+        | GetSecondWindowHandle 
+        | GetSecondWindowContent 
+        | GetSecondWindowIcon 
+        | GetSecondWindowMani
+        | GetWindowPos;
 
     export type FileContent = {
         name: string;                   // file name wo/ path

@@ -12,3 +12,4 @@ export * from './get-window-controls';
 export * from './get-window-icon';
 export * from './get-window-mani';
 export * from './highligth-rect';
+export * from './get-window-pos';

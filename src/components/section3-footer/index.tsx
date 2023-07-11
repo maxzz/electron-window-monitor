@@ -7,7 +7,7 @@ import { TestTargetWindowPosition } from "./test-target-position";
 
 export function Section3Footer() {
     return (
-        <div className="p-4 text-xs flex flex-col space-y-2">
+        <div className="p-4 text-xs flex flex-col space-y-2 select-none">
             <TestTargetWindowPosition />
             <TestLinks />
 

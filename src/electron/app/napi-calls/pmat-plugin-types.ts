@@ -8,7 +8,7 @@ export type GetTargetWindowParams = {   // i.e. empty object like this '{}'
 };
 
 export type GetTargetWindowResult = {   // SAW - Second Active Window
-    hwnd: string;                       // "000000000014103E",
+    hwnd: string;                       // "000000000014103E", // hwnd should be string because int64 and js number types are different
     caption: string;                    // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
     classname: string;                  // "Chrome_WidgetWin_1",
     process: string;                    // "C:\\Program Files\\Microsoft VS Code\\Code.exe"
@@ -22,19 +22,22 @@ export interface getTargetWindow {
 // Drag And Drop icon to a window (for programmatic mouse click to a control in manual mode)
 
 export type DragAndDropParams = {
-    hwnd: string;               // hwnd should be string because int64 and js number types are different
+    hwnd: string;
 };
 
-export type POINT = {
-    x: number;                    // x-coordinate relative to client area of the window
-    y: number;                    // y-coordinate relative to client area of the window
-}
+export type PointXY = {                 // x and y coordinates relative to client area of the window
+    x: number;                          
+    y: number;
+};
+
+export type TargetPosition = {
+    point: PointXY;
+    rect?: TargetClientRect;            // TODO: why c++ returns clientRect?
+};
 
 export type DragAndDropResult = {
-    status: 'progress' | 'done';
-    point: POINT;
-    rect?: TargetClientRect;
-};
+    status: 'progress' | 'done';        // TODO: status 'done' never returns
+} & TargetPosition;
 
 export interface dragAndDrop {
     (DragAndDropParams: string, cb: PluginDataCallback): void;
@@ -47,7 +50,7 @@ export type IconFormatType = 'png' | 'jpeg' | 'bmp';
 export type Base64String = string;
 
 export type WindowIconGetterParams = {
-    hwnd: string;               // hwnd should be string because int64 and js number types are different
+    hwnd: string;
     iconFormat: IconFormatType;
 };
 
@@ -58,8 +61,8 @@ export type WindowIconGetterResult = {
 
 /**
  * Class for getting window icon. Instantiate once and call getIcon multiple times.
- * 
- * During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times, 
+ *
+ * During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times,
  * it will be expensive.
 
  * Usage:
@@ -80,7 +83,7 @@ export type TargetClientRect = {
     right: number;
     top: number;
     bottom: number;
-}
+};
 
 export type WindowControlHighlighterParams = {
     hwnd: string;
@@ -89,14 +92,14 @@ export type WindowControlHighlighterParams = {
 
 /**
  * Class for getting window icon. Instantiate once and call getIcon multiple times.
- * 
- * During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times, 
+ *
+ * During instantiation it internally starts GDI Plus. So, do not create/destruct this class multiple times,
  * it will be expensive.
 
  * Usage:
  * let highlighter = new WindowControlHighlighter();
  * highlighter.highlight('{"hwnd":"12345", "rect":{"left":100,"right":200,"top":100,"bottom":200}}');
- * 
+ *
  * TODO: There is no hide highlighter call. Is that done by timer? How to set timer interval in that case or reset show to see rect again?
  */
 

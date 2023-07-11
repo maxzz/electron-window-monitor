@@ -23,6 +23,10 @@ export const doFromMainAtom = atom(
                 buildState.buildCounter = data.progress;
                 break;
             }
+            case 'position-progress': {
+                buildState.getPosProgress = data.progress;
+                break;
+            }
             case 'failed-raw-content': {
                 clientState.buildFailedBody = data.body;
                 break;

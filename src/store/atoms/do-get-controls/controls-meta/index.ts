@@ -1,5 +1,5 @@
 import { EngineControl, TargetClientRect, WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
-import { FieldPath, MPath, MSAA_ROLE, MSAA_STATE, Meta, splitPool } from "pm-manifest";
+import { FieldPath, MPath, MSAA_ROLE, MSAA_STATE, Meta, getStateEntries, splitPool } from "pm-manifest";
 import { uuid } from "pm-manifest/src/utils";
 
 export type RoleStateNames = {
@@ -89,37 +89,4 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
             };
         }
     }
-}
-
-export function getEnumNumberEntries<T extends object>(objEnum: T) {
-    return Object.entries(objEnum).filter(([key, val]) => Number.isInteger(+key));
-}
-
-export function getEnumNamedEntries<T extends object>(objEnum: T) {
-    return Object.entries(objEnum).filter(([key, val]) => !Number.isInteger(+key));
-}
-
-export function getStateEntries(state: string | undefined) {
-    if (!state) {
-        return;
-    }
-
-    let rv: string[] = [];
-
-    let stateNum = parseInt(state, 16) || 0;
-    if (!isNaN(stateNum)) {
-
-        const nums = getEnumNamedEntries(MSAA_STATE) as [string, number][];
-        let key = 0;
-
-        while (stateNum && key < nums.length) {
-            const [k, v] = nums[key++];
-            if ((stateNum & v) !== 0) {
-                stateNum = stateNum & ~v;
-                rv.push(k);
-            }
-        }
-    }
-
-    return rv.length ? rv : undefined;
 }

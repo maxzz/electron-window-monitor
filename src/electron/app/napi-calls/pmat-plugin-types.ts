@@ -19,6 +19,28 @@ export interface getTargetWindow {
 }
 
 /////////////////////////////////////////////////////////////////////////////
+// Drag And Drop icon to a window (for programmatic mouse click to a control in manual mode)
+
+export type DragAndDropParams = {
+    hwnd: string;               // hwnd should be string because int64 and js number types are different
+};
+
+export type POINT = {
+    x: number;                    // x-coordinate relative to client area of the window
+    y: number;                    // y-coordinate relative to client area of the window
+}
+
+export type DragAndDropResult = {
+    status: 'progress' | 'done';
+    point: POINT;
+    rect?: TargetClientRect;
+};
+
+export interface dragAndDrop {
+    (DragAndDropParams: string, cb: PluginDataCallback): void;
+}
+
+/////////////////////////////////////////////////////////////////////////////
 // Get Icon
 
 export type IconFormatType = 'png' | 'jpeg' | 'bmp';
@@ -157,6 +179,7 @@ export type ManifestForWindowCreatorFinalAfterParse =
 
 export type AddonTypes = {
     getTargetWindow: getTargetWindow;
+    dragAndDrop: dragAndDrop,
     WindowIconGetter: WindowIconGetter;
     WindowControlsCollector: WindowControlsCollector;
     ManifestForWindowCreator: ManifestForWindowCreator;

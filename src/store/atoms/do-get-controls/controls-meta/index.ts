@@ -72,7 +72,7 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         const roleName = MSAA_ROLE[roleNum];
 
         let stateNum = parseInt(parts[1], 16) || 0;
-        let stateStr = ''
+        let stateStr: string[] = []
         
         if (!isNaN(stateNum)) {
 
@@ -83,14 +83,14 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
                 const [k, v] = nums[key++];
                 if ((stateNum & v) !== 0) {
                     stateNum = stateNum & ~v;
-                    stateStr += k;
+                    stateStr.push(k);
                 }
             }
         }
 
         return {
             role: roleName,
-            state: `${stateStr}`,
+            state: `${stateStr.join(', ')}`,
         };
     }
 

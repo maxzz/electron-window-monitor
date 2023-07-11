@@ -17,15 +17,15 @@ export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
             <div className="text-end" title="Order ID">{`${item.control.orderid}`.padStart(2, '0')}</div>
             <div className=""><FieldTypeIconComponent field={engineControlToFieldIconType(item.control)} className="w-4 h-4" /></div>
             <div className={ellipsisClasses}>{item.control.dispname}</div>
-            <div className="text-[.6rem]">{item.meta.role?.role} {item.meta.role?.state}</div>
+            <div className="pr-4 text-[.6rem] flex items-center justify-between">
+                <div className="font-semibold">{item.meta.role?.role}</div>
+                <div className="">{item.meta.role?.state ? `${item.meta.role?.state}` : ''}</div>
+            </div>
         </div>
     );
 }
 
 export function ControlsGrid({ controls }: { controls: EngineControlWithMeta[]; }) {
-
-    console.log('controls', controls);
-
     return (
         <div className="text-xs grid">
             {controls.map((control, idx) => (

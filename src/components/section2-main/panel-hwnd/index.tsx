@@ -1,8 +1,10 @@
 import { HTMLAttributes } from "react";
 import { useSetAtom, useAtomValue } from "jotai";
+import { useSnapshot } from "valtio";
+import { appUi } from "@/store/app-state";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom } from "@/store";
 import { classNames } from "@/utils";
-import { ImagePanel } from "../panel-window-icon";
+import { ImagePanel } from "./panel-window-icon";
 import { PanelBuildProcess } from "./panel-build-process";
 import { PanelHwndGrid } from "./panel-grid";
 
@@ -35,14 +37,18 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
 function HeaderButtons() {
     const isMonitoring = useAtomValue(doMonitoringAtom);
     const raw = useAtomValue(sawHandleStrAtom);
+    const { iconsLarge } = useSnapshot(appUi.uiState);
+
     if (!raw) {
         return null;
     }
     return (
-        <div className="pb-1 h-7 max-w-3xl flex items-center justify-between">
+        <div className={classNames("pb-1 max-w-3xl flex items-center justify-between", !iconsLarge && "h-7")}>
             <div className="flex items-center">
-                <div className="font-semibold">Second active window</div>
-                <ImagePanel className="mx-2 w-5 h-5" />
+                <div className="font-semibold">
+                    Second active window
+                </div>
+                <ImagePanel className={iconsLarge ? "mx-2 w-12 h-12" : "mx-2 w-5 h-5"} />
             </div>
 
             {!isMonitoring &&

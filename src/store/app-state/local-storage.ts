@@ -8,9 +8,10 @@ const STORAGE_UI_VER = 'v1';
 
 export type UiState = {
     darkMode: boolean;
-    maxControls: number; // max # of controls before detection canceled. 0 is unlimited
+    maxControls: number;        // max # of controls before detection canceled. 0 is unlimited
     acquireXml: boolean;
-    iconAutoUpdate: boolean; // get window icon automatically
+    iconAutoUpdate: boolean;    // get window icon automatically
+    iconsLarge: boolean;        // show large icon of the target window
 };
 
 type AppUi = {
@@ -23,6 +24,7 @@ const initialAppUi: AppUi = {
         maxControls: 0,
         acquireXml: false,
         iconAutoUpdate: true,
+        iconsLarge: false,
     },
 };
 

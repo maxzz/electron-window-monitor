@@ -26,6 +26,7 @@ export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
 }
 
 export function ControlsGrid({ controls }: { controls: EngineControlWithMeta[]; }) {
+    console.log('controls', controls);
     return (
         <div className="text-xs grid">
             {controls.map((control, idx) => (

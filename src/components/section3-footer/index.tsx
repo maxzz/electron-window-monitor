@@ -64,6 +64,20 @@ function ChkboxIconAutoUpdate() {
     );
 }
 
+function ChkboxLargeIcon() {
+    const { iconsLarge } = useSnapshot(appUi.uiState);
+    return (
+        <label className="w-max flex items-center gap-x-1" title="The get manifest request format: JSON/XML">
+            <input type="checkbox"
+                className={checkboxClasses}
+                checked={iconsLarge}
+                onChange={(e) => appUi.uiState.iconsLarge = e.target.checked}
+            />
+            <div className="select-none">Large icon</div>
+        </label>
+    );
+}
+
 function InputMaxControls() {
     const { maxControls } = useSnapshot(appUi.uiState);
     
@@ -95,6 +109,7 @@ export function Section3Footer() {
                 <InputMaxControls />
                 <ChkboxXmlFormat />
                 <ChkboxIconAutoUpdate />
+                <ChkboxLargeIcon />
             </div>
         </div>
     );

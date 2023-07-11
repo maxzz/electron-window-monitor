@@ -1,3 +1,5 @@
+import { classNames } from "@/utils";
+
 export const scrollbarClasses = "\
 p-0.5 \
 bg-primary-500/50 \
@@ -40,3 +42,5 @@ dark:focus:ring-offset-primary-800 \
 focus:ring-1 \
 focus:ring-offset-1 \
 focus:outline-none";
+
+export const checkboxClasses = classNames("form-checkbox text-primary-500 bg-primary-400 rounded-sm", focusClasses);

@@ -12,14 +12,16 @@ export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
     function select() {
         doHighlightRect({ rect: item.meta.rect });
     }
+    const role = item.meta.role?.role || item.meta.role?.raw;
+    const states = item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : '';
     return (
         <div className={gridRowClasses} onClick={select}>
             <div className="text-end" title="Order ID">{`${item.control.orderid}`.padStart(2, '0')}</div>
             <div className=""><FieldTypeIconComponent field={engineControlToFieldIconType(item.control)} className="w-4 h-4" /></div>
             <div className={ellipsisClasses}>{item.control.dispname}</div>
             <div className="pr-4 text-[.6rem] flex items-center justify-between">
-                <div className="font-semibold">{item.meta.role?.role}</div>
-                <div className="">{item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : ''}</div>
+                <div className="font-semibold">{role}</div>
+                <div className="">{states}</div>
             </div>
         </div>
     );

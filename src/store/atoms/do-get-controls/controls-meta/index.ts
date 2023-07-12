@@ -1,5 +1,5 @@
 import { EngineControl, TargetClientRect, WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
-import { FieldPath, MPath, MSAA_ROLE, MSAA_STATE, Meta, RoleStateNames, getRoleStateNames, getStateEntries, splitPool } from "pm-manifest";
+import { FieldPath, MPath, Meta, RoleStateNames, getRoleStateNames, splitPool } from "pm-manifest";
 import { uuid } from "pm-manifest/src/utils";
 
 export type EngineControlMeta = {

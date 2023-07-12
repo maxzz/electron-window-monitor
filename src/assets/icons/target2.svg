@@ -1,0 +1,14 @@
+<svg id="renders" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1{stroke-linecap:round}.cls-1,.cls-2{fill:none;stroke:red;stroke-miterlimit:10}
+    </style>
+  </defs>
+  <path fill="#e6e6e6" d="M0 0h24v24H0z"/>
+  <circle class="cls-2" cx="12" cy="12" r="8.04"/>
+  <circle class="cls-2" cx="12" cy="12" r="4.99"/>
+  <path class="cls-1" d="M12 1.5v8.13"/>
+  <path class="cls-1" d="M22.5 12h-8.13"/>
+  <path class="cls-1" d="M12 22.5v-8.13"/>
+  <path class="cls-1" d="M1.5 12h8.13"/>
+</svg>

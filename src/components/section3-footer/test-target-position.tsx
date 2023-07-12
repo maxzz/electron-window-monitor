@@ -57,7 +57,7 @@ export function TestTargetWindowPosition() {
             <div className="">Test get target position:</div>
 
             <div
-                className="w-12 h-12 bg-primary-900 rounded"
+                className="w-12 h-12 bg-primary-900 rounded cursor-pointer"
                 onPointerDown={startDragging}
                 onPointerUp={stopDragging}
                 onPointerMove={dragging}
@@ -79,3 +79,5 @@ function round2(num: number) {
 function roundInt(num: number) {
     return Math.round(num);
 }
+
+//TODO: set custom cursor while dragging

@@ -21,7 +21,7 @@ export function TestTargetWindowPosition() {
         elm.setPointerCapture(event.pointerId);
         setIconVisible(false);
 
-        console.log('startDragging (false)', event.target);
+        //console.log('startDragging (false)', event.target);
 
         // this is not ready on plugin side: if (sawHandle?.hwnd) { invokeMain({ type: 'get-window-pos', hwnd: sawHandle.hwnd }); }
     }
@@ -29,23 +29,27 @@ export function TestTargetWindowPosition() {
     function stopDragging(event: React.PointerEvent<HTMLDivElement>) {
         setIconVisible(true);
 
-        console.log('stopDragging (true)');
+        //console.log('stopDragging (true)');
     }
 
     function dragging(event: React.PointerEvent<HTMLDivElement>) {
+        if (iconVisible) {
+            return;
+        }
+
         const point = { x: roundInt(event.pageX), y: roundInt(event.pageY) };
 
         buildState.getPosProgress = {
             point,
         };
 
-        console.log('stopDragging (true)', point);
+        //console.log('stopDragging (true)', point);
     }
 
     function stopDragCanceled(event: React.PointerEvent<HTMLDivElement>) {
         setIconVisible(true);
 
-        console.log('stopDragcancel (true)');
+        //console.log('stopDragcancel (true)');
     }
 
     return (

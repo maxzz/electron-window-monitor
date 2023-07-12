@@ -35,7 +35,7 @@ export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
             <div className="text-end" title="Order ID">{`${item.control.orderid}`.padStart(2, '0')}</div>
             <div className=""><FieldTypeIconComponent field={engineControlToFieldIconType(item.control)} className="w-4 h-4" /></div>
             <div className={ellipsisClasses}>{item.control.dispname}</div>
-            <div className="pr-4 text-[.6rem] flex items-center justify-between">
+            <div className="pr-4 text-[.6rem] flex items-center justify-between" title={item.meta.role?.raw}>
                 <div className="font-semibold">{role}</div>
                 <div className="">{states}</div>
             </div>

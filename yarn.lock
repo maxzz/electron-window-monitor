@@ -2669,10 +2669,10 @@ pm-manifest-icons@1.0.3:
   resolved "https://registry.yarnpkg.com/pm-manifest-icons/-/pm-manifest-icons-1.0.3.tgz#a9c6939802398a3705e11265a87f9fa41de7c9a1"
   integrity sha512-KIYGr2leVRRohxcfi/2doprvF64c7M+8YZcvLNMTT6m8bDqs4EYiK1ZDcMM1M7jbnoigUIVfjU5bzXCndGK1xw==
 
-pm-manifest@1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.13.tgz#d269d9e154be6f1fd6963ed626765a82ecd7959d"
-  integrity sha512-6kdUzehyEFA2RFGWr1wwHIGh82PFH0abEe7ilDBKMtnmvvl/ssYyi++Hzp6Yd5Rsw2ajsZa1bRqY74Am2jkylg==
+pm-manifest@1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/pm-manifest/-/pm-manifest-1.0.14.tgz#757b1bbcb68d3ec405aff365cba107f8ef31a901"
+  integrity sha512-HABM32yWvoUpjVHrHKd1D4NVm82ndFgNQk0bgWM386EOcTOhTOYs81hoM8OPpy+G2fxl1/7bPvmCeWU3na/i5Q==
   dependencies:
     fast-xml-parser "^4.2.5"
 

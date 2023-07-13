@@ -20,12 +20,12 @@
         "pm-manifest-icons": "1.0.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "valtio": "1.10.6"
+        "valtio": "1.10.7"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.3",
-        "@types/react": "18.2.14",
-        "@types/react-dom": "18.2.6",
+        "@types/react": "18.2.15",
+        "@types/react-dom": "18.2.7",
         "@vitejs/plugin-react": "4.0.2",
         "autoprefixer": "^10.4.14",
         "electron": "25.2.0",

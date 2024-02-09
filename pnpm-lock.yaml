@@ -15,11 +15,11 @@ dependencies:
     specifier: ^4.4.0
     version: 4.4.0
   jotai:
-    specifier: 2.2.2
-    version: 2.2.2(react@18.2.0)
+    specifier: 2.6.4
+    version: 2.6.4(@types/react@18.2.55)(react@18.2.0)
   jotai-valtio:
-    specifier: ^0.3.0
-    version: 0.3.0(jotai@2.2.2)(valtio@1.10.7)
+    specifier: ^0.4.0
+    version: 0.4.0(jotai@2.6.4)(valtio@1.13.1)
   pm-manifest:
     specifier: 1.0.14
     version: 1.0.14
@@ -33,8 +33,8 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   valtio:
-    specifier: 1.10.7
-    version: 1.10.7(react@18.2.0)
+    specifier: 1.13.1
+    version: 1.13.1(@types/react@18.2.55)(react@18.2.0)
 
 devDependencies:
   '@tailwindcss/forms':
@@ -1592,6 +1592,14 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
+  /derive-valtio@0.1.0(valtio@1.13.1):
+    resolution: {integrity: sha512-OCg2UsLbXK7GmmpzMXhYkdO64vhJ1ROUUGaTFyHjVwEdMEcTTRj7W1TxLbSBxdY8QLBPCcp66MTyaSy0RpO17A==}
+    peerDependencies:
+      valtio: '*'
+    dependencies:
+      valtio: 1.13.1(@types/react@18.2.55)(react@18.2.0)
+    dev: false
+
   /detect-node@2.1.0:
     resolution: {integrity: sha512-T0NIuQpnTvFDATNuHN5roPwSBG83rFsuO+MXXH9/3N1eFbn4wcPjttvjMLEPWJ0RGUYgQE7cGgS3tNxbqCGM7g==}
     requiresBuild: true
@@ -2277,25 +2285,29 @@ packages:
     hasBin: true
     dev: true
 
-  /jotai-valtio@0.3.0(jotai@2.2.2)(valtio@1.10.7):
-    resolution: {integrity: sha512-fN8IaL3pVZoILk8plucDSLo4WkfD2edTpqoeFzDqVKrAjQ11wt1xaABK2tqchqA0cbPSvN/UBxYO0GnX21yv/g==}
+  /jotai-valtio@0.4.0(jotai@2.6.4)(valtio@1.13.1):
+    resolution: {integrity: sha512-j19IjUHjlbIzwM3I5dE8Me9nVGa/uJMQrnprg+wnR9xxdB7uXf4b+fldlTyNFgDN6HP8XSdIztKTMHlIp1365Q==}
     peerDependencies:
       jotai: '>=1.11.0'
       valtio: '*'
     dependencies:
-      jotai: 2.2.2(react@18.2.0)
-      valtio: 1.10.7(react@18.2.0)
+      jotai: 2.6.4(@types/react@18.2.55)(react@18.2.0)
+      valtio: 1.13.1(@types/react@18.2.55)(react@18.2.0)
     dev: false
 
-  /jotai@2.2.2(react@18.2.0):
-    resolution: {integrity: sha512-Cn8hnBg1sc5ppFwEgVGTfMR5WSM0hbAasd/bdAwIwTaum0j3OUPqBSC4tyk3jtB95vicML+RRWgKFOn6gtfN0A==}
+  /jotai@2.6.4(@types/react@18.2.55)(react@18.2.0):
+    resolution: {integrity: sha512-RniwQPX4893YlNR1muOtyUGHYaTD1fhEN4qnOuZJSrDHj6xdEMrqlRSN/hCm2fshwk78ruecB/P2l+NCVWe6TQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
+      '@types/react': '>=17.0.0'
       react: '>=17.0.0'
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
       react:
         optional: true
     dependencies:
+      '@types/react': 18.2.55
       react: 18.2.0
     dev: false
 
@@ -2751,8 +2763,8 @@ packages:
       retry: 0.12.0
     dev: true
 
-  /proxy-compare@2.5.1:
-    resolution: {integrity: sha512-oyfc0Tx87Cpwva5ZXezSp5V9vht1c7dZBhvuV/y3ctkgMVUmiAGDVeeB0dKhGSyT0v1ZTEQYpe/RXlBVBNuCLA==}
+  /proxy-compare@2.6.0:
+    resolution: {integrity: sha512-8xuCeM3l8yqdmbPoYeLbrAXCBWu19XEYc5/F28f5qOaoAIMyfmBUkl5axiK+x9olUvRlcekvnm98AP9RDngOIw==}
     dev: false
 
   /pump@3.0.0:
@@ -3258,16 +3270,21 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /valtio@1.10.7(react@18.2.0):
-    resolution: {integrity: sha512-XUwXJ9twXqwfVhXlcbYlCcRUUSOmp8RcJODVAxPrUZc2jh3com13B49MOL/cbgcTOX+5yf7wdMqbFGR7ba2sPg==}
+  /valtio@1.13.1(@types/react@18.2.55)(react@18.2.0):
+    resolution: {integrity: sha512-zowA+lrJPnj6YfIMrVzLKlpBJ/mrIJtMoStPoVLfFMQzvmqdB/JAFNBsxRJ707Oso0lyRgxRfaq4QbE9Uz0tYg==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
+      '@types/react': '>=16.8'
       react: '>=16.8'
     peerDependenciesMeta:
+      '@types/react':
+        optional: true
       react:
         optional: true
     dependencies:
-      proxy-compare: 2.5.1
+      '@types/react': 18.2.55
+      derive-valtio: 0.1.0(valtio@1.13.1)
+      proxy-compare: 2.6.0
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false

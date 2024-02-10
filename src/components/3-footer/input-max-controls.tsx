@@ -1,7 +1,7 @@
 import { useSnapshot } from "valtio";
 import { appUi } from "@/store/app-state";
 import { classNames } from "@/utils";
-import { focusClasses } from "../section2-main/shared-styles";
+import { focusClasses } from "../2-main/shared-styles";
 
 export function InputMaxControls() {
     const { maxControls } = useSnapshot(appUi.uiState);

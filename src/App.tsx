@@ -1,6 +1,6 @@
-import { Section1Header } from "./components/section1-header";
-import { Section2Main } from "./components/section2-main";
-import { Section3Footer } from "./components/section3-footer";
+import { Section1Header } from "./components/1-header";
+import { Section2Main } from "./components/2-main";
+import { Section3Footer } from "./components/3-footer";
 import { UISymbolDefs } from "./components/ui/icons";
 import { OnAppMount, WorldToReactListener } from "./shared/ipc-client/ipc-react-listener";
 

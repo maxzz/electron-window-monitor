@@ -1,6 +1,6 @@
 import { useSnapshot } from "valtio";
 import { appUi } from "@/store/app-state";
-import { checkboxClasses } from "../section2-main/shared-styles";
+import { checkboxClasses } from "../2-main/shared-styles";
 
 export function ChkboxXmlFormat() {
     const { acquireXml } = useSnapshot(appUi.uiState);

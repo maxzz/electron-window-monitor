@@ -5,7 +5,6 @@
     "description": "Electron app to test nodejs napi plugins",
     "author": "Max Zakharzhevskiy",
     "main": "dist-electron/main.js",
-    "_type": "module",
     "dependencies": {
         "@radix-ui/react-scroll-area": "^1.0.4",
         "@react-spring/web": "9.7.3",

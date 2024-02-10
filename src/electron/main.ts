@@ -3,9 +3,6 @@ import { app } from 'electron';
 import { connect_ListenersForCallFromRenderer, connect_MainWindowListeners, createWindow } from './app/window-electron-start-main/create-main-window';
 // import { getTargetWindow } from './window-monitor';
 
-// import * as url from 'node:url';
-// const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
 // The built directory structure
 //
 // ├─┬─┬ dist

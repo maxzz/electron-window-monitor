@@ -21,8 +21,8 @@ dependencies:
     specifier: ^0.4.0
     version: 0.4.0(jotai@2.6.4)(valtio@1.13.1)
   pm-manifest:
-    specifier: 1.1.0
-    version: 1.1.0
+    specifier: 1.1.1
+    version: 1.1.1
   pm-manifest-icons:
     specifier: 1.0.3
     version: 1.0.3(react@18.2.0)
@@ -36,8 +36,8 @@ dependencies:
     specifier: 1.13.1
     version: 1.13.1(@types/react@18.2.55)(react@18.2.0)
   vite-plugin-electron:
-    specifier: ^0.28.1
-    version: 0.28.1(electron@28.2.2)(vite-plugin-electron-renderer@0.14.5)
+    specifier: ^0.28.2
+    version: 0.28.2(electron@28.2.2)(vite-plugin-electron-renderer@0.14.5)
 
 devDependencies:
   '@tailwindcss/forms':
@@ -1946,8 +1946,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /fast-xml-parser@4.3.4:
-    resolution: {integrity: sha512-utnwm92SyozgA3hhH2I8qldf2lBqm6qHOICawRNRFu1qMe3+oqr+GcXjGqTmXTMGE5T4eC03kr/rlh5C1IRdZA==}
+  /fast-xml-parser@4.2.7:
+    resolution: {integrity: sha512-J8r6BriSLO1uj2miOk1NW0YVm8AGOOu3Si2HQp/cSmo6EA4m3fcwu2WKjJ4RK9wMLBtg69y1kS8baDiQBR41Ig==}
     hasBin: true
     dependencies:
       strnum: 1.0.5
@@ -2729,10 +2729,10 @@ packages:
       react: 18.2.0
     dev: false
 
-  /pm-manifest@1.1.0:
-    resolution: {integrity: sha512-EuaC2oNu4EmqeaLCPj5We9wz0TmiXsSQPqEvP7tAp4DtBY3vAkSFw6Hr1bonbRrpQKSionpOWr4Cj6M1T6cwGA==}
+  /pm-manifest@1.1.1:
+    resolution: {integrity: sha512-3d6DYxVGMl0ZweXkE8tbrShTfI7SQSC1j8EZzB7EN1iVMNMwWDSRxPV1jQLUha20vh3+kcH3NodW6dL3h1t53Q==}
     dependencies:
-      fast-xml-parser: 4.3.4
+      fast-xml-parser: 4.2.7
     dev: false
 
   /postcss-import@15.1.0(postcss@8.4.35):
@@ -3357,8 +3357,8 @@ packages:
   /vite-plugin-electron-renderer@0.14.5:
     resolution: {integrity: sha512-EQ7ORuPp8vFPCqfuGnVo7d36fXS0IFH4/RUlKb1drseix3TQEPcgwEuFADdXBxRgqMp70njz/1m0kdf5lEsm8w==}
 
-  /vite-plugin-electron@0.28.1(electron@28.2.2)(vite-plugin-electron-renderer@0.14.5):
-    resolution: {integrity: sha512-m2LLcYwUpLx/fQDcdtVqKUMWj7whHoBHvybmuhj+ZHIRawxiyI+9T0YN+TFCaeufNesuny4IyBDRjSOLrTBu5w==}
+  /vite-plugin-electron@0.28.2(electron@28.2.2)(vite-plugin-electron-renderer@0.14.5):
+    resolution: {integrity: sha512-RSYvChUSIMN7L4yxW5hqtF8VutJWLRPukxrSWtefEATCZ/PGAf+9l8VQ84UTIk/gbYJghRMOd5139Byhx5pfIw==}
     peerDependencies:
       electron: ^28.0.0
       tree-kill: '*'

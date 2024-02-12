@@ -2,7 +2,7 @@ import path from 'node:path';
 import { BrowserWindow, IpcMainEvent, IpcMainInvokeEvent, app, ipcMain, shell } from "electron";
 import { M4R, M4RInvoke } from '@/shared/ipc-types';
 import { callFromRendererToMain, invokeFromRendererToMain } from '../../../shared/ipc-main';
-import { getIniOptions, saveIniOptions } from '../utils-main/app-ini-options';
+import { loadIniFileOptions, saveIniFileOptions } from '../utils-main/ini-file-options';
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
@@ -10,18 +10,18 @@ const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 export let winApp: BrowserWindow | null;
 
 export async function createWindow() {
-    const iniOptions = getIniOptions();
-    const preload = path.join(__dirname, 'preload.js');
+    const iniFileOptions = loadIniFileOptions();
+    const preloadPath = path.join(__dirname, 'preload.js');
 
     //console.log('__dirname', __dirname);
 
     winApp = new BrowserWindow({
         title: 'PMAT Monitor',
-        ...(iniOptions?.bounds),
+        ...(iniFileOptions?.bounds),
         show: false,
         icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
         webPreferences: {
-            preload: preload,
+            preload: preloadPath,
             nodeIntegration: false, //https://www.electronjs.org/docs/latest/tutorial/security process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
             contextIsolation: true, //https://www.electronjs.org/docs/latest/tutorial/context-isolation
             //...(iniOptions?.devTools && { devTools: iniOptions.devTools }) enable during runtime
@@ -35,10 +35,14 @@ export async function createWindow() {
     }
 
     winApp.once('ready-to-show', () => {
-        if (iniOptions?.devTools && winApp && !winApp.webContents.isDevToolsOpened()) {
-            winApp.webContents.toggleDevTools();
+        if (iniFileOptions?.devTools && !winApp?.webContents.isDevToolsOpened()) {
+            winApp?.webContents.toggleDevTools();
         }
         winApp?.show();
+    });
+
+    winApp.on('close', () => {
+        winApp && saveIniFileOptions(winApp);
     });
 
     winApp.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
@@ -46,10 +50,6 @@ export async function createWindow() {
             shell.openExternal(url);
         }
         return { action: 'deny' };
-    });
-
-    winApp.on('close', () => {
-        winApp && saveIniOptions(winApp);
     });
 
     winApp.webContents.on('did-finish-load', () => {

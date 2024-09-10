@@ -31,12 +31,14 @@ const fixInputs = plugin.withOptions(function (options = { light: 'black', dark:
             '.dark .form-checkbox:checked': {
                 'background-image': svgCheckbox(dark),
             },
+
             '.form-checkbox:indeterminate': {
                 'background-image': svgCheckboxIndeterminate(light),
             },
             '.dark .form-checkbox:indeterminate': {
                 'background-image': svgCheckboxIndeterminate(dark),
             },
+            
             '.form-radio:checked': {
                 'background-image': svgRadio(light),
             },

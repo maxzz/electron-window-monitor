@@ -45,6 +45,12 @@ importers:
       '@tailwindcss/forms':
         specifier: ^0.5.3
         version: 0.5.7(tailwindcss@3.4.1)
+      '@types/electron':
+        specifier: ^1.6.10
+        version: 1.6.10
+      '@types/node':
+        specifier: ^22.5.4
+        version: 22.5.4
       '@types/react':
         specifier: 18.3.5
         version: 18.3.5
@@ -668,6 +674,10 @@ packages:
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
+
+  '@types/electron@1.6.10':
+    resolution: {integrity: sha512-MOCVyzIwkBEloreoCVrTV108vSf8fFIJPsGruLCoAoBZdxtnJUqKA4lNonf/2u1twSjAspPEfmEheC+TLm/cMw==}
+    deprecated: This is a stub types definition for electron (https://github.com/electron/electron). electron provides its own type definitions, so you don't need @types/electron installed!
 
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
@@ -3009,12 +3019,18 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
       '@types/responselike': 1.0.3
 
   '@types/debug@4.1.12':
     dependencies:
       '@types/ms': 0.7.34
+
+  '@types/electron@1.6.10':
+    dependencies:
+      electron: 32.0.2
+    transitivePeerDependencies:
+      - supports-color
 
   '@types/estree@1.0.5': {}
 
@@ -3026,7 +3042,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
 
   '@types/ms@0.7.34': {}
 
@@ -3057,14 +3073,14 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
 
   '@types/verror@1.10.10':
     optional: true
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 20.16.5
+      '@types/node': 22.5.4
     optional: true
 
   '@vitejs/plugin-react@4.3.1(vite@5.4.3(@types/node@22.5.4))':

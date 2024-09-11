@@ -1,7 +1,6 @@
 import { addon } from "./0-addon";
 import { type ManifestForWindowCreatorParams, type ManifestForWindowCreatorResult } from "./pmat-plugin-types";
-import { mainToRenderer } from "../../../shared/ipc-main";
-import { mainStore } from "../store-main";
+import { mainStore, mainToRenderer } from "./9-external";
 
 export function getWindowMani(hwnd: string, wantXml: boolean): Promise<string> {
     return new Promise<string>(

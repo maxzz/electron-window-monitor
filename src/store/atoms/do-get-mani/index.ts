@@ -4,7 +4,7 @@ import { buildState, clientState } from "../../app-state";
 import { EngineControl } from "@/electron/app/napi-calls";
 import { getSubError } from "@/utils";
 import { lastBuildProgressAtom } from "..";
-import { CatalogFile, Mani, Meta, buildCatalogMeta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
+import { CatalogFile, Mani, Meta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
 
 type SawContentReply = {
     pool: string;

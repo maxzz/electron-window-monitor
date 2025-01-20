@@ -1,11 +1,6 @@
-import { EngineControl, TargetClientRect, WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
-import { FieldPath, MPath, MSAA_ROLE, Meta, splitPool } from "pm-manifest";
+import { FieldPath, type MPath, type Meta, RoleStateNames, getRoleStateNames, splitPool } from "pm-manifest";
+import { type EngineControl, type TargetClientRect, type WindowControlsCollectFinalAfterParse } from "@/electron/app/napi-calls";
 import { uuid } from "pm-manifest/src/utils";
-
-export type RoleStateNames = {
-    role: string;
-    state: string;
-};
 
 export type EngineControlMeta = {
     uuid: number;
@@ -42,7 +37,7 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         const rv = controls.map((control) => {
             const path = FieldPath.fieldPathItems(pool, control.path);
             const rect = getControlTaretRect(path.loc);
-            const role = getRole(path.p4 || path.p4a);
+            const role = getRoleAndStates(path.p4 || path.p4a);
             const item = {
                 control,
                 meta: {
@@ -57,25 +52,12 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         return rv;
     }
 
-    function getRole(p4a: MPath.p4a[] | undefined): RoleStateNames | undefined {
+    function getRoleAndStates(p4a: MPath.p4a[] | undefined): RoleStateNames | undefined {
         if (!p4a?.length) {
             return;
         }
         const lastP4a = p4a.at(-1);
-        const parts = lastP4a?.roleString?.split('_');
-
-        if (!lastP4a?.roleString || !parts?.length || !parts[0]) {
-            return;
-        }
-
-        const roleNum = parseInt(parts[0], 16);
-        const roleName = MSAA_ROLE[roleNum];
-        const stateNum = parts[1] || 0;
-
-        return {
-            role: roleName,
-            state: `${stateNum}`,
-        };
+        return getRoleStateNames(lastP4a?.roleString);
     }
 
     function getControlTaretRect(pathLoc: string | undefined): TargetClientRect | undefined {

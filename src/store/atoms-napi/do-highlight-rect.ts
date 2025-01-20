@@ -1,6 +1,7 @@
-import { TargetClientRect } from "@/electron/app/napi-calls";
 import { atom } from "jotai";
-import { sawHandleAtom, sendToMain } from "..";
+import { sendToMain } from "@/shared/ipc-client";
+import { type TargetClientRect } from "@/electron/app/napi-calls";
+import { sawHandleAtom } from "./do-get-hwnd";
 
 export const doHighlightRectAtom = atom(
     null,

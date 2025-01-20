@@ -3,7 +3,7 @@ import { invokeMain } from "@/shared/ipc-client";
 import { buildState, clientState } from "../../app-state";
 import { type EngineControl } from "@/electron/app/napi-calls";
 import { getSubError } from "@/utils";
-import { lastBuildProgressAtom } from "../do-get-hwnd";
+import { lastBuildProgressAtom } from "../1-do-get-hwnd";
 import { type CatalogFile, type Mani, type Meta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
 
 type SawContentReply = {

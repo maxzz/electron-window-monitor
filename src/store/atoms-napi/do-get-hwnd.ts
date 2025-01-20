@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
 import { type GetTargetWindowResult } from "@/electron/app/napi-calls";
-import { sawContentAtom, sawContentStrAtom } from "./do-get-controls";
+import { sawContentAtom, sawContentStrAtom } from "./3-do-get-controls";
 import { doGetWindowIconAtom } from "./do-get-icon";
 import { appUi, clientStateAtom } from "../app-state";
 

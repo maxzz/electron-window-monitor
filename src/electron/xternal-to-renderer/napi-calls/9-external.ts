@@ -1,2 +1,2 @@
 export { mainToRenderer } from "../../../shared/ipc-main";
-export { mainStore } from "../store-main";
+export { mainStore } from "../../app/store-main";

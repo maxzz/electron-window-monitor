@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
+import { type CatalogFile, type Mani, type Meta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
 import { buildState, clientState } from "../../app-state";
-import { type EngineControl } from "@/electron/app/napi-calls";
+import { type EngineControl } from "@/electron/xternal-to-renderer/napi-calls";
 import { getSubError } from "@/utils";
 import { lastBuildProgressAtom } from "../1-do-get-hwnd";
-import { type CatalogFile, type Mani, type Meta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
 
 type SawContentReply = {
     pool: string;

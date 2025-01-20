@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { useSnapshot } from "valtio";
 import { easings, a, useTransition } from "@react-spring/web";
-import { clientState } from "@/store/app-state";
+import { clientState } from "@/store/1-app-state";
 import { classNames } from "@/utils";
 import { IconCopy } from "@/components/ui/icons";
 import { useAtomValue } from "jotai";

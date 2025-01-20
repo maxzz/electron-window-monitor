@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
-import { clientState } from "../app-state";
+import { clientState } from "../1-app-state";
 import { getSubError } from "@/utils";
-import { WindowIconGetterResult } from "@/electron/xternal-to-renderer/calls-napi";
+import { WindowIconGetterResult } from "@/electron/xternal-to-renderer/7-napi-calls";
 //import { sawHandleAtom } from "./do-get-hwnd";
 
 export const sawIconStrAtom = atom<string | undefined>(undefined);

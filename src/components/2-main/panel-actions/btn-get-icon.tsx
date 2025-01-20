@@ -2,7 +2,7 @@ import { useSetAtom, useAtomValue } from "jotai";
 import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
-import { appUi } from "@/store/app-state";
+import { appUi } from "@/store/1-app-state";
 import { useSnapshot } from "valtio";
 
 export function ButtonGetIcon() {

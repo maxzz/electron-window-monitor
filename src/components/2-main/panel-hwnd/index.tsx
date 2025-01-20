@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
-import { appUi } from "@/store/app-state";
+import { appUi } from "@/store/1-app-state";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom } from "@/store";
 import { classNames } from "@/utils";
 import { ImagePanel } from "./panel-window-icon";

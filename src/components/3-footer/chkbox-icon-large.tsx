@@ -1,5 +1,5 @@
 import { useSnapshot } from "valtio";
-import { appUi } from "@/store/app-state";
+import { appUi } from "@/store/1-app-state";
 import { checkboxClasses } from "../2-main/shared-styles";
 
 export function ChkboxLargeIcon() {

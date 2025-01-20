@@ -1,7 +1,7 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { doGetWindowManiAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
-import { appUi, clientState } from "@/store/app-state";
+import { appUi, clientState } from "@/store/1-app-state";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 

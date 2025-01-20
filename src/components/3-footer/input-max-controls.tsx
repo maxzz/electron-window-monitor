@@ -1,5 +1,5 @@
 import { useSnapshot } from "valtio";
-import { appUi } from "@/store/app-state";
+import { appUi } from "@/store/1-app-state";
 import { classNames } from "@/utils";
 import { focusClasses } from "../2-main/shared-styles";
 

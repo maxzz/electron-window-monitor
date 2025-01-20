@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { useSnapshot } from 'valtio';
 import { sawContentStrAtom } from '@/store';
-import { buildState, clientState } from "@/store/app-state";
+import { buildState, clientState } from "@/store/1-app-state";
 import { ButtonCopyContent } from './btn-copy';
 
 function HeaderTitle() {

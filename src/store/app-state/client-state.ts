@@ -1,4 +1,4 @@
-import { TargetPosition } from '@/electron/xternal-to-renderer/napi-calls';
+import { TargetPosition } from '@/electron/xternal-to-renderer/calls-napi';
 import { atomWithProxy } from 'jotai-valtio';
 import { proxy } from 'valtio';
 

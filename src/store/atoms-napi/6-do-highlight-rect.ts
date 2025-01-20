@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { sendToMain } from "@/shared/ipc-client";
-import { type TargetClientRect } from "@/electron/xternal-to-renderer/napi-calls";
+import { type TargetClientRect } from "@/electron/xternal-to-renderer/calls-napi";
 import { sawHandleAtom } from "./1-do-get-hwnd";
 
 export const doHighlightRectAtom = atom(

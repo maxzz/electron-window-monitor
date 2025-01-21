@@ -29,17 +29,18 @@ export type TlwScreenshot = TlwData | TlwError; // Discriminated union of "data"
 export type GetTlWindowsParams = {      // i.e. empty object like this '{}'
 };
 
-export type TlwClassname = {
+export type TlwInfo = {
     hwnd: string;
     classname: string;                  // like "Chrome_WidgetWin_1"; that will allow us sort out windows and show browser windows first
+    caption: string;                    // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
 };
 
-export type GetTlWindowsResult = {
-    windows: TlwClassname[];
+export type GetTlwInfoResult = {
+    windows: TlwInfo[];
 };
 
-export interface getTlWindows {
-    (GetNumberOfTLWindowsParams: string, cb: PluginDataCallback): void;
+export interface getTopLevelWindowsInfo { //tm:to:change: should be getTlWindows
+    (GetNumberOfTLWindowsParams: string, cb: PluginDataCallback): void; // TODO: params type definition is missing. there is no params so define as an empty object
 }
 
 // 2. Get top-level window screenshots
@@ -52,6 +53,6 @@ export type GetTlwScreenshotsParams = {
 
 export type GetTlwScreenshotsResult = TlwScreenshot[];
 
-export interface getTlwScreenshots {
+export interface getTopLevelWindowsScreenshots { //tm:to:change: should be getTlwScreenshots
     (GetTLWScreenshotsParams: string, cb: PluginDataCallback): void;
 }

@@ -1,7 +1,7 @@
 import { Notification } from "electron";
 import { M4R } from "@/shared/ipc-types";
-import { mainStore } from "../../electron/app/store-main";
-import { highlightRect } from "../../electron/xternal-to-renderer/7-napi-calls";
+import { mainStore } from "../../x-electron/app/store-main";
+import { highlightRect } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 
 export async function callFromRendererToMain(data: M4R.ToMainCalls): Promise<void> {
     switch (data.type) {

@@ -1,5 +1,5 @@
 import { FieldPath, type MPath, type Meta, RoleStateNames, getRoleStateNames, splitPool } from "pm-manifest";
-import { type EngineControl, type TargetClientRect, type WindowControlsCollectFinalAfterParse } from "@/electron/xternal-to-renderer/7-napi-calls";
+import { type EngineControl, type TargetClientRect, type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { uuid } from "pm-manifest/src/utils";
 
 export type EngineControlMeta = {

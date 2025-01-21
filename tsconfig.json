@@ -32,7 +32,7 @@
     },
     "include": [
         "src",
-        "src/electron",
+        "src/x-electron",
         "vite-preload-calls.d.ts"
     ],
     "references": [

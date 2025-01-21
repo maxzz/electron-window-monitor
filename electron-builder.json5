@@ -14,18 +14,18 @@
     "dist",
     //ok
     // {
-    //     "from": "./src/electron/app/plugins/bin",
+    //     "from": "./src/x-electron/app/plugins/bin",
     //     "to": "./dist-electron/plugins",
     //     "filter": ["**/*"]
     // }
     //no
     // {
-    //     "from": "./src/electron/app/plugins/bin",
+    //     "from": "./src/x-electron/app/plugins/bin",
     //     "to": ".",
     //     //"filter": ["**/*", "!*.dll"]
     // }
     // {
-    //     "from": "./src/electron/app/plugins/bin/dpnodehelper.dll",
+    //     "from": "./src/x-electron/app/plugins/bin/dpnodehelper.dll",
     //     "to": "./dpnodehelper.dll",
     //     "filter": ["**/*", "!*.dll"]
     // }

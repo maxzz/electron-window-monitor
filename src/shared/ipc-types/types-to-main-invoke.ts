@@ -1,4 +1,4 @@
-import { type GetTlwScreenshotsParams } from "@/electron/xternal-to-renderer/7-napi-calls";
+import { type GetTlwScreenshotsParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace M4RInvoke { // Main from Renderer invoke and get result
     type DoLoadfiles = {

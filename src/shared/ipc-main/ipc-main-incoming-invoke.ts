@@ -1,6 +1,6 @@
 import { M4RInvoke } from "@/shared/ipc-types";
-import { loadFilesContent } from "../../electron/app/utils-main/load-files";
-import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "../../electron/xternal-to-renderer/7-napi-calls";
+import { loadFilesContent } from "../../x-electron/app/utils-main/load-files";
+import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 
 export async function invokeFromRendererToMain(data: M4RInvoke.InvokeCalls): Promise<any> {
     switch (data.type) {

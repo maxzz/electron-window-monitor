@@ -18,11 +18,11 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       jotai:
-        specifier: 2.10.4
-        version: 2.10.4(@types/react@18.3.5)(react@18.3.1)
+        specifier: 2.11.1
+        version: 2.11.1(@types/react@18.3.5)(react@18.3.1)
       jotai-valtio:
         specifier: ^0.6.0
-        version: 0.6.0(jotai@2.10.4(@types/react@18.3.5)(react@18.3.1))(valtio@2.1.2(@types/react@18.3.5)(react@18.3.1))
+        version: 0.6.0(jotai@2.11.1(@types/react@18.3.5)(react@18.3.1))(valtio@2.1.2(@types/react@18.3.5)(react@18.3.1))
       pm-manifest:
         specifier: 1.2.74
         version: 1.2.74
@@ -1387,8 +1387,8 @@ packages:
       jotai: '>=2.0.0'
       valtio: '>=2.0.0'
 
-  jotai@2.10.4:
-    resolution: {integrity: sha512-/T4ofyMSkAybEs2OvR8S4HACa+/ASUEPLz86SUjFXJqU9RdJKLvZDJrag398suvHC5CR0+Cs4P5m/gtVcryzlw==}
+  jotai@2.11.1:
+    resolution: {integrity: sha512-41Su098mpHIX29hF/XOpDb0SqF6EES7+HXfrhuBqVSzRkxX48hD5i8nGsEewWZNAsBWJCTTmuz8M946Ih2PfcQ==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=17.0.0'
@@ -3597,12 +3597,12 @@ snapshots:
       filelist: 1.0.4
       minimatch: 3.1.2
 
-  jotai-valtio@0.6.0(jotai@2.10.4(@types/react@18.3.5)(react@18.3.1))(valtio@2.1.2(@types/react@18.3.5)(react@18.3.1)):
+  jotai-valtio@0.6.0(jotai@2.11.1(@types/react@18.3.5)(react@18.3.1))(valtio@2.1.2(@types/react@18.3.5)(react@18.3.1)):
     dependencies:
-      jotai: 2.10.4(@types/react@18.3.5)(react@18.3.1)
+      jotai: 2.11.1(@types/react@18.3.5)(react@18.3.1)
       valtio: 2.1.2(@types/react@18.3.5)(react@18.3.1)
 
-  jotai@2.10.4(@types/react@18.3.5)(react@18.3.1):
+  jotai@2.11.1(@types/react@18.3.5)(react@18.3.1):
     optionalDependencies:
       '@types/react': 18.3.5
       react: 18.3.1

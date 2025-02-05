@@ -1,7 +1,6 @@
-import { FieldPath, type MPath, type RoleStateNames, getRoleStateNames, splitPool } from "pm-manifest";
+import { FieldPath, type MPath, type RoleStateNames, getRoleStateNames, splitPool, uuid } from "pm-manifest";
 import { type EngineControl, type TargetClientRect, type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta, type EngineControlWithMeta } from "../9-types";
-import { uuid } from "pm-manifest/src/utils";
 
 export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollectFinalAfterParse): EngineControlsWithMeta | null {
     const final = reply.pool && reply.controls?.length ? reply : null;

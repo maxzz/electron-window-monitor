@@ -1,27 +1,28 @@
-import { FieldPath, MPath, MSAA_ROLE, type Meta, splitPool } from "pm-manifest";
+import { FieldPath, MPath, MSAA_ROLE, type RoleStateNames, splitPool } from "pm-manifest";
 import { type EngineControl, type TargetClientRect, type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type EngineControlsWithMeta, type EngineControlWithMeta } from "../9-types";
 import { uuid } from "pm-manifest/src/utils";
 
-export type RoleStateNames = {
-    role: string;
-    state: string;
-};
+// export type EngineControlMeta = {
+//     uuid: number;
+//     path: Meta.Path;
+//     rect?: TargetClientRect;
+//     role?: RoleStateNames;
+// };
 
-export type EngineControlMeta = {
-    uuid: number;
-    path: Meta.Path;
-    rect?: TargetClientRect;
-    role?: RoleStateNames;
-};
+// export type EngineControlWithMeta = {
+//     control: EngineControl;
+//     meta: EngineControlMeta;
+// };
 
-export type EngineControlWithMeta = {
-    control: EngineControl;
-    meta: EngineControlMeta;
-};
+// export type EngineControlsWithMeta = Omit<WindowControlsCollectFinalAfterParse, 'controls'> & {
+//     controls: EngineControlWithMeta[];
+// };
 
-export type EngineControlsWithMeta = Omit<WindowControlsCollectFinalAfterParse, 'controls'> & {
-    controls: EngineControlWithMeta[];
-};
+// export type RoleStateNames = {
+//     role: string;
+//     state: string;
+// };
 
 export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollectFinalAfterParse): EngineControlsWithMeta | null {
     const final = reply.pool && reply.controls?.length ? reply : null;
@@ -73,8 +74,9 @@ export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollec
         const stateNum = parts[1] || 0;
 
         return {
+            raw: lastP4a?.roleString,
             role: roleName,
-            state: `${stateNum}`,
+            states: [`${stateNum}`],
         };
     }
 

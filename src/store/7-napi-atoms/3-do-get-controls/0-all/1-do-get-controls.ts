@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta } from "../9-types";
-import { controlsReplyToEngineControlWithMeta } from "../2-conv-controls-meta";
+import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
 import { getSubError } from "@/utils";
 import { buildState, clientState } from "../../../1-app-state";
 import { lastBuildProgressAtom } from "../../1-do-get-hwnd";

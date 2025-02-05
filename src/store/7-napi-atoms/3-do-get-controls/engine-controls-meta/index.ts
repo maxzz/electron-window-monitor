@@ -3,27 +3,6 @@ import { type EngineControl, type TargetClientRect, type WindowControlsCollectFi
 import { type EngineControlsWithMeta, type EngineControlWithMeta } from "../9-types";
 import { uuid } from "pm-manifest/src/utils";
 
-// export type EngineControlMeta = {
-//     uuid: number;
-//     path: Meta.Path;
-//     rect?: TargetClientRect;
-//     role?: RoleStateNames;
-// };
-
-// export type EngineControlWithMeta = {
-//     control: EngineControl;
-//     meta: EngineControlMeta;
-// };
-
-// export type EngineControlsWithMeta = Omit<WindowControlsCollectFinalAfterParse, 'controls'> & {
-//     controls: EngineControlWithMeta[];
-// };
-
-// export type RoleStateNames = {
-//     role: string;
-//     state: string;
-// };
-
 export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollectFinalAfterParse): EngineControlsWithMeta | null {
     const final = reply.pool && reply.controls?.length ? reply : null;
     if (!final) {

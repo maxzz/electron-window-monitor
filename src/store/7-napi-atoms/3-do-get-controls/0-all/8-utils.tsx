@@ -1,4 +1,4 @@
-import { FieldPath, MPath, MSAA_ROLE, RoleStateNames, getRoleStateNames } from "@/store/manifest";
+import { FieldPath, type MPath, type RoleStateNames, getRoleStateNames } from "@/store/manifest";
 import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export function getRoleAndStates(p4a: MPath.p4a[] | undefined): RoleStateNames | undefined {

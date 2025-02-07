@@ -1,29 +1,29 @@
-import { TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
-import { atomWithProxy } from 'jotai-valtio';
 import { proxy } from 'valtio';
+import { atomWithProxy } from 'jotai-valtio';
+import { TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
 
-type ClientState = {
+type NapiBuildState = {                         // state of Napi multistep build: icons, controls, manifest
     buildRunning: boolean;                      // content check build is runnning
     buildError: string;                         // error message if build failed
     buildFailedBody: string;                    // raw string returned from main that failed to parse
 };
 
-export const clientState = proxy<ClientState>({
+export const napiBuildState = proxy<NapiBuildState>({
     buildRunning: false,
     buildError: '',
     buildFailedBody: '',
 });
 
-export const clientStateAtom = atomWithProxy(clientState);
+export const napiBuildStateAtom = atomWithProxy(napiBuildState);
 
 //
 
-type BuildState = {
+type NapiBuildProgress = {
     buildCounter: number;                       // controls detection progress
-    getPosProgress: TargetPosition | null;    // get window position progress
+    getPosProgress: TargetPosition | null;      // get window position progress
 };
 
-export const buildState = proxy<BuildState>({
+export const napiBuildProgress = proxy<NapiBuildProgress>({
     buildCounter: 0,
     getPosProgress: null,
 });

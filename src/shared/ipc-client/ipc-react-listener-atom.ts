@@ -1,7 +1,7 @@
 import { M2R } from "@/shared/ipc-types";
 import { atom } from "jotai";
 import { filesContentAtom } from "../../store/atom-dropped-files";
-import { buildState, clientState } from "../../store/1-app-state";
+import { napiBuildProgress, napiBuildState } from "../../store/1-app-state";
 
 export const doFromMainAtom = atom(
     null,
@@ -20,15 +20,15 @@ export const doFromMainAtom = atom(
                 break;
             }
             case 'detection-progress': {
-                buildState.buildCounter = data.progress;
+                napiBuildProgress.buildCounter = data.progress;
                 break;
             }
             case 'position-progress': {
-                buildState.getPosProgress = data.progress;
+                napiBuildProgress.getPosProgress = data.progress;
                 break;
             }
             case 'failed-raw-content': {
-                clientState.buildFailedBody = data.body;
+                napiBuildState.buildFailedBody = data.body;
                 break;
             }
             default: {

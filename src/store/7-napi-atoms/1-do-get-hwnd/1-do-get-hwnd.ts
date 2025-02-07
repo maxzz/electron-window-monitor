@@ -3,7 +3,7 @@ import { invokeMain } from "@/shared/ipc-client";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { sawContentAtom, sawContentStrAtom } from "../3-do-get-controls";
 import { doGetWindowIconAtom } from "../2-do-get-icon";
-import { appUi, clientStateAtom } from "../../1-app-state";
+import { appUi, napiBuildStateAtom } from "../../1-app-state";
 
 export const sawHandleStrAtom = atom<string | undefined>('');
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
@@ -53,7 +53,7 @@ export const doGetTargetHwndAtom = atom(
 export const sawGetDisabledAtom = atom(
     (get) => {
         const secondActiveWindow = get(sawHandleAtom);
-        const { buildRunning } = get(clientStateAtom);
+        const { buildRunning } = get(napiBuildStateAtom);
         const hwnd = secondActiveWindow?.hwnd;
         const isDisabled = !hwnd || buildRunning;
         return isDisabled;

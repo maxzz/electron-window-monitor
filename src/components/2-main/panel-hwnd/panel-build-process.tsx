@@ -1,14 +1,14 @@
 import { HTMLAttributes } from "react";
 import { useSnapshot } from "valtio";
 import { sendToMain } from "@/store";
-import { clientState, buildState } from "@/store/1-app-state";
+import { napiBuildState, napiBuildProgress } from "@/store/1-app-state";
 import { classNames } from "@/utils";
 
 const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
 
 function BuildCounter() {
-    const { buildError } = useSnapshot(clientState);
-    const { buildCounter } = useSnapshot(buildState);
+    const { buildError } = useSnapshot(napiBuildState);
+    const { buildCounter } = useSnapshot(napiBuildProgress);
     if (buildError || buildCounter < 200) {
         return null;
     }
@@ -28,7 +28,7 @@ function BuildCounter() {
 }
 
 function BuildError() {
-    const { buildError } = useSnapshot(clientState);
+    const { buildError } = useSnapshot(napiBuildState);
     if (!buildError) {
         return null;
     }

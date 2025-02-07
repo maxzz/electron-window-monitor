@@ -4,7 +4,7 @@ import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-
 import { type EngineControlsWithMeta } from "../9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
 import { getSubError } from "@/utils";
-import { buildState, clientState } from "../../../1-app-state";
+import { napiBuildProgress, napiBuildState } from "../../../1-app-state";
 import { lastBuildProgressAtom } from "../../1-do-get-hwnd";
 
 export const sawContentStrAtom = atom<string | undefined>('');
@@ -18,22 +18,22 @@ export const doGetWindowControlsAtom = atom(
                 throw new Error('No hwnd');
             }
 
-            if (clientState.buildRunning) {
+            if (napiBuildState.buildRunning) {
                 return;
             }
 
-            clientState.buildRunning = true;
-            buildState.buildCounter = 0;
-            clientState.buildError = '';
-            clientState.buildFailedBody = '';
+            napiBuildState.buildRunning = true;
+            napiBuildProgress.buildCounter = 0;
+            napiBuildState.buildError = '';
+            napiBuildState.buildFailedBody = '';
 
             const res = await invokeMain<string>({ type: 'r2mi:get-window-controls', hwnd });
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
-                clientState.buildRunning = false;
-                buildState.buildCounter = 0;
-                clientState.buildError = '';
+                napiBuildState.buildRunning = false;
+                napiBuildProgress.buildCounter = 0;
+                napiBuildState.buildError = '';
                 return;
             }
             set(sawContentStrAtom, res);
@@ -43,21 +43,21 @@ export const doGetWindowControlsAtom = atom(
 
             set(sawContentAtom, final);
 
-            set(lastBuildProgressAtom, buildState.buildCounter);
-            clientState.buildRunning = false;
-            buildState.buildCounter = 0;
-            clientState.buildError = '';
+            set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
+            napiBuildState.buildRunning = false;
+            napiBuildProgress.buildCounter = 0;
+            napiBuildState.buildError = '';
 
             console.log('doGetWindowControlsAtom.set', JSON.stringify(reply, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
 
-            clientState.buildRunning = false;
-            buildState.buildCounter = 0;
-            clientState.buildError = getSubError(error);
+            napiBuildState.buildRunning = false;
+            napiBuildProgress.buildCounter = 0;
+            napiBuildState.buildError = getSubError(error);
 
-            set(lastBuildProgressAtom, buildState.buildCounter);
+            set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
 
             console.error(`'doGetWindowControlsAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }

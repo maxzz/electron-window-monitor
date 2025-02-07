@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
 import { type CatalogFile, type Mani, type Meta, buildManiMetaForms, parseXMLFile } from "@/store/manifest";
-import { buildState, clientState } from "../../1-app-state";
+import { napiBuildProgress, napiBuildState } from "../../1-app-state";
 import { type EngineControl } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { getSubError } from "@/utils";
 import { lastBuildProgressAtom } from "../1-do-get-hwnd";
@@ -11,9 +11,9 @@ type SawContentReply = {
     controls: EngineControl[];
 };
 
-export const sawManiStrAtom = atom<string | undefined>('');
-export const sawManiAtom = atom<SawContentReply | null>(null);
-export const sawManiXmlAtom = atom<string | undefined>(undefined);
+export const sawManiStrAtom = atom<string | undefined>('');         // raw unprocessed reply string from napi to compare with current
+export const sawManiXmlAtom = atom<string | undefined>(undefined);  // raw xml string from napi if called with wantXml
+export const sawManiAtom = atom<SawContentReply | null>(null);      // reply with controls and pool
 
 export const doGetWindowManiAtom = atom(
     null,
@@ -23,25 +23,29 @@ export const doGetWindowManiAtom = atom(
                 throw new Error('No hwnd');
             }
 
-            if (clientState.buildRunning) {
+            if (napiBuildState.buildRunning) {
                 return;
             }
 
-            clientState.buildRunning = true;
-            buildState.buildCounter = 0;
-            clientState.buildError = '';
-            clientState.buildFailedBody = '';
+            // 1. call napi to get raw reply string
+
+            napiBuildProgress.buildCounter = 0;
+            napiBuildState.buildRunning = true;
+            napiBuildState.buildError = '';
+            napiBuildState.buildFailedBody = '';
 
             const res = await invokeMain<string>({ type: 'r2mi:get-window-mani', hwnd, wantXml });
 
             const prev = get(sawManiStrAtom);
             if (prev === res) {
-                clientState.buildRunning = false;
-                buildState.buildCounter = 0;
-                clientState.buildError = '';
+                napiBuildProgress.buildCounter = 0;
+                napiBuildState.buildRunning = false;
+                napiBuildState.buildError = '';
                 return;
             }
             set(sawManiStrAtom, res);
+
+            // 2. parse reply string to get final reply
 
             if (wantXml) {
                 set(sawManiXmlAtom, res);
@@ -55,17 +59,17 @@ export const doGetWindowManiAtom = atom(
                 console.log('doGetWindowManiAtom.set', JSON.stringify(reply, null, 4));
             }
 
-            set(lastBuildProgressAtom, buildState.buildCounter);
-            clientState.buildRunning = false;
-            buildState.buildCounter = 0;
-            clientState.buildError = '';
+            set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
+            napiBuildProgress.buildCounter = 0;
+            napiBuildState.buildRunning = false;
+            napiBuildState.buildError = '';
         } catch (error) {
             set(sawManiStrAtom, '');
             set(sawManiAtom, null);
 
-            clientState.buildRunning = false;
-            buildState.buildCounter = 0;
-            clientState.buildError = getSubError(error);
+            napiBuildProgress.buildCounter = 0;
+            napiBuildState.buildRunning = false;
+            napiBuildState.buildError = getSubError(error);
 
             console.error(`'doGetWindowManiAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }

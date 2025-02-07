@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import { useSnapshot } from "valtio";
 import { easings, a, useTransition } from "@react-spring/web";
-import { clientState } from "@/store/1-app-state";
+import { napiBuildState } from "@/store/1-app-state";
 import { classNames } from "@/utils";
 import { IconCopy } from "@/components/ui/icons";
 import { useAtomValue } from "jotai";
@@ -24,7 +24,7 @@ function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v
 export function ButtonCopyContent() {
     const [showNotice, setShowNotice] = useState(false);
     const sawContentStr = useAtomValue(sawContentStrAtom);
-    const { buildFailedBody } = useSnapshot(clientState);
+    const { buildFailedBody } = useSnapshot(napiBuildState);
     const msg = buildFailedBody || sawContentStr;
     if (!msg) {
         return null;

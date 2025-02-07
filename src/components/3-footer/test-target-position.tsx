@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSnapshot } from "valtio";
 import { IconTarget2 } from "../ui/icons";
-import { buildState } from "@/store/1-app-state";
+import { napiBuildProgress } from "@/store/1-app-state";
 import { invokeMain, sawHandleAtom } from "@/store";
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
@@ -9,7 +9,7 @@ import { classNames } from "@/utils";
 export function TestTargetWindowPosition() {
     const [iconVisible, setIconVisible] = useState(true);
 
-    const { getPosProgress } = useSnapshot(buildState);
+    const { getPosProgress } = useSnapshot(napiBuildProgress);
 
     const sawHandle = useAtomValue(sawHandleAtom);
     if (!sawHandle?.hwnd) {
@@ -39,7 +39,7 @@ export function TestTargetWindowPosition() {
 
         const point = { x: roundInt(event.pageX), y: roundInt(event.pageY) };
 
-        buildState.getPosProgress = {
+        napiBuildProgress.getPosProgress = {
             point,
         };
 

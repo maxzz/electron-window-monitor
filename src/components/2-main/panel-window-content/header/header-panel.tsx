@@ -1,13 +1,13 @@
 import { useAtomValue } from 'jotai';
 import { useSnapshot } from 'valtio';
 import { sawContentStrAtom } from '@/store';
-import { buildState, clientState } from "@/store/1-app-state";
+import { napiBuildProgress, napiBuildState } from "@/store/1-app-state";
 import { ButtonCopyContent } from './btn-copy';
 
 function HeaderTitle() {
     const sawContentStr = useAtomValue(sawContentStrAtom);
-    const { buildError } = useSnapshot(clientState);
-    const { buildCounter } = useSnapshot(buildState);
+    const { buildError } = useSnapshot(napiBuildState);
+    const { buildCounter } = useSnapshot(napiBuildProgress);
     return (<>
         {(!!sawContentStr || buildCounter > 0 || buildError) &&
             <div className="py-2 flex items-center gap-2">

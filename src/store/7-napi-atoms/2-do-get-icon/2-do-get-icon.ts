@@ -44,6 +44,7 @@ export const doGetWindowIconAtom = atom(
             //console.log('doGetSawIconAtom.set', JSON.stringify(str, null, 4));
         } catch (error) {
             set(sawIconStrAtom, '');
+            set(sawIconAtom, null);
 
             napiBuildState.buildError = getSubError(error);
 

@@ -1,11 +1,11 @@
 import { type ReactNode, useState } from "react";
 import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
+import { classNames } from "@/utils";
 import { easings, a, useTransition } from "@react-spring/web";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { sawContentStrAtom } from "@/store";
 import { IconCopy } from "@/components/ui/icons";
-import { classNames } from "@/utils";
 
 export function ButtonCopyContent() {
     const [showNotice, setShowNotice] = useState(false);

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useSetAtom } from "jotai";
-import { EngineControlWithMeta, doHighlightRectAtom } from "@/store";
-import { FieldTypeIconComponent, engineControlToFieldIconType } from "@/store/manifest";
 import { classNames } from '@/utils';
 import { a, useSpring } from "@react-spring/web";
+import { FieldTypeIconComponent, engineControlToFieldIconType } from "@/store/manifest";
+import { EngineControlWithMeta, doHighlightRectAtom } from "@/store";
 
 export function ControlsGridItems({ controls }: { controls: EngineControlWithMeta[]; }) {
     console.log('controls', controls);

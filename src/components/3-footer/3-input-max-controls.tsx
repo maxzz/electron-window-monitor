@@ -1,7 +1,7 @@
 import { useSnapshot } from "valtio";
-import { appUi } from "@/store/1-app-state";
 import { classNames } from "@/utils";
-import { focusClasses } from "../2-main/shared-styles";
+import { appUi } from "@/store/1-app-state";
+import { focusClasses } from "../2-main/8-shared-styles";
 
 export function InputMaxControls() {
     const { maxControls } = useSnapshot(appUi.uiState);
@@ -13,6 +13,7 @@ export function InputMaxControls() {
         }
         appUi.uiState.maxControls = n;
     }
+
     return (
         <label className="w-max flex items-center gap-x-2" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
             <div className="select-none">Max controls</div>

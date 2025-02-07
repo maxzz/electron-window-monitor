@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { FieldTyp, Mani } from "@/store/manifest";
-import { EngineControl } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type FC } from "react";
+import { type FieldTyp, type Mani } from "@/store/manifest";
+import { type EngineControl } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { SymbolFieldBtn, SymbolFieldTxt, SymbolFieldChk, SymbolFieldLst, SymbolFieldPsw, SymbolFieldEdt } from "@ui/icons";
 
 export const fieldIcons: Record<Exclude<keyof typeof FieldTyp, 'und'>, FC> = {

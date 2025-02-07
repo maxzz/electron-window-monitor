@@ -1,7 +1,7 @@
 import { type HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
-import { sawHandleStrAtom } from "@/store";
 import { classNames } from "@/utils";
+import { sawHandleStrAtom } from "@/store";
 import { HeaderPanel } from "../1-header";
 import { ContentScrollArea } from "../2-body-elements";
 

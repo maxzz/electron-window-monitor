@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
-import { scrollbarClasses, scrollbarThumbClasses } from '../../shared-styles';
+import { scrollbarClasses, scrollbarThumbClasses } from '../../8-shared-styles';
 
 export function ScrollBox({ children }: { children: ReactNode; }) {
     return (

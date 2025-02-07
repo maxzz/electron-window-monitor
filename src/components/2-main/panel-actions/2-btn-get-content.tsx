@@ -3,7 +3,7 @@ import { useSnapshot } from "valtio";
 import { doGetWindowControlsAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { classNames } from "@/utils";
-import { buttonClasses } from ".";
+import { buttonClasses } from "./8-button-classes";
 
 export function ButtonGetContent() {
     const doGetWindowControls = useSetAtom(doGetWindowControlsAtom);

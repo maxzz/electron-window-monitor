@@ -1,10 +1,10 @@
-import { HTMLAttributes } from "react";
+import { type HTMLAttributes } from "react";
 import { useSetAtom, useAtomValue } from "jotai";
 import { doGetTargetHwndAtom, doMonitoringAtom } from "@/store";
+import { buttonClasses } from "./8-button-classes";
 import { classNames } from "@/utils";
-import { buttonClasses } from ".";
 
-export function ButtonGetHandle({ className, ...rest }: HTMLAttributes<HTMLButtonElement>) {
+export function ButtonGetSawHandle({ className, ...rest }: HTMLAttributes<HTMLButtonElement>) {
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
     const isMonitoring = useAtomValue(doMonitoringAtom);
     return (

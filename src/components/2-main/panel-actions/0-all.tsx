@@ -1,0 +1,42 @@
+import { type HTMLAttributes } from "react";
+import { useAtomValue } from "jotai";
+import { a, useSpring } from "@react-spring/web";
+import { monitoringCounterAtom, sawGetDisabledAtom } from "@/store";
+import { ButtonRunMonitor } from "./1-btn-get-window-monitor";
+import { ButtonGetContent } from "./2-btn-get-content";
+import { ButtonGetSawHandle } from "./5-btn-get-saw-handle";
+import { ButtonGetIcon } from "./4-btn-get-icon";
+import { ButtonGetManifest } from "./3-btn-get-mani";
+import { classNames } from "@/utils";
+
+export function MainActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
+    return (
+        <div className={classNames("text-sm [@media_(min-width:_480px)]:text-base grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
+            <ButtonRunMonitor />
+            <GetActionsGroup />
+            <ButtonGetSawHandle className="col-start-1 [@media_(min-width:_480px)]:col-start-4" />
+        </div>
+    );
+}
+
+function GetActionsGroup() {
+
+    const isDisabled = useAtomValue(sawGetDisabledAtom);
+    const animStyles = useSpring({ opacity: isDisabled ? 0 : 1 });
+
+    return (
+        <a.div style={animStyles} className={classNames("relative px-2 min-h-[66px] border-primary-500/50 border border-b-0 rounded-t shadow-inner flex items-end")}>
+
+            <div className="absolute left-3 -top-3 px-3 bg-primary-500/50 border-primary-500 border rounded">
+                Get
+            </div>
+
+            <div className="flex items-center space-x-2">
+                <ButtonGetContent />
+                <ButtonGetIcon />
+                <ButtonGetManifest />
+            </div>
+
+        </a.div>
+    );
+}

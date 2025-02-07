@@ -1,9 +1,9 @@
-import { useSetAtom, useAtom } from "jotai";
-import { doGetTargetHwndAtom, doMonitoringAtom } from "@/store";
+import { type HTMLAttributes } from "react";
+import { useSetAtom, useAtom, useAtomValue } from "jotai";
+import { doGetTargetHwndAtom, doMonitoringAtom, monitoringCounterAtom } from "@/store";
 import { IconPlayStop, IconPlayStart } from "@/components/ui/icons";
 import { classNames } from "@/utils";
-import { buttonClasses } from ".";
-import { MonitoringCounter } from "./monitor-counter";
+import { buttonClasses } from "./8-button-classes";
 
 export function ButtonRunMonitor() {
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
@@ -24,3 +24,17 @@ export function ButtonRunMonitor() {
         </button>
     );
 }
+
+function MonitoringCounter({className, ...rest}: HTMLAttributes<HTMLDivElement>) {
+    const monitoringCounter = useAtomValue(monitoringCounterAtom);
+    if (monitoringCounter < 0) {
+        return null;
+    }
+    return (
+        <div className={classNames(counterClasses, className)} title="Number of calls to check the active window" {...rest}>
+            {`${monitoringCounter}`.padStart(2, '0')}
+        </div>
+    );
+}
+
+const counterClasses = "text-center font-mono font-semibold text-transparent [-webkit-text-stroke-width:0.5px] [-webkit-text-stroke-color:#173717]";

@@ -1,9 +1,9 @@
 import { useSetAtom, useAtomValue } from "jotai";
-import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
-import { classNames } from "@/utils";
-import { buttonClasses } from ".";
-import { appUi } from "@/store/1-app-state";
 import { useSnapshot } from "valtio";
+import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
+import { buttonClasses } from "./8-button-classes";
+import { appUi } from "@/store/1-app-state";
+import { classNames } from "@/utils";
 
 export function ButtonGetIcon() {
     const doGetWindowIcon = useSetAtom(doGetWindowIconAtom);

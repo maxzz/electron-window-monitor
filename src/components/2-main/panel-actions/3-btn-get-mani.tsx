@@ -2,7 +2,7 @@ import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { doGetWindowManiAtom, doMonitoringAtom, napiBuildState, sawHandleAtom } from "@/store";
 import { appUi } from "@/store/1-app-state";
-import { buttonClasses } from ".";
+import { buttonClasses } from "./8-button-classes";
 import { classNames } from "@/utils";
 
 export function ButtonGetManifest() {

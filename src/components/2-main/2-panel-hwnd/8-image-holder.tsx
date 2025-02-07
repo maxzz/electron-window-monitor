@@ -1,32 +1,35 @@
 import { type HTMLAttributes, useRef, useEffect } from "react";
-import { useAtomValue } from "jotai";
-import { sawIconAtom } from "@/store";
+import { type Atom, useAtomValue } from "jotai";
 
-export function ImagePanel(props: HTMLAttributes<HTMLDivElement>) {
-    const image = useAtomValue(sawIconAtom);
+export function ImageHolder({ imageAtom, ...rest }: { imageAtom: Atom<HTMLImageElement | null>; } & HTMLAttributes<HTMLDivElement>) {
+    const imageElm = useAtomValue(imageAtom);
     const refParent = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (!refParent.current || !image) {
-            return;
-        }
+    useEffect(
+        () => {
+            if (!refParent.current || !imageElm) {
+                return;
+            }
 
-        const parent = refParent.current;
-        parent.appendChild(image);
+            const parent = refParent.current;
+            parent.appendChild(imageElm);
 
-        return () => {
-            parent.removeChild(image);
-        };
-    }, [image]);
+            return () => {
+                parent.removeChild(imageElm);
+            };
+        }, [imageElm]
+    );
 
-    if (!image) {
+    if (!imageElm) {
         return null;
     }
 
-    return (
-        <div ref={refParent} {...props}>
-        </div>
-    );
+    return (<>
+        {imageElm
+            ? <div ref={refParent} {...rest} />
+            : null
+        }
+    </>);
 }
 
 //TODO: add icons cache

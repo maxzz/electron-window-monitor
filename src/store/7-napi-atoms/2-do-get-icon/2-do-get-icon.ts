@@ -7,6 +7,7 @@ import { getSubError } from "@/utils";
 
 export const sawIconStrAtom = atom<string | undefined>(undefined);
 export const sawIconAtom = atom<HTMLImageElement | null>(null);
+export type SawIconAtom = typeof sawIconAtom;
 
 type IconsCache = Map<string, string>; // hwnd -> string with WindowIconGetterResult
 

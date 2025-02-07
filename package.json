@@ -38,7 +38,7 @@
     "scripts": {
         "dev": "vite",
         "preview": "vite preview",
-        "build": "tsc && vite build && electron-builder",
+        "build": "tsc && vite build && electron-builder --windows",
         "build:exe": "tsc && vite build && electron-builder --windows portable",
         "debug-vite": "set VITE_CJS_TRACE=true && vite dev"
     }

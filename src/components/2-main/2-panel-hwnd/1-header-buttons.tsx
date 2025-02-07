@@ -18,7 +18,7 @@ export function HeaderButtons() {
         <div className={classNames("pb-1 max-w-3xl flex items-center justify-between", !iconsLarge && "h-7")}>
 
             <div className="flex items-center gap-2">
-                <div className="font-semibold">
+                <div className="text-sm font-semibold">
                     Second active window
                 </div>
 

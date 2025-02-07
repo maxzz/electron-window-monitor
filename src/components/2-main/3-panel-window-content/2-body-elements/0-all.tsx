@@ -21,7 +21,7 @@ export function ContentScrollArea() {
     }
 
     return (
-        <div className={classNames("min-h-0", gridBorderClasses)}>
+        <div className={classNames("min-h-32", gridBorderClasses)}>
             <ScrollBox>
                 <ControlsGridItems controls={controls} />
             </ScrollBox>

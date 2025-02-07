@@ -17,11 +17,11 @@ export function PanelHwndGrid() {
                     <GridRow name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
                 </div>
 
-                {!!lastBuildProgress &&
-                    <div className="text-[.55rem] opacity-50 absolute right-2 bottom-1.5">
+                {!!lastBuildProgress && (
+                    <div className="text-[.55rem] opacity-70 absolute right-2 bottom-1.5">
                         last progress calls: {lastBuildProgress}
                     </div>
-                }
+                )}
             </div>
         )}
     </>);

@@ -20,10 +20,11 @@ function HeaderTitle() {
     const showControls = !!sawContentStr || buildCounter > 0 || !!buildError;
     return (<>
         {showControls &&
-            <div className="py-2 flex items-center gap-2">
-                <div className="font-semibold">
-                Controls inside window
+            <div className="py-1 flex items-center gap-2">
+                <div className="text-sm font-semibold">
+                    Controls inside window
                 </div>
+
                 <ButtonCopyContent />
             </div>
         }

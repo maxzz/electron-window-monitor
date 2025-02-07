@@ -1,10 +1,8 @@
 import { useAtomValue } from 'jotai';
 import { sawContentAtom, sawContentStrAtom } from '@/store';
 import { classNames } from '@/utils';
-import { ControlsGridItems } from './content-items';
-import { ScrollBox } from './scrollbox';
-
-const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;
+import { ControlsGridItems } from './1-controls-grid';
+import { ScrollBox } from './8-scrollbox';
 
 export function ContentScrollArea() {
     const sawContentStr = useAtomValue(sawContentStrAtom);
@@ -30,3 +28,5 @@ export function ContentScrollArea() {
         </div>
     );
 }
+
+const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;

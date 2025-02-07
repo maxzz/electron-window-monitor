@@ -5,11 +5,18 @@ import { FieldTypeIconComponent, engineControlToFieldIconType } from "@/store/ma
 import { classNames } from '@/utils';
 import { a, useSpring } from "@react-spring/web";
 
-const vlineClasses = "[&>*]:pl-2 [&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l"; // [&>*~*]:border-b
-const gridRowClasses = classNames("grid grid-cols-[1.6rem,1.6rem,minmax(10ch,30ch),16rem] gap-x-2 cursor-pointer", vlineClasses);
-const ellipsisClasses = "whitespace-nowrap overflow-hidden overflow-ellipsis";
+export function ControlsGridItems({ controls }: { controls: EngineControlWithMeta[]; }) {
+    console.log('controls', controls);
+    return (
+        <div className="text-xs grid">
+            {controls.map((control, idx) => (
+                <ControlsGridItem item={control} key={idx} />
+            ))}
+        </div>
+    );
+}
 
-export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
+function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
     const [localHi, setLocalHi] = useState(false);
 
     const doHighlightRect = useSetAtom(doHighlightRectAtom);
@@ -43,13 +50,6 @@ export function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
     );
 }
 
-export function ControlsGridItems({ controls }: { controls: EngineControlWithMeta[]; }) {
-    console.log('controls', controls);
-    return (
-        <div className="text-xs grid">
-            {controls.map((control, idx) => (
-                <ControlsGridItem item={control} key={idx} />
-            ))}
-        </div>
-    );
-}
+const vlineClasses = "[&>*]:pl-2 [&>*]:py-0.5 [&>*]:border-primary-500 [&>*]:border-l"; // [&>*~*]:border-b
+const gridRowClasses = classNames("grid grid-cols-[1.6rem,1.6rem,minmax(10ch,30ch),16rem] gap-x-2 cursor-pointer", vlineClasses);
+const ellipsisClasses = "whitespace-nowrap overflow-hidden overflow-ellipsis";

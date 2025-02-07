@@ -39,13 +39,28 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
     const states = item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : '';
     return (
         <a.div style={styles} className={gridRowClasses} onClick={select}>
-            <div className="text-end" title="Order ID">{`${item.control.orderid}`.padStart(2, '0')}</div>
-            <div className=""><FieldTypeIconComponent field={engineControlToFieldIconType(item.control)} className="w-4 h-4" /></div>
-            <div className={ellipsisClasses}>{item.control.dispname}</div>
-            <div className="pr-4 text-[.6rem] flex items-center justify-between" title={item.meta.role?.raw}>
-                <div className="font-semibold">{role}</div>
-                <div className="">{states}</div>
+
+            <div className="text-end" title="Order ID">
+                {`${item.control.orderid}`.padStart(2, '0')}
             </div>
+
+            <div>
+                <FieldTypeIconComponent className="size-4" field={engineControlToFieldIconType(item.control)} />
+            </div>
+
+            <div className={ellipsisClasses}>
+                {item.control.dispname}
+            </div>
+
+            <div className="pr-4 text-[.6rem] flex items-center justify-between" title={item.meta.role?.raw}>
+                <div className="font-semibold">
+                    {role}
+                </div>
+                <div>
+                    {states}
+                </div>
+            </div>
+
         </a.div>
     );
 }

@@ -1,8 +1,8 @@
 import { useAtomValue } from 'jotai';
 import { classNames } from '@/utils';
+import { ScrollBox } from '@/components/ui';
 import { sawContentAtom, sawContentStrAtom } from '@/store';
 import { ControlsGridItems } from './1-controls-grid';
-import { ScrollBox } from './8-scrollbox';
 
 export function ContentScrollArea() {
     const sawContentStr = useAtomValue(sawContentStrAtom);

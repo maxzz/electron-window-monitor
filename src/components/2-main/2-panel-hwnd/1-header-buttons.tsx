@@ -48,11 +48,24 @@ function ButtonClearHandle() {
 }
 
 function ButtonShowReplyRawText({ raw }: { raw: string; }) {
+    try {
+        const rawObj = JSON.parse(raw);
+        raw = JSON.stringify(rawObj, null, 2);
+    } catch (e) {
+        raw = `Failed to parse: "${raw}"`;
+    }
+    raw = `Second active window info:\n${raw}`;
+    
     return (
         <div className="relative group cursor-default">
-            <div className={borderClasses}>Raw</div>
+            <div className={borderClasses}>
+                Raw
+            </div>
+
             <div className="absolute hidden group-hover:block right-0 py-1">
-                <div className="px-2 py-1 text-xs bg-primary-100 rounded">{`"${raw}"`}</div>
+                <div className="relative px-2 py-1 text-xs bg-primary-100 rounded whitespace-pre z-50">
+                    {`${raw}`}
+                </div>
             </div>
         </div>
     );

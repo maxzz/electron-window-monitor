@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { useSetAtom, useAtom, useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { doGetTargetHwndAtom, doMonitoringAtom, monitoringCounterAtom } from "@/store";
-import { IconPlayStop, IconPlayStart } from "@/components/ui/icons";
+import { IconPlayStop, IconPlayStart } from "@/components/ui";
 import { buttonClasses } from "./8-button-classes";
 
 export function ButtonRunMonitor() {

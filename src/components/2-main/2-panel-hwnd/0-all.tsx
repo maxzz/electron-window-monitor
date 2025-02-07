@@ -9,6 +9,7 @@ export function PanelHwnd({ className, ...rest }: HTMLAttributes<HTMLElement>) {
         <div className={classNames("flex flex-col", className)} {...rest}>
             <HeaderButtons />
             <PanelHwndGrid />
+            
             <PanelBuildProcess className="h-10 self-end" />
         </div>
     );

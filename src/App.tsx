@@ -1,7 +1,7 @@
 import { Section1Header } from "./components/1-header";
 import { Section2Main } from "./components/2-main";
 import { Section3Footer } from "./components/3-footer";
-import { UISymbolDefs } from "./components/ui/icons";
+import { UISymbolDefs } from "./components/ui";
 import { OnAppMount, WorldToReactListener } from "./shared/ipc-client/ipc-react-listener";
 
 export function App() {

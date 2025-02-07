@@ -5,7 +5,7 @@ import { classNames } from "@/utils";
 import { easings, a, useTransition } from "@react-spring/web";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { sawContentStrAtom } from "@/store";
-import { IconCopy } from "@/components/ui/icons";
+import { IconCopy } from "@/components/ui";
 
 export function ButtonCopyContent() {
     const [showNotice, setShowNotice] = useState(false);

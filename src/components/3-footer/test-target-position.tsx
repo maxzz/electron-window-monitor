@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSnapshot } from "valtio";
 import { IconTarget2 } from "../ui/icons";
-import { napiBuildProgress } from "@/store/1-app-state";
+import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { invokeMain, sawHandleAtom } from "@/store";
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";

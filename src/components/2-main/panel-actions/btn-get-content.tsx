@@ -1,7 +1,7 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { doGetWindowControlsAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
-import { napiBuildState } from "@/store/1-app-state";
+import { napiBuildState } from "@/store/7-napi-atoms";
 import { classNames } from "@/utils";
 import { buttonClasses } from ".";
 

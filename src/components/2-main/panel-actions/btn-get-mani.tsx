@@ -1,13 +1,14 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
-import { doGetWindowManiAtom, doMonitoringAtom, sawHandleAtom } from "@/store";
-import { appUi, napiBuildState } from "@/store/1-app-state";
-import { classNames } from "@/utils";
+import { doGetWindowManiAtom, doMonitoringAtom, napiBuildState, sawHandleAtom } from "@/store";
+import { appUi } from "@/store/1-app-state";
 import { buttonClasses } from ".";
+import { classNames } from "@/utils";
 
 export function ButtonGetManifest() {
     const doGetWindowMani = useSetAtom(doGetWindowManiAtom);
-    const setIsMonitoring = useSetAtom(doMonitoringAtom);
+    const doIsMonitoring = useSetAtom(doMonitoringAtom);
+    
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const { buildRunning } = useSnapshot(napiBuildState);
     const { acquireXml } = useSnapshot(appUi.uiState);
@@ -21,7 +22,7 @@ export function ButtonGetManifest() {
             disabled={isDisabled}
             title={title}
             onClick={() => {
-                setIsMonitoring({ doStart: false });
+                doIsMonitoring({ doStart: false });
                 doGetWindowMani({ hwnd, wantXml: acquireXml });
             }}
         >

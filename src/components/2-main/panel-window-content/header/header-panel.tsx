@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 import { useSnapshot } from 'valtio';
 import { sawContentStrAtom } from '@/store';
-import { napiBuildProgress, napiBuildState } from "@/store/1-app-state";
+import { napiBuildProgress, napiBuildState } from "@/store/7-napi-atoms";
 import { ButtonCopyContent } from './btn-copy';
 
 function HeaderTitle() {

@@ -4,7 +4,7 @@ import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-
 import { type EngineControlsWithMeta } from "../9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
 import { getSubError } from "@/utils";
-import { napiBuildProgress, napiBuildState } from "../../../1-app-state";
+import { napiBuildProgress, napiBuildState } from "../../9-napi-build-state";
 import { lastBuildProgressAtom } from "../../1-do-get-hwnd";
 
 export const sawContentStrAtom = atom<string | undefined>('');

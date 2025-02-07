@@ -1,11 +1,11 @@
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
+import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { easings, a, useTransition } from "@react-spring/web";
-import { napiBuildState } from "@/store/1-app-state";
+import { napiBuildState } from "@/store/7-napi-atoms";
+import { sawContentStrAtom } from "@/store";
 import { classNames } from "@/utils";
 import { IconCopy } from "@/components/ui/icons";
-import { useAtomValue } from "jotai";
-import { sawContentStrAtom } from "@/store";
 
 const borderClasses = `border-primary-500 border rounded ${"hover:bg-primary-500 hover:border-primary-600 select-none shadow-sm"}`;
 

@@ -1,7 +1,7 @@
 import { M2R } from "@/shared/ipc-types";
 import { atom } from "jotai";
 import { filesContentAtom } from "../../store/atom-dropped-files";
-import { napiBuildProgress, napiBuildState } from "../../store/1-app-state";
+import { napiBuildProgress, napiBuildState } from "../../store/7-napi-atoms";
 
 export const doFromMainAtom = atom(
     null,

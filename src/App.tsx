@@ -10,8 +10,8 @@ export function App() {
         
         <div className="bg-primary-100 h-screen grid grid-rows-[auto_1fr_auto]">
             <Section1Header />
-            <Section2Main />
-            <Section3Footer />
+            <Section2Main className="m-4 w-full max-w-2xl" />
+            <Section3Footer className="mx-4 max-w-2xl" />
         </div>
 
         <WorldToReactListener />

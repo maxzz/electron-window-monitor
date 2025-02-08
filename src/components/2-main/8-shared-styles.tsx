@@ -2,7 +2,7 @@ import { classNames } from "@/utils";
 
 export const scrollbarClasses = "\
 p-0.5 \
-bg-primary-500/50 \
+bg-primary-300/30 \
 hover:bg-primary-500 \
 \
 data-[orientation=vertical]:w-2.5 \

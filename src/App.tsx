@@ -5,9 +5,7 @@ import { OnAppMount, WorldToReactListener } from "./shared/ipc-client/ipc-react-
 export function App() {
     return (<>
         <UISymbolDefs />
-
         <AppLayout />
-        
         <WorldToReactListener />
         <OnAppMount />
     </>);

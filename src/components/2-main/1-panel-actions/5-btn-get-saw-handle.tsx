@@ -5,8 +5,10 @@ import { doGetTargetHwndAtom, doMonitoringAtom } from "@/store";
 import { buttonClasses } from "./8-button-classes";
 
 export function ButtonGetSawHandle({ className, ...rest }: HTMLAttributes<HTMLButtonElement>) {
-    const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
+
     const isMonitoring = useAtomValue(doMonitoringAtom);
+    const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
+
     return (
         <button className={classNames(buttonClasses, className)} disabled={isMonitoring} onClick={doGetTargetHwnd} {...rest}>
             Get Second Window

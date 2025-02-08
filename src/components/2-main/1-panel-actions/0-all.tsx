@@ -29,7 +29,7 @@ function GetActionsGroup() {
     return (
         <a.div style={animStyles} className={classNames(getClasses)}>
 
-            <div className="absolute left-2.5 -top-2 px-3 text-xs bg-primary-500 border-primary-500 border rounded">
+            <div className="absolute left-2.5 -top-2 px-3 text-[.65rem] bg-primary-200 border-primary-500/50 border rounded">
                 Get
             </div>
 
@@ -45,7 +45,7 @@ function GetActionsGroup() {
 
 const getClasses = "\
 relative px-2 min-h-[66px] \
-border-primary-500/70 border \
+border-primary-500/50 border \
 rounded shadow-inner \
 flex items-center \
 ";

@@ -6,8 +6,10 @@ import { buttonClasses } from "./8-button-classes";
 import { appUi } from "@/store/1-app-state";
 
 export function ButtonGetIcon() {
+
     const doGetWindowIcon = useSetAtom(doGetWindowIconAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
+
     const { iconAutoUpdate } = useSnapshot(appUi.uiState);
     if (iconAutoUpdate) {
         return null;
@@ -16,6 +18,7 @@ export function ButtonGetIcon() {
     const hwnd = secondActiveWindow?.hwnd;
     const isDisabled = !hwnd;
     const title = !hwnd ? 'Get the second active window first' : 'Get the second active window icon';
+    
     return (
         <button
             className={classNames(buttonClasses, "")}

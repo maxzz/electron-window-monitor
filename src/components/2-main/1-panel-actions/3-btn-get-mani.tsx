@@ -6,8 +6,9 @@ import { appUi } from "@/store/1-app-state";
 import { buttonClasses } from "./8-button-classes";
 
 export function ButtonGetManifest() {
-    const doGetWindowMani = useSetAtom(doGetWindowManiAtom);
+
     const doIsMonitoring = useSetAtom(doMonitoringAtom);
+    const doGetWindowMani = useSetAtom(doGetWindowManiAtom);
     
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const { buildRunning } = useSnapshot(napiBuildState);
@@ -16,6 +17,7 @@ export function ButtonGetManifest() {
     const hwnd = secondActiveWindow?.hwnd;
     const isDisabled = !hwnd || buildRunning;
     const title = !hwnd ? 'Get the second active window first' : buildRunning ? 'Build already started' : 'Get the second active window content';
+
     return (
         <button
             className={classNames(buttonClasses, "")}

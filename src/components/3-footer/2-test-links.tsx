@@ -44,4 +44,4 @@ function ButtonTestHighlight() {
     );
 }
 
-const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-600 border border-dotted rounded";
+const linkClasses = "px-2 py-0.5 hover:text-green-100 hover:bg-primary-600 border-primary-600 border border-dotted rounded active:scale-x-[.97]";

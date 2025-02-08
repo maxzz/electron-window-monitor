@@ -11,7 +11,7 @@ import { ButtonGetManifest } from "./3-btn-get-mani";
 
 export function MainActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className={classNames("text-sm [@media_(min-width:_480px)]:text-base grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
+        <div className={classNames("grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
             <ButtonRunMonitor />
             <GetActionsGroup />
             <ButtonGetSawHandle className="col-start-1 [@media_(min-width:_480px)]:col-start-4" />
@@ -40,3 +40,5 @@ function GetActionsGroup() {
         </a.div>
     );
 }
+
+//text-sm [@media_(min-width:_480px)]:text-base

@@ -7,7 +7,7 @@ import { ChkboxLargeIcon } from "./6-chkbox-icon-large";
 
 export function Section3Footer() {
     return (
-        <div className="m-4 text-xs border border-slate-500/50 rounded flex flex-col select-none">
+        <div className="m-4 max-w-2xl text-xs border border-slate-500/50 rounded flex flex-col select-none">
 
             <TestLinks className="p-2 border-b border-slate-500/50" />
 

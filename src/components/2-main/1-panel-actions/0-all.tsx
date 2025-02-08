@@ -13,7 +13,9 @@ export function MainActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElem
     return (
         <div className={classNames("grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
             <ButtonRunMonitor />
+
             <GetActionsGroup />
+
             <ButtonGetSawHandle className="col-start-1 [@media_(min-width:_480px)]:col-start-4" />
         </div>
     );
@@ -25,13 +27,13 @@ function GetActionsGroup() {
     const animStyles = useSpring({ opacity: isDisabled ? 0 : 1 });
 
     return (
-        <a.div style={animStyles} className={classNames("relative px-2 min-h-[66px] border-primary-500/50 border border-b-0 rounded-t shadow-inner flex items-end")}>
+        <a.div style={animStyles} className={classNames(getClasses)}>
 
-            <div className="absolute left-3 -top-3 px-3 bg-primary-500/50 border-primary-500 border rounded">
+            <div className="absolute left-2.5 -top-2 px-3 text-xs bg-primary-500 border-primary-500 border rounded">
                 Get
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-x-2">
                 <ButtonGetContent />
                 <ButtonGetIcon />
                 <ButtonGetManifest />
@@ -40,5 +42,12 @@ function GetActionsGroup() {
         </a.div>
     );
 }
+
+const getClasses = "\
+relative px-2 min-h-[66px] \
+border-primary-500/70 border \
+rounded shadow-inner \
+flex items-center \
+";
 
 //text-sm [@media_(min-width:_480px)]:text-base

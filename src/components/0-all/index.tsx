@@ -7,7 +7,7 @@ export function AppLayout() {
         <div className="h-screen bg-primary-100 grid grid-rows-[auto_1fr]">
             <Section1Header className="" />
             <div className="py-4 h-full min-h-0 grid grid-rows-[1fr_auto] gap-4">
-                <Section2Main className="mni-h-0 mx-4 max-w-2xl" />
+                <Section2Main className="mx-4 max-w-2xl" />
                 <Section3Footer className="mx-4 max-w-2xl" />
             </div>
         </div>

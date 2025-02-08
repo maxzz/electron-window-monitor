@@ -6,7 +6,7 @@ import { PanelBuildProcess } from "./3-panel-build-process";
 
 export function PanelHwnd({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className={classNames("flex flex-col", className)} {...rest}>
+        <div className={classNames("grid", className)} {...rest}>
             <HeaderButtons />
             <PanelHwndGrid />
             

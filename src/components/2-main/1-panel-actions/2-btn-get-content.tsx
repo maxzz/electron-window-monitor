@@ -23,7 +23,7 @@ export function ButtonGetContent() {
                 doGetWindowControls(hwnd);
             }}
         >
-            Content
+            Controls
         </button>
     );
 }

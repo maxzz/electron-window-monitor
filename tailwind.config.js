@@ -8,7 +8,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'primary': twColors.green,
+                'primary': twColors.slate,
             }
         },
     },

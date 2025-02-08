@@ -8,7 +8,7 @@ export function App() {
     return (<>
         <UISymbolDefs />
         
-        <div className="bg-green-400 h-screen grid grid-rows-[auto_1fr_auto]">
+        <div className="bg-primary-100 h-screen grid grid-rows-[auto_1fr_auto]">
             <Section1Header />
             <Section2Main />
             <Section3Footer />

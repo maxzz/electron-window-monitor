@@ -1,5 +1,6 @@
 export const buttonClasses = "\
 px-2 py-1 \
+text-sm \
 border-primary-500 \
 hover:border-primary-600 \
 hover:bg-primary-500 \

@@ -9,9 +9,9 @@ export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"d
         <div className={classNames("min-h-0 text-primary-900 flex flex-col gap-4", className)} {...rest}>
             <MainActionsPanel className="py-4 border-b border-primary-500/50" />
 
-            <PanelHwnd className="py-4 border-b border-primary-500/50" />
+            <PanelHwnd className="border-b border-primary-500/50" />
 
-            <SawContentPanel className="py-4 border-b border-primary-500/50" />
+            <SawContentPanel className="border-b border-primary-500/50" />
         </div>
     );
 } 

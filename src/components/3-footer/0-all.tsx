@@ -7,11 +7,13 @@ import { ChkboxLargeIcon } from "./6-chkbox-icon-large";
 
 export function Section3Footer() {
     return (
-        <div className="p-4 text-xs flex flex-col space-y-2 select-none">
-            <TestTargetWindowPosition />
-            <TestLinks />
+        <div className="m-4 text-xs border border-slate-500/50 rounded flex flex-col select-none">
 
-            <div className="flex gap-x-4">
+            <TestLinks className="p-2 border-b border-slate-500/50" />
+
+            <TestTargetWindowPosition className="p-2 border-b border-slate-500/50" />
+
+            <div className="p-2 flex gap-x-4">
                 <InputMaxControls />
                 <ChkboxXmlFormat />
                 <ChkboxIconAutoUpdate />

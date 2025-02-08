@@ -1,38 +1,47 @@
+import { type ComponentPropsWithoutRef } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
+import { classNames } from "@/utils";
 import { sawHandleAtom, doHighlightRectAtom } from "@/store";
 
-export function TestLinks() {
+export function TestLinks({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
-        <div className="text-primary-600 flex items-center space-x-1">
-            <div>
-                Test web logins:
+        <div className={classNames("text-primary-600 flex items-center justify-between", className)} {...rest}>
+            <div className="flex items-center gap-x-1">
+                <div>
+                    Test web logins:
+                </div>
+
+                <a className={linkClasses} href="https://tailwindui.com/login" target="_blank">
+                    tw
+                </a>
+
+                <a className={linkClasses} href="https://www.bankofamerica.com" target="_blank">
+                    bofa
+                </a>
             </div>
 
-            <a className={linkClasses} href="https://tailwindui.com/login" target="_blank">
-                tw
-            </a>
-            <a className={linkClasses} href="https://www.bankofamerica.com" target="_blank">
-                bofa
-            </a>
-
-            <TestHighlight />
+            <ButtonTestHighlight />
         </div>
     );
 }
 
-function TestHighlight() {
+function ButtonTestHighlight() {
     const sawHandle = useAtomValue(sawHandleAtom);
     const doHighlightRect = useSetAtom(doHighlightRectAtom);
 
     if (!sawHandle?.hwnd) {
         return null;
     }
-    
+
     return (
-        <button className={linkClasses} onClick={() => {
-            doHighlightRect({ hwnd: sawHandle.hwnd, rect: { left: 0, top: 0, right: 640, bottom: 480, } });
-        }}>hi</button>
+        <button
+            className={linkClasses}
+            onClick={() => {
+                doHighlightRect({ hwnd: sawHandle.hwnd, rect: { left: 0, top: 0, right: 640, bottom: 480, } });
+            }}>
+            Highlight
+        </button>
     );
 }
 
-const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-500 border border-dotted rounded-sm underline underline-offset-2";
+const linkClasses = "px-2 pb-0.5  hover:bg-primary-300 border-primary-600 border border-dotted rounded";

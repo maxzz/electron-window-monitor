@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type ComponentPropsWithoutRef, useState } from "react";
 import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
@@ -6,7 +6,7 @@ import { IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { invokeMain, sawHandleAtom } from "@/store";
 
-export function TestTargetWindowPosition() {
+export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
 
     const { getPosProgress } = useSnapshot(napiBuildProgress);
@@ -53,8 +53,10 @@ export function TestTargetWindowPosition() {
     }
 
     return (
-        <div className="flex items-end space-x-2">
-            <div className="">Test get target position:</div>
+        <div className={classNames("flex items-end space-x-2", className)} {...rest}>
+            <div>
+                Test get target position:
+            </div>
 
             <div
                 className="w-12 h-12 bg-primary-900 rounded cursor-pointer"
@@ -66,9 +68,11 @@ export function TestTargetWindowPosition() {
                 <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
             </div>
 
-            {getPosProgress &&
-                <div className="">{getPosProgress.point.x}, {getPosProgress.point.y}</div>
-            }
+            {getPosProgress && (
+                <div>
+                    {getPosProgress.point.x}, {getPosProgress.point.y}
+                </div>
+            )}
         </div>
     );
 }

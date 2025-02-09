@@ -10,7 +10,7 @@ export function PanelHwnd({ className, ...rest }: HTMLAttributes<HTMLElement>) {
             <HeaderButtons />
             <PanelHwndGrid />
             
-            <PanelBuildProcess className="h-10 self-end" />
+            <PanelBuildProcess className="place-self-end" />
         </div>
     );
 }

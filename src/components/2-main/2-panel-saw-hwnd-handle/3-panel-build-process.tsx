@@ -12,8 +12,20 @@ export function PanelBuildProcess({ className, ...rest }: HTMLAttributes<HTMLEle
         </div>
     );
 }
+function BuildError() {
 
-const buttonClasses = "px-2 py-1 border-primary-500 hover:border-primary-600 hover:bg-primary-500 border rounded shadow active:scale-[.97] disabled:scale-100 disabled:hover:bg-transparent disabled:opacity-20 transition-transform";
+    const { buildError } = useSnapshot(napiBuildState);
+    if (!buildError) {
+        return null;
+    }
+
+    return (
+        <div className="px-2 py-1 bg-red-600 text-white rounded-sm">
+            {buildError}
+        </div>
+    );
+}
+
 
 function BuildCounter() {
 
@@ -38,16 +50,18 @@ function BuildCounter() {
     </>);
 }
 
-function BuildError() {
-
-    const { buildError } = useSnapshot(napiBuildState);
-    if (!buildError) {
-        return null;
-    }
-
-    return (
-        <div className="px-2 py-1 bg-red-600 text-white rounded-sm">
-            {buildError}
-        </div>
-    );
-}
+const buttonClasses = "\
+px-2 py-1 \
+border-primary-500 \
+hover:border-primary-600 \
+hover:bg-primary-500 \
+border \
+rounded \
+shadow \
+active:scale-[.97] \
+disabled:scale-100 \
+disabled:hover:bg-transparent \
+disabled:opacity-20 \
+\
+transition-transform \
+";

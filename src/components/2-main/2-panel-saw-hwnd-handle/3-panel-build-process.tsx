@@ -4,34 +4,28 @@ import { classNames } from "@/utils";
 import { sendToMain } from "@/store";
 import { napiBuildState, napiBuildProgress } from "@/store/7-napi-atoms";
 
-export function PanelBuildProcess({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
+export function PanelBuildProcess(props: ComponentPropsWithoutRef<"div">) {
+    const { buildError } = useSnapshot(napiBuildState);
     return (<>
-        <BuildCounter />
-        <BuildError />
+        {buildError
+            ? <BuildError buildError={buildError} {...props} />
+            : <BuildCounter {...props} />
+        }
     </>);
 }
-function BuildError({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
 
-    const { buildError } = useSnapshot(napiBuildState);
-    if (!buildError) {
-        return null;
-    }
-
+function BuildError({ buildError, className, ...rest }: { buildError: string; } & ComponentPropsWithoutRef<"div">) {
     return (
-        <div className={classNames("text-xs text-primary-700 flex items-center gap-x-1", className)} {...rest}>
-            <div className="px-2 py-1 bg-red-600 text-white rounded-sm">
-                {buildError}
-            </div>
+        <div className={classNames("my-2 px-2 text-[.65rem] text-white bg-red-600 rounded-sm flex items-center gap-x-1", className)} {...rest}>
+            {buildError}
         </div>
     );
 }
 
-
 function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
 
-    const { buildError } = useSnapshot(napiBuildState);
     const { buildCounter } = useSnapshot(napiBuildProgress);
-    if (buildError || buildCounter < 200) {
+    if (buildCounter < 200) {
         return null;
     }
 

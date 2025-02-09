@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { lastBuildProgressAtom, sawHandleAtom } from "@/store";
 
-export function PanelHwndGrid() {
+export function SawHwndPropsGrid() {
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const lastBuildProgress = useAtomValue(lastBuildProgressAtom);
 

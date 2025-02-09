@@ -5,7 +5,7 @@ import { appUi } from "@/store/1-app-state";
 import { ImageHolder } from "@/components/ui";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom, sawIconAtom } from "@/store";
 
-export function HeaderButtons() {
+export function SawHeaderButtons() {
     const isMonitoring = useAtomValue(doMonitoringAtom);
     const iconsLarge = useSnapshot(appUi.uiState).iconsLarge;
 

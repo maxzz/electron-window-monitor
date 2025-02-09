@@ -1,14 +1,14 @@
 import { type HTMLAttributes } from "react";
 import { classNames } from "@/utils";
-import { HeaderButtons } from "./1-header-buttons";
-import { PanelHwndGrid } from "./2-panel-grid";
+import { SawHeaderButtons } from "./1-saw-header-buttons";
+import { SawHwndPropsGrid } from "./2-saw-hwnd-props-grid";
 import { PanelBuildProcess } from "./3-panel-build-process";
 
-export function PanelHwnd({ className, ...rest }: HTMLAttributes<HTMLElement>) {
+export function SawHwndInfo({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
         <div className={classNames("grid", className)} {...rest}>
-            <HeaderButtons />
-            <PanelHwndGrid />
+            <SawHeaderButtons />
+            <SawHwndPropsGrid />
             
             <PanelBuildProcess className="place-self-end" />
         </div>

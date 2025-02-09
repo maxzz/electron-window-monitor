@@ -5,7 +5,7 @@ import { sawHandleStrAtom } from "@/store";
 import { HeaderPanel } from "../1-header";
 import { ContentScrollArea } from "../2-body-elements";
 
-export function SawContentPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
+export function SawControlsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
 
     const sawHandleStr = useAtomValue(sawHandleStrAtom);
     if (!sawHandleStr) {

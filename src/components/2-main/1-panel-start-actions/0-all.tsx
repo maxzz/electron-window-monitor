@@ -9,7 +9,7 @@ import { ButtonGetSawHandle } from "./5-btn-get-saw-handle";
 import { ButtonGetIcon } from "./4-btn-get-icon";
 import { ButtonGetManifest } from "./3-btn-get-mani";
 
-export function MainActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
+export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
         <div className={classNames("grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
             <ButtonRunMonitor />

@@ -1,11 +1,12 @@
 import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { type EngineControlsWithMeta } from "../9-types";
+import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
 import { getSubError } from "@/utils";
-import { napiBuildProgress, napiBuildState } from "../../9-napi-build-state";
-import { lastBuildProgressAtom } from "../../1-do-get-hwnd";
+import { napiBuildProgress, napiBuildState } from "../9-napi-build-state";
+import { setLocalState } from "./8-utils-set-state";
+import { lastBuildProgressAtom } from "../1-do-get-hwnd";
 
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<EngineControlsWithMeta | null>(null);
@@ -22,18 +23,13 @@ export const doGetWindowControlsAtom = atom(
                 return;
             }
 
-            napiBuildState.buildRunning = true;
-            napiBuildProgress.buildCounter = 0;
-            napiBuildState.buildError = '';
-            napiBuildState.buildFailedBody = '';
+            setLocalState({ progress: 0, isRunning: true, error: '', failedBody: '' });
 
             const res = await invokeMain<string>({ type: 'r2mi:get-window-controls', hwnd });
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
-                napiBuildState.buildRunning = false;
-                napiBuildProgress.buildCounter = 0;
-                napiBuildState.buildError = '';
+                setLocalState({ progress: 0, isRunning: false, error: '' });
                 return;
             }
             set(sawContentStrAtom, res);
@@ -42,20 +38,15 @@ export const doGetWindowControlsAtom = atom(
             const final = controlsReplyToEngineControlWithMeta(reply);
 
             set(sawContentAtom, final);
-
             set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
-            napiBuildState.buildRunning = false;
-            napiBuildProgress.buildCounter = 0;
-            napiBuildState.buildError = '';
+            setLocalState({ progress: 0, isRunning: false, error: '' });
 
             console.log('doGetWindowControlsAtom.set', JSON.stringify(reply, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
 
-            napiBuildState.buildRunning = false;
-            napiBuildProgress.buildCounter = 0;
-            napiBuildState.buildError = getSubError(error);
+            setLocalState({ progress: 0, isRunning: false, error: getSubError(error) });
 
             set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
 

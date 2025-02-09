@@ -1,7 +1,7 @@
 import { FieldPath, splitPool, uuid } from "@/store/manifest";
 import { type EngineControl, type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { type EngineControlMeta, type EngineControlsWithMeta, type EngineControlWithMeta } from "../9-types";
-import { getControlTaretRect, getRoleAndStates } from "./8-utils";
+import { type EngineControlMeta, type EngineControlsWithMeta, type EngineControlWithMeta } from "./9-types";
+import { getControlTaretRect, getRoleAndStates } from "./8-utils-conv";
 
 export function controlsReplyToEngineControlWithMeta(reply: WindowControlsCollectFinalAfterParse): EngineControlsWithMeta | null {
     const final = reply.pool && reply.controls?.length ? reply : null;

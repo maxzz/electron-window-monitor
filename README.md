@@ -2,7 +2,7 @@
 
 Electron app to test nodejs napi plugins and integration with win32 api.
 
-![](src/assets/previews/2023-06-25_16-16-06.png)
+![](src/assets/previews/2025-02-08_16-59-21.png)
 
 #### Links, refs, credits
 

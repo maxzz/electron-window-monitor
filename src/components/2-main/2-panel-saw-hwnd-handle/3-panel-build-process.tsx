@@ -30,8 +30,8 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     }
 
     return (
-        <div className={classNames("text-xs text-primary-700 flex items-center gap-x-1", className)} {...rest}>
-            <div className="pt-0.5">
+        <div className={classNames("my-2 text-xs text-primary-700 flex items-center gap-x-1", className)} {...rest}>
+            <div>
                 controls detection progress
             </div>
 
@@ -39,7 +39,7 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
                 {buildCounter}
             </div>
 
-            <button className={classNames(buttonClasses, "text-white bg-orange-500")} onClick={() => sendToMain({ type: 'cancel-detection' })}>
+            <button className={buttonClasses} onClick={() => sendToMain({ type: 'cancel-detection' })}>
                 Cancel
             </button>
         </div>
@@ -48,16 +48,17 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
 
 const buttonClasses = "\
 px-2 py-1 \
-border-primary-500 \
-hover:border-primary-600 \
-hover:bg-primary-500 \
+text-orange-100 bg-orange-500 border-orange-600 \
+hover:text-white \
+hover:bg-orange-600 \
+hover:border-orange-700 \
 border \
 rounded \
 shadow \
-active:scale-[.97] \
 disabled:scale-100 \
 disabled:hover:bg-transparent \
 disabled:opacity-20 \
 \
-transition-transform \
+active:scale-x-75 \
+transition-colors \
 ";

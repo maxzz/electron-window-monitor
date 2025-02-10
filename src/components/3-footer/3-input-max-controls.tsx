@@ -4,14 +4,14 @@ import { appUi } from "@/store/1-app-state";
 import { focusClasses } from "../2-main/8-shared-styles";
 
 export function InputMaxControls() {
-    const { maxControls } = useSnapshot(appUi.uiState);
+    const { maxControls } = useSnapshot(appUi.monitor);
     
     function setValue(value: string) {
         let n = parseInt(value);
         if (Number.isNaN(n)) {
             n = 0;
         }
-        appUi.uiState.maxControls = n;
+        appUi.monitor.maxControls = n;
     }
 
     return (

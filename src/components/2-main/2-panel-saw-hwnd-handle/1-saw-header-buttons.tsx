@@ -7,7 +7,7 @@ import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom, sawIconAtom }
 
 export function SawHeaderButtons() {
     const isMonitoring = useAtomValue(doMonitoringAtom);
-    const iconsLarge = useSnapshot(appUi.uiState).iconsLarge;
+    const iconsLarge = useSnapshot(appUi.monitor).iconsLarge;
 
     const raw = useAtomValue(sawHandleStrAtom);
     if (!raw) {

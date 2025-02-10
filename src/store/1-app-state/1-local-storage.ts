@@ -1,31 +1,26 @@
 import { proxy, subscribe } from 'valtio';
-import { initializeUiState } from './2-local-storage-utils';
+import { initializeUiState } from './4-local-storage-utils';
 import { mergeDefaultAndLoaded } from '@/utils';
 import { sendClientOptions } from '..';
+import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:ui';
-const STORAGE_UI_VER = 'v1';
+const STORAGE_UI_VER = 'v2';
 
 export type UiState = {
     darkMode: boolean;
-    maxControls: number;        // max # of controls before detection canceled. 0 is unlimited
-    acquireXml: boolean;
-    iconAutoUpdate: boolean;    // get window icon automatically
-    iconsLarge: boolean;        // show large icon of the target window
 };
 
 type AppUi = {
     uiState: UiState;
+    monitor: DebugMonitorState;
 };
 
 const initialAppUi: AppUi = {
     uiState: {
         darkMode: false,
-        maxControls: 0,
-        acquireXml: false,
-        iconAutoUpdate: true,
-        iconsLarge: false,
     },
+    monitor: initialDebugMonitorState,
 };
 
 export const appUi = proxy<AppUi>(loadUiInitialState());
@@ -45,18 +40,13 @@ function loadUiInitialState(): AppUi {
         }
     }
 
-    const readyUiState = mergeDefaultAndLoaded({ defaults: initialAppUi.uiState, loaded: storageUi });
-
-    const ready: AppUi = {
-        uiState: readyUiState,
-    };
-
-    return ready;
+    const state = mergeDefaultAndLoaded({ defaults: initialAppUi, loaded: storageUi });
+    return state;
 }
 
 subscribe(appUi.uiState, () => {
-    //console.log('store ui  ', appUi.uiState);
+    //console.log('store ui  ', appUi);
 
     sendClientOptions();
-    localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appUi.uiState }));
+    localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appUi }));
 });

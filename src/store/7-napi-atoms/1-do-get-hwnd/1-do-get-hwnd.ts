@@ -36,7 +36,7 @@ export const doGetTargetHwndAtom = atom(
             const obj = JSON.parse(res || '{}') as GetTargetWindowResult;
             set(sawHandleAtom, obj);
 
-            if (appUi.uiState.iconAutoUpdate) {
+            if (appUi.monitor.iconAutoUpdate) {
                 if (obj.hwnd) {
                     set(doGetWindowIconAtom, obj.hwnd);
                 }

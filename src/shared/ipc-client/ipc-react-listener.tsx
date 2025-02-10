@@ -32,7 +32,7 @@ export function WorldToReactListener() {
 // Initial state exchange with main
 
 export function sendClientOptions() {
-    sendToMain({ type: 'set-client-options', state: { maxControls: appUi.uiState.maxControls } });
+    sendToMain({ type: 'set-client-options', state: { maxControls: appUi.monitor.maxControls } });
 }
 
 export function OnAppMount() {

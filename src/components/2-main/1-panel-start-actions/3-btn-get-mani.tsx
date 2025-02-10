@@ -12,7 +12,7 @@ export function ButtonGetManifest() {
     
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const { buildRunning } = useSnapshot(napiBuildState);
-    const { acquireXml } = useSnapshot(appUi.uiState);
+    const { acquireXml } = useSnapshot(appUi.monitor);
 
     const hwnd = secondActiveWindow?.hwnd;
     const isDisabled = !hwnd || buildRunning;

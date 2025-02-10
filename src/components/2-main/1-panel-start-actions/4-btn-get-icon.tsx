@@ -10,7 +10,7 @@ export function ButtonGetIcon() {
     const doGetWindowIcon = useSetAtom(doGetWindowIconAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
 
-    const { iconAutoUpdate } = useSnapshot(appUi.uiState);
+    const { iconAutoUpdate } = useSnapshot(appUi.monitor);
     if (iconAutoUpdate) {
         return null;
     }

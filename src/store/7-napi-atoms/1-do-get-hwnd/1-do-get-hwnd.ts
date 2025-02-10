@@ -4,7 +4,7 @@ import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-n
 import { doGetWindowIconAtom } from "../2-do-get-icon";
 import { sawContentAtom, sawContentStrAtom } from "../3-do-get-controls";
 import { napiBuildStateAtom } from "../9-napi-build-state";
-import { appUi } from "../../1-app-state";
+import { appSettings } from "../../1-app-state";
 
 export const sawHandleStrAtom = atom<string | undefined>('');
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
@@ -36,7 +36,7 @@ export const doGetTargetHwndAtom = atom(
             const obj = JSON.parse(res || '{}') as GetTargetWindowResult;
             set(sawHandleAtom, obj);
 
-            if (appUi.monitor.iconAutoUpdate) {
+            if (appSettings.monitor.iconAutoUpdate) {
                 if (obj.hwnd) {
                     set(doGetWindowIconAtom, obj.hwnd);
                 }

@@ -4,7 +4,7 @@ import { M2R } from "@/shared/ipc-types";
 import { doFromMainAtom } from "./ipc-react-listener-atom";
 
 import { sendToMain } from "../../store";
-import { appUi } from "../../store/1-app-state";
+import { appSettings } from "../../store/1-app-state";
 
 export const worldStore = {
     listeners: new Set<(data: unknown) => void>(),
@@ -32,7 +32,7 @@ export function WorldToReactListener() {
 // Initial state exchange with main
 
 export function sendClientOptions() {
-    sendToMain({ type: 'set-client-options', state: { maxControls: appUi.monitor.maxControls } });
+    sendToMain({ type: 'set-client-options', state: { maxControls: appSettings.monitor.maxControls } });
 }
 
 export function OnAppMount() {

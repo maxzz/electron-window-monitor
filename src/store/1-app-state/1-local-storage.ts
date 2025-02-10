@@ -26,9 +26,9 @@ const initialAppUi: AppUi = {
     testCreate: initialTestCreate,
 };
 
-export const appUi = proxy<AppUi>(loadUiInitialState());
+export const appSettings = proxy<AppUi>(loadUiInitialState());
 
-initializeUiState(appUi.uiState);
+initializeUiState(appSettings.uiState);
 
 // Local storage
 
@@ -47,9 +47,9 @@ function loadUiInitialState(): AppUi {
     return state;
 }
 
-subscribe(appUi.uiState, () => {
+subscribe(appSettings.uiState, () => {
     //console.log('store ui  ', appUi);
 
     sendClientOptions();
-    localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appUi }));
+    localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appSettings }));
 });

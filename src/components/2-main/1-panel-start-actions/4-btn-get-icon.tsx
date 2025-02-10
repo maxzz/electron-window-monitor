@@ -3,14 +3,14 @@ import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
 import { buttonClasses } from "./8-button-classes";
-import { appUi } from "@/store/1-app-state";
+import { appSettings } from "@/store/1-app-state";
 
 export function ButtonGetIcon() {
 
     const doGetWindowIcon = useSetAtom(doGetWindowIconAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
 
-    const { iconAutoUpdate } = useSnapshot(appUi.monitor);
+    const { iconAutoUpdate } = useSnapshot(appSettings.monitor);
     if (iconAutoUpdate) {
         return null;
     }

@@ -3,6 +3,7 @@ import { initializeUiState } from './4-local-storage-utils';
 import { mergeDefaultAndLoaded } from '@/utils';
 import { sendClientOptions } from '..';
 import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
+import { type TestCreate, initialTestCreate } from './3-local-storage-debug-create';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:ui';
 const STORAGE_UI_VER = 'v2';
@@ -14,6 +15,7 @@ export type UiState = {
 type AppUi = {
     uiState: UiState;
     monitor: DebugMonitorState;
+    testCreate: TestCreate;
 };
 
 const initialAppUi: AppUi = {
@@ -21,6 +23,7 @@ const initialAppUi: AppUi = {
         darkMode: false,
     },
     monitor: initialDebugMonitorState,
+    testCreate: initialTestCreate,
 };
 
 export const appUi = proxy<AppUi>(loadUiInitialState());

@@ -42,6 +42,10 @@
         "build": "tsc && vite build && electron-builder --win",
         "build:exe": "tsc && vite build && electron-builder --windows portable",
         "debug-vite": "set VITE_CJS_TRACE=true && vite dev",
-        "web": "vite --config vite.config-browser.mts"
+        "....................................................................................a": ".......................................................",
+        "web": "vite --config vite.config-browser.mts",
+        "build:web": "vite --config vite.config-browser.mts build --outDir ./dist --emptyOutDir",
+        "build:web:github": "vite --config vite.config-browser.mts build --outDir ./dist --emptyOutDir && gh-pages -d ./dist",
+        "build:web:preview": "vite --config vite.config-browser.mts preview --outDir ./dist"
     }
 }

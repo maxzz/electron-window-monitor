@@ -7,19 +7,13 @@ import { visualizer } from 'rollup-plugin-visualizer';
 export default defineConfig((): UserConfig => { // https://vitejs.dev/config
     return {
         base: '',
-        root: resolve(__dirname, 'src/renderer'),
         publicDir: resolve(__dirname, 'public'),
         // build: { rollupOptions: { input: resolve(__dirname, 'src/renderer/index.html'), }, },
 
         resolve: {
             alias: {
-                "@shared": resolve(__dirname, 'src/shared'),
-                '@electron': resolve(__dirname, 'src/electron/app'),
-                "@shell": resolve(__dirname, 'src/shell/app'),
-
-                '@': resolve(__dirname, 'src/renderer/src'),
-                '@ui': resolve(__dirname, 'src/renderer/src/ui'),
-                '@renderer': resolve(__dirname, 'src/renderer/src'),
+                '@': resolve(__dirname, 'src'),
+                '@ui': resolve(__dirname, 'src/components/ui/'),
             }
         },
 

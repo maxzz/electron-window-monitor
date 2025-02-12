@@ -1,7 +1,7 @@
 import { proxy, subscribe } from 'valtio';
 import { initializeUiState } from './4-local-storage-utils';
 import { mergeDefaultAndLoaded } from '@/utils';
-import { sendClientOptions } from '..';
+import { sendNapiOptions } from '..';
 import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
 import { type TestCreate, initialTestCreate } from './3-local-storage-debug-create';
 
@@ -50,6 +50,6 @@ function loadUiInitialState(): AppUi {
 subscribe(appSettings.uiState, () => {
     //console.log('store ui  ', appUi);
 
-    sendClientOptions();
+    sendNapiOptions();
     localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appSettings }));
 });

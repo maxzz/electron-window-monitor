@@ -31,13 +31,13 @@ export function WorldToReactListener() {
 
 // Initial state exchange with main
 
-export function sendClientOptions() {
+export function sendNapiOptions() {
     sendToMain({ type: 'set-client-options', state: { maxControls: appSettings.monitor.maxControls } });
 }
 
 export function OnAppMount() {
     useEffect(() => {
-        sendClientOptions();
+        sendNapiOptions();
     }, []);
     return null;
 }

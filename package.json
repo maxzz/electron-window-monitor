@@ -41,6 +41,7 @@
         "preview": "vite preview",
         "build": "tsc && vite build && electron-builder --win",
         "build:exe": "tsc && vite build && electron-builder --windows portable",
-        "debug-vite": "set VITE_CJS_TRACE=true && vite dev"
+        "debug-vite": "set VITE_CJS_TRACE=true && vite dev",
+        "web": "vite --config vite.config-browser.mts"
     }
 }

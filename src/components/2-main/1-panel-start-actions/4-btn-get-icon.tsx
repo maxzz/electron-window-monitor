@@ -3,7 +3,7 @@ import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
 import { buttonClasses } from "./8-button-classes";
-import { appSettings } from "@/store/1-app-state";
+import { appSettings } from "@/store/1-atoms";
 
 export function ButtonGetIcon() {
 

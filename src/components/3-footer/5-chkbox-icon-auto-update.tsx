@@ -1,5 +1,5 @@
 import { useSnapshot } from "valtio";
-import { appSettings } from "@/store/1-app-state";
+import { appSettings } from "@/store/1-atoms";
 import { checkboxClasses } from "../2-main/8-shared-styles";
 
 export function ChkboxIconAutoUpdate() {

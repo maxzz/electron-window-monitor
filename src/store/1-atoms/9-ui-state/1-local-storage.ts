@@ -1,7 +1,7 @@
 import { proxy, subscribe } from 'valtio';
 import { initializeUiState } from './4-local-storage-utils';
 import { mergeDefaultAndLoaded } from '@/utils';
-import { sendNapiOptions } from '..';
+import { sendNapiOptions } from '@/shared/ipc-client';
 import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
 import { type TestCreate, initialTestCreate } from './3-local-storage-debug-create';
 

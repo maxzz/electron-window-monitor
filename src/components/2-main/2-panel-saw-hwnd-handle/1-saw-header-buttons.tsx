@@ -1,7 +1,7 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/1-app-state";
+import { appSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom, sawIconAtom } from "@/store";
 

@@ -1,10 +1,10 @@
 import { atom } from "jotai";
 import { invokeMain } from "@/shared/ipc-client";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { appSettings } from "@/store/1-atoms";
 import { doGetWindowIconAtom } from "../2-do-get-icon";
 import { sawContentAtom, sawContentStrAtom } from "../3-do-get-controls";
 import { napiBuildStateAtom } from "../9-napi-build-state";
-import { appSettings } from "../../1-app-state";
 
 export const sawHandleStrAtom = atom<string | undefined>('');
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);

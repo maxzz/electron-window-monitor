@@ -1,6 +1,6 @@
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/1-app-state";
+import { appSettings } from "@/store/1-atoms";
 import { focusClasses } from "../2-main/8-shared-styles";
 
 export function InputMaxControls() {

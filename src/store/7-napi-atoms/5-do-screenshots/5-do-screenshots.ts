@@ -1,11 +1,11 @@
 import { atom, type Getter, type Setter } from "jotai";
 import { proxy } from "valtio";
 import { hasMain, invokeMain } from "@/shared/ipc-client";
-import { appSettings } from "@/store/1-app-state";
+import { appSettings } from "@/store/1-atoms";
 import { GetTlwInfoResult, type TlwInfo, type GetTlwScreenshotsParams, type TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { uuid } from "../../manifest";
 import { toast } from "sonner";
-import { doLoadFakeScreensAtom } from "@/store/1-app-state/3-create-tests";
+import { doLoadFakeScreensAtom } from "@/store/1-atoms";
 
 export type TlwScreenshotInfo = {
     item: TlwScreenshot;

@@ -4,7 +4,7 @@ import { M2R } from "@/shared/ipc-types";
 import { doFromMainAtom } from "./ipc-react-listener-atom";
 
 import { sendToMain } from "../../store";
-import { appSettings } from "../../store/1-app-state";
+import { appSettings } from "@/store/1-atoms";
 
 export const worldStore = {
     listeners: new Set<(data: unknown) => void>(),

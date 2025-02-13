@@ -34,14 +34,14 @@ export const doGetWindowControlsAtom = atom(
             }
             set(sawContentStrAtom, res);
 
-            const reply = JSON.parse(res || '{}') as WindowControlsCollectFinalAfterParse;
-            const final = controlsReplyToEngineControlWithMeta(reply);
+            const poolAndControls = JSON.parse(res || '{}') as WindowControlsCollectFinalAfterParse;
+            const final = controlsReplyToEngineControlWithMeta(poolAndControls);
 
             set(sawContentAtom, final);
             set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
             setLocalState({ progress: 0, isRunning: false, error: '' });
 
-            console.log('doGetWindowControlsAtom.set', JSON.stringify(reply, null, 4));
+            console.log('doGetWindowControlsAtom', JSON.stringify(poolAndControls, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);

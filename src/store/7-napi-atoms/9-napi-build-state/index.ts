@@ -1,3 +1,4 @@
+import { atom } from 'jotai';
 import { proxy } from 'valtio';
 import { atomWithProxy } from 'jotai-valtio';
 import { TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
@@ -15,6 +16,8 @@ export const napiBuildState = proxy<NapiBuildState>({
 });
 
 export const napiBuildStateAtom = atomWithProxy(napiBuildState);
+
+export const lastBuildProgressAtom = atom(0); // last number of build progress or 0
 
 //
 

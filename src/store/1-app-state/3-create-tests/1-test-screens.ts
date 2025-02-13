@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { type TestScreenEnum } from "../0-state-debug";
 import { hashedQueryAtom } from "./8-hashed-query";
-import { TlwScreenshot } from "@shared/ipc-types";
+import { TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 const testScreenIds: Record<TestScreenEnum, string> = {
     none: '',

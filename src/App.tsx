@@ -10,3 +10,5 @@ export function App() {
         <OnAppMount />
     </>);
 }
+
+//TODO: icons loast transparency

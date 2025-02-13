@@ -4,7 +4,7 @@ import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-
 import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
 import { getSubError } from "@/utils";
-import { lastBuildProgressAtom, napiBuildProgress, napiBuildState } from "../9-napi-build-state";
+import { napiBuildProgress, napiBuildState } from "../9-napi-build-state";
 import { setLocalState } from "./8-utils-set-state";
 
 export const sawContentStrAtom = atom<string | undefined>('');
@@ -41,17 +41,14 @@ export const doGetWindowControlsAtom = atom(
             const final = controlsReplyToEngineControlWithMeta(poolAndControls);
 
             set(sawContentAtom, final);
-            set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
-            setLocalState({ progress: 0, isRunning: false, error: '' });
+            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: '' });
 
             console.log('doGetWindowControlsAtom', JSON.stringify(poolAndControls, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
 
-            setLocalState({ progress: 0, isRunning: false, error: getSubError(error) });
-
-            set(lastBuildProgressAtom, napiBuildProgress.buildCounter);
+            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: getSubError(error) });
 
             console.error(`'doGetWindowControlsAtom' ${error instanceof Error ? error.message : `${error}`}`);
         }

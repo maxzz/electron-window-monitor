@@ -1,4 +1,5 @@
 export * from './classnames';
+export * from "./error-to-string";
 export * from './merge-options';
 export * from './os-utils';
 export * from './prepend-url-path';

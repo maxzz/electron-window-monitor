@@ -1,2 +1,2 @@
-export * from "./auto-cleanup-toast";
-export * from "./next-toast";
+export * from "./toasts-auto-cleanup";
+export * from "./toasts-next";

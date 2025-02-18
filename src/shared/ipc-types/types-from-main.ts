@@ -1,5 +1,5 @@
 import { TargetPosition } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { M4RInvoke } from "./types-to-main-invoke";
+import { R2MInvoke } from "./types-to-main-invoke";
 
 export namespace M2R { // Main to Renderer
 
@@ -16,7 +16,7 @@ export namespace M2R { // Main to Renderer
 
     export type OpenedFiles = {
         type: 'm2r:opened-files';
-        filesCnt: M4RInvoke.FileContent[];
+        filesCnt: R2MInvoke.FileContent[];
     };
 
     export type DetectionProgress = {

@@ -1,6 +1,6 @@
 import { type GetTlwScreenshotsParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
-export namespace M4RInvoke { // Main from Renderer invoke and get result
+export namespace R2MInvoke { // Main from Renderer invoke and get result
     type DoLoadfiles = {
         type: 'r2mi:load-files';
         filenames: string[];

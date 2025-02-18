@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { BrowserWindow, IpcMainEvent, IpcMainInvokeEvent, app, ipcMain, shell } from "electron";
-import { R2M, M4RInvoke } from '@/shared/ipc-types';
+import { R2M, R2MInvoke } from '@/shared/ipc-types';
 import { callFromRendererToMain, invokeFromRendererToMain } from '../../../shared/ipc-main';
 import { loadIniFileOptions, saveIniFileOptions } from '../utils-main/ini-file-options';
 
@@ -79,7 +79,7 @@ export function connect_ListenersForCallFromRenderer() {
     }
     // 2. invoke handlers
     function ii(_event: IpcMainInvokeEvent, data: any): any {
-        return invokeFromRendererToMain(data as M4RInvoke.InvokeCalls);
+        return invokeFromRendererToMain(data as R2MInvoke.InvokeCalls);
     }
     function connect_InvokeMain(channel: PreloadChannelNames, handler: (event: IpcMainInvokeEvent, data: any) => any) {
         ipcMain.handle(channel, handler);

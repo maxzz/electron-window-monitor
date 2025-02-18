@@ -32,7 +32,7 @@ export function WorldToReactListener() {
 // Initial state exchange with main
 
 export function sendNapiOptions() {
-    sendToMain({ type: 'set-client-options', state: { maxControls: appSettings.monitor.maxControls } });
+    sendToMain({ type: 'r2m:set-client-options', state: { maxControls: appSettings.monitor.maxControls } });
 }
 
 export function OnAppMount() {

@@ -14,7 +14,7 @@ export const doHighlightRectAtom = atom(
             hwnd = sawHandle?.hwnd;
         }
         if (hwnd) {
-            sendToMain({ type: 'highlight-rect', hwnd, rect });
+            sendToMain({ type: 'r2m:highlight-rect', hwnd, rect });
         }
     }
 );

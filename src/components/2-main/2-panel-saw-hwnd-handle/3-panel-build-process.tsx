@@ -39,7 +39,7 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
                 {buildCounter}
             </div>
 
-            <button className={buttonClasses} onClick={() => sendToMain({ type: 'cancel-detection' })}>
+            <button className={buttonClasses} onClick={() => sendToMain({ type: 'r2m:cancel-detection' })}>
                 Cancel
             </button>
         </div>

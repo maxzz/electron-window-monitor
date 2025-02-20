@@ -6,7 +6,9 @@ export type TlwData = {
     type: 'data';
     hwnd: string;                       // "000000000014103E", // hwnd should be string because int64 and js number types are different
     caption: string;                    // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
-    data: Base64String;                 // image data in base64 format
+    classname: string;
+    isBrowser: boolean;                 // True if the process is web browser, false otherwise.
+    data: Base64String;                 // base64 encoded image data
     width: number;                      // image width in pixels
     height: number;                     // image height in pixels
     format: ImageFormatType;            // "png" or "jpg"
@@ -16,6 +18,8 @@ export type TlwError = {
     type: 'error';
     hwnd: string;
     errorCode: TlwErrorCode;
+    classname: string;
+    caption: string
 };
 
 export type TlwErrorCode =              // not negative values, to avoid c++ to js conversion issues (long, short, etc)
@@ -26,21 +30,22 @@ export type TlwScreenshot = TlwData | TlwError; // Discriminated union of "data"
 
 // 1. Get a list of top-level windows
 
-export type GetTlWindowsParams = {      // i.e. empty object like this '{}'
+export type GetTlwInfoParams = {        //TODO: for type GetTlwInfo param GetNumberOfTLWindowsParams was not defined
 };
 
 export type TlwInfo = {
     hwnd: string;
     classname: string;                  // like "Chrome_WidgetWin_1"; that will allow us sort out windows and show browser windows first
     caption: string;                    // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
+    isBrowser: boolean;                 // True if the process is web browser, false otherwise.
 };
 
 export type GetTlwInfoResult = {
     windows: TlwInfo[];
 };
 
-export interface getTopLevelWindowsInfo { //tm:to:change: should be getTlWindows
-    (GetNumberOfTLWindowsParams: string, cb: PluginDataCallback): void; // TODO: params type definition is missing. there is no params so define as an empty object
+export interface GetTlwInfos {
+    (GetNumberOfTLWindowsParams: string, cb: PluginDataCallback): void;
 }
 
 // 2. Get top-level window screenshots
@@ -53,6 +58,6 @@ export type GetTlwScreenshotsParams = {
 
 export type GetTlwScreenshotsResult = TlwScreenshot[];
 
-export interface getTopLevelWindowsScreenshots { //tm:to:change: should be getTlwScreenshots
+export interface GetTlwScreenshots {
     (GetTLWScreenshotsParams: string, cb: PluginDataCallback): void;
 }

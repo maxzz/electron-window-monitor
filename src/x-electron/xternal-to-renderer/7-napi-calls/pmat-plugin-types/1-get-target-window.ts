@@ -10,8 +10,9 @@ export type GetTargetWindowResult = {   // SAW - Second Active Window
     caption: string;                    // "ipc-invoke.ts - electron-window-monitor - Visual Studio Code",
     classname: string;                  // "Chrome_WidgetWin_1",
     process: string;                    // "C:\\Program Files\\Microsoft VS Code\\Code.exe"
+    isBrowser: boolean;                 // True if the process is web browser, false otherwise.
 };
 
-export interface getTargetWindow {
+export interface GetTargetWindow {
     (getTargetWindowParams: string, cb: PluginDataCallback): void;
 }

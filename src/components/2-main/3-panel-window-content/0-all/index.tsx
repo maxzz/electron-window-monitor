@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { sawHandleStrAtom } from "@/store";
 import { HeaderPanel } from "../1-header";
-import { ContentScrollArea } from "../2-body-elements";
+import { ContentScrollArea } from "../2-body-controls";
 
 export function SawControlsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
 

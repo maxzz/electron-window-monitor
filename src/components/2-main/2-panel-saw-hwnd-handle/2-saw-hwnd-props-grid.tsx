@@ -15,7 +15,8 @@ export function SawHwndPropsGrid() {
                     <GridRow name="caption"   /**/ value={secondActiveWindow.caption} className="font-semibold" highlight={true} />
                     <GridRow name="classname" /**/ value={secondActiveWindow.classname} />
                     <GridRow name="process"   /**/ value={secondActiveWindow.process} />
-                    <GridRow name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^00000000/, '')} />
+                    <GridRow name="browser"   /**/ value={secondActiveWindow.isBrowser ? 'yes' : 'no'} />
+                    <GridRow name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^0x00000000/, '0x')} />
                 </div>
 
                 {!!lastBuildProgress && (

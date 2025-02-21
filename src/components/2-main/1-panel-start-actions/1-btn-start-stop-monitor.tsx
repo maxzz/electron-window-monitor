@@ -19,7 +19,7 @@ export function ButtonStartStopMonitor() {
     return (
         <button className={classNames("relative", buttonClasses)} onClick={sendRequest}>
             <MonitorButtonText isMonitoring={isMonitoring} />
-            <MonitorCounter className="absolute -top-3 px-2 leading-6 bg-primary-400 border-primary-600 border rounded" />
+            <MonitorCounter className="absolute -top-3" />
         </button>
     );
 }
@@ -28,13 +28,13 @@ function MonitorButtonText({ isMonitoring }: { isMonitoring: boolean; }) {
     return (
         isMonitoring
             ? (
-                <div className="flex items-center gap-1">
+                <div className="w-28 flex items-center justify-center gap-1">
                     <IconPlayStop className="pt-0.5 size-4 fill-red-500 text-red-400" />
                     Stop Monitor
                 </div>
             )
             : (
-                <div className="flex items-center gap-1">
+                <div className="w-28 flex items-center justify-center gap-1">
                     <IconPlayStart className="pt-0.5 size-4" />
                     Start Monitor
                 </div>
@@ -51,9 +51,19 @@ function MonitorCounter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) 
 
     return (
         <div className={classNames(counterClasses, className)} title="Number of calls to check the active window" {...rest}>
-            {`${monitorCounter}`.padStart(2, '0')}
+            {`${monitorCounter}`.padStart(2, '0')}s
         </div>
     );
 }
 
-const counterClasses = "text-center font-mono font-semibold text-transparent [-webkit-text-stroke-width:0.5px] [-webkit-text-stroke-color:#173717]";
+const counterClasses = "\
+px-2 \
+leading-6 \
+scale-y-125 \
+text-center \
+font-mono font-semibold \
+text-transparent \
+bg-primary-200 border-primary-600 border rounded \
+[-webkit-text-stroke-width:0.5px] \
+[-webkit-text-stroke-color:#173717] \
+";

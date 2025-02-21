@@ -35,8 +35,6 @@ export function SawHeaderButtons() {
     );
 }
 
-const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-500 select-none shadow-sm"}`;
-
 function ButtonClearHandle() {
     const doClearSawHandle = useSetAtom(doClearSawHandleAtom);
     return (
@@ -66,10 +64,12 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
             </div>
 
             <div className="absolute hidden group-hover:block right-0 py-1">
-                <div className="relative px-2 py-1 text-xs bg-primary-100 rounded whitespace-pre z-50">
+                <div className="relative px-2 py-1 text-xs bg-primary-300 border-primary-500 border shadow-md rounded whitespace-pre z-50">
                     {`${raw}`}
                 </div>
             </div>
         </div>
     );
 }
+
+const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-300 select-none shadow-sm"}`;

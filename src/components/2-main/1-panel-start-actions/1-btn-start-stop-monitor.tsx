@@ -18,12 +18,27 @@ export function ButtonStartStopMonitor() {
 
     return (
         <button className={classNames("relative", buttonClasses)} onClick={sendRequest}>
-            <div className="flex items-center gap-1"><IconPlayStop className={classNames("pt-0.5 size-4", isMonitoring && "fill-red-500 text-red-400")} />
-                {isMonitoring ? 'Stop Monitor' : 'Start Monitor'}
-            </div>
-
+            <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3 px-2 leading-6 bg-primary-400 border-primary-600 border rounded" />
         </button>
+    );
+}
+
+function MonitorButtonText({ isMonitoring }: { isMonitoring: boolean; }) {
+    return (
+        isMonitoring
+            ? (
+                <div className="flex items-center gap-1">
+                    <IconPlayStop className="pt-0.5 size-4 fill-red-500 text-red-400" />
+                    Stop Monitor
+                </div>
+            )
+            : (
+                <div className="flex items-center gap-1">
+                    <IconPlayStart className="pt-0.5 size-4" />
+                    Start Monitor
+                </div>
+            )
     );
 }
 

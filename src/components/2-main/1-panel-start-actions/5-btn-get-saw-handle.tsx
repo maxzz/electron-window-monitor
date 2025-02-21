@@ -10,7 +10,7 @@ export function ButtonGetSawHandle({ className, ...rest }: HTMLAttributes<HTMLBu
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
 
     return (
-        <button className={classNames(buttonClasses, className)} disabled={isMonitoring} onClick={doGetTargetHwnd} {...rest}>
+        <button className={classNames(buttonClasses, isMonitoring && "!opacity-5", className)} disabled={isMonitoring} onClick={doGetTargetHwnd} {...rest}>
             Get Second Window
         </button>
     );

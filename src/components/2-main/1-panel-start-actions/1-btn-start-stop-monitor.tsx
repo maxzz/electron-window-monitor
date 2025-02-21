@@ -1,9 +1,10 @@
-import { type HTMLAttributes } from "react";
+import { type ComponentPropsWithoutRef } from "react";
 import { useSetAtom, useAtom, useAtomValue } from "jotai";
+import { AnimatePresence, motion } from "motion/react";
 import { classNames } from "@/utils";
-import { doGetTargetHwndAtom, doMonitoringAtom, monitorCounterAtom } from "@/store";
+import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
-import { buttonClasses } from "./8-button-classes";
+import { doGetTargetHwndAtom, doMonitoringAtom, monitorCounterAtom } from "@/store";
 
 export function ButtonStartStopMonitor() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
@@ -42,7 +43,7 @@ function MonitorButtonText({ isMonitoring }: { isMonitoring: boolean; }) {
     );
 }
 
-function MonitorCounter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+function MonitorCounter({ className, ...rest }: ComponentPropsWithoutRef<typeof motion.div>) {
 
     const monitorCounter = useAtomValue(monitorCounterAtom);
     if (monitorCounter < 0) {
@@ -50,9 +51,19 @@ function MonitorCounter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) 
     }
 
     return (
-        <div className={classNames(counterClasses, className)} title="Number of calls to check the active window" {...rest}>
-            {`${monitorCounter}`.padStart(2, '0')}s
-        </div>
+        <AnimatePresence>
+            {monitorCounter > 0 && (
+                <motion.div
+                    {...animationProps}
+                    transition={{duration: .5, delay: .5}}
+                    className={classNames(counterClasses, className)}
+                    title="Number of calls to check the active window"
+                    {...rest}
+                >
+                    {`${monitorCounter}`.padStart(2, '0')}s
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }
 

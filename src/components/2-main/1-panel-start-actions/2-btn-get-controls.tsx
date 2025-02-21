@@ -5,7 +5,7 @@ import { doGetWindowControlsAtom, doMonitoringAtom, sawHandleAtom } from "@/stor
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { buttonClasses } from "./8-button-classes";
 
-export function ButtonGetContent() {
+export function ButtonGetControls() {
 
     const doMonitoring = useSetAtom(doMonitoringAtom);
     const doGetWindowControls = useSetAtom(doGetWindowControlsAtom);

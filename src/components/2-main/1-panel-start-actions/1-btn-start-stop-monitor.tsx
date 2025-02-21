@@ -5,7 +5,7 @@ import { doGetTargetHwndAtom, doMonitoringAtom, monitoringCounterAtom } from "@/
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
 import { buttonClasses } from "./8-button-classes";
 
-export function ButtonRunMonitor() {
+export function ButtonStartStopMonitor() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
 

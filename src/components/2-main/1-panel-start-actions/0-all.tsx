@@ -3,8 +3,8 @@ import { useAtomValue } from "jotai";
 import { a, useSpring } from "@react-spring/web";
 import { classNames } from "@/utils";
 import { monitoringCounterAtom, sawGetDisabledAtom } from "@/store";
-import { ButtonRunMonitor } from "./1-btn-get-window-monitor";
-import { ButtonGetContent } from "./2-btn-get-content";
+import { ButtonStartStopMonitor } from "./1-btn-start-stop-monitor";
+import { ButtonGetControls } from "./2-btn-get-controls";
 import { ButtonGetSawHandle } from "./5-btn-get-saw-handle";
 import { ButtonGetIcon } from "./4-btn-get-icon";
 import { ButtonGetManifest } from "./3-btn-get-mani";
@@ -12,7 +12,7 @@ import { ButtonGetManifest } from "./3-btn-get-mani";
 export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
         <div className={classNames("grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
-            <ButtonRunMonitor />
+            <ButtonStartStopMonitor />
 
             <GetActionsGroup />
 
@@ -34,7 +34,7 @@ function GetActionsGroup() {
             </div>
 
             <div className="flex items-center gap-x-2">
-                <ButtonGetContent />
+                <ButtonGetControls />
                 <ButtonGetIcon />
                 <ButtonGetManifest />
             </div>

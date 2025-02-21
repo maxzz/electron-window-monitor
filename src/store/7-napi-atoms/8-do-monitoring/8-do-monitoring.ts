@@ -2,13 +2,9 @@ import { atom } from "jotai";
 
 export const monitoringCounterAtom = atom(-1);
 
-const _isMonitoringAtom = atom(false);
-
-let monitorTimerId: ReturnType<typeof setTimeout> | undefined;
-
 export const doMonitoringAtom = atom(
     (get) => get(_isMonitoringAtom),
-    (get, set, {doStart, callback}: {doStart: boolean, callback?: Function}) => {
+    (get, set, { doStart, callback }: { doStart: boolean, callback?: Function; }) => {
         const isMonitoring = get(_isMonitoringAtom);
 
         if (isMonitoring) {
@@ -43,3 +39,7 @@ export const doMonitoringAtom = atom(
         }
     }
 );
+
+const _isMonitoringAtom = atom(false);
+
+let monitorTimerId: ReturnType<typeof setTimeout> | undefined;

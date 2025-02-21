@@ -30,21 +30,21 @@ export function ButtonStartStopMonitor() {
                     </div>
                 )
             }
-            <MonitoringCounter className="absolute -top-3 px-2 leading-6 bg-primary-400 border-primary-600 border rounded" />
+            <MonitorCounter className="absolute -top-3 px-2 leading-6 bg-primary-400 border-primary-600 border rounded" />
         </button>
     );
 }
 
-function MonitoringCounter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
+function MonitorCounter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
 
-    const monitoringCounter = useAtomValue(monitorCounterAtom);
-    if (monitoringCounter < 0) {
+    const monitorCounter = useAtomValue(monitorCounterAtom);
+    if (monitorCounter < 0) {
         return null;
     }
     
     return (
         <div className={classNames(counterClasses, className)} title="Number of calls to check the active window" {...rest}>
-            {`${monitoringCounter}`.padStart(2, '0')}
+            {`${monitorCounter}`.padStart(2, '0')}
         </div>
     );
 }

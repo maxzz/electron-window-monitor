@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
 import { a, useSpring } from "@react-spring/web";
 import { classNames } from "@/utils";
-import { monitorCounterAtom, sawGetDisabledAtom } from "@/store";
+import { sawGetDisabledAtom } from "@/store";
 import { ButtonStartStopMonitor } from "./1-btn-start-stop-monitor";
 import { ButtonGetControls } from "./2-btn-get-controls";
 import { ButtonGetSawHandle } from "./5-btn-get-saw-handle";

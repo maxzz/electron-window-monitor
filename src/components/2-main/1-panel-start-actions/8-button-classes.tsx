@@ -13,6 +13,9 @@ export const animationProps: AnimationProps = {
     exit: { opacity: 0, scale: 0.95 },
 };
 
+/**
+ * Top big action button classes
+ */
 export const buttonClasses = "\
 px-2 py-1 \
 text-sm \
@@ -30,3 +33,16 @@ disabled:opacity-20 \
 transition-all \
 ";
 
+/**
+ * Utility button classes
+ */
+export const utilityButtonClasses = "\
+px-2 py-1 text-xs \
+\
+hover:bg-primary-300 \
+hover:border-primary-600 hover:shadow \
+border-primary-500 border \
+\
+rounded shadow-sm select-none \
+active:scale-[.97] transition-transform \
+";

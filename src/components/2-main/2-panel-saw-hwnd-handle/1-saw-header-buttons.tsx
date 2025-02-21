@@ -3,6 +3,7 @@ import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { appSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
+import { utilityButtonClasses } from "../1-panel-start-actions/8-button-classes";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringAtom, sawIconAtom } from "@/store";
 
 export function SawHeaderButtons() {
@@ -39,7 +40,7 @@ function ButtonClearHandle() {
     const doClearSawHandle = useSetAtom(doClearSawHandleAtom);
     return (
         <button
-            className={classNames(borderClasses, "hover:border-primary-600 hover:shadow active:scale-[.97] transition-transform")}
+            className={utilityButtonClasses}
             onClick={doClearSawHandle}
             title="Clear Second Active Window handle"
         >
@@ -59,7 +60,7 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
 
     return (
         <div className="relative group cursor-default">
-            <div className={borderClasses}>
+            <div className={classNames(utilityButtonClasses, "active:!scale-100 !transition-none")}>
                 Raw
             </div>
 
@@ -71,5 +72,3 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
         </div>
     );
 }
-
-const borderClasses = `px-2 py-1 text-xs border-primary-500 border rounded ${"hover:bg-primary-300 select-none shadow-sm"}`;

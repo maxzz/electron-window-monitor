@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-export const monitoringCounterAtom = atom(-1);
+export const monitorCounterAtom = atom(-1); // How many seconds passed since the start of monitoring
 
 export const doMonitoringAtom = atom(
     (get) => get(_isMonitoringAtom),
@@ -10,7 +10,7 @@ export const doMonitoringAtom = atom(
         if (isMonitoring) {
             if (!doStart) {
                 set(_isMonitoringAtom, false);
-                set(monitoringCounterAtom, -1);
+                set(monitorCounterAtom, -1);
 
                 if (monitorTimerId) {
                     clearTimeout(monitorTimerId);
@@ -29,11 +29,11 @@ export const doMonitoringAtom = atom(
                 function runTimeout() {
                     callback?.();
 
-                    set(monitoringCounterAtom, get(monitoringCounterAtom) + 1);
+                    set(monitorCounterAtom, get(monitorCounterAtom) + 1);
                     monitorTimerId = setTimeout(runTimeout, 1000);
                 }
 
-                set(monitoringCounterAtom, 1);
+                set(monitorCounterAtom, 1);
                 monitorTimerId = setTimeout(runTimeout, 1000);
             }
         }

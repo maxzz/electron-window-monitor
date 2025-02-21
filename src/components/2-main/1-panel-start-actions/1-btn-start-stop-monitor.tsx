@@ -1,7 +1,7 @@
 import { type HTMLAttributes } from "react";
 import { useSetAtom, useAtom, useAtomValue } from "jotai";
 import { classNames } from "@/utils";
-import { doGetTargetHwndAtom, doMonitoringAtom, monitoringCounterAtom } from "@/store";
+import { doGetTargetHwndAtom, doMonitoringAtom, monitorCounterAtom } from "@/store";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
 import { buttonClasses } from "./8-button-classes";
 
@@ -37,7 +37,7 @@ export function ButtonStartStopMonitor() {
 
 function MonitoringCounter({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
 
-    const monitoringCounter = useAtomValue(monitoringCounterAtom);
+    const monitoringCounter = useAtomValue(monitorCounterAtom);
     if (monitoringCounter < 0) {
         return null;
     }

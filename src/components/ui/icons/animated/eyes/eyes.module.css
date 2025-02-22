@@ -1,0 +1,81 @@
+/* #9 */
+/* https://css-loaders.com/eyes/ #9 */
+.loader9 {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.loader9:before,
+.loader9:after {
+    content: "";
+    height: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+        linear-gradient(#222 0 0) top/100% 0% no-repeat,
+        radial-gradient(farthest-side, #000 95%, #0000) 50%/8px 8px no-repeat #fff;
+    animation: l9 4s infinite ease-in;
+}
+
+@keyframes l9 {
+    0% {
+        background-size: 100% 0%, 8px 8px;
+        background-position: top, 50% 50%
+    }
+
+    80% {
+        background-size: 100% 70%, 8px 8px;
+        background-position: top, 50% 70%
+    }
+
+    84%,
+    100% {
+        background-size: 100% 0%, 8px 8px;
+        background-position: top, 50% 50%
+    }
+}
+
+/* #5 */
+/* https://css-loaders.com/eyes/ #5 */
+.loader5 {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.loader5:before,
+.loader5:after {
+    content: "";
+    height: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, #000 95%, #0000) 35% 35%/6px 6px no-repeat #fff;
+    animation: l5 3s infinite;
+}
+
+@keyframes l5 {
+
+    0%,
+    11% {
+        background-position: 35% 35%
+    }
+
+    14%,
+    36% {
+        background-position: 65% 35%
+    }
+
+    38%,
+    61% {
+        background-position: 65% 65%
+    }
+
+    64%,
+    86% {
+        background-position: 35% 65%
+    }
+
+    88%,
+    100% {
+        background-position: 35% 35%
+    }
+}

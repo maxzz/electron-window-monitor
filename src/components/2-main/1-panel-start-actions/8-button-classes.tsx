@@ -37,7 +37,7 @@ transition-all \
  * Utility button classes
  */
 export const utilityButtonClasses = "\
-px-2 py-1 text-xs \
+p-1 text-xs \
 \
 hover:bg-primary-300 \
 hover:border-primary-600 hover:shadow \

@@ -6,6 +6,7 @@ import { easings, a, useTransition } from "@react-spring/web";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { sawContentStrAtom } from "@/store";
 import { IconCopy } from "@/components/ui";
+import { utilityButtonClasses } from "../../1-panel-start-actions/8-button-classes";
 
 export function ButtonCopyContent() {
     const [showNotice, setShowNotice] = useState(false);
@@ -19,13 +20,11 @@ export function ButtonCopyContent() {
 
     return (
         <button
-            className={classNames(borderClasses, "relative p-1.5 py-1 active:scale-[.97]")} title="copy server reply"
-            onClick={() => {
-                navigator.clipboard.writeText(msg);
-                setShowNotice(true);
-            }}
+            className={utilityButtonClasses} title="copy server reply"
+            onClick={() => { navigator.clipboard.writeText(msg); setShowNotice(true); }}
         >
-            <IconCopy className="w-4 h-4 text-primary-800/80" />
+            <IconCopy className="size-4 text-primary-800/80" />
+
             <MountCopyNotice
                 show={showNotice}
                 setShow={setShowNotice}
@@ -40,8 +39,6 @@ export function ButtonCopyContent() {
     );
 }
 
-const borderClasses = `border-primary-500 border rounded ${"hover:bg-primary-500 hover:border-primary-600 select-none shadow-sm"}`;
-
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
 
     const transitions = useTransition(Number(show), {
@@ -50,8 +47,10 @@ function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v
         leave: { opacity: 0, y: -25, config: { duration: 350, easing: easings.easeOutQuad }, },
         onRest: ({ finished }) => show && finished && setShow?.(false),
     });
-    
+
     return transitions((styles, item) => (
-        <a.div style={styles} className="absolute"> {items[item]} </a.div>
+        <a.div style={styles} className="absolute">
+            {items[item]}
+        </a.div>
     ));
 }

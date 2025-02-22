@@ -5,6 +5,7 @@ import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
 import { doGetTargetHwndAtom, doMonitoringAtom, monitorCounterAtom } from "@/store";
+import { IconRadarV1 } from "@/components/ui/icons/animated/radar-v1";
 
 export function ButtonStartStopMonitor() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
@@ -21,6 +22,7 @@ export function ButtonStartStopMonitor() {
         <button className={classNames("relative", buttonClasses)} onClick={sendRequest}>
             <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3" />
+            <IconRadarV1 />
         </button>
     );
 }

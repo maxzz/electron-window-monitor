@@ -57,11 +57,7 @@ async function animateEye(scope: AnimationScope, animate: AnimateFunction, e: Mo
 }
 
 function getEyeMovement(eye: Element, e: MouseEvent): EyeMovement | undefined {
-    if (!eye.parentElement) {
-        return;
-    }
-
-    const eyeRect = eye.parentElement.getBoundingClientRect();
+    const eyeRect = eye.getBoundingClientRect();
     const eyeCenterX = eyeRect.left + eyeRect.width / 2;
     const eyeCenterY = eyeRect.top + eyeRect.height / 2;
 
@@ -71,7 +67,8 @@ function getEyeMovement(eye: Element, e: MouseEvent): EyeMovement | undefined {
     const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
     // Maximum radius the pupil can move (in pixels)
-    const maxRadius = 8;
+    // const maxRadius = 8;
+    const maxRadius = 32;
 
     // Calculate scale factor to limit movement
     const scale = Math.min(1, maxRadius / Math.max(1, distance));

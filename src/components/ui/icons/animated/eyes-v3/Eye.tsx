@@ -2,12 +2,8 @@ import { useRef, useState } from "react"; //https://github.com/xcvrys/UI-project
 import { motion } from "motion/react";
 import { useMouseMove } from "./useMouseMove";
 
-type EyeProps = {
-    offsetX?: number;
-    offsetY?: number;
-};
+export function EyeV3({ offsetX = 0, offsetY = 0 }: EyeProps) {
 
-export const EyeV3 = ({ offsetX = 0, offsetY = 0 }: EyeProps) => {
     const [position, setPosition] = useState({ x: -1.5, y: 3 });
     const eyeRef = useRef<HTMLDivElement>(null);
 
@@ -30,26 +26,23 @@ export const EyeV3 = ({ offsetX = 0, offsetY = 0 }: EyeProps) => {
 
     return (
         <span className="relative inline-block" ref={eyeRef}>
-            <span>O</span>
+            <span className="text-9xl">
+                O
+            </span>
+
             <motion.span
                 className="w-8 h-8 bg-black rounded-full "
-                initial={{
-                    scale: 0,
-                }}
-                animate={{
-                    scale: 1,
-                }}
-                transition={{
-                    delay: 1,
-                    duration: 0.15,
-                }}
                 style={{
                     position: "absolute",
                     left: `calc(50% + ${position.x + offsetX}px)`,
                     top: `calc(50% + ${position.y + offsetY}px)`,
                     transform: "translate(-50%, -50%)",
                 }}
-            />
+                initial={{ scale: 0, }}
+                animate={{ scale: 1, }}
+                transition={{ delay: 1, duration: 0.15, }} />
         </span>
     );
-};
+}
+
+type EyeProps = { offsetX?: number; offsetY?: number; };

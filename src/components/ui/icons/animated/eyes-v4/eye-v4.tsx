@@ -1,5 +1,6 @@
-import { useEffect } from "react"; //https://github.com/jmski/hijon/blob/main/app/components/Eye/index.tsx //https://naruto.fandom.com/wiki/Rinnegan
+import { type ComponentPropsWithoutRef, useEffect } from "react"; //https://github.com/jmski/hijon/blob/main/app/components/Eye/index.tsx //https://naruto.fandom.com/wiki/Rinnegan
 import { motion } from "motion/react";
+import { classNames } from "@/utils";
 
 export const EyeV4 = () => {
     useEffect(
@@ -51,7 +52,7 @@ function getNewXY(pupil: HTMLElement, e: MouseEvent) {
     // get x and y position of cursor
     const mouseX = e.pageX;
     const mouseY = e.pageY;
-    
+
     const rect = pupil.getBoundingClientRect();
     const pupilCenterX = rect.left + rect.width / 2;
     const pupilCenterY = rect.top + rect.height / 2;
@@ -72,16 +73,24 @@ function getNewXY(pupil: HTMLElement, e: MouseEvent) {
 
 function RightEyeRinnegan() {
     return (
-        <div className={`size-[21svw] ${riCircleClasses}`}>
-            <div className={`size-[17svw] ${riCircleClasses}`}>
-                <div className={`size-[13svw] ${riCircleClasses}`}>
-                    <div className={`size-[9svw] ${riCircleClasses}`}>
-                        <div className={`size-[5svw] ${riCircleClasses} bg-purple-400`}>
-                            <div className="size-[1svw] pupil rinnegan bg-black border-black rounded-full" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <Ring size="21svw">
+            <Ring size="17svw">
+                <Ring size="13svw">
+                    <Ring size="9svw">
+                        <Ring size="5svw" className="bg-purple-400">
+                            <Ring size="1svw" className="bg-black" />
+                        </Ring>
+                    </Ring>
+                </Ring>
+            </Ring>
+        </Ring>
+    );
+}
+
+function Ring({ size, className, children, ...rest }: { size: string; } & ComponentPropsWithoutRef<"div">) {
+    return (
+        <div className={classNames(riCircleClasses, className)} style={{ width: size, height: size }} {...rest}>
+            {children}
         </div>
     );
 }
@@ -90,6 +99,23 @@ const riCircleClasses = "\
 pupil rinnegan \
 border border-black rounded-full \
 flex justify-center items-center";
+
+// function RightEyeRinnegan() {
+//     return (
+//         <div className={`size-[21svw] ${riCircleClasses}`}>
+//             <div className={`size-[17svw] ${riCircleClasses}`}>
+//                 <div className={`size-[13svw] ${riCircleClasses}`}>
+//                     <div className={`size-[9svw] ${riCircleClasses}`}>
+//                         <div className={`size-[5svw] ${riCircleClasses} bg-purple-400`}>
+//                             <div className="size-[1svw] pupil rinnegan bg-black border-black rounded-full" />
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
 
 // function DemoSharingan() {
 //     return (<>

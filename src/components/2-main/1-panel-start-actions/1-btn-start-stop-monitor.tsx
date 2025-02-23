@@ -12,6 +12,7 @@ import { EyesFollowCursor } from "@/components/ui/icons/animated/eyes-v2";
 import { EyeV3 } from "@/components/ui/icons/animated/eyes-v3";
 import { EyeV4 } from "@/components/ui/icons/animated/eyes-v4";
 import { EyeV5 } from "@/components/ui/icons/animated/eyes-v5";
+import { EyeV6 } from "@/components/ui/icons/animated/eyes-v6";
 
 export function ButtonStartStopMonitor() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
@@ -28,12 +29,16 @@ export function ButtonStartStopMonitor() {
         <button className={classNames("relative", buttonClasses)} onClick={sendRequest}>
             <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3" />
-            {/* <IconRadarV1 /> */}
-            {/* <EyesFollowCursor /> */}
-            {/* <IconEyes /> */}
-            {/* <EyeV3 /> */}
-            {/* <EyeV4 /> */}
+
+            <div className="flex items-center gap-x-2">
+                <IconRadarV1 />
+                <EyesFollowCursor />
+                <IconEyes />
+                <EyeV3 />
+            </div>
+            <EyeV4 />
             <EyeV5 />
+            <EyeV6 />
         </button>
     );
 }

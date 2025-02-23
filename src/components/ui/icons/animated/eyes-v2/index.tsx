@@ -1,11 +1,6 @@
 import { motion, useAnimate } from 'motion/react';
 import { useEffect } from 'react';
 
-type EyeMovement = { x: number; y: number; };
-
-type AnimationScope = ReturnType<typeof useAnimate>[0];
-type AnimateFunction = ReturnType<typeof useAnimate>[1];
-
 export function EyesFollowCursor(): JSX.Element {
     const [scopeLeft, animateLeft] = useAnimate();
     const [scopeRight, animateRight] = useAnimate();
@@ -13,19 +8,12 @@ export function EyesFollowCursor(): JSX.Element {
     useEffect(
         () => {
             function handleMouseMove(e: MouseEvent): void {
-                async function animateEye(scope: AnimationScope, animate: AnimateFunction): Promise<void> {
-                    const movement = scope.current && getEyeMovement(scope.current, e);
-                    if (movement) {
-                        const { x, y } = movement;
-                        await animate(scope.current, { x, y }, { duration: 0.1, type: "spring", bounce: 0, stiffness: 1000, damping: 50, });
-                    }
-                }
-
-                animateEye(scopeLeft, animateLeft);
-                animateEye(scopeRight, animateRight);
+                animateEye(scopeLeft, animateLeft, e);
+                animateEye(scopeRight, animateRight, e);
             }
 
             window.addEventListener('mousemove', handleMouseMove);
+
             return function cleanup() {
                 window.removeEventListener('mousemove', handleMouseMove);
             };
@@ -55,6 +43,17 @@ export function EyesFollowCursor(): JSX.Element {
             </div>
         </div>
     );
+}
+
+type EyeMovement = { x: number; y: number; };
+type AnimationScope = ReturnType<typeof useAnimate>[0];
+type AnimateFunction = ReturnType<typeof useAnimate>[1];
+
+async function animateEye(scope: AnimationScope, animate: AnimateFunction, e: MouseEvent): Promise<void> {
+    const movement = scope.current && getEyeMovement(scope.current, e);
+    if (movement) {
+        await animate(scope.current, movement, { duration: 0.1, type: "spring", bounce: 0, stiffness: 1000, damping: 50, });
+    }
 }
 
 function getEyeMovement(eye: Element, e: MouseEvent): EyeMovement | undefined {

@@ -30,15 +30,15 @@ export function ButtonStartStopMonitor() {
             <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3" />
 
-            <div className="flex items-center gap-x-2">
+            {/* <div className="flex items-center gap-x-2">
                 <IconRadarV1 />
                 <EyesFollowCursor />
                 <IconEyes />
                 <EyeV3 />
-            </div>
+            </div> */}
             <EyeV4 />
-            <EyeV5 />
-            <EyeV6 />
+            {/* <EyeV5 />
+            <EyeV6 /> */}
         </button>
     );
 }

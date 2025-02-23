@@ -22,23 +22,23 @@ export function EyesFollowCursor(): JSX.Element {
 
     return (
         <div className="flex items-center justify-center gap-4 p-4">
-            <div className="relative w-16 h-16 bg-white rounded-full shadow-inner">
+            <div className="relative size-16 bg-white rounded-full shadow-inner">
                 <motion.div
                     ref={scopeLeft}
-                    className="absolute top-1/2 left-1/2 w-6 h-6 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-6"
                     initial={{ x: 0, y: 0 }}
                 >
-                    <div className="w-full h-full bg-black rounded-full" />
+                    <div className="size-full bg-black rounded-full" />
                 </motion.div>
             </div>
 
-            <div className="relative w-16 h-16 bg-white rounded-full shadow-inner">
+            <div className="relative size-16 bg-white rounded-full shadow-inner">
                 <motion.div
                     ref={scopeRight}
-                    className="absolute top-1/2 left-1/2 w-6 h-6 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-6"
                     initial={{ x: 0, y: 0 }}
                 >
-                    <div className="w-full h-full bg-black rounded-full" />
+                    <div className="size-full bg-black rounded-full" />
                 </motion.div>
             </div>
         </div>
@@ -52,7 +52,7 @@ type AnimateFunction = ReturnType<typeof useAnimate>[1];
 async function animateEye(scope: AnimationScope, animate: AnimateFunction, e: MouseEvent): Promise<void> {
     const movement = scope.current && getEyeMovement(scope.current, e);
     if (movement) {
-        await animate(scope.current, movement, { duration: 0.1, type: "spring", bounce: 0, stiffness: 1000, damping: 50, });
+        await animate(scope.current, movement, { duration: 0.1, type: "spring", bounce: 0, stiffness: 500, damping: 40, });
     }
 }
 

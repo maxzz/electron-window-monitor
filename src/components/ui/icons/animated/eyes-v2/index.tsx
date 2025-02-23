@@ -1,5 +1,5 @@
 import { motion, useAnimate } from 'motion/react';
-import { useEffect, RefObject } from 'react';
+import { useEffect } from 'react';
 
 interface EyeMovement {
   x: number;
@@ -24,20 +24,21 @@ export function EyesFollowCursor(): JSX.Element {
         const eyeRect = eye.getBoundingClientRect();
         const eyeCenterX = eyeRect.left + eyeRect.width / 2;
         const eyeCenterY = eyeRect.top + eyeRect.height / 2;
-        
-        // Calculate distance from eye to cursor
+
+        // Calculate distance and angle
         const deltaX = clientX - eyeCenterX;
         const deltaY = clientY - eyeCenterY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         
-        // Calculate the angle between eye and cursor
-        const angle = Math.atan2(deltaY, deltaX);
+        // Maximum radius the pupil can move (in pixels)
+        const maxRadius = 8;
         
-        // Maximum movement radius (in pixels)
-        const maxRadius = 5;
+        // Calculate scale factor to limit movement
+        const scale = Math.min(1, maxRadius / Math.max(1, distance));
         
-        // Calculate new position with constraints
-        const x = Math.cos(angle) * maxRadius;
-        const y = Math.sin(angle) * maxRadius;
+        // Apply scaled movement
+        const x = deltaX * scale;
+        const y = deltaY * scale;
         
         return { x, y };
       }
@@ -52,16 +53,13 @@ export function EyesFollowCursor(): JSX.Element {
         const { x, y } = movement;
         await animate(
           scope.current,
+          { x, y },
           { 
-            x,
-            y,
-          },
-          { 
-            duration: 0.3,
-            ease: "easeOutElastic",
+            duration: 0.1,
             type: "spring",
-            stiffness: 200,
-            damping: 15
+            bounce: 0,
+            stiffness: 1000,
+            damping: 50
           }
         );
       }

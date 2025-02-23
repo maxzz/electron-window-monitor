@@ -9,23 +9,7 @@ export const EyeV4 = () => {
 
                 pupils.forEach(
                     (pupil) => {
-                        // get x and y position of cursor
-                        const rect = pupil.getBoundingClientRect();
-                        const pupilCenterX = rect.left + rect.width / 2;
-                        const pupilCenterY = rect.top + rect.height / 2;
-                        const mouseX = e.pageX;
-                        const mouseY = e.pageY;
-
-                        // calculate the distance between the pupil center and the mouse position
-                        const distanceX = mouseX - pupilCenterX;
-                        const distanceY = mouseY - pupilCenterY;
-
-                        // calculate the maximum distance the pupil can move from the center
-                        const maxDistance = Math.min(rect.width, rect.height) / 2;
-
-                        // calculate the normalized distance based on the maximum distance
-                        const normalizedDistanceX = Math.max(-1, Math.min(1, distanceX / maxDistance));
-                        let normalizedDistanceY = Math.max(-1, Math.min(1, distanceY / maxDistance));
+                        const { normalizedDistanceX, normalizedDistanceY } = getNewXY(pupil, e);
 
                         // calculate the final translation values
                         const x = normalizedDistanceX * 4;
@@ -50,22 +34,7 @@ export const EyeV4 = () => {
 
     return (
         <div className="flex items-center justify-evenly mx-auto">
-
-            {/* <motion.div
-                whileInView={{ scaleY: ["0%", "100%"] }}
-                transition={{ delay: 0.2, duration: 1, type: "spring" }}
-                className="bg-gradient-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-left"
-            >
-                <EyeSharingan />
-            </motion.div>
-
-            <motion.div
-                whileInView={{ scaleY: ["0%", "100%"] }}
-                transition={{ delay: 0.2, duration: 1, type: "spring" }}
-                className="bg-gradient-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-right"
-            >
-                <EyeSharingan />
-            </motion.div> */}
+            {/* <DemoSharingan /> */}
 
             <motion.div
                 whileInView={{ scaleY: ["0%", "100%"] }}
@@ -79,12 +48,34 @@ export const EyeV4 = () => {
     );
 };
 
+function getNewXY(pupil: HTMLElement, e: MouseEvent) {
+    // get x and y position of cursor
+    const rect = pupil.getBoundingClientRect();
+    const pupilCenterX = rect.left + rect.width / 2;
+    const pupilCenterY = rect.top + rect.height / 2;
+    const mouseX = e.pageX;
+    const mouseY = e.pageY;
+
+    // calculate the distance between the pupil center and the mouse position
+    const distanceX = mouseX - pupilCenterX;
+    const distanceY = mouseY - pupilCenterY;
+
+    // calculate the maximum distance the pupil can move from the center
+    const maxDistance = Math.min(rect.width, rect.height) / 2;
+
+    // calculate the normalized distance based on the maximum distance
+    const normalizedDistanceX = Math.max(-1, Math.min(1, distanceX / maxDistance));
+    let normalizedDistanceY = Math.max(-1, Math.min(1, distanceY / maxDistance));
+
+    return { normalizedDistanceX, normalizedDistanceY, };
+}
+
 function RightEyeRinnegan() {
     return (
-        <div className={`size-[21svw] bg-purple-300 ${riCircleClasses}`}>
-            <div className={`size-[17svw] bg-purple-300 ${riCircleClasses}`}>
-                <div className={`size-[13svw] bg-purple-300 ${riCircleClasses}`}>
-                    <div className={`size-[9svw] bg-purple-300 ${riCircleClasses}`}>
+        <div className={`size-[21svw] ${riCircleClasses}`}>
+            <div className={`size-[17svw] ${riCircleClasses}`}>
+                <div className={`size-[13svw] ${riCircleClasses}`}>
+                    <div className={`size-[9svw] ${riCircleClasses}`}>
                         <div className={`size-[5svw] bg-purple-400 ${riCircleClasses}`}>
                             <div className="size-[1svw] bg-black border-black rounded-full pupil rinnegan"></div>
                         </div>
@@ -96,9 +87,29 @@ function RightEyeRinnegan() {
 }
 
 const riCircleClasses = "\
-rounded-full flex justify-center items-center pupil rinnegan \
-border border-black \
-";
+pupil rinnegan \
+border border-black rounded-full \
+flex justify-center items-center";
+
+// function DemoSharingan() {
+//     return (<>
+//         <motion.div
+//                 whileInView={{ scaleY: ["0%", "100%"] }}
+//                 transition={{ delay: 0.2, duration: 1, type: "spring" }}
+//                 className="bg-gradient-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-left"
+//             >
+//                 <EyeSharingan />
+//             </motion.div>
+
+//             <motion.div
+//                 whileInView={{ scaleY: ["0%", "100%"] }}
+//                 transition={{ delay: 0.2, duration: 1, type: "spring" }}
+//                 className="bg-gradient-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-right"
+//             >
+//                 <EyeSharingan />
+//             </motion.div>
+//     </>);
+// }
 
 // function EyeSharingan() {
 //     return (

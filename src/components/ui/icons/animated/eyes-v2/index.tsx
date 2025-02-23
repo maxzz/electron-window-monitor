@@ -57,8 +57,11 @@ async function animateEye(scope: AnimationScope, animate: AnimateFunction, e: Mo
 }
 
 function getEyeMovement(eye: Element, e: MouseEvent): EyeMovement | undefined {
+    if (!eye.parentElement) {
+        return;
+    }
 
-    const eyeRect = eye.getBoundingClientRect();
+    const eyeRect = eye.parentElement.getBoundingClientRect();
     const eyeCenterX = eyeRect.left + eyeRect.width / 2;
     const eyeCenterY = eyeRect.top + eyeRect.height / 2;
 

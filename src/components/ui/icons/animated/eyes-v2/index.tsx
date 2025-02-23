@@ -2,8 +2,8 @@ import { motion, useAnimate } from 'motion/react';
 import { useEffect, RefObject } from 'react';
 
 interface EyeMovement {
-  rotation: number;
-  distance: number;
+  x: number;
+  y: number;
 }
 
 type AnimationScope = ReturnType<typeof useAnimate>[0];
@@ -25,11 +25,21 @@ export function EyesFollowCursor(): JSX.Element {
         const eyeCenterX = eyeRect.left + eyeRect.width / 2;
         const eyeCenterY = eyeRect.top + eyeRect.height / 2;
         
-        const radian = Math.atan2(clientY - eyeCenterY, clientX - eyeCenterX);
-        const rotation = radian * (180 / Math.PI);
-        const distance = Math.min(3, Math.hypot(clientX - eyeCenterX, clientY - eyeCenterY) / 100);
+        // Calculate distance from eye to cursor
+        const deltaX = clientX - eyeCenterX;
+        const deltaY = clientY - eyeCenterY;
         
-        return { rotation, distance };
+        // Calculate the angle between eye and cursor
+        const angle = Math.atan2(deltaY, deltaX);
+        
+        // Maximum movement radius (in pixels)
+        const maxRadius = 5;
+        
+        // Calculate new position with constraints
+        const x = Math.cos(angle) * maxRadius;
+        const y = Math.sin(angle) * maxRadius;
+        
+        return { x, y };
       }
 
       async function animateEye(
@@ -39,13 +49,20 @@ export function EyesFollowCursor(): JSX.Element {
         const movement = moveEye(scope);
         if (!movement) return;
         
-        const { rotation, distance } = movement;
+        const { x, y } = movement;
         await animate(
           scope.current,
           { 
-            transform: `rotate(${rotation}deg) translateX(${distance}px)` 
+            x,
+            y,
           },
-          { duration: 0.1 }
+          { 
+            duration: 0.3,
+            ease: "easeOutElastic",
+            type: "spring",
+            stiffness: 200,
+            damping: 15
+          }
         );
       }
 
@@ -65,6 +82,7 @@ export function EyesFollowCursor(): JSX.Element {
         <motion.div
           ref={scopeLeft}
           className="absolute top-1/2 left-1/2 w-6 h-6 -translate-x-1/2 -translate-y-1/2"
+          initial={{ x: 0, y: 0 }}
         >
           <div className="w-full h-full bg-black rounded-full" />
         </motion.div>
@@ -73,6 +91,7 @@ export function EyesFollowCursor(): JSX.Element {
         <motion.div
           ref={scopeRight}
           className="absolute top-1/2 left-1/2 w-6 h-6 -translate-x-1/2 -translate-y-1/2"
+          initial={{ x: 0, y: 0 }}
         >
           <div className="w-full h-full bg-black rounded-full" />
         </motion.div>

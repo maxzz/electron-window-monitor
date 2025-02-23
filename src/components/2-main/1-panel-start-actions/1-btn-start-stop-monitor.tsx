@@ -7,6 +7,7 @@ import { IconPlayStop, IconPlayStart } from "@/components/ui";
 import { doGetTargetHwndAtom, doMonitoringAtom, monitorCounterAtom } from "@/store";
 import { IconRadarV1 } from "@/components/ui/icons/animated/radar-v1";
 import { IconEyes } from "@/components/ui/icons/animated/eyes";
+import { EyesFollowCursor } from "@/components/ui/icons/animated/eyes-v2";
 
 export function ButtonStartStopMonitor() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
@@ -24,7 +25,8 @@ export function ButtonStartStopMonitor() {
             <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3" />
             {/* <IconRadarV1 /> */}
-            <IconEyes />
+            <EyesFollowCursor />
+            {/* <IconEyes /> */}
         </button>
     );
 }

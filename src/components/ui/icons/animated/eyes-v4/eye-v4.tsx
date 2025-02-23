@@ -4,9 +4,8 @@ import { motion } from "motion/react";
 export const EyeV4 = () => {
     useEffect(
         () => {
-            const handleMouseMove = (e: MouseEvent) => {
+            function handleMouseMove(e: MouseEvent) {
                 const pupils = document.querySelectorAll<HTMLElement>(".eye .pupil");
-
                 pupils.forEach(
                     (pupil) => {
                         const { normalizedDistanceX, normalizedDistanceY } = getNewXY(pupil, e);
@@ -22,7 +21,7 @@ export const EyeV4 = () => {
                         pupil.style.transform = `translate3d(${x}px, ${y}px, 0px)`;
                     }
                 );
-            };
+            }
 
             window.addEventListener("mousemove", handleMouseMove);
 
@@ -39,7 +38,7 @@ export const EyeV4 = () => {
             <motion.div
                 whileInView={{ scaleY: ["0%", "100%"] }}
                 transition={{ delay: 0.2, duration: 1, type: "spring" }}
-                className="bg-purple-300 flex justify-center items-center overflow-clip eye eye-shape eye-shape-right rinnegan"
+                className="bg-purple-300 flex justify-center items-center overflow-clip eye 1eye-shape 1eye-shape-right 1rinnegan"
             >
                 <RightEyeRinnegan />
             </motion.div>
@@ -50,11 +49,12 @@ export const EyeV4 = () => {
 
 function getNewXY(pupil: HTMLElement, e: MouseEvent) {
     // get x and y position of cursor
+    const mouseX = e.pageX;
+    const mouseY = e.pageY;
+    
     const rect = pupil.getBoundingClientRect();
     const pupilCenterX = rect.left + rect.width / 2;
     const pupilCenterY = rect.top + rect.height / 2;
-    const mouseX = e.pageX;
-    const mouseY = e.pageY;
 
     // calculate the distance between the pupil center and the mouse position
     const distanceX = mouseX - pupilCenterX;
@@ -76,8 +76,8 @@ function RightEyeRinnegan() {
             <div className={`size-[17svw] ${riCircleClasses}`}>
                 <div className={`size-[13svw] ${riCircleClasses}`}>
                     <div className={`size-[9svw] ${riCircleClasses}`}>
-                        <div className={`size-[5svw] bg-purple-400 ${riCircleClasses}`}>
-                            <div className="size-[1svw] bg-black border-black rounded-full pupil rinnegan"></div>
+                        <div className={`size-[5svw] ${riCircleClasses} bg-purple-400`}>
+                            <div className="size-[1svw] pupil rinnegan bg-black border-black rounded-full" />
                         </div>
                     </div>
                 </div>

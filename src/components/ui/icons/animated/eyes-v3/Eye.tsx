@@ -10,6 +10,8 @@ export function EyeV3({ offsetX = 0, offsetY = 0 }: EyeProps) {
     useMouseMove((x, y) => {
         if (eyeRef.current) {
             const eyeRect = eyeRef.current.getBoundingClientRect();
+            // const eyeX = eyeRect.left + eyeRect.width / 2;
+            // const eyeY = eyeRect.top + eyeRect.height / 2;
             const eyeX = eyeRect.left + eyeRect.width / 2;
             const eyeY = eyeRect.top + eyeRect.height / 2;
 
@@ -25,7 +27,7 @@ export function EyeV3({ offsetX = 0, offsetY = 0 }: EyeProps) {
     });
 
     return (
-        <span className="relative inline-block" ref={eyeRef}>
+        <span className="relative inline-block bg-red-300 debug" ref={eyeRef}>
             <span className="text-9xl">
                 O
             </span>

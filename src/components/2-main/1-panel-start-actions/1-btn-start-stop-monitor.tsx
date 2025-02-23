@@ -9,6 +9,7 @@ import { IconRadarV1 } from "@/components/ui/icons/animated/radar-v1";
 import { IconEyes } from "@/components/ui/icons/animated/eyes";
 import { EyesFollowCursor } from "@/components/ui/icons/animated/eyes-v2";
 import { EyeV3 } from "@/components/ui/icons/animated/eyes-v3";
+import { EyeV4 } from "@/components/ui/icons/animated/eyes-v4";
 
 export function ButtonStartStopMonitor() {
     const [isMonitoring, setIsMonitoring] = useAtom(doMonitoringAtom);
@@ -28,7 +29,8 @@ export function ButtonStartStopMonitor() {
             {/* <IconRadarV1 /> */}
             {/* <EyesFollowCursor /> */}
             {/* <IconEyes /> */}
-            <EyeV3 />
+            {/* <EyeV3 /> */}
+            <EyeV4 />
         </button>
     );
 }
@@ -63,7 +65,7 @@ function MonitorCounter({ className, ...rest }: ComponentPropsWithoutRef<typeof 
             {monitorCounter > 0 && (
                 <motion.div
                     {...animationProps}
-                    transition={{duration: .5, delay: .5}}
+                    transition={{ duration: .5, delay: .5 }}
                     className={classNames(counterClasses, className)}
                     title="Number of calls to check the active window"
                     {...rest}

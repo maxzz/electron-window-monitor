@@ -2,7 +2,7 @@ import { atom } from "jotai";
 
 export const monitorCounterAtom = atom(-1); // How many seconds passed since the start of monitoring
 
-export const doMonitoringAtom = atom(
+export const isMonitoringAtom = atom(
     (get) => get(_isMonitoringAtom),
     (get, set, { doStart, callback }: { doStart: boolean, callback?: Function; }) => {
         const isMonitoring = get(_isMonitoringAtom);

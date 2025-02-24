@@ -50,11 +50,11 @@ const _isMonitoringAtom = atom(false);
 const timerId = {
     id: undefined as undefined | ReturnType<typeof setTimeout>,
     clear() {
-        console.log('---- timerId. intended clear id', timerId.id);
-        if (timerId.id) {
-            console.log('---- timerId.clear id', timerId.id);
-            clearTimeout(timerId.id);
-            timerId.id = undefined;
+        console.log('---- timerId. intended clear id', this.id);
+        if (this.id) {
+            console.log('---- this.clear id', this.id);
+            clearTimeout(this.id);
+            this.id = undefined;
         }
     }
 };

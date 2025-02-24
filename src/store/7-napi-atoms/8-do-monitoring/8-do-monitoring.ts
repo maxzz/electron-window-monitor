@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { atom, useAtomValue, useSetAtom } from "jotai";
 
 export const isMonitoringAtom = atom(
     (get) => get(_isMonitoringAtom)

@@ -2,8 +2,8 @@ import { type HTMLAttributes, useRef, useEffect } from "react";
 import { type Atom, useAtomValue } from "jotai";
 
 export function ImageHolder({ imageAtom, ...rest }: { imageAtom: Atom<HTMLImageElement | null>; } & HTMLAttributes<HTMLDivElement>) {
-    const imageElm = useAtomValue(imageAtom);
     const refParent = useRef<HTMLDivElement>(null);
+    const imageElm = useAtomValue(imageAtom);
 
     useEffect(
         () => {
@@ -24,12 +24,9 @@ export function ImageHolder({ imageAtom, ...rest }: { imageAtom: Atom<HTMLImageE
         return null;
     }
 
-    return (<>
-        {imageElm
-            ? <div ref={refParent} {...rest} />
-            : null
-        }
-    </>);
+    return (
+        <div ref={refParent} {...rest} />
+    );
 }
 
 //TODO: add icons cache

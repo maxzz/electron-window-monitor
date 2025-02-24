@@ -17,10 +17,15 @@ import { EyeV6 } from "@/components/ui/icons/animated/eyes-v6";
 export function ButtonStartStopMonitor() {
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
 
-    const callback = useCallback(() => doGetTargetHwnd(), []);
+    const callback = useCallback(
+        () => {
+            console.log('ButtonStartStopMonitor.callback');
+            doGetTargetHwnd();
+        }, []
+    );
 
-    const [isMonitoring, start] = useMonitoring(callback)
-    
+    const [isMonitoring, start] = useMonitoring(callback);
+
     // const [isMonitoring, setIsMonitoring] = useAtom(isMonitoringAtom);
     // const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
 

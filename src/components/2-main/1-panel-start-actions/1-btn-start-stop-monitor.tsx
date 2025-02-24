@@ -1,10 +1,10 @@
-import { type ComponentPropsWithoutRef } from "react";
+import { useCallback, type ComponentPropsWithoutRef } from "react";
 import { useSetAtom, useAtom, useAtomValue } from "jotai";
 import { AnimatePresence, motion } from "motion/react";
 import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
-import { doGetTargetHwndAtom, isMonitoringAtom, monitorCounterAtom } from "@/store";
+import { doGetTargetHwndAtom, isMonitoringAtom, monitorCounterAtom, useMonitoring } from "@/store";
 
 import { IconRadarV1 } from "@/components/ui/icons/animated/radar-v1";
 import { IconEyes } from "@/components/ui/icons/animated/eyes";
@@ -15,18 +15,24 @@ import { EyeV5 } from "@/components/ui/icons/animated/eyes-v5";
 import { EyeV6 } from "@/components/ui/icons/animated/eyes-v6";
 
 export function ButtonStartStopMonitor() {
-    const [isMonitoring, setIsMonitoring] = useAtom(isMonitoringAtom);
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
 
-    async function sendRequest() {
-        function callback() {
-            doGetTargetHwnd();
-        }
-        setIsMonitoring({ doStart: !isMonitoring, callback });
-    }
+    const callback = useCallback(() => doGetTargetHwnd(), []);
+
+    const [isMonitoring, start] = useMonitoring(callback)
+    
+    // const [isMonitoring, setIsMonitoring] = useAtom(isMonitoringAtom);
+    // const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
+
+    // async function sendRequest() {
+    //     function callback() {
+    //         doGetTargetHwnd();
+    //     }
+    //     setIsMonitoring({ doStart: !isMonitoring, callback });
+    // }
 
     return (
-        <button className={classNames("relative", buttonClasses)} onClick={sendRequest}>
+        <button className={classNames("relative", buttonClasses)} onClick={start}>
             <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3" />
 

@@ -82,6 +82,7 @@ import { EyeV3 } from "@/components/ui/icons/animated/eyes-v3";
 import { EyeV4 } from "@/components/ui/icons/animated/eyes-v4";
 import { EyeV5 } from "@/components/ui/icons/animated/eyes-v5";
 import { EyeV6 } from "@/components/ui/icons/animated/eyes-v6";
+import { WaitV1 } from "@/components/ui/icons/animated/wait-v1";
 
 function Tests() {
     return (<>
@@ -96,5 +97,7 @@ function Tests() {
 
         {/* <EyeV5 />
             <EyeV6 /> */}
+
+        <WaitV1 />
     </>);
 }

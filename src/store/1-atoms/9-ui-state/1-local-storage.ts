@@ -48,8 +48,6 @@ function loadUiInitialState(): AppUi {
 }
 
 subscribe(appSettings.uiState, () => {
-    //console.log('store ui  ', appUi);
-
     sendNapiOptions();
     localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appSettings }));
 });

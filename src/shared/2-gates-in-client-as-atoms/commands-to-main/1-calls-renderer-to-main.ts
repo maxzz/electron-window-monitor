@@ -14,11 +14,11 @@ export namespace R2MCalls {
         sendToMain({ type: 'r2m:dark-mode', ...state });
     }
 
-    // napi
-
     export function setClientOptions(state: R2MParams.SetNapiOptions): void {
         sendToMain({ type: 'r2m:set-client-options', ...state });
     }
+
+    // napi
 
     export function cancelDetection(): void {
         sendToMain({ type: 'r2m:cancel-detection' });

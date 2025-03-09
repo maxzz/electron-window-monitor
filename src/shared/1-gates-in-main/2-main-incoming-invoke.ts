@@ -1,14 +1,14 @@
 import { type R2MInvoke } from "@/shared/ipc-types";
-import { loadFilesContent } from "../../x-electron/app/utils-main/load-files";
-import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { loadWin32FilesContent } from "@/x-electron/xternal-to-renderer/2-commands-in-main";
 
 export async function invokeFromRendererInMain(data: R2MInvoke.InvokeCalls): Promise<any> {
     switch (data.type) {
         case 'r2mi:load-files': {
-            return loadFilesContent(data.filenames, data.allowedExt);
+            return loadWin32FilesContent(data.filenames, data.allowedExt);
         }
         case 'r2mi:load-files2': {
-            return loadFilesContent(data.filenames);
+            return loadWin32FilesContent(data.filenames);
         }
         case 'r2mi:get-target-hwnd': {
             const res = await getTargetHwnd();

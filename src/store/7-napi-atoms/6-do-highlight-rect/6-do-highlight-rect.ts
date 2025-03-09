@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { sendToMain } from "@/shared/2-gates-in-client-as-atoms";
+import { R2MCalls } from "@/shared/2-gates-in-client-as-atoms";
 import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { sawHandleAtom } from "../1-do-get-hwnd";
 
@@ -14,7 +14,7 @@ export const doHighlightRectAtom = atom(
             hwnd = sawHandle?.hwnd;
         }
         if (hwnd) {
-            sendToMain({ type: 'r2m:highlight-rect', hwnd, rect });
+            R2MCalls.highlightRect({ hwnd, rect });
         }
     }
 );

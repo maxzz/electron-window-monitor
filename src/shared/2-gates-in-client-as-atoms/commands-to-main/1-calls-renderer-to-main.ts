@@ -12,7 +12,7 @@ export namespace R2MCalls {
 
     export function darkMode(state: R2MParams.DarkMode): void {
         sendToMain({ type: 'r2m:dark-mode', ...state });
-    }    
+    }
 
     // napi
 
@@ -24,7 +24,7 @@ export namespace R2MCalls {
         sendToMain({ type: 'r2m:cancel-detection' });
     }
 
-    export function highlightRect(hwnd: string, rect: TargetClientRect): void {
+    export function highlightRect({ hwnd, rect }: { hwnd: string; rect: TargetClientRect; }): void {
         sendToMain({ type: 'r2m:highlight-rect', hwnd, rect });
     }
 }

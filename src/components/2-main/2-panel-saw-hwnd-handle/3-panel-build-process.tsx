@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { sendToMain } from "@/store";
+import { R2MCalls } from "@/store";
 import { napiBuildState, napiBuildProgress } from "@/store/7-napi-atoms";
 
 export function PanelBuildProcess(props: ComponentPropsWithoutRef<"div">) {
@@ -39,7 +39,7 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
                 {buildCounter}
             </div>
 
-            <button className={buttonClasses} onClick={() => sendToMain({ type: 'r2m:cancel-detection' })}>
+            <button className={buttonClasses} onClick={() => R2MCalls.cancelDetection()}>
                 Cancel
             </button>
         </div>

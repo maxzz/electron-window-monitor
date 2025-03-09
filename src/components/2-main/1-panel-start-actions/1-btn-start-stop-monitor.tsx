@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
-import { doGetTargetHwndAtom, monitorCounterAtom, useMonitoring } from "@/store";
+import { doGetTargetHwndAtom, secondsCounterAtom, useMonitoring } from "@/store";
 
 export function ButtonStartStopMonitor() {
 
@@ -41,7 +41,7 @@ function MonitorButtonText({ isMonitoring }: { isMonitoring: boolean; }) {
 
 function MonitorCounter({ className, ...rest }: ComponentPropsWithoutRef<typeof motion.div>) {
 
-    const monitorCounter = useAtomValue(monitorCounterAtom);
+    const monitorCounter = useAtomValue(secondsCounterAtom);
     if (monitorCounter < 0) {
         return null;
     }

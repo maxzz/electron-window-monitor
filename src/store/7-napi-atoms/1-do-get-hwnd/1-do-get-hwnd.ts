@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "@/shared/ipc-client";
+import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { appSettings } from "@/store/1-atoms";
 import { doGetWindowIconAtom } from "../2-do-get-icon";

@@ -1,4 +1,4 @@
-import { hasMain } from "@/shared/ipc-client";
+import { hasMain } from "@/shared/2-gates-in-client-as-atoms";
 
 // Non-reactive Napi reentrancy lock
 

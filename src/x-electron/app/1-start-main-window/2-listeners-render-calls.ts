@@ -1,6 +1,6 @@
 import { IpcMainEvent, IpcMainInvokeEvent, ipcMain } from "electron";
 import { R2M, R2MInvoke } from '@/shared/ipc-types';
-import { callFromRendererToMain, invokeFromRendererToMain } from '../../../shared/ipc-main';
+import { callFromRendererToMain, invokeFromRendererToMain } from '../../../shared/1-gates-in-main';
 
 export function connect_ListenersForCallFromRenderer() {
     connect_CallMain('call-main', cc);

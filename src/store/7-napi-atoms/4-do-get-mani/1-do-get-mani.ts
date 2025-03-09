@@ -1,5 +1,5 @@
 import { atom, type Getter, type Setter } from "jotai";
-import { hasMain, invokeMain } from "@/shared/ipc-client";
+import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { napiBuildProgress, napiBuildState } from "../9-napi-build-state";
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";

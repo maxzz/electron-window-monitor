@@ -1,4 +1,4 @@
-import { TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace R2M { // Main from Renderer
     export type ClientOptions = {

@@ -1,6 +1,6 @@
 import { atom, type Getter, type Setter } from "jotai";
 import { proxy } from "valtio";
-import { hasMain, invokeMain } from "@/shared/ipc-client";
+import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { appSettings } from "@/store/1-atoms";
 import { GetTlwInfoResult, type TlwInfo, type GetTlwScreenshotsParams, type TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { uuid } from "../../manifest";

@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "@/shared/ipc-client";
+import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowIconGetterResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { napiBuildState } from "../9-napi-build-state";
 import { getSubError } from "@/utils";

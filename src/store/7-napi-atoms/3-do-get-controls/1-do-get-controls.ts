@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { invokeMain } from "@/shared/ipc-client";
+import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";

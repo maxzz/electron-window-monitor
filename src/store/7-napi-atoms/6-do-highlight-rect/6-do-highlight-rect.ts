@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { sendToMain } from "@/shared/ipc-client";
+import { sendToMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { sawHandleAtom } from "../1-do-get-hwnd";
 

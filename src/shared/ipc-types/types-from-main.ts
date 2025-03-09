@@ -1,5 +1,5 @@
-import { TargetPosition } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { R2MInvoke } from "./types-to-main-invoke";
+import { type TargetPosition } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type R2MInvoke } from "./types-to-main-invoke";
 
 export namespace M2R { // Main to Renderer
 

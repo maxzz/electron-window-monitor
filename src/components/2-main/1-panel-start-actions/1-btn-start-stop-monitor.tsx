@@ -98,6 +98,6 @@ function Tests() {
         {/* <EyeV5 />
             <EyeV6 /> */}
 
-        <WaitV1 />
+        {/* <WaitV1 /> */}
     </>);
 }

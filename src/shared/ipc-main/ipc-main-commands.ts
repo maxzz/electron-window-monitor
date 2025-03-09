@@ -1,5 +1,5 @@
 import { type BrowserWindow, dialog } from "electron";
-import { winApp } from "../../x-electron/app/window-electron-start-main/create-main-window";
+import { winApp } from "../../x-electron/app/1-start-main-window";
 import { loadFilesContent } from "../../x-electron/app/utils-main/load-files";
 import { type M2R, R2MInvoke } from "../ipc-types";
 

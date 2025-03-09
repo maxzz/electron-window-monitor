@@ -1,6 +1,6 @@
 import { Notification } from "electron";
 import { R2M } from "@/shared/ipc-types";
-import { mainStore } from "../../x-electron/app/store-main";
+import { electronState } from "../../x-electron/app/2-electron-globals";
 import { highlightRect } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 
 export async function callFromRendererToMain(data: R2M.ToMainCalls): Promise<void> {
@@ -14,11 +14,11 @@ export async function callFromRendererToMain(data: R2M.ToMainCalls): Promise<voi
             break;
         }
         case 'r2m:set-client-options': {
-            mainStore.maxControls = data.state.maxControls;
+            electronState.maxControls = data.state.maxControls;
             break;
         }
         case 'r2m:cancel-detection': {
-            mainStore.cancelDetection = true;
+            electronState.cancelDetection = true;
             break;
         }
         case 'r2m:highlight-rect': {

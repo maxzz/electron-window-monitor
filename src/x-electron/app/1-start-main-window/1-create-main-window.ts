@@ -1,6 +1,6 @@
-import path from 'node:path';
+import path from "node:path";
 import { BrowserWindow, app, shell } from "electron";
-import { loadIniFileOptions, saveIniFileOptions } from '../utils-main/ini-file-options';
+import { loadIniFileOptions, saveIniFileOptions } from "./8-ini-file-options";
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];

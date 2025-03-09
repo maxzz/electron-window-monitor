@@ -1,3 +1,3 @@
-export * from './ipc-main-incoming-calls';
-export * from './ipc-main-incoming-invoke';
-export * from './ipc-main-commands';
+export * from './1-main-incoming-calls';
+export * from './2-main-incoming-invoke';
+export * from './3-main-to-renderer';

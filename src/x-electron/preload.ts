@@ -1,5 +1,6 @@
-import { contextBridge, ipcRenderer, IpcRendererEvent } from "electron";
+import { contextBridge, ipcRenderer, IpcRendererEvent, webUtils } from "electron";
 
+// Custom APIs for renderer
 const api: TmApi = {
     callMain: (data: any): void => {
         const channel: PreloadChannelNames = 'call-main';
@@ -16,6 +17,29 @@ const api: TmApi = {
         ipcRenderer.removeAllListeners(channel);
         ipcRenderer.on(channel, callback);
     },
+
+    getPathForFile(file: File): string {
+        try {
+            return webUtils.getPathForFile(file);
+        } catch (error) {
+            console.error(error); // no a file case
+        }
+        return '';
+    },
 };
 
-contextBridge.exposeInMainWorld('tmApi', api);
+// Use `contextBridge` APIs to expose Electron APIs to renderer only if context isolation is enabled,
+// otherwise just add to the DOM global.
+
+if (process.contextIsolated) { // It should be true always from now on.
+    try {
+        contextBridge.exposeInMainWorld('tmApi', api);
+    } catch (error) {
+        console.error(error);
+    }
+} else {
+    // @ts-ignore (define in dts)
+    window.electron = electronAPI;
+    // @ts-ignore (define in dts)
+    window.tmApi = api;
+}

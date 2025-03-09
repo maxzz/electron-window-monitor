@@ -1,5 +1,5 @@
 import { Notification } from "electron";
-import { R2M } from "@/shared/ipc-types";
+import { type R2M } from "@/shared/ipc-types";
 import { electronState } from "../../x-electron/app/2-electron-globals";
 import { highlightRect } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 

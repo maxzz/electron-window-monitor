@@ -1,4 +1,4 @@
-import { R2MInvoke } from "@/shared/ipc-types";
+import { type R2MInvoke } from "@/shared/ipc-types";
 import { loadFilesContent } from "../../x-electron/app/utils-main/load-files";
 import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 

@@ -7,33 +7,33 @@ import { hashedQueryAtom } from "./8-hashed-query";
 import { easyDelayInput } from "./8-easy-delay-input";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 
-// export const doLoadFakeScreensAtom = atom(
-//     null,
-//     async (get, set, tsId: TestScreenEnum): Promise<TlwScreenshot[]> => {
+export const doLoadFakeScreensAtom = atom(
+    null,
+    async (get, set, tsId: TestScreenEnum): Promise<TlwScreenshot[]> => {
 
-//         // 1. Check if we need to delay
-//         const nDelay = easyDelayInput(appSettings.appUi.uiAdvanced.testCreateAppsDelay);
-//         if (nDelay) {
-//             const nDelays = nDelay / 500;
-//             for (let i = 0; i < nDelays; i++) {
-//                 napiBuildProgress.buildCounter = i * 500 + randomIntExclusive(0, 100);
-//                 await delay(500);
-//             }
-//         }
+        // 1. Check if we need to delay
+        const nDelay = easyDelayInput(appSettings.appUi.uiAdvanced.testCreateAppsDelay);
+        if (nDelay) {
+            const nDelays = nDelay / 500;
+            for (let i = 0; i < nDelays; i++) {
+                napiBuildProgress.buildCounter = i * 500 + randomIntExclusive(0, 100);
+                await delay(500);
+            }
+        }
 
-//         // 2. Get content
-//         const fname = testScreenIds[tsId];
-//         if (!fname) {
-//             return [];
-//         }
+        // 2. Get content
+        const fname = testScreenIds[tsId];
+        if (!fname) {
+            return [];
+        }
 
-//         const rv = await get(hashedQueryAtom(fname)) as TlwScreenshot[]; //console.log('doLoadFakeScreenshotsAtom', fname, cnt);
-//         return rv;
-//     }
-// );
+        const rv = await get(hashedQueryAtom(fname)) as TlwScreenshot[]; //console.log('doLoadFakeScreenshotsAtom', fname, cnt);
+        return rv;
+    }
+);
 
-// const testScreenIds: Record<TestScreenEnum, string> = {
-//     none: '',
-//     A: 'tests/25.01.16.25/TopLevelWindowsScreenshots.json',
-//     B: 'tests/25.01.16.25/TopLevelWindowsScreenshots2many.json',
-// };
+const testScreenIds: Record<TestScreenEnum, string> = {
+    none: '',
+    A: 'tests/25.01.16.25/TopLevelWindowsScreenshots.json',
+    B: 'tests/25.01.16.25/TopLevelWindowsScreenshots2many.json',
+};

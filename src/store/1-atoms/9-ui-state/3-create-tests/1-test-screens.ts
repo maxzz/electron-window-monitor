@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type TestScreenEnum } from "../0-state-debug";
+import { type TestScreenEnum } from "../0-local-storage-debug";
 import { type TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { hashedQueryAtom } from "./8-hashed-query";
 

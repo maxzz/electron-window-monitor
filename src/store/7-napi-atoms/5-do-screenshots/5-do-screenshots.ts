@@ -1,8 +1,8 @@
 import { atom, type Getter, type Setter } from "jotai";
 import { proxy } from "valtio";
 import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
-import { appSettings } from "@/store/1-atoms";
-import { GetTlwInfoResult, type TlwInfo, type GetTlwScreenshotsParams, type TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { debugSettings } from "@/store/1-atoms";
+import { type TlwInfo, type GetTlwScreenshotsParams, type TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { uuid } from "../../manifest";
 import { toast } from "sonner";
 import { doLoadFakeScreensAtom } from "@/store/1-atoms";
@@ -114,7 +114,7 @@ function correlateScreenshotsOrder(tlwInfos: TlwInfo[], screenshots: TlwScreensh
 // }
 
 async function doTestScreenshots(width: number | undefined, get: Getter, set: Setter) {
-    const screen = appSettings.testCreate.screen;
+    const screen = debugSettings.testCreate.screen;
     const screenshots = await set(doLoadFakeScreensAtom, screen);
 
     set(allScreenshotAtom, addScreenshotsExtra(screenshots));

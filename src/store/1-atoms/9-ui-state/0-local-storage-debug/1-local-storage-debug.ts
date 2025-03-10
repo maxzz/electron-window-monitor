@@ -4,7 +4,7 @@ import { mergeDefaultAndLoaded } from '@/utils';
 import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
 import { type TestCreate, initialTestCreate } from './3-local-storage-debug-create';
 
-const STORAGE_UI_KEY = 'pmat24-lite:ui';
+const STORAGE_UI_KEY = 'electron-window-monitor:debug';
 const STORAGE_UI_VER = 'v1';
 
 type DebugState = {

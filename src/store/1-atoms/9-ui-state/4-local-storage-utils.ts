@@ -1,4 +1,4 @@
-import { UiState } from "./1-local-storage";
+import { UiState } from "./0-local-storage-app";
 
 export function setAppDarkMode(setDark: boolean) {
     document.getElementsByTagName('body')[0].classList[setDark ? 'add' : 'remove']('dark');

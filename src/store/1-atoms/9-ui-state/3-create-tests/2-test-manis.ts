@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { type TestManiEnum } from "../0-state-debug";
+import { type TestManiEnum } from "../0-local-storage-debug";
 import { hashedQueryAtom } from "./8-hashed-query";
 
 const testManis: Record<TestManiEnum, string> = {

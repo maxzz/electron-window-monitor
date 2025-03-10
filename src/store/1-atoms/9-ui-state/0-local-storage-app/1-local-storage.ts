@@ -1,31 +1,28 @@
 import { proxy, subscribe } from 'valtio';
-import { mergeDefaultAndLoaded } from '@/utils';
+import { mergeDefaultAndLoaded, themeApplyMode } from '@/utils';
 import { sendNapiOptions } from '@/shared/2-gates-in-client-as-atoms';
-import { initializeUiState } from '../4-local-storage-utils';
-import { AppUISettings, defaultAppUISettings } from '../8-app-ui';
+import { type AppUISettings, defaultAppUISettings } from '../8-app-ui';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:ui';
 const STORAGE_UI_VER = 'v2';
 
-export type UiState = {
-    darkMode: boolean;
-};
-
 type AppUi = {
     appUi: AppUISettings;           // App UI settings: theme, divider, etc.
-    uiState: UiState;
 };
 
 const initialAppUi: AppUi = {
     appUi: defaultAppUISettings,
-    uiState: {
-        darkMode: false,
-    },
 };
 
 export const appSettings = proxy<AppUi>(loadUiInitialState());
 
-initializeUiState(appSettings.uiState);
+// Apply theme changes
+
+themeApplyMode(appSettings.appUi.theme);
+
+subscribe(appSettings.appUi, () => {
+    themeApplyMode(appSettings.appUi.theme);
+});
 
 // Local storage
 
@@ -44,7 +41,7 @@ function loadUiInitialState(): AppUi {
     return state;
 }
 
-subscribe(appSettings.uiState, () => {
+subscribe(appSettings, () => {
     sendNapiOptions();
     localStorage.setItem(STORAGE_UI_KEY, JSON.stringify({ [STORAGE_UI_VER]: appSettings }));
 });

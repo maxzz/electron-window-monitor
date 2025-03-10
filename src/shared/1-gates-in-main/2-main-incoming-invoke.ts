@@ -1,6 +1,6 @@
 import { type R2MInvoke } from "@/shared/ipc-types";
-import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { loadWin32FilesContent } from "@/x-electron/xternal-to-renderer/2-commands-in-main";
+import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { loadWin32FilesContent } from "../../x-electron/xternal-to-renderer/2-commands-in-main";
 
 export async function invokeFromRendererInMain(data: R2MInvoke.InvokeCalls): Promise<any> {
     switch (data.type) {

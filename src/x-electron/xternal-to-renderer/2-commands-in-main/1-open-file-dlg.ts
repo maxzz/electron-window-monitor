@@ -1,6 +1,6 @@
 import { type BrowserWindow, dialog } from "electron";
-import { R2MInvoke } from "@/shared/ipc-types";
-import { mainToRenderer } from "@/shared/1-gates-in-main";
+import { R2MInvoke } from "../../../shared/ipc-types";
+import { mainToRenderer } from "../../../shared/1-gates-in-main";
 import { loadWin32FilesContent } from "./2-load-win32-files";
 
 export async function openFileDialogAndReply(appWin: BrowserWindow | null | undefined, what: { openDirs: boolean; } = { openDirs: false }) {

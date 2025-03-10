@@ -20,21 +20,21 @@ export const doClearSawHandleAtom = atom(
 export const doGetTargetHwndAtom = atom(
     null,
     async (get, set): Promise<void> => {
+        // 1. Get target hwnd
         if (!napiLock.locked()) {
 
             hasMain()
                 ? await doLiveHwnd(get, set)
                 : await doTestHwnd(get, set);
-
-            const hwnd = get(sawHandleAtom)?.hwnd;
-            
-            if (appSettings.monitor.iconAutoUpdate) {
-                if (hwnd) {
-                    set(doGetWindowIconAtom, hwnd);
-                }
-            }
-
             napiLock.unlock();
+        }
+
+        // 2. Update icon
+        if (appSettings.monitor.iconAutoUpdate) {
+            const hwnd = get(sawHandleAtom)?.hwnd;
+            if (hwnd) {
+                set(doGetWindowIconAtom, hwnd);
+            }
         }
     }
 );
@@ -54,14 +54,6 @@ async function doLiveHwnd(get: Getter, set: Setter) {
 
         const obj = JSON.parse(res || '{}') as GetTargetWindowResult;
         set(sawHandleAtom, obj);
-
-        if (appSettings.monitor.iconAutoUpdate) {
-            if (obj.hwnd) {
-                set(doGetWindowIconAtom, obj.hwnd);
-            }
-        }
-
-        //console.log('doGetSawHandleAtom.set', JSON.stringify(obj, null, 4));
     } catch (error) {
         set(sawHandleStrAtom, '');
         set(sawHandleAtom, null);

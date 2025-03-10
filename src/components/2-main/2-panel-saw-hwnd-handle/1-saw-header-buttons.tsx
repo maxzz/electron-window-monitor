@@ -1,14 +1,14 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/1-atoms";
+import { debugSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
 import { utilityButtonClasses } from "../1-panel-start-actions/8-button-classes";
 import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringTimerAtom, sawIconAtom } from "@/store";
 
 export function SawHeaderButtons() {
     const isMonitoring = useAtomValue(doMonitoringTimerAtom);
-    const iconsLarge = useSnapshot(appSettings.monitor).iconsLarge;
+    const { iconsLarge } = useSnapshot(debugSettings.uiState);
 
     const raw = useAtomValue(sawHandleStrAtom);
     if (!raw) {

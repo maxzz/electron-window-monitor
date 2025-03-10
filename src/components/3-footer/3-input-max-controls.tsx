@@ -1,17 +1,17 @@
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/1-atoms";
+import { debugSettings } from "@/store/1-atoms";
 import { focusClasses } from "../2-main/8-shared-styles";
 
 export function InputMaxControls() {
-    const { maxControls } = useSnapshot(appSettings.monitor);
-    
+    const { maxControls } = useSnapshot(debugSettings.uiState);
+
     function setValue(value: string) {
         let n = parseInt(value);
         if (Number.isNaN(n)) {
             n = 0;
         }
-        appSettings.monitor.maxControls = n;
+        debugSettings.uiState.maxControls = n;
     }
 
     return (

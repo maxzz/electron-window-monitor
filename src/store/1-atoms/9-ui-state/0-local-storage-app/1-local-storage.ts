@@ -2,7 +2,6 @@ import { proxy, subscribe } from 'valtio';
 import { initializeUiState } from '../4-local-storage-utils';
 import { mergeDefaultAndLoaded } from '@/utils';
 import { sendNapiOptions } from '@/shared/2-gates-in-client-as-atoms';
-import { type DebugMonitorState, initialDebugMonitorState } from '../2-local-storage-debug-monitor';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:ui';
 const STORAGE_UI_VER = 'v2';
@@ -13,14 +12,12 @@ export type UiState = {
 
 type AppUi = {
     uiState: UiState;
-    monitor: DebugMonitorState;
 };
 
 const initialAppUi: AppUi = {
     uiState: {
         darkMode: false,
     },
-    monitor: initialDebugMonitorState,
 };
 
 export const appSettings = proxy<AppUi>(loadUiInitialState());

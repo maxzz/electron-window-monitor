@@ -1,16 +1,16 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
 import { buttonClasses } from "./8-button-classes";
-import { appSettings } from "@/store/1-atoms";
+import { doGetWindowIconAtom, sawHandleAtom } from "@/store";
+import { debugSettings } from "@/store/1-atoms";
 
 export function ButtonGetIcon() {
 
     const doGetWindowIcon = useSetAtom(doGetWindowIconAtom);
     const secondActiveWindow = useAtomValue(sawHandleAtom);
 
-    const { iconAutoUpdate } = useSnapshot(appSettings.monitor);
+    const { iconAutoUpdate } = useSnapshot(debugSettings.uiState);
     if (iconAutoUpdate) {
         return null;
     }

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { R2MCalls } from "../../store";
-import { appSettings } from "@/store/1-atoms";
+import { debugSettings } from "@/store/1-atoms";
 
 // Initial state exchange from renderer to main
 
@@ -14,5 +14,5 @@ export function OnAppMount() {
 }
 
 export function sendNapiOptions() {
-    R2MCalls.setClientOptions({ state: { maxControls: appSettings.monitor.maxControls } });
+    R2MCalls.setClientOptions({ state: { maxControls: debugSettings.uiState.maxControls } });
 }

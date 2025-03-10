@@ -1,7 +1,7 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { appSettings } from "@/store/1-atoms";
+import { debugSettings } from "@/store/1-atoms";
 import { doGetWindowManiAtom, doMonitoringTimerAtom, napiBuildState, sawHandleAtom } from "@/store";
 import { buttonClasses } from "./8-button-classes";
 
@@ -12,7 +12,7 @@ export function ButtonGetManifest() {
     
     const secondActiveWindow = useAtomValue(sawHandleAtom);
     const { buildRunning } = useSnapshot(napiBuildState);
-    const { acquireXml } = useSnapshot(appSettings.monitor);
+    const { acquireXml } = useSnapshot(debugSettings.uiState);
 
     const hwnd = secondActiveWindow?.hwnd;
     const isDisabled = !hwnd || buildRunning;

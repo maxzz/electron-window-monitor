@@ -1,7 +1,7 @@
 import { atom, type Getter, type Setter } from "jotai";
 import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { appSettings } from "@/store/1-atoms";
+import { debugSettings } from "@/store/1-atoms";
 import { doGetWindowIconAtom } from "../2-do-get-icon";
 import { sawContentAtom, sawContentStrAtom } from "../3-do-get-controls";
 import { napiBuildStateAtom, napiLock } from "../9-napi-build-state";
@@ -30,7 +30,7 @@ export const doGetTargetHwndAtom = atom(
         }
 
         // 2. Update icon
-        if (appSettings.monitor.iconAutoUpdate) {
+        if (debugSettings.uiState.iconAutoUpdate) {
             const hwnd = get(sawHandleAtom)?.hwnd;
             if (hwnd) {
                 set(doGetWindowIconAtom, hwnd);

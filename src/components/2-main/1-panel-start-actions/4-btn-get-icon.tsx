@@ -16,17 +16,17 @@ export function ButtonGetIcon() {
     }
 
     const hwnd = secondActiveWindow?.hwnd;
+    const title = !hwnd
+        ? 'Get the second active window first'
+        : 'Get the second active window icon';
     const isDisabled = !hwnd;
-    const title = !hwnd ? 'Get the second active window first' : 'Get the second active window icon';
-    
+
     return (
         <button
             className={classNames(buttonClasses, "")}
             disabled={isDisabled}
             title={title}
-            onClick={() => {
-                doGetWindowIcon(hwnd);
-            }}
+            onClick={() => doGetWindowIcon(hwnd)}
         >
             Icon
         </button>

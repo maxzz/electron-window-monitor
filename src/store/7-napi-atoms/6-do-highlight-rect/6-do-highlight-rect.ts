@@ -9,10 +9,12 @@ export const doHighlightRectAtom = atom(
         if (!rect) {
             return;
         }
+
         if (hwnd === undefined) {
             const sawHandle = get(sawHandleAtom);
             hwnd = sawHandle?.hwnd;
         }
+        
         if (hwnd) {
             R2MCalls.highlightRect({ hwnd, rect });
         }

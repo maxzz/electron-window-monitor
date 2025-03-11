@@ -3,9 +3,8 @@ import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
-import { errorToString, getSubError, splitTypedError, typedErrorToString } from "@/utils";
-import { napiBuildProgress, napiBuildState } from "../9-napi-build-state";
-import { setLocalState } from "./8-utils-set-state";
+import { errorToString, splitTypedError, typedErrorToString } from "@/utils";
+import { napiBuildProgress, napiBuildState, setBuildState } from "../9-napi-build-state";
 
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<EngineControlsWithMeta | null>(null);
@@ -24,13 +23,13 @@ export const doGetWindowControlsAtom = atom(
 
             // 1. call napi to get raw reply string
 
-            setLocalState({ progress: 0, isRunning: true, error: undefined, failedBody: '' });
+            setBuildState({ progress: 0, isRunning: true, error: undefined, failedBody: '' });
 
             const res = await invokeMain<string>({ type: 'r2mi:get-window-controls', hwnd });
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
-                setLocalState({ progress: 0, isRunning: false, error: undefined });
+                setBuildState({ progress: 0, isRunning: false, error: undefined });
                 return;
             }
             set(sawContentStrAtom, res);
@@ -41,7 +40,7 @@ export const doGetWindowControlsAtom = atom(
             const final = controlsReplyToEngineControlWithMeta(poolAndControls);
 
             set(sawContentAtom, final);
-            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: undefined });
+            setBuildState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: undefined });
 
             console.log('doGetWindowControlsAtom', JSON.stringify(poolAndControls, null, 4));
         } catch (error) {
@@ -49,9 +48,13 @@ export const doGetWindowControlsAtom = atom(
             set(sawContentAtom, null);
 
             const typedError = splitTypedError(errorToString(error));
-            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: typedError });
+            setBuildState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: typedError });
 
             console.error(`'doGetWindowControlsAtom' ${typedErrorToString(typedError)}`);
         }
     }
 );
+
+//TODO: if error: undefined then reset error in napiBuildState
+//TODO: add sawContentStrAtom and sawContentAtom reset atom
+//TODO: add reset atom and use setBuildState for 2-do-get-icon.ts

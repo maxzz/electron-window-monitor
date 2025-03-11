@@ -9,3 +9,5 @@ export * from "./theme-apply";
 export * from "./web-data-transfer-item-list";
 export * from "./web-drop-utils";
 export * from "./x-sub-error";
+
+export * from "./9-types-napi-error";

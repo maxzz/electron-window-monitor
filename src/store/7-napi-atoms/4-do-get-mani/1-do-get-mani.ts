@@ -4,7 +4,7 @@ import { type WindowControlsCollectResult } from "@/x-electron/xternal-to-render
 import { napiBuildProgress, napiBuildState } from "../9-napi-build-state";
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";
 import { setLocalState } from "../3-do-get-controls";
-import { getSubError } from "@/utils";
+import { errorToString, splitTypedError, typedErrorToString } from "@/utils";
 
 export const sawManiStrAtom = atom<string | undefined>('');                 // raw unprocessed reply string from napi to compare with current
 export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw xml string from napi if called with wantXml
@@ -33,13 +33,13 @@ async function doLiveMani({ hwnd, wantXml }: { hwnd: string | undefined; wantXml
 
         // 1. call napi to get raw reply string
 
-        setLocalState({ progress: 0, lastProgress: 0, isRunning: true, error: '', failedBody: '' });
+        setLocalState({ progress: 0, lastProgress: 0, isRunning: true, error: undefined, failedBody: '' });
 
         const res = await invokeMain<string>({ type: 'r2mi:get-window-mani', hwnd, wantXml });
 
         const prev = get(sawManiStrAtom);
         if (prev === res) {
-            setLocalState({ progress: 0, isRunning: false, error: '' });
+            setLocalState({ progress: 0, isRunning: false, error: undefined });
             return;
         }
         set(sawManiStrAtom, res);
@@ -58,13 +58,15 @@ async function doLiveMani({ hwnd, wantXml }: { hwnd: string | undefined; wantXml
             console.log('doGetWindowManiAtom.set', JSON.stringify(reply, null, 4));
         }
 
-        setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: '' });
+        setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: undefined });
     } catch (error) {
         set(sawManiStrAtom, '');
         set(sawManiAtom, null);
-        setLocalState({ progress: 0, isRunning: false, error: getSubError(error) });
 
-        console.error(`'doGetWindowManiAtom' ${error instanceof Error ? error.message : `${error}`}`);
+        const typedError = splitTypedError(errorToString(error));
+        setLocalState({ progress: 0, isRunning: false, error: typedError });
+
+        console.error(`'doGetWindowManiAtom' ${typedErrorToString(typedError)}`);
     }
 }
 

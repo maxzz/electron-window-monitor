@@ -3,7 +3,7 @@ import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
-import { getSubError } from "@/utils";
+import { errorToString, getSubError, splitTypedError, typedErrorToString } from "@/utils";
 import { napiBuildProgress, napiBuildState } from "../9-napi-build-state";
 import { setLocalState } from "./8-utils-set-state";
 
@@ -24,13 +24,13 @@ export const doGetWindowControlsAtom = atom(
 
             // 1. call napi to get raw reply string
 
-            setLocalState({ progress: 0, isRunning: true, error: '', failedBody: '' });
+            setLocalState({ progress: 0, isRunning: true, error: undefined, failedBody: '' });
 
             const res = await invokeMain<string>({ type: 'r2mi:get-window-controls', hwnd });
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {
-                setLocalState({ progress: 0, isRunning: false, error: '' });
+                setLocalState({ progress: 0, isRunning: false, error: undefined });
                 return;
             }
             set(sawContentStrAtom, res);
@@ -41,16 +41,17 @@ export const doGetWindowControlsAtom = atom(
             const final = controlsReplyToEngineControlWithMeta(poolAndControls);
 
             set(sawContentAtom, final);
-            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: '' });
+            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: undefined });
 
             console.log('doGetWindowControlsAtom', JSON.stringify(poolAndControls, null, 4));
         } catch (error) {
             set(sawContentStrAtom, '');
             set(sawContentAtom, null);
 
-            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: getSubError(error) });
+            const typedError = splitTypedError(errorToString(error));
+            setLocalState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: typedError });
 
-            console.error(`'doGetWindowControlsAtom' ${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'doGetWindowControlsAtom' ${typedErrorToString(typedError)}`);
         }
     }
 );

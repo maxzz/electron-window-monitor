@@ -2,7 +2,7 @@ import { atom } from "jotai";
 import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowIconGetterResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { napiBuildState } from "../9-napi-build-state";
-import { getSubError } from "@/utils";
+import { errorToString, splitTypedError, typedErrorToString } from "@/utils";
 //import { sawHandleAtom } from "./do-get-hwnd";
 
 export const sawIconStrAtom = atom<string | undefined>(undefined);
@@ -39,16 +39,19 @@ export const doGetWindowIconAtom = atom(
                 set(sawIconAtom, image);
             }
 
-            napiBuildState.buildError = '';
+            napiBuildState.typedError = '';
+            napiBuildState.typedExtra = undefined;
 
             //console.log('doGetSawIconAtom.set', JSON.stringify(str, null, 4));
         } catch (error) {
             set(sawIconStrAtom, '');
             set(sawIconAtom, null);
 
-            napiBuildState.buildError = getSubError(error);
+            const typedError = splitTypedError(errorToString(error));
+            napiBuildState.typedError = typedError.typed;
+            napiBuildState.typedExtra = typedError.extra;
 
-            console.error(`'doGetWindowIconAtom' ${error instanceof Error ? error.message : `${error}`}`);
+            console.error(`'doGetWindowIconAtom' ${typedErrorToString(typedError)}`);
         }
     }
 );

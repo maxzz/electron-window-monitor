@@ -13,9 +13,9 @@ export function setBuildState({ progress, lastProgress, isRunning, error, failed
     progress !== undefined && (napiBuildProgress.buildCounter = progress);
     lastProgress !== undefined && (napiBuildProgress.lastProgress = lastProgress);
     isRunning !== undefined && (napiBuildState.buildRunning = isRunning);
-    if (error) {
-        napiBuildState.typedError = error.typed;
-        napiBuildState.typedExtra = error.extra;
-    }
+
+    napiBuildState.typedError = error ? error.typed : '';
+    napiBuildState.typedExtra = error ? error.extra : undefined;
+
     failedBody !== undefined && (napiBuildState.buildFailedBody = failedBody);
 }

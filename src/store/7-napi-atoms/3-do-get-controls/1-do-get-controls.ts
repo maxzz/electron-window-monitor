@@ -58,3 +58,5 @@ export const doGetWindowControlsAtom = atom(
 //TODO: if error: undefined then reset error in napiBuildState
 //TODO: add sawContentStrAtom and sawContentAtom reset atom
 //TODO: add reset atom and use setBuildState for 2-do-get-icon.ts
+
+//TODO: remove duplicates

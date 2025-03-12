@@ -2,7 +2,7 @@ import { proxy, subscribe } from 'valtio';
 import { sendNapiOptions } from '@/shared/2-gates-in-client-as-atoms';
 import { mergeDefaultAndLoaded } from '@/utils';
 import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
-import { type TestCreate, initialTestCreate } from './3-local-storage-debug-create';
+import { initialTestCreate, TestCreate } from '@/store/7-napi-atoms/8-create-mani-tests-w-fetch';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:debug';
 const STORAGE_UI_VER = 'v1';

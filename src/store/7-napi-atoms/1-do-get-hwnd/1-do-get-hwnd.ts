@@ -9,14 +9,6 @@ import { napiBuildStateAtom, napiLock } from "../9-napi-build-state";
 export const sawHandleStrAtom = atom<string | undefined>('');
 export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
 
-export const doClearSawHandleAtom = atom(
-    null,
-    (get, set) => {
-        set(sawHandleAtom, null);
-        set(sawHandleStrAtom, '');
-    }
-);
-
 export const doGetTargetHwndAtom = atom(
     null,
     async (get, set): Promise<void> => {
@@ -55,8 +47,7 @@ async function doLiveHwnd(get: Getter, set: Setter) {
         const obj = JSON.parse(res || '{}') as GetTargetWindowResult;
         set(sawHandleAtom, obj);
     } catch (error) {
-        set(sawHandleStrAtom, '');
-        set(sawHandleAtom, null);
+        set(doClearSawHandleAtom);
         console.error(`'doGetTargetHwndAtom' ${error instanceof Error ? error.message : `${error}`}`);
     }
 }
@@ -74,6 +65,15 @@ async function doTestHwnd(get: Getter, set: Setter) {
 
 // let lastTestCreateHwnd: typeof debugSettings.testCreate.hwnd = 'none';
 
+export const doClearSawHandleAtom = atom(
+    null,
+    (get, set) => {
+        set(sawHandleAtom, null);
+        set(sawHandleStrAtom, '');
+    }
+);
+
+//
 
 export const sawGetDisabledAtom = atom(
     (get) => {

@@ -9,14 +9,6 @@ export const sawIconStrAtom = atom<string | undefined>(undefined);
 export const sawIconAtom = atom<HTMLImageElement | null>(null);
 export type SawIconAtom = typeof sawIconAtom;
 
-export const doClearSawIconAtom = atom(
-    null,
-    (get, set) => {
-        set(sawIconStrAtom, '');
-        set(sawIconAtom, null);
-    }
-);
-
 export const doGetWindowIconAtom = atom(
     null,
     async (get, set, hwnd: string | undefined): Promise<void> => {
@@ -95,6 +87,14 @@ async function doTestIcon(hwnd: string, get: Getter, set: Setter) {
 }
 
 // let lastTestCreateHwnd: typeof debugSettings.testCreate.hwnd = 'none';
+
+const doClearSawIconAtom = atom(
+    null,
+    (get, set) => {
+        set(sawIconStrAtom, '');
+        set(sawIconAtom, null);
+    }
+);
 
 //
 

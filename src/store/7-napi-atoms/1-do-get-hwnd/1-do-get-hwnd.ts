@@ -4,6 +4,7 @@ import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-n
 import { debugSettings } from "@/store/1-atoms";
 import { doGetWindowIconAtom } from "../2-do-get-icon";
 import { sawContentAtom, sawContentStrAtom } from "../3-do-get-controls";
+import { doLoadFakeHwndAtom, type TestHwnd } from "../8-create-mani-tests-w-fetch";
 import { napiBuildStateAtom, napiLock } from "../9-napi-build-state";
 
 export const sawHandleStrAtom = atom<string | undefined>('');
@@ -58,9 +59,9 @@ async function doTestHwnd(get: Getter, set: Setter) {
     // }
     // lastTestCreateHwnd = debugSettings.testCreate.hwnd;
 
-    // const testHwnd = (await set(doLoadFakeHwndAtom, debugSettings.testCreate.hwnd)) as unknown as TestHwnd;
-    // set(sawHandleStrAtom, JSON.stringify(testHwnd));
-    // set(sawHandleAtom, testHwnd?.hwnd ? testHwnd.hwnd : null);
+    const testHwnd = (await set(doLoadFakeHwndAtom, debugSettings.testCreate.hwnd)) as unknown as TestHwnd;
+    set(sawHandleStrAtom, JSON.stringify(testHwnd));
+    set(sawHandleAtom, testHwnd?.hwnd ? testHwnd.hwnd : null);
 }
 
 // let lastTestCreateHwnd: typeof debugSettings.testCreate.hwnd = 'none';

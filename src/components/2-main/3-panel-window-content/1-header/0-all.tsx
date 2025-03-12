@@ -15,9 +15,9 @@ export function HeaderPanel() {
 function HeaderTitle() {
     const sawContentStr = useAtomValue(sawContentStrAtom);
     const { buildCounter } = useSnapshot(napiBuildProgress);
-    const { typedError } = useSnapshot(napiBuildState);
+    const { buildError } = useSnapshot(napiBuildState);
 
-    const showControls = !!sawContentStr || buildCounter > 0 || !!typedError;
+    const showControls = !!sawContentStr || buildCounter > 0 || !!buildError;
     return (<>
         {showControls &&
             <div className="py-1 flex items-center gap-2">

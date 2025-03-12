@@ -39,19 +39,15 @@ export const doGetWindowIconAtom = atom(
                 set(sawIconAtom, image);
             }
 
-            napiBuildState.typedError = '';
-            napiBuildState.typedExtra = undefined;
+            napiBuildState.buildError = '';
 
             //console.log('doGetSawIconAtom.set', JSON.stringify(str, null, 4));
         } catch (error) {
             set(sawIconStrAtom, '');
             set(sawIconAtom, null);
 
-            const typedError = splitTypedError(errorToString(error));
-            napiBuildState.typedError = typedError.typed;
-            napiBuildState.typedExtra = typedError.extra;
-
-            console.error(`'doGetWindowIconAtom' ${typedErrorToString(typedError)}`);
+            napiBuildState.buildError = errorToString(error);
+            console.error(`'doGetWindowIconAtom' ${typedErrorToString(splitTypedError(napiBuildState.buildError))}`);
         }
     }
 );

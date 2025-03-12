@@ -5,10 +5,10 @@ import { R2MCalls } from "@/store";
 import { napiBuildState, napiBuildProgress } from "@/store/7-napi-atoms";
 
 export function PanelBuildProcess(props: ComponentPropsWithoutRef<"div">) {
-    const { typedError } = useSnapshot(napiBuildState);
+    const { buildError } = useSnapshot(napiBuildState);
     return (<>
-        {typedError
-            ? <BuildError buildError={typedError} {...props} />
+        {buildError
+            ? <BuildError buildError={buildError} {...props} />
             : <BuildCounter {...props} />
         }
     </>);

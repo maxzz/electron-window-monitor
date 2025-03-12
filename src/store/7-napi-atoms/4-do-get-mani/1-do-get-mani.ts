@@ -1,9 +1,9 @@
 import { atom, type Getter, type Setter } from "jotai";
+import { errorToString } from "@/utils";
 import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { napiBuildProgress, napiBuildState, setBuildState } from "../9-napi-build-state";
+import { napiBuildProgress, napiBuildState, setBuildState, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";
-import { errorToString, splitTypedError, typedErrorToString } from "@/utils";
 
 export const sawManiStrAtom = atom<string | undefined>('');                 // raw unprocessed reply string from napi to compare with current
 export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw xml string from napi if called with wantXml

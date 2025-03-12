@@ -1,8 +1,8 @@
 import { atom, type Getter, type Setter } from "jotai";
+import { errorToString } from "@/utils";
 import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowIconGetterResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { napiBuildState, napiLock } from "../9-napi-build-state";
-import { errorToString, splitTypedError, typedErrorToString } from "@/utils";
+import { napiBuildState, napiLock, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 //import { sawHandleAtom } from "./do-get-hwnd";
 
 export const sawIconStrAtom = atom<string | undefined>(undefined);

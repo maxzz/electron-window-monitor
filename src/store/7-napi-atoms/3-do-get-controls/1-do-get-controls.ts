@@ -1,10 +1,10 @@
 import { atom } from "jotai";
+import { errorToString } from "@/utils";
 import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
-import { errorToString, splitTypedError, typedErrorToString } from "@/utils";
-import { napiBuildProgress, napiBuildState, setBuildState } from "../9-napi-build-state";
+import { napiBuildProgress, napiBuildState, setBuildState, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 
 export const sawContentStrAtom = atom<string | undefined>('');
 export const sawContentAtom = atom<EngineControlsWithMeta | null>(null);
@@ -54,7 +54,7 @@ export const doGetWindowControlsAtom = atom(
     }
 );
 
-//TODO: if error: undefined then reset error in napiBuildState
+//TODO: if error: undefined then reset error in napiBuildState - done
 //TODO: add sawContentStrAtom and sawContentAtom reset atom
 //TODO: add reset atom and use setBuildState for 2-do-get-icon.ts
 

@@ -1,8 +1,8 @@
 import { proxy, subscribe } from 'valtio';
-import { sendNapiOptions } from '@/shared/2-gates-in-client-as-atoms';
 import { mergeDefaultAndLoaded } from '@/utils';
+import { sendNapiOptions } from '@/shared/2-gates-in-client-as-atoms';
 import { type DebugMonitorState, initialDebugMonitorState } from './2-local-storage-debug-monitor';
-import { initialTestCreate, TestCreate } from '@/store/7-napi-atoms/8-create-mani-tests-w-fetch';
+import { type TestCreate, initialTestCreate } from '@/store/7-napi-atoms/8-create-mani-tests-w-fetch';
 
 const STORAGE_UI_KEY = 'electron-window-monitor:debug';
 const STORAGE_UI_VER = 'v1';
@@ -23,6 +23,7 @@ export const debugSettings = proxy<DebugState>(loadUiInitialState());
 
 function loadUiInitialState(): DebugState {
     let storageUi: any;
+    
     let storageUiStr = localStorage.getItem(STORAGE_UI_KEY);
     if (storageUiStr) {
         try {

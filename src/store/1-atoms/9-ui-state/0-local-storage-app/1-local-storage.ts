@@ -27,7 +27,8 @@ subscribe(appSettings.appUi, () => {
 // Local storage
 
 function loadUiInitialState(): AppUi {
-    let storageUi;
+    let storageUi: any;
+
     let storageUiStr = localStorage.getItem(STORAGE_UI_KEY);
     if (storageUiStr) {
         try {

@@ -3,7 +3,7 @@ import { mergeDefaultAndLoaded, themeApplyMode } from '@/utils';
 import { sendNapiOptions } from '@/shared/2-gates-in-client-as-atoms';
 import { type AppUISettings, defaultAppUISettings } from '../8-app-ui';
 
-const STORAGE_UI_KEY = 'electron-window-monitor:ui';
+const STORAGE_UI_KEY = 'pmat-win-mon:ui';
 const STORAGE_UI_VER = 'v2';
 
 type AppUi = {

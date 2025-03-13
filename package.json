@@ -9,7 +9,7 @@
         "@radix-ui/react-scroll-area": "^1.2.2",
         "@react-spring/web": "9.7.5",
         "global": "^4.4.0",
-        "jotai": "2.12.1",
+        "jotai": "2.12.2",
         "jotai-valtio": "^0.6.0",
         "pm-manifest": "1.2.74",
         "pm-manifest-icons": "1.0.3",

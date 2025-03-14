@@ -25,7 +25,7 @@ export function ButtonGetManifest() {
             title={title}
             onClick={() => {
                 doIsMonitoring({ doStart: false });
-                doGetWindowMani({ hwnd, wantXml: acquireXml });
+                doGetWindowMani({ hwnd: hwnd || '', wantXml: acquireXml, manual: false, passwordChange: false });
             }}
         >
             Manifest

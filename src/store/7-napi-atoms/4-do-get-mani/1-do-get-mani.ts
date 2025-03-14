@@ -20,9 +20,9 @@ export const doGetWindowManiAtom = atom(
     }
 );
 
-async function doLiveMani({ hwnd, wantXml, manual, passwordChange }: ManifestForWindowCreatorParams, get: Getter, set: Setter) {
+async function doLiveMani(params: ManifestForWindowCreatorParams, get: Getter, set: Setter) {
     try {
-        if (!hwnd) {
+        if (!params.hwnd) {
             throw new Error('No hwnd');
         }
 
@@ -34,7 +34,7 @@ async function doLiveMani({ hwnd, wantXml, manual, passwordChange }: ManifestFor
 
         setBuildState({ progress: 0, lastProgress: 0, isRunning: true, error: '', failedBody: '' });
 
-        const res = await invokeMain<string>({ type: 'r2mi:get-window-mani', params: { hwnd, wantXml, manual, passwordChange, } });
+        const res = await invokeMain<string>({ type: 'r2mi:get-window-mani', params });
 
         const prev = get(sawManiStrAtom);
         if (prev === res) {
@@ -45,7 +45,7 @@ async function doLiveMani({ hwnd, wantXml, manual, passwordChange }: ManifestFor
 
         // 2. parse reply string to get final reply
 
-        if (wantXml) {
+        if (params.wantXml) {
             set(sawManiXmlAtom, res);
 
             console.log(`doGetWindowManiXmlAtom.set\n${res}`);

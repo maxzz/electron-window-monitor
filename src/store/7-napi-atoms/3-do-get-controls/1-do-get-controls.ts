@@ -42,7 +42,7 @@ export const doGetWindowControlsAtom = atom(
             set(sawContentAtom, final);
             setBuildState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: '' });
 
-            console.log('doGetWindowControlsAtom', JSON.stringify(poolAndControls, null, 4));
+            printControlsData(poolAndControls);
         } catch (error) {
             set(doClearWindowControlsAtom);
 
@@ -60,3 +60,10 @@ const doClearWindowControlsAtom = atom(
         set(sawContentAtom, null);
     }
 );
+
+/**
+ * Print hwnd and icon in format that can be used in tests.
+ */
+function printControlsData(poolAndControls: WindowControlsCollectFinalAfterParse) {
+    console.log('doGetWindowControlsAtom', JSON.stringify(poolAndControls, null, 4));
+}

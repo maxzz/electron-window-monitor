@@ -1,4 +1,5 @@
 import { atom, type Getter, type Setter } from "jotai";
+import { errorToString } from "@/utils";
 import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { debugSettings } from "@/store/1-atoms";
@@ -46,7 +47,7 @@ async function doLiveHwnd(get: Getter, set: Setter) {
         set(sawHandleAtom, obj);
     } catch (error) {
         set(doClearSawHandleAtom);
-        console.error(`'doGetTargetHwndAtom' ${error instanceof Error ? error.message : `${error}`}`);
+        console.error(`'doGetTargetHwndAtom' ${errorToString(error)}`);
     }
 }
 

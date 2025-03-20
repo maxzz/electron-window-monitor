@@ -2,7 +2,7 @@ import { atom, type Getter, type Setter } from "jotai";
 import { errorToString } from "@/utils";
 import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
 import { type ManifestForWindowCreatorParams, type WindowControlsCollectResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { napiBuildProgress, napiBuildState, setBuildState, splitTypedError, typedErrorToString } from "../9-napi-build-state";
+import { napiBuildProgress, napiBuildState, napiLock, setBuildState, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";
 
 export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw unprocessed reply string from napi to compare with current
@@ -11,11 +11,17 @@ export const sawManiAtom = atom<WindowControlsCollectResult | null>(null);  // r
 export const doGetWindowManiAtom = atom(
     null,
     async (get, set, params: ManifestForWindowCreatorParams): Promise<void> => {
+        if (napiLock.locked('mani')) {
+            return;
+        }
+
         if (hasMain()) {
             await doLiveMani(params, get, set);
         } else {
             await doTestMani(params, get, set);
         }
+
+        napiLock.unlock();
     }
 );
 

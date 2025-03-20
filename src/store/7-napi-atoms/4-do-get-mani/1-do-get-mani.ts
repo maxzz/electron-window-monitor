@@ -5,8 +5,8 @@ import { type ManifestForWindowCreatorParams, type WindowControlsCollectResult }
 import { napiBuildProgress, napiBuildState, napiLock, setBuildState, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";
 
-export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw unprocessed reply string from napi to compare with current
-export const sawManiAtom = atom<WindowControlsCollectResult | null>(null);  // reply with controls and pool
+export const maniXmlStrAtom = atom<string | undefined>(undefined);          // raw unprocessed reply string from napi to compare with current
+const sawManiAtom = atom<WindowControlsCollectResult | null>(null);         // reply with controls and pool
 
 export const doGetWindowManiAtom = atom(
     null,
@@ -41,12 +41,12 @@ async function doLiveMani(params: ManifestForWindowCreatorParams, get: Getter, s
 
         const res = await invokeMain<string>({ type: 'r2mi:get-window-mani', params });
 
-        const prev = get(sawManiXmlAtom);
+        const prev = get(maniXmlStrAtom);
         if (prev === res) {
             setBuildState({ progress: 0, isRunning: false, error: '' });
             return;
         }
-        set(sawManiXmlAtom, res);
+        set(maniXmlStrAtom, res);
         //printStrResultData(res);
 
         // 2. parse reply string to get final reply
@@ -70,13 +70,13 @@ async function doLiveMani(params: ManifestForWindowCreatorParams, get: Getter, s
 
 async function doTestMani({ hwnd, wantXml }: ManifestForWindowCreatorParams, get: Getter, set: Setter) {
     const mani = await set(doLoadFakeManiAtom, debugSettings.testCreate.mani);
-    set(sawManiXmlAtom, mani);
+    set(maniXmlStrAtom, mani);
 }
 
 const doClearManiAtom = atom(
     null,
     (get, set) => {
-        set(sawManiXmlAtom, undefined);
+        set(maniXmlStrAtom, undefined);
         set(sawManiAtom, null);
     }
 );

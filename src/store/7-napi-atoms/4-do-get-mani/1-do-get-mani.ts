@@ -6,7 +6,7 @@ import { napiBuildProgress, napiBuildState, setBuildState, splitTypedError, type
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";
 
 export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw unprocessed reply string from napi to compare with current
-export const sawManiAtom = atom<WindowControlsCollectResult | null>(null);   // reply with controls and pool
+export const sawManiAtom = atom<WindowControlsCollectResult | null>(null);  // reply with controls and pool
 
 export const doGetWindowManiAtom = atom(
     null,
@@ -49,8 +49,7 @@ async function doLiveMani(params: ManifestForWindowCreatorParams, get: Getter, s
             const reply = JSON.parse(res || '{}') as WindowControlsCollectResult;
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawManiAtom, final);
-
-            console.log('doGetWindowManiAtom.set', JSON.stringify(reply, null, 4));
+            //printControlsResultData(reply);
         }
 
         setBuildState({ progress: 0, lastProgress: napiBuildProgress.buildCounter, isRunning: false, error: '' });
@@ -80,4 +79,8 @@ const doClearManiAtom = atom(
 
 function printStrResultData(res: string | undefined) {
     console.log(`doGetWindowManiXmlAtom\n${res}`);
+}
+
+function printControlsResultData(reply: WindowControlsCollectResult) {
+    console.log('doGetWindowManiAtom.set', JSON.stringify(reply, null, 4));
 }

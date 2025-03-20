@@ -5,8 +5,7 @@ import { type ManifestForWindowCreatorParams, type WindowControlsCollectResult }
 import { napiBuildProgress, napiBuildState, setBuildState, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 import { debugSettings, doLoadFakeManiAtom } from "@/store/1-atoms";
 
-export const sawManiStrAtom = atom<string | undefined>('');                 // raw unprocessed reply string from napi to compare with current
-export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw xml string from napi if called with wantXml
+export const sawManiXmlAtom = atom<string | undefined>(undefined);          // raw unprocessed reply string from napi to compare with current
 export const sawManiAtom = atom<WindowControlsCollectResult | null>(null);   // reply with controls and pool
 
 export const doGetWindowManiAtom = atom(
@@ -36,20 +35,17 @@ async function doLiveMani(params: ManifestForWindowCreatorParams, get: Getter, s
 
         const res = await invokeMain<string>({ type: 'r2mi:get-window-mani', params });
 
-        const prev = get(sawManiStrAtom);
+        const prev = get(sawManiXmlAtom);
         if (prev === res) {
             setBuildState({ progress: 0, isRunning: false, error: '' });
             return;
         }
-        set(sawManiStrAtom, res);
+        set(sawManiXmlAtom, res);
+        //printStrResultData(res);
 
         // 2. parse reply string to get final reply
 
-        if (params.wantXml) {
-            set(sawManiXmlAtom, res);
-
-            console.log(`doGetWindowManiXmlAtom.set\n${res}`);
-        } else {
+        if (!params.wantXml) {
             const reply = JSON.parse(res || '{}') as WindowControlsCollectResult;
             const final = reply.pool && reply.controls?.length ? reply : null;
             set(sawManiAtom, final);
@@ -75,8 +71,13 @@ async function doTestMani({ hwnd, wantXml }: ManifestForWindowCreatorParams, get
 const doClearManiAtom = atom(
     null,
     (get, set) => {
-        set(sawManiStrAtom, '');
         set(sawManiXmlAtom, undefined);
         set(sawManiAtom, null);
     }
 );
+
+//
+
+function printStrResultData(res: string | undefined) {
+    console.log(`doGetWindowManiXmlAtom\n${res}`);
+}

@@ -24,10 +24,7 @@ export const doGetTargetHwndAtom = atom(
 
         // 2. Update icon
         if (debugSettings.uiState.iconAutoUpdate) {
-            const hwnd = get(sawHandleAtom)?.hwnd;
-            if (hwnd) {
-                set(doGetWindowIconAtom, hwnd);
-            }
+            set(doGetWindowIconAtom, get(sawHandleAtom)?.hwnd);
         }
     }
 );

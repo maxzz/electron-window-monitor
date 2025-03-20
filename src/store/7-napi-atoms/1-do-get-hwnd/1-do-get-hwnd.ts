@@ -14,7 +14,7 @@ export const doGetTargetHwndAtom = atom(
     null,
     async (get, set): Promise<void> => {
         // 1. Get target hwnd
-        if (!napiLock.locked()) {
+        if (!napiLock.locked('hwnd')) {
 
             hasMain()
                 ? await doLiveHwnd(get, set)

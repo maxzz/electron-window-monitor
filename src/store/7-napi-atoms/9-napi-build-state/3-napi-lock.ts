@@ -1,32 +1,28 @@
-import { hasMain } from "@/shared/2-gates-in-client-as-atoms";
+import { R2MCalls } from "@/shared/2-gates-in-client-as-atoms";
 
 // Non-reactive Napi reentrancy lock
 
 export const napiLock = {
     isLocked: false,
     canceled: false, // Non-reactive detection cancellation. This is cheked by fake loaders when there is no electron.
+    name: '',
 
-    locked(): boolean {
+    locked(name: string): boolean { // is it locked for napi call
         if (this.isLocked) {
-            console.error('Napi call lock is already locked');
+            console.error(`Napi call lock is already locked with "${this.name}"`);
             return true;
         }
         this.isLocked = true;
         this.canceled = false;
+        this.name = name;
         return false;
     },
     unlock() {
         this.isLocked = false;
+        this.name = '';
     },
     cancel() {
         this.canceled = true;
-        if (hasMain()) {
-
-
-
-
-            // R2MCalls.cancelDetection();
-
-        }
+        R2MCalls.cancelDetection();
     },
 };

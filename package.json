@@ -11,7 +11,7 @@
         "global": "^4.4.0",
         "jotai": "2.12.2",
         "jotai-valtio": "^0.6.0",
-        "pm-manifest": "1.2.77",
+        "pm-manifest": "1.2.79",
         "pm-manifest-icons": "1.0.3",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",

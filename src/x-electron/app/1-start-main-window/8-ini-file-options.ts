@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { app, type BrowserWindow, type Rectangle } from "electron";
-import { fixBounds } from "../utils-main";
+import { fixBounds } from "../3-utils-main";
 
 export type IniOptions = {
     bounds: Rectangle;  // x, y, width, height

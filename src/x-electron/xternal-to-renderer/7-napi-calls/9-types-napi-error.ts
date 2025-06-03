@@ -1,4 +1,6 @@
-// Server side version of NapiCallError
+// Server side version of NapiCallError see also clinet version in ./src/renderer/src/store/7-napi-atoms/9-napi-build-state/9-types-napi-error.ts
+
+import { type BrowserExtErrors } from "./pmat-plugin-types";
 
 export type NapiCallError =
     | ''                    // no error
@@ -10,19 +12,29 @@ export type NapiCallError =
     | 'too-many-controls'   // Too many controls (more then ${mainStore.maxControls})
     ;
 
+type MakeTypedErrorParams =
+    | { error: NapiCallError; extra?: string; }
+    | { sub: BrowserExtErrors; }
+    ;
+
 /**
  * First part after '>>>' is error type, second part after ':::' is optional extra info.
  */
-export function makeTypedError(error: NapiCallError, extra?: string): string {
-    if (extra) {
-        return `>>>${error}:::${extra}`;
+export function makeTypedError(params: MakeTypedErrorParams): string {
+    if ('sub' in params) {
+        const error: NapiCallError = 'build-error';
+        return `>>>${error}:::${params.sub}:::`; // ::: at the end to distinguish from call with extra
     }
-    return `>>>${error}`;
+    if (params.extra) {
+        return `>>>${params.error}:::${params.extra}`;
+    }
+    return `>>>${params.error}`;
 }
 
 export type TypedError = {
     typed: NapiCallError;
     extra: string | undefined;
+    sub?: BrowserExtErrors | ''; // error ruturned from ManifestForWindowCreatorResult as 'incompatiblePM' from '>>>build-error:::incompatiblePM'
 };
 
 export function splitTypedError(errorStr: string): TypedError {
@@ -35,23 +47,22 @@ export function splitTypedError(errorStr: string): TypedError {
         };
     }
 
-    const parts = typed.split('...');
-    return {
-        typed: parts[0] as NapiCallError,
-        extra: parts[1],
-    };
+    const parts = typed.split(':::');
+    if (parts.length === 2) {
+        return {
+            typed: parts[0] as NapiCallError,
+            extra: parts[1],
+            sub: '',
+        };
+    } else {
+        return {
+            typed: parts[0] as NapiCallError,
+            extra: '',
+            sub: parts[1] as BrowserExtErrors,
+        };
+    }
 }
 
 export function typedErrorToString(typedError: TypedError): string {
     return `typed: ${typedError.typed}${typedError.extra ? `, extra: ${typedError.extra}` : ''}`;
-}
-
-/**
- * Regular error to string
- */
-export function errorToString(error: unknown): string {
-    if (error instanceof Error) {
-        return error.message;
-    }
-    return `${error}`;
 }

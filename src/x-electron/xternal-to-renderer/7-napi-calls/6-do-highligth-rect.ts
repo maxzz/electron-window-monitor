@@ -3,17 +3,22 @@ import { type WindowControlHighlighterParams, type WindowControlHighlighter, typ
 
 let gWindowControlHighlighter: WindowControlHighlighter | null = null;
 
-export function highlightRect(hwnd: string, rect: TargetClientRect): void {
+export function highlightField(params: WindowControlHighlighterParams): void {
+
     if (!gWindowControlHighlighter) {
         gWindowControlHighlighter = new addon.WindowControlHighlighter();
     }
-
     if (!gWindowControlHighlighter) {
         throw new Error('no gWindowControlHighlighter');
     }
 
-    const params: WindowControlHighlighterParams = { hwnd, rect };
-    const param = JSON.stringify(params);
+    const paramStr = JSON.stringify(params);
 
-    gWindowControlHighlighter.highlight(param);
+    const tempCb = (err: any, data: string) => { //TODO: update it to promise
+        if (err) {
+            console.error('highlightField error', err);
+        }
+    };
+
+    gWindowControlHighlighter.highlight(paramStr, tempCb);
 }

@@ -1,7 +1,8 @@
 import { addon } from "./0-addon";
-import { type ManifestForWindowCreatorParams, type ManifestForWindowCreatorResult } from "./pmat-plugin-types";
+import { errorToString } from "../../app/3-utils-main";
+import { makeTypedError } from "./9-types-napi-error";
 import { mainStore, mainToRenderer } from "./9-external";
-import { errorToString, makeTypedError } from "./9-types-napi-error";
+import { type ManifestForWindowCreatorParams, type ManifestForWindowCreatorResult } from "./pmat-plugin-types";
 
 export function getWindowMani(params: ManifestForWindowCreatorParams): Promise<string> {
     return new Promise<string>(
@@ -23,14 +24,14 @@ export function getWindowMani(params: ManifestForWindowCreatorParams): Promise<s
                         if (mainStore.cancelDetection) {
                             collector.cancel();
                             mainStore.cancelDetection = false;
-                            reject(makeTypedError('canceled-by-user'));
+                            reject(makeTypedError({ error: 'canceled-by-user' }));
                             return;
                         }
 
                         if (res.type === 'progress') {
                             if (mainStore.maxControls !== 0 && res.progress > mainStore.maxControls) {
                                 collector.cancel();
-                                reject(makeTypedError('too-many-controls', `more then ${mainStore.maxControls}`));
+                                reject(makeTypedError({ error: 'too-many-controls', extra: `more then ${mainStore.maxControls}` }));
                                 return;
                             }
 
@@ -39,7 +40,7 @@ export function getWindowMani(params: ManifestForWindowCreatorParams): Promise<s
                         }
 
                         if (res.type === 'error') {
-                            reject(makeTypedError('build-error', `${res.error}`));
+                            reject(makeTypedError({ sub: res.error }));
                             return;
                         }
 
@@ -48,9 +49,9 @@ export function getWindowMani(params: ManifestForWindowCreatorParams): Promise<s
                             return;
                         }
 
-                        reject(makeTypedError('build-wo-mani', `${JSON.stringify(res)}`));
+                        reject(makeTypedError({ error: 'build-wo-mani', extra: `${JSON.stringify(res)}` }));
                     } catch (error) {
-                        reject(makeTypedError('unknown-error', errorToString(error)));
+                        reject(makeTypedError({ error: 'unknown-error', extra: errorToString(error) }));
                         mainToRenderer({ type: 'm2r:failed-raw-content', body: str }); // It's set to the client atom but not used by client
                     }
                 }

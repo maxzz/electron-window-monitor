@@ -1,6 +1,5 @@
 import { addon } from "./0-addon";
-import { type WindowIconGetterParams, type ImageFormatType, type WindowIconGetter, type WindowIconGetterResult } from "./pmat-plugin-types";
-// import fs from "fs";
+import { type WindowIconGetterParams, type ImageFormatType, type WindowIconGetter } from "./pmat-plugin-types";
 
 let gWindowIconGetter: WindowIconGetter | null = null;
 
@@ -12,26 +11,28 @@ export async function getWindowIcon(hwnd: string, iconFormat: ImageFormatType = 
     const params: WindowIconGetterParams = { hwnd, imageFormat: iconFormat };
     const param = JSON.stringify(params);
 
-    return new Promise<string>(
-        (resolve, reject) => {
-            if (!gWindowIconGetter) {
-                throw new Error('no gWindowIconGetter');
-            }
+    return new Promise<string>((resolve, reject) => {
+        if (!gWindowIconGetter) {
+            throw new Error('no gWindowIconGetter');
+        }
 
-            gWindowIconGetter.getWindowIcon(param, (err: any, data: string) => {
+        gWindowIconGetter.getWindowIcon(param,
+            (err: any, data: string) => {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(data);
                     //saveIconFile(`test-icon.${iconFormat}`, data); // The icon will go to the root folder of the electron-window-monitor project.
                 }
-            });
-        }
-    );
+            }
+        );
+    });
 }
 
 /*
-// import { Buffer } from "node:buffer";
+import fs from "fs";
+import { Buffer } from "node:buffer";
+import { type WindowIconGetterResult } from "./pmat-plugin-types";
 
 function saveIconFile(filename: string, data: string) {
     const obj = JSON.parse(data) as WindowIconGetterResult;

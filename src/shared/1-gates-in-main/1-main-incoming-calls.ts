@@ -1,7 +1,7 @@
 import { Notification } from "electron";
 import { type R2M } from "@/shared/ipc-types";
 import { electronState } from "../../x-electron/app/2-electron-globals";
-import { highlightRect } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { highlightField } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 
 export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<void> {
     switch (data.type) {
@@ -22,7 +22,7 @@ export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<voi
             break;
         }
         case 'r2m:highlight-rect': {
-            highlightRect(data.hwnd, data.rect);
+            highlightField(data);
             break;
         }
         default: {

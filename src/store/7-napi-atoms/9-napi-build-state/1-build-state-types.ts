@@ -48,4 +48,4 @@ export function setNapiGetPosXY(x: number, y: number) {
     }
 }
 
-export const debouncedsetNapiGetPosXY = debounce(setNapiGetPosXY, 100);
+export const debouncedSetNapiGetPosXY = debounce(setNapiGetPosXY, 100);

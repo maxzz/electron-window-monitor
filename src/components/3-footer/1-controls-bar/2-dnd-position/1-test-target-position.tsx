@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
 import { classNames, roundInt } from "@/utils";
 import { IconTarget2 } from "@/components/ui";
-import { napiBuildProgress, setNapiGetPosXY } from "@/store/7-napi-atoms";
+import { napiBuildProgress, debouncedSetNapiGetPosXY } from "@/store/7-napi-atoms";
 import { invokeMain } from "@/store";
 
 export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
@@ -26,7 +26,7 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
             return;
         }
 
-        setNapiGetPosXY(event.pageX, event.pageY);
+        debouncedSetNapiGetPosXY(event.pageX, event.pageY);
     }
 
     function stopDragCanceled(event: React.PointerEvent<HTMLDivElement>) {

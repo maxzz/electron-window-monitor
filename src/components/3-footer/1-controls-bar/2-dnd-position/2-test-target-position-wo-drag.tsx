@@ -41,13 +41,13 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
     return (<>
         <div
             className="relative size-12 bg-primary-900 rounded cursor-pointer"
-            onPointerDown={startDragging}
-            onPointerUp={stopDragging}
-            onPointerMove={dragging}
-            onPointerCancel={stopDragCanceled}
+            // onPointerDown={startDragging}
+            // onPointerUp={stopDragging}
+            // onPointerMove={dragging}
+            // onPointerCancel={stopDragCanceled}
         >
-            <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
-            
+            {/* <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} /> */}
+
             <MovingIcon iconVisible={iconVisible} />
         </div>
     </>);
@@ -58,14 +58,27 @@ function MovingIcon({ className, iconVisible, ...rest }: {iconVisible: boolean} 
     return (<>
         {getPosProgress && (
             <motion.div
-                className="absolute"
-                initial={{ x: 0, y: 0 }}
-                animate={{ x: getPosProgress.point.x, y: getPosProgress.point.y }}
-                transition={{ duration: 0.5 }}
-                // {...rest}
+            className="size-12"
+                drag
             >
                 <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
             </motion.div>
         )}
     </>);
 }
+// function MovingIcon({ className, iconVisible, ...rest }: {iconVisible: boolean} & ComponentPropsWithoutRef<"div">) {
+//     const { getPosProgress } = useSnapshot(napiBuildProgress);
+//     return (<>
+//         {getPosProgress && (
+//             <motion.div
+//                 className="absolute"
+//                 initial={{ x: 0, y: 0 }}
+//                 animate={{ x: getPosProgress.point.x, y: getPosProgress.point.y }}
+//                 transition={{ duration: 0.5 }}
+//                 // {...rest}
+//             >
+//                 <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
+//             </motion.div>
+//         )}
+//     </>);
+// }

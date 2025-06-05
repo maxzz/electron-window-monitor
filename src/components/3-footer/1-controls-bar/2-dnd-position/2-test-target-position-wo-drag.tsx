@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
 import { motion } from "motion/react";
-import { classNames } from "@/utils";
+import { classNames, debounce } from "@/utils";
 import { IconDndTarget, IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { roundInt } from "./8-utils";
@@ -63,6 +63,8 @@ function setNapiBuildProgressXY(x: number, y: number) {
         napiBuildProgress.getPosProgress = { point: xyNew };
     }
 }
+
+const debouncedsetNapiBuildProgressXY = debounce(setNapiBuildProgressXY, 100);
 
 function MovingIcon({ className, iconVisible, ...rest }: { iconVisible: boolean; } & ComponentPropsWithoutRef<"div">) {
     const { getPosProgress } = useSnapshot(napiBuildProgress);

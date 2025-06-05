@@ -1,4 +1,5 @@
 export * from "./classnames";
+export * from "./debounce";
 export * from "./delay";
 export * from "./error-to-string";
 export * from "./merge-options";

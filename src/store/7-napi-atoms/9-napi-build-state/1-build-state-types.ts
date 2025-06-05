@@ -1,6 +1,7 @@
 import { proxy } from 'valtio';
 import { atomWithProxy } from 'jotai-valtio';
-import { type TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
+import { type PointXY, type TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
+import { debounce, roundInt } from '@/utils';
 
 type NapiBuildState = {                         // State of Napi multistep build: icons, controls, manifest
     buildRunning: boolean;                      // Content check build is runnning. Make shure there is no multiple calls at the same time or use counter as lock
@@ -29,3 +30,13 @@ export const napiBuildProgress = proxy<NapiBuildProgress>({
     lastProgress: 0,
     getPosProgress: null,
 });
+
+export function setNapiBuildProgressXY(x: number, y: number) {
+    const xyNew: PointXY = { x: roundInt(x), y: roundInt(y) };
+    const xyOld = napiBuildProgress.getPosProgress?.point || { x: 0, y: 0 };
+    if (xyNew.x !== xyOld.x || xyNew.y !== xyOld.y) {
+        napiBuildProgress.getPosProgress = { point: xyNew };
+    }
+}
+
+export const debouncedsetNapiBuildProgressXY = debounce(setNapiBuildProgressXY, 100);

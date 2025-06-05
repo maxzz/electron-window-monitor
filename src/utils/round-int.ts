@@ -5,5 +5,3 @@ export function round2(num: number) {
 export function roundInt(num: number) {
     return Math.round(num);
 }
-
-//TODO: set custom cursor while dragging

@@ -1,9 +1,8 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
-import { classNames } from "@/utils";
+import { classNames, roundInt } from "@/utils";
 import { IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { invokeMain } from "@/store";
-import { roundInt } from "./8-utils";
 
 export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);

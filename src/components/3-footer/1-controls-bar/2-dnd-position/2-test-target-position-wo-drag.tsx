@@ -2,7 +2,7 @@ import { type ComponentPropsWithoutRef, useState } from "react";
 import { motion } from "motion/react";
 import { classNames, debounce, roundInt } from "@/utils";
 import { IconDndTarget, IconTarget2 } from "@/components/ui";
-import { napiBuildProgress, setNapiBuildProgressXY } from "@/store/7-napi-atoms";
+import { napiBuildProgress, setNapiGetPosXY } from "@/store/7-napi-atoms";
 import { useSnapshot } from "valtio";
 import { type PointXY } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
@@ -28,7 +28,7 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
             return;
         }
 
-        setNapiBuildProgressXY(event.pageX, event.pageY);
+        setNapiGetPosXY(event.pageX, event.pageY);
     }
 
     function stopDragCanceled(event: React.PointerEvent<HTMLDivElement>) {
@@ -57,9 +57,9 @@ function MovingIcon({ className, iconVisible, ...rest }: { iconVisible: boolean;
         {getPosProgress && (
             <motion.div
                 className="size-12"
-                onPointerDown={()=>{napiBuildProgress.dragIsRunning = true; setNapiBuildProgressXY(0, 0);}}
+                onPointerDown={()=>{napiBuildProgress.dragIsRunning = true; setNapiGetPosXY(0, 0);}}
                 onPointerUp={()=>{napiBuildProgress.dragIsRunning = false;}}
-                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && setNapiBuildProgressXY(event.pageX, event.pageY)}
+                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && setNapiGetPosXY(event.pageX, event.pageY)}
                 drag
             >
                 <IconDndTarget className="text-primary-200" />

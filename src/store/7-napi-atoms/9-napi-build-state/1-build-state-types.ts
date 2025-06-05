@@ -37,7 +37,7 @@ export const napiBuildProgress = proxy<NapiBuildProgress>({
 
 // Utilities
 
-export function setNapiBuildProgressXY(x: number, y: number) {
+export function setNapiGetPosXY(x: number, y: number) {
     const xyNew: PointXY = { x: roundInt(x), y: roundInt(y) };
     const xyOld = napiBuildProgress.getPosProgress?.point || { x: 0, y: 0 };
 
@@ -48,4 +48,4 @@ export function setNapiBuildProgressXY(x: number, y: number) {
     }
 }
 
-export const debouncedsetNapiBuildProgressXY = debounce(setNapiBuildProgressXY, 100);
+export const debouncedsetNapiGetPosXY = debounce(setNapiGetPosXY, 100);

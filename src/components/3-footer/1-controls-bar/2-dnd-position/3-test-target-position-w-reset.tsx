@@ -4,7 +4,7 @@ import { IconDndTarget } from "@/components/ui";
 import { napiBuildProgress, debouncedSetNapiGetPosXY } from "@/store/7-napi-atoms";
 import { useSnapshot } from "valtio";
 
-export function TestTargetWindowPositionWoDrag({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
+export function TestTargetWindowPositionWReset({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
         <div className="relative size-12 bg-primary-900 rounded cursor-pointer" {...rest}>
             <MovingIcon />
@@ -28,5 +28,3 @@ function MovingIcon() {
         )}
     </>);
 }
-
-//TODO: how to set icon position to initial position?

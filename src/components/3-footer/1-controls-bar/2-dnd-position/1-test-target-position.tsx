@@ -26,7 +26,6 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
 
     function stopDragging(event: React.PointerEvent<HTMLDivElement>) {
         setIconVisible(true);
-
         //console.log('stopDragging (true)');
     }
 
@@ -35,18 +34,13 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
             return;
         }
 
-        const point = { x: roundInt(event.pageX), y: roundInt(event.pageY) };
-
-        napiBuildProgress.getPosProgress = {
-            point,
-        };
-
-        //console.log('stopDragging (true)', point);
+        const pointXY = { x: roundInt(event.pageX), y: roundInt(event.pageY) };
+        napiBuildProgress.getPosProgress = { point: pointXY };
+        //console.log('stopDragging (true)', pointXY);
     }
 
     function stopDragCanceled(event: React.PointerEvent<HTMLDivElement>) {
         setIconVisible(true);
-
         //console.log('stopDragcancel (true)');
     }
 

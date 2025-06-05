@@ -1,10 +1,10 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
 import { useAtomValue } from "jotai";
-import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { invokeMain, sawHandleAtom } from "@/store";
+import { PositionIndicator } from "./2-position-indicator";
 
 export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
@@ -55,18 +55,7 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
             <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
         </div>
 
-        <PositionProgress />
-    </>);
-}
-
-function PositionProgress({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
-    const { getPosProgress } = useSnapshot(napiBuildProgress);
-    return (<>
-        {getPosProgress && (
-            <div>
-                {getPosProgress.point.x}, {getPosProgress.point.y}
-            </div>
-        )}
+        <PositionIndicator />
     </>);
 }
 

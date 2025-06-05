@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
 import { motion } from "motion/react";
 import { classNames } from "@/utils";
-import { IconTarget2 } from "@/components/ui";
+import { IconDndTarget, IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { roundInt } from "./8-utils";
 import { useSnapshot } from "valtio";
@@ -41,10 +41,10 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
     return (<>
         <div
             className="relative size-12 bg-primary-900 rounded cursor-pointer"
-            // onPointerDown={startDragging}
-            // onPointerUp={stopDragging}
-            // onPointerMove={dragging}
-            // onPointerCancel={stopDragCanceled}
+        // onPointerDown={startDragging}
+        // onPointerUp={stopDragging}
+        // onPointerMove={dragging}
+        // onPointerCancel={stopDragCanceled}
         >
             {/* <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} /> */}
 
@@ -53,15 +53,21 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
     </>);
 }
 
-function MovingIcon({ className, iconVisible, ...rest }: {iconVisible: boolean} & ComponentPropsWithoutRef<"div">) {
+function MovingIcon({ className, iconVisible, ...rest }: { iconVisible: boolean; } & ComponentPropsWithoutRef<"div">) {
     const { getPosProgress } = useSnapshot(napiBuildProgress);
     return (<>
         {getPosProgress && (
             <motion.div
-            className="size-12"
+                className="size-12"
+                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => {
+                    console.log('move', event.clientX, event.clientY);
+                    const pointXY = { x: roundInt(event.pageX), y: roundInt(event.pageY) };
+                    napiBuildProgress.getPosProgress = { point: pointXY };
+                }}
                 drag
             >
-                <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
+                <IconDndTarget className="text-primary-200" />
+                {/* <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} /> */}
             </motion.div>
         )}
     </>);

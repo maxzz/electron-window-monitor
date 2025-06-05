@@ -9,8 +9,6 @@ import { invokeMain, sawHandleAtom } from "@/store";
 export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
 
-    const { getPosProgress } = useSnapshot(napiBuildProgress);
-
     const sawHandle = useAtomValue(sawHandleAtom);
     if (!sawHandle?.hwnd) {
         return null;
@@ -63,6 +61,13 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
             <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
         </div>
 
+        <PositionProgress />
+    </>);
+}
+
+function PositionProgress({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
+    const { getPosProgress } = useSnapshot(napiBuildProgress);
+    return (<>
         {getPosProgress && (
             <div>
                 {getPosProgress.point.x}, {getPosProgress.point.y}

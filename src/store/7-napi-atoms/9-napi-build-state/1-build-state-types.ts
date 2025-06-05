@@ -36,6 +36,8 @@ export function setNapiBuildProgressXY(x: number, y: number) {
     const xyOld = napiBuildProgress.getPosProgress?.point || { x: 0, y: 0 };
     if (xyNew.x !== xyOld.x || xyNew.y !== xyOld.y) {
         napiBuildProgress.getPosProgress = { point: xyNew };
+
+        console.log('setNapiBuildProgressXY', napiBuildProgress.getPosProgress.point);
     }
 }
 

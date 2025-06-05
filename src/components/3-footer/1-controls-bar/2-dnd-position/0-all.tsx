@@ -2,6 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { sawHandleAtom } from "@/store";
+import { TestTargetWindowPosition } from "./1-test-target-position";
 
 export function BlockTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
 
@@ -16,7 +17,7 @@ export function BlockTargetWindowPosition({ className, ...rest }: ComponentProps
                 Test get target position:
             </div>
 
-            123
+            <TestTargetWindowPosition />
 
         </div>
     );

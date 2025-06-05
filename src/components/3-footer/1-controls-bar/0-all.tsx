@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { classNames } from "@/utils";
-import { TestTargetWindowPosition } from "./2-dnd-position";
+import { BlockTargetWindowPosition } from "./2-dnd-position";
 import { TestLinks } from "./2-test-links";
 import { InputMaxControls } from "./3-input-max-controls";
 import { ChkboxXmlFormat } from "./4-chkbox-xml-format";
@@ -13,7 +13,7 @@ export function Section3Footer({ className, ...rest }: ComponentPropsWithoutRef<
 
             <TestLinks className="p-2 border-b border-slate-500/50" />
 
-            <TestTargetWindowPosition className="p-2 border-b border-slate-500/50" />
+            <BlockTargetWindowPosition className="p-2 border-b border-slate-500/50" />
 
             <div className="p-2 flex gap-x-4">
                 <InputMaxControls />

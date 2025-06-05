@@ -1,1 +1,1 @@
-export * from "./1-test-target-position";
+export * from "./0-all";

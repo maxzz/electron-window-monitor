@@ -52,29 +52,23 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
         //console.log('stopDragcancel (true)');
     }
 
-    return (
-        <div className={classNames("flex items-end space-x-2", className)} {...rest}>
-            <div>
-                Test get target position:
-            </div>
-
-            <div
-                className="w-12 h-12 bg-primary-900 rounded cursor-pointer"
-                onPointerDown={startDragging}
-                onPointerUp={stopDragging}
-                onPointerMove={dragging}
-                onPointerCancel={stopDragCanceled}
-            >
-                <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
-            </div>
-
-            {getPosProgress && (
-                <div>
-                    {getPosProgress.point.x}, {getPosProgress.point.y}
-                </div>
-            )}
+    return (<>
+        <div
+            className="w-12 h-12 bg-primary-900 rounded cursor-pointer"
+            onPointerDown={startDragging}
+            onPointerUp={stopDragging}
+            onPointerMove={dragging}
+            onPointerCancel={stopDragCanceled}
+        >
+            <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
         </div>
-    );
+
+        {getPosProgress && (
+            <div>
+                {getPosProgress.point.x}, {getPosProgress.point.y}
+            </div>
+        )}
+    </>);
 }
 
 function round2(num: number) {

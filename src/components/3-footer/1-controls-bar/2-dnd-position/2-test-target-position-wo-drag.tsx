@@ -1,8 +1,8 @@
-import { type ComponentPropsWithoutRef, useState } from "react";
+import { type ComponentPropsWithoutRef } from "react";
+import { useSnapshot } from "valtio";
 import { motion } from "motion/react";
 import { IconDndTarget } from "@/components/ui";
 import { napiBuildProgress, debouncedSetNapiGetPosXY } from "@/store/7-napi-atoms";
-import { useSnapshot } from "valtio";
 
 export function TestTargetWindowPositionWoDrag({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (

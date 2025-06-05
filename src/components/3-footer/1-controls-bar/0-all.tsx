@@ -1,6 +1,6 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { classNames } from "@/utils";
-import { TestTargetWindowPosition } from "./1-test-target-position";
+import { TestTargetWindowPosition } from "./2-dnd-position";
 import { TestLinks } from "./2-test-links";
 import { InputMaxControls } from "./3-input-max-controls";
 import { ChkboxXmlFormat } from "./4-chkbox-xml-format";

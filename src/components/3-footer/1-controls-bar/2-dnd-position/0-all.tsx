@@ -19,21 +19,17 @@ export function BlockTargetWindowPosition({ className, ...rest }: ComponentProps
                 <PositionIndicator />
             </div>
 
-
-            <div className="flex items-center gap-1">
-
-                <div className="">
+            <div className="flex items-center gap-12">
+                <div>
                     <TestTargetWindowPosition />
                     w/ drag
                 </div>
 
-                <div className="pl-4">
+                <div>
                     <TestTargetWindowPositionWoDrag />
                     wo/ drag
                 </div>
             </div>
-
-
         </div>
     );
 }

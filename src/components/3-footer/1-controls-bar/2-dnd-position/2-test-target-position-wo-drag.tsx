@@ -1,8 +1,10 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
+import { motion } from "motion/react";
 import { classNames } from "@/utils";
 import { IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { roundInt } from "./8-utils";
+import { useSnapshot } from "valtio";
 
 export function TestTargetWindowPositionWoDrag({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
@@ -38,13 +40,32 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
 
     return (<>
         <div
-            className="w-12 h-12 bg-primary-900 rounded cursor-pointer"
+            className="relative size-12 bg-primary-900 rounded cursor-pointer"
             onPointerDown={startDragging}
             onPointerUp={stopDragging}
             onPointerMove={dragging}
             onPointerCancel={stopDragCanceled}
         >
             <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
+            
+            <MovingIcon iconVisible={iconVisible} />
         </div>
+    </>);
+}
+
+function MovingIcon({ className, iconVisible, ...rest }: {iconVisible: boolean} & ComponentPropsWithoutRef<"div">) {
+    const { getPosProgress } = useSnapshot(napiBuildProgress);
+    return (<>
+        {getPosProgress && (
+            <motion.div
+                className="absolute"
+                initial={{ x: 0, y: 0 }}
+                animate={{ x: getPosProgress.point.x, y: getPosProgress.point.y }}
+                transition={{ duration: 0.5 }}
+                // {...rest}
+            >
+                <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
+            </motion.div>
+        )}
     </>);
 }

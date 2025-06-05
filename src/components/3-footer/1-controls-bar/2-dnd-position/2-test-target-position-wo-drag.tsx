@@ -5,6 +5,7 @@ import { IconDndTarget, IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { roundInt } from "./8-utils";
 import { useSnapshot } from "valtio";
+import { type PointXY } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export function TestTargetWindowPositionWoDrag({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
@@ -51,6 +52,16 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
             <MovingIcon iconVisible={iconVisible} />
         </div>
     </>);
+}
+
+//TODO: add debounce on set position
+
+function setNapiBuildProgressXY(x: number, y: number) {
+    const xyNew: PointXY = { x: roundInt(x), y: roundInt(y) };
+    const xyOld = napiBuildProgress.getPosProgress?.point || { x: 0, y: 0 };
+    if (xyNew.x !== xyOld.x || xyNew.y !== xyOld.y) {
+        napiBuildProgress.getPosProgress = { point: xyNew };
+    }
 }
 
 function MovingIcon({ className, iconVisible, ...rest }: { iconVisible: boolean; } & ComponentPropsWithoutRef<"div">) {

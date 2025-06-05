@@ -5,6 +5,7 @@ import { IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
 import { invokeMain, sawHandleAtom } from "@/store";
 import { PositionIndicator } from "./2-position-indicator";
+import { roundInt } from "./8-utils";
 
 export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
@@ -57,13 +58,6 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
 
         <PositionIndicator />
     </>);
-}
-
-function round2(num: number) {
-    return Math.round((num + Number.EPSILON) * 100) / 100;
-}
-function roundInt(num: number) {
-    return Math.round(num);
 }
 
 //TODO: set custom cursor while dragging

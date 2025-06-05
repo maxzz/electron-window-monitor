@@ -57,9 +57,9 @@ function MovingIcon({ className, iconVisible, ...rest }: { iconVisible: boolean;
         {getPosProgress && (
             <motion.div
                 className="size-12"
-                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => {
-                    setNapiBuildProgressXY(event.pageX, event.pageY);
-                }}
+                onPointerDown={()=>{napiBuildProgress.dragIsRunning = true; setNapiBuildProgressXY(0, 0);}}
+                onPointerUp={()=>{napiBuildProgress.dragIsRunning = false;}}
+                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && setNapiBuildProgressXY(event.pageX, event.pageY)}
                 drag
             >
                 <IconDndTarget className="text-primary-200" />

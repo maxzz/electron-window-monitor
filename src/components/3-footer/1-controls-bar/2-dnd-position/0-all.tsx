@@ -3,6 +3,7 @@ import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { sawHandleAtom } from "@/store";
 import { TestTargetWindowPosition } from "./1-test-target-position";
+import { PositionIndicator } from "./2-position-indicator";
 
 export function BlockTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
 
@@ -18,6 +19,7 @@ export function BlockTargetWindowPosition({ className, ...rest }: ComponentProps
             </div>
 
             <TestTargetWindowPosition />
+            <PositionIndicator />
 
         </div>
     );

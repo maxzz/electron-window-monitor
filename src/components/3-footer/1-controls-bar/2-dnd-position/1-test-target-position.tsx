@@ -1,25 +1,17 @@
 import { type ComponentPropsWithoutRef, useState } from "react";
-import { useAtomValue } from "jotai";
 import { classNames } from "@/utils";
 import { IconTarget2 } from "@/components/ui";
 import { napiBuildProgress } from "@/store/7-napi-atoms";
-import { invokeMain, sawHandleAtom } from "@/store";
-import { PositionIndicator } from "./2-position-indicator";
+import { invokeMain } from "@/store";
 import { roundInt } from "./8-utils";
 
 export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const [iconVisible, setIconVisible] = useState(true);
 
-    const sawHandle = useAtomValue(sawHandleAtom);
-    if (!sawHandle?.hwnd) {
-        return null;
-    }
-
     function startDragging(event: React.PointerEvent<HTMLDivElement>) {
         const elm = event.target as HTMLDivElement;
         elm.setPointerCapture(event.pointerId);
         setIconVisible(false);
-
         //console.log('startDragging (false)', event.target);
 
         // this is not ready on plugin side: if (sawHandle?.hwnd) { invokeMain({ type: 'get-window-pos', hwnd: sawHandle.hwnd }); }
@@ -55,8 +47,6 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
         >
             <IconTarget2 className={classNames("text-primary-200", !iconVisible && "invisible")} />
         </div>
-
-        <PositionIndicator />
     </>);
 }
 

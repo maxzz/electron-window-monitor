@@ -60,7 +60,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         hwnds: string[];
     };
 
-    export type InvokeCalls =
+    export type AllInvokes =
         | DoLoadfiles
         | DoLoadfiles2/* | DoLoadfiles3*/
         | GetSecondWindowHandle
@@ -74,7 +74,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         | GetWindowExtras
         ;
 
-    export type InvokeResult<T extends R2MInvoke.InvokeCalls> =
+    export type InvokeResult<T extends R2MInvoke.AllInvokes> =
         T extends DoLoadfiles                //'r2mi:load-files'
         // T['type'] extends 'r2mi:load-files'               //'r2mi:load-files' // This is OK but not for now
         ? {
@@ -112,7 +112,6 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         ? string
 
         : never;
-
 
     export type FileContent = {
         name: string;                   // file name wo/ path

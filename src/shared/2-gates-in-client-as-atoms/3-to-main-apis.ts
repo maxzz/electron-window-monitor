@@ -21,12 +21,12 @@ export function sendToMain(data: R2M.ToMainCalls): void {
 
 // invoke
 
-export async function invokeMain<TResult>(data: R2MInvoke.InvokeCalls): Promise<TResult | undefined> {
-    return mainApi?.invokeMain<R2MInvoke.InvokeCalls, TResult>(data);
+export async function invokeMain<TResult>(data: R2MInvoke.AllInvokes): Promise<TResult | undefined> {
+    return mainApi?.invokeMain<R2MInvoke.AllInvokes, TResult>(data);
 }
 
 export function invokeLoadFiles(filenames: string[], allowedExt?: string[]): Promise<R2MInvoke.FileContent[]> {
-    const d: R2MInvoke.InvokeCalls = {
+    const d: R2MInvoke.AllInvokes = {
         type: 'r2mi:load-files',
         filenames,
         ...(allowedExt && { allowedExt }),

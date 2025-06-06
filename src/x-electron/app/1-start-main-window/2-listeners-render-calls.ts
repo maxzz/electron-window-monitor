@@ -22,5 +22,5 @@ function connect_InvokeMain(channel: PreloadChannelNames, handler: (event: IpcMa
 }
 
 function ii(_event: IpcMainInvokeEvent, data: any): any {
-    return invokeFromRendererInMain(data as R2MInvoke.InvokeCalls);
+    return invokeFromRendererInMain(data as R2MInvoke.AllInvokes);
 }

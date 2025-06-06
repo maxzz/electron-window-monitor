@@ -1,21 +1,19 @@
 import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace R2MInvoke { // Main from Renderer invoke and get result
+
+    // load files
+
     type DoLoadfiles = {
         type: 'r2mi:load-files';
         filenames: string[];
         allowedExt?: string[];
     };
 
-    type DoLoadfiles2 = {
-        type: 'r2mi:load-files2';
-        filenames: string[];
-    };
+    type DoLoadfiles2 = { type: 'r2mi:load-files2'; filenames: string[]; };
+    type DoLoadfiles3 = { type: 'r2mi:load-files3'; filenames: string[]; };
 
-    type DoLoadfiles3 = {
-        type: 'r2mi:load-files3';
-        filenames: string[];
-    };
+    // napi
 
     type GetSecondWindowHandle = {
         type: 'r2mi:get-target-hwnd';
@@ -74,4 +72,5 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
     };
 
     export const allowedExt = ['dpm', 'dpn'];
-}
+
+} //namespace R2MInvoke

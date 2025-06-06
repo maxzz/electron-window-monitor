@@ -1,10 +1,10 @@
-import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams, type TargetClientRect, type TargetPosition } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace R2MInvoke { // Main from Renderer invoke and get result
 
     // load files
 
-    type DoLoadfiles = {
+    export type DoLoadfiles = {
         type: 'r2mi:load-files';
         filenames: string[];
         allowedExt?: string[];
@@ -15,50 +15,104 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
 
     // napi
 
-    type GetSecondWindowHandle = {
+    export type GetSecondWindowHandle = {
         type: 'r2mi:get-target-hwnd';
     };
 
-    type GetSecondWindowContent = {
+    export type GetSecondWindowContent = {
         type: 'r2mi:get-window-controls';
         hwnd: string;
     };
 
-    type GetSecondWindowIcon = {
+    export type GetSecondWindowIcon = {
         type: 'r2mi:get-window-icon';
         hwnd: string;
     };
 
-    type GetSecondWindowMani = {
+    export type GetSecondWindowMani = {
         type: 'r2mi:get-window-mani';
         params: ManifestForWindowCreatorParams;
     };
 
-    type GetWindowPos = {
+    export type GetWindowPos = {
         type: 'r2mi:get-window-pos';
         hwnd: string;
     };
 
-    type GetTlwInfos = {
+    export type GetTlwInfos = {
         type: 'r2mi:get-tlw-infos';
     };
 
-    type GetTlwScreenshots = {
+    export type GetTlwScreenshots = {
         type: 'r2mi:get-tlw-screenshots';
         tlwInfos: GetTlwScreenshotsParams;
     };
 
+    export type HighlightField = {
+        type: 'r2mi:highlight-field';
+        hwnd: string;
+        rect?: TargetClientRect;
+        accId?: number;                 // We accId (not be profile id) as ordered in manifest (accId does not skip buttons).
+    };
+
+    export type GetWindowExtras = {
+        type: 'r2mi:get-window-extras';
+        hwnds: string[];
+    };
+
     export type InvokeCalls =
-        | DoLoadfiles 
-        | DoLoadfiles2/* | DoLoadfiles3*/ 
-        | GetSecondWindowHandle 
-        | GetSecondWindowContent 
-        | GetSecondWindowIcon 
+        | DoLoadfiles
+        | DoLoadfiles2/* | DoLoadfiles3*/
+        | GetSecondWindowHandle
+        | GetSecondWindowContent
+        | GetSecondWindowIcon
         | GetSecondWindowMani
         | GetWindowPos
         | GetTlwInfos
         | GetTlwScreenshots
+        | HighlightField
+        | GetWindowExtras
         ;
+
+    export type InvokeResult<T extends R2MInvoke.InvokeCalls> =
+        T extends DoLoadfiles                //'r2mi:load-files'
+        // T['type'] extends 'r2mi:load-files'               //'r2mi:load-files' // This is OK but not for now
+        ? {
+            filesCnt: FileContent[];
+            emptyFolder: string;
+        }
+
+        // napi
+
+        : T extends GetSecondWindowHandle    //'r2mi:get-target-hwnd'
+        ? string
+
+        : T extends GetSecondWindowContent   //'r2mi:get-window-controls'
+        ? string
+
+        : T extends GetSecondWindowIcon      //'r2mi:get-window-icon'
+        ? string
+
+        : T extends GetSecondWindowMani      //'r2mi:get-window-mani'
+        ? string
+
+        : T extends GetWindowPos             //'r2mi:get-window-pos'
+        ? TargetPosition
+
+        : T extends GetTlwInfos              //'r2mi:get-tlw-infos'
+        ? string
+
+        : T extends GetTlwScreenshots        //'r2mi:get-tlw-screenshots'
+        ? string
+
+        : T extends HighlightField           //'r2mi:highlight-field'
+        ? string
+
+        : T extends GetWindowExtras          //'r2mi:get-window-extras'
+        ? string
+
+        : never;
+
 
     export type FileContent = {
         name: string;                   // file name wo/ path

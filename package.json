@@ -5,11 +5,13 @@
     "description": "Electron app to test nodejs napi plugins",
     "author": "Max Zakharzhevskiy",
     "main": "dist-electron/main.js",
-    "onlyBuiltDependencies": [
-        "electron",
-        "electron-winstaller",
-        "esbuild"
-    ],
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "electron",
+            "electron-winstaller",
+            "esbuild"
+        ]
+    },
     "dependencies": {
         "@radix-ui/react-scroll-area": "^1.2.2",
         "@react-spring/web": "9.7.5",

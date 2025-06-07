@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useSetAtom } from "jotai";
 import { motion } from "motion/react";
-import { FieldTypeIconComponent, engineControlToFieldIconType } from "@/store/manifest";
-import { EngineControlWithMeta, doHighlightRectAtom } from "@/store";
+import { FieldTypeIconComponent, type Meta, engineControlToFieldIconType, getRoleStateNames } from "@/store/manifest";
+import { type EngineControlWithMeta, doHighlightRectAtom } from "@/store";
 
 export function ControlsGridItems({ controls }: { controls: EngineControlWithMeta[]; }) {
-    console.log('controls', controls);
+
+    console.log('%ccontrols', 'color: green', controls);
+
     return (
         <div className="text-xs grid">
             {controls.map(
@@ -17,6 +19,49 @@ export function ControlsGridItems({ controls }: { controls: EngineControlWithMet
     );
 }
 
+function printRoles(path: Meta.Path) {
+    /*
+    path.p4a.roleString 
+      96_ -> {"raw":"96_","role":"dpinfo"},
+       9_160000 -> {"raw":"9_160000","role":"window","states":["sizeable","moveable","focusable"]},
+         a_100000 -> {"raw":"a_100000","role":"client","states":["focusable"]},
+           9_100000 -> {"raw":"9_100000","role":"window","states":["focusable"]},
+             a_100000 -> {"raw":"a_100000","role":"client","states":["focusable"]},
+               9_100000 -> {"raw":"9_100000","role":"window","states":["focusable"]},
+                 a_100000 -> {"raw":"a_100000","role":"client","states":["focusable"]},
+                   9_100000 -> {"raw":"9_100000","role":"window","states":["focusable"]},
+                     10_ -> {"raw":"10_","role":"pane"},
+                       10_ -> {"raw":"10_","role":"pane"},
+                         9_100000 -> {"raw":"9_100000","role":"window","states":["focusable"]},
+                           a_100000 -> {"raw":"a_100000","role":"client","states":["focusable"]},
+                             9_100000 -> {"raw":"9_100000","role":"window","states":["focusable"]},
+                               21_100040 -> {"raw":"21_100040","role":"list","states":["readonly","focusable"]},
+                                 22_1300002 -> {"raw":"22_1300002","role":"listitem","states":["selected","focusable","selectable","multiselectable"]},
+                                   2a_ -> {"raw":"2a_","role":"text"}
+    */
+    const paths = path.p4a || [];
+    const res = paths.map((p4a, idx) => {
+        const s = `${``.padStart(idx * 2, ' ')} ${p4a.roleString} -> ${JSON.stringify(getRoleStateNames(p4a.roleString))}`;
+        return s;
+    }).join(',\n');
+    console.log('%cpath.p4a.roleString', 'color: blue', '\n', res);
+}
+
+/**
+ * Correct name for listitems
+ */
+function getItemName(item: EngineControlWithMeta) {
+    let name = item.control.dispname;
+    if (!name) {
+        const lastRole = getRoleStateNames(item.meta.path.p4a?.at(-1)?.roleString);
+        const prevRole = getRoleStateNames(item.meta.path.p4a?.at(-2)?.roleString);
+        if (lastRole && prevRole && lastRole?.role === 'text' && prevRole?.role === 'listitem') {
+            name = item.meta.path.p4a?.at(-2)?.name || 'aa';
+        }
+    }
+    return name;
+}
+
 function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
     const [localHighlight, setLocalHighlight] = useState(false);
 
@@ -26,6 +71,8 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
         setLocalHighlight(true);
     }
 
+    printRoles(item.meta.path);
+
     const role = item.meta.role?.role || item.meta.role?.raw;
     const states = item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : '';
 
@@ -33,23 +80,10 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
         <motion.div
             className={gridRowClasses}
             onClick={select}
-            initial={{
-                borderStyle: 'solid',
-                borderWidth: '1px',
-                borderColor: 'transparent',
-            }}
-            animate={{
-                borderColor: localHighlight ? 'red' : 'transparent'
-            }}
-            // style={{
-            //     borderColor: 'transparent',
-            // }}
-            onAnimationComplete={() => {
-                setTimeout(() => setLocalHighlight(false), 1000);
-            }}
-            transition={{
-                duration: 2.3
-            }}
+            initial={{ borderStyle: 'solid', borderWidth: '1px', borderColor: 'transparent', }}
+            animate={{ borderColor: localHighlight ? 'red' : 'transparent' }}
+            onAnimationComplete={() => setTimeout(() => setLocalHighlight(false), 1000)}
+            transition={{ duration: 0.3 }}
         >
             <div className="text-end" title="Order ID">
                 {`${item.control.orderid}`.padStart(2, '0')}
@@ -60,7 +94,8 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
             </div>
 
             <div className="truncate">
-                {item.control.dispname}
+                {getItemName(item)}
+                {/* {item.control.dispname} */}
             </div>
 
             <div className="pr-4 text-[.6rem] flex items-center justify-between" title={item.meta.role?.raw}>

@@ -1,3 +1,5 @@
+import { twMerge } from "tailwind-merge";
+
 export function cx(...classes: Array<string | Record<string, boolean>>): string {
     return classes.map((cls) => (
         typeof cls === 'string'
@@ -12,4 +14,8 @@ export function classNames(...classes: (string | undefined | false | null | 0)[]
 
 export function tw(s: string): string { // added to help tailwind intellisense
     return s;
+}
+
+export function cn(...inputs: Parameters<typeof classNames>) {
+    return twMerge(classNames(...inputs));
 }

@@ -14,14 +14,14 @@ export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLEle
         <div className={classNames("grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
             <ButtonStartStopMonitor />
 
-            <GetActionsGroup />
+            <ActionsGroup_Get />
 
             <ButtonGetSawHandle className="col-start-1 [@media_(min-width:_480px)]:col-start-4" />
         </div>
     );
 }
 
-function GetActionsGroup() {
+function ActionsGroup_Get() {
 
     const isDisabled = useAtomValue(sawGetDisabledAtom);
     const animStyles = useSpring({ opacity: isDisabled ? 0 : 1 });
@@ -29,7 +29,7 @@ function GetActionsGroup() {
     return (
         <a.div style={animStyles} className={classNames(getClasses)}>
 
-            <div className="absolute left-2.5 -top-2 px-3 text-[.65rem] bg-primary-200 border-primary-500/50 border rounded">
+            <div className="absolute -left-[1px] -top-[14px] px-2 pb-[1px] text-[.6rem] bg-primary-200 border-primary-500/20 border rounded-sm">
                 Get
             </div>
 
@@ -44,8 +44,8 @@ function GetActionsGroup() {
 }
 
 const getClasses = "\
-relative px-2 min-h-[66px] \
-border-primary-500/50 border \
+relative px-2 py-2 \
+border-primary-500/20 border \
 rounded shadow-inner \
 flex items-center \
 ";

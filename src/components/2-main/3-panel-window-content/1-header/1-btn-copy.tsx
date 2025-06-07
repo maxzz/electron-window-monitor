@@ -2,6 +2,7 @@ import { type ReactNode, useState } from "react";
 import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { motion, AnimatePresence } from "motion/react";
+import { classNames } from "@/utils";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { sawContentStrAtom } from "@/store";
 import { IconCopy } from "@/components/ui";
@@ -40,7 +41,10 @@ export function ButtonCopyContent() {
 
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
     return (
-        <AnimatePresence onExitComplete={() => setShow?.(false)}>
+        <AnimatePresence 
+            onExitComplete={() => setShow?.(false)}
+            mode="wait"
+        >
             {show && (
                 <motion.div
                     className="absolute"
@@ -50,6 +54,10 @@ function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v
                     transition={{
                         duration: 0.35,
                         ease: "easeOut"
+                    }}
+                    onAnimationComplete={() => {
+                        // Auto-hide after 1.5 seconds
+                        setTimeout(() => setShow?.(false), 1500);
                     }}
                 >
                     {items[1]}

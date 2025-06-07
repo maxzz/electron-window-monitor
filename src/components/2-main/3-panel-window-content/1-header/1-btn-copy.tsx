@@ -56,8 +56,7 @@ function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v
                         ease: "easeOut"
                     }}
                     onAnimationComplete={() => {
-                        // Auto-hide after 1.5 seconds
-                        setTimeout(() => setShow?.(false), 1500);
+                        setTimeout(() => setShow?.(false), 300);
                     }}
                 >
                     {items[1]}

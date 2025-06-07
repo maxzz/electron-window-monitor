@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSetAtom } from "jotai";
-import { a, useSpring } from "@react-spring/web";
+import { motion } from "motion/react";
 import { FieldTypeIconComponent, engineControlToFieldIconType } from "@/store/manifest";
 import { EngineControlWithMeta, doHighlightRectAtom } from "@/store";
 
@@ -26,21 +26,27 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
         setLocalHighlight(true);
     }
 
-    const styles = useSpring({
-        // opacity: localHighlight ? 0 : 1,
-        borderColor: localHighlight ? 'red' : 'transparent',
-        borderStyle: 'solid',
-        borderWidth: '1px',
-        onRest: () => {
-            setLocalHighlight(false);
-        }
-    });
-
     const role = item.meta.role?.role || item.meta.role?.raw;
     const states = item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : '';
-    return (
-        <a.div style={styles} className={gridRowClasses} onClick={select}>
 
+    return (
+        <motion.div
+            className={gridRowClasses}
+            onClick={select}
+            animate={{
+                borderColor: localHighlight ? 'red' : 'transparent'
+            }}
+            initial={{
+                borderStyle: 'solid',
+                borderWidth: '1px',
+            }}
+            onAnimationComplete={() => {
+                setTimeout(() => setLocalHighlight(false), 1000);
+            }}
+            transition={{
+                duration: 0.3
+            }}
+        >
             <div className="text-end" title="Order ID">
                 {`${item.control.orderid}`.padStart(2, '0')}
             </div>
@@ -61,8 +67,7 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
                     {states}
                 </div>
             </div>
-
-        </a.div>
+        </motion.div>
     );
 }
 

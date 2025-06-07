@@ -46,6 +46,7 @@
     },
     "scripts": {
         "dev": "vite",
+        "tsc": "tsc -w",
         "preview": "vite preview",
         "build": "tsc && vite build && electron-builder --win",
         "build:exe": "tsc && vite build && electron-builder --windows portable",

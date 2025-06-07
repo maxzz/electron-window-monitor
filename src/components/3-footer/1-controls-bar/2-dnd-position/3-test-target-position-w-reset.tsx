@@ -14,7 +14,7 @@ export function TestTargetWindowPositionWReset({ className, ...rest }: Component
 }
 
 function MovingIcon() {
-    const { getPosProgress } = useSnapshot(napiBuildProgress);
+    // const { getPosProgress } = useSnapshot(napiBuildProgress);
     const dragControls = useDragControls();
 
     function onDrag(event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
@@ -23,7 +23,7 @@ function MovingIcon() {
     }
 
     return (<>
-        {getPosProgress && (
+        {/* {getPosProgress && ( */}
             <motion.div
                 className="size-12"
                 onPointerDown={(event) => { napiBuildProgress.dragIsRunning = true; dragControls.start(event, { snapToCursor: true }); }}
@@ -40,6 +40,6 @@ function MovingIcon() {
             >
                 <IconDndTarget className="text-primary-200" />
             </motion.div>
-        )}
+        {/* )} */}
     </>);
 }

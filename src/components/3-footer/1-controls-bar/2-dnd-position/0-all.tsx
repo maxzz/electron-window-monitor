@@ -26,10 +26,10 @@ export function BlockTargetWindowPosition({ className, ...rest }: ComponentProps
                     w/ drag
                 </div>
 
-                <div>
+                {/* <div>
                     <TestTargetWindowPositionWoDrag />
                     wo/ drag
-                </div>
+                </div> */}
 
                 <div>
                     <TestTargetWindowPositionWReset />

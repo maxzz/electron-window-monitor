@@ -1,8 +1,7 @@
 import { type ReactNode, useState } from "react";
 import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
-import { classNames } from "@/utils";
-import { easings, a, useTransition } from "@react-spring/web";
+import { motion, AnimatePresence } from "motion/react";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { sawContentStrAtom } from "@/store";
 import { IconCopy } from "@/components/ui";
@@ -40,17 +39,22 @@ export function ButtonCopyContent() {
 }
 
 function MountCopyNotice({ show, setShow, items }: { show: boolean; setShow?: (v: boolean) => void; items: ReactNode[]; }) {
-
-    const transitions = useTransition(Number(show), {
-        from: { opacity: 0, y: 0, },
-        enter: { opacity: 1, y: 0, config: { duration: 300 }, },
-        leave: { opacity: 0, y: -25, config: { duration: 350, easing: easings.easeOutQuad }, },
-        onRest: ({ finished }) => show && finished && setShow?.(false),
-    });
-
-    return transitions((styles, item) => (
-        <a.div style={styles} className="absolute">
-            {items[item]}
-        </a.div>
-    ));
+    return (
+        <AnimatePresence onExitComplete={() => setShow?.(false)}>
+            {show && (
+                <motion.div
+                    className="absolute"
+                    initial={{ opacity: 0, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -25 }}
+                    transition={{
+                        duration: 0.35,
+                        ease: "easeOut"
+                    }}
+                >
+                    {items[1]}
+                </motion.div>
+            )}
+        </AnimatePresence>
+    );
 }

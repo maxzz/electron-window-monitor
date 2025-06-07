@@ -27,9 +27,9 @@ function ActionsGroup_Get() {
     const animStyles = useSpring({ opacity: isDisabled ? 0 : 1 });
 
     return (
-        <a.div style={animStyles} className={classNames(getClasses)}>
+        <a.div className={classNames(containerGetClasses)} style={animStyles}>
 
-            <div className="absolute -left-[1px] -top-[14px] px-2 pb-[1px] text-[.6rem] bg-primary-200 border-primary-500/20 border rounded-sm">
+            <div className={labelGetClasses}>
                 Get
             </div>
 
@@ -43,11 +43,13 @@ function ActionsGroup_Get() {
     );
 }
 
-const getClasses = "\
+const containerGetClasses = "\
 relative px-2 py-2 \
 border-primary-500/20 border \
 rounded shadow-inner \
 flex items-center \
 ";
+
+const labelGetClasses = "absolute -left-[1px] -top-[14px] px-2 pb-[1px] text-[.6rem] bg-primary-200 border-primary-500/20 border rounded-sm";
 
 //text-sm [@media_(min-width:_480px)]:text-base

@@ -33,7 +33,6 @@
     "dependencies": {
         "@radix-ui/react-scroll-area": "^1.2.2",
         "@radix-ui/react-slot": "^1.2.3",
-        "@react-spring/web": "9.7.5",
         "class-variance-authority": "^0.7.1",
         "global": "^4.4.0",
         "jotai": "2.12.2",

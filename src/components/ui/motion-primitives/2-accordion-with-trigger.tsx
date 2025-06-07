@@ -4,28 +4,27 @@ import { classNames } from "@/utils";
 import { Accordion, AccordionItem, AccordionContent, useAccordion, AccordionItemAugmentedProps } from "./1-accordion"; //https://motion-primitives.com/docs/accordion
 import { Button } from "../shadcn";
 import { SymbolChevronDown } from "../icons";
-import { appSettings } from "@/store";
+import { appSettings } from "@/store/1-atoms";
 
 type AccordionWithTriggerProps = {
     triggerText: ReactNode;
-    formIdx: number;
-    name: string;
+    keyName: string;
     children: ReactNode;
     triggerClasses?: string;
     contentClasses?: string;
 };
 
-export function AccordionWithTrigger({ triggerText, formIdx, name, children, triggerClasses, contentClasses }: AccordionWithTriggerProps) {
-    const [open, toggleOpen] = useAccordionState({ formIdx, name });
+export function AccordionWithTrigger({ triggerText, keyName, children, triggerClasses, contentClasses }: AccordionWithTriggerProps) {
+    const [open, toggleOpen] = useAccordionState({ keyName });
     return (
         <Accordion
             className="w-full flex flex-col"
             transition={{ type: "spring", stiffness: 420, damping: 40 }}
             variants={variants}
-            expandedValue={open ? name : undefined}
+            expandedValue={open ? keyName : undefined}
             onValueChange={toggleOpen}
         >
-            <AccordionItem value={name}>
+            <AccordionItem value={keyName}>
                 <AccordionTrigger className={triggerClasses}>
                     {triggerText}
                 </AccordionTrigger>
@@ -66,13 +65,13 @@ const localTriggerClasses = "w-full flex items-center justify-between gap-1";
 
 // Utilities
 
-function useAccordionState({ formIdx, name }: { formIdx: number; name: string; }) {
-    const open: boolean = useSnapshot(appSettings).right.mani.openInOptions[formIdx][name];
+function useAccordionState({ keyName }: { keyName: string; }) {
+    const open: boolean = useSnapshot(appSettings).appUi.accordionsOpened[keyName];
 
     const toggleOpen = useCallback(
         () => {
-            appSettings.right.mani.openInOptions[formIdx][name] = !appSettings.right.mani.openInOptions[formIdx][name];
-        }, [formIdx, name]
+            appSettings.appUi.accordionsOpened[keyName] = !appSettings.appUi.accordionsOpened[keyName];
+        }, [keyName]
     );
 
     return [open, toggleOpen] as const;

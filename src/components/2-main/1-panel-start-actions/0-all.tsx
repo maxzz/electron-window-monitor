@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
-import { a, useSpring } from "@react-spring/web";
+import { motion, AnimatePresence } from "motion/react";
 import { classNames } from "@/utils";
 import { sawGetDisabledAtom } from "@/store";
 import { ButtonStartStopMonitor } from "./1-btn-start-stop-monitor";
@@ -22,24 +22,29 @@ export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLEle
 }
 
 function ActionsGroup_Get() {
-
     const isDisabled = useAtomValue(sawGetDisabledAtom);
-    const animStyles = useSpring({ opacity: isDisabled ? 0 : 1 });
-
+    
     return (
-        <a.div className={classNames(containerGetClasses)} style={animStyles}>
+        <AnimatePresence>
+            <motion.div 
+                className={classNames(containerGetClasses)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isDisabled ? 0 : 1 }}
+                transition={{ duration: 0.2 }}
+            >
 
-            <div className={labelGetClasses}>
-                Get
-            </div>
+                <div className={labelGetClasses}>
+                    Get
+                </div>
 
-            <div className="flex items-center gap-x-2">
-                <ButtonGetControls />
-                <ButtonGetIcon />
-                <ButtonGetManifest />
-            </div>
+                <div className="flex items-center gap-x-2">
+                    <ButtonGetControls />
+                    <ButtonGetIcon />
+                    <ButtonGetManifest />
+                </div>
 
-        </a.div>
+            </motion.div>
+        </AnimatePresence>
     );
 }
 

@@ -33,18 +33,22 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
         <motion.div
             className={gridRowClasses}
             onClick={select}
-            animate={{
-                borderColor: localHighlight ? 'red' : 'transparent'
-            }}
             initial={{
                 borderStyle: 'solid',
                 borderWidth: '1px',
+                borderColor: 'transparent',
             }}
+            animate={{
+                borderColor: localHighlight ? 'red' : 'transparent'
+            }}
+            // style={{
+            //     borderColor: 'transparent',
+            // }}
             onAnimationComplete={() => {
                 setTimeout(() => setLocalHighlight(false), 1000);
             }}
             transition={{
-                duration: 0.3
+                duration: 2.3
             }}
         >
             <div className="text-end" title="Order ID">

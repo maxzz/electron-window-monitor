@@ -1,3 +1,4 @@
+import { type JSX } from 'react';
 import { motion, useAnimate } from 'motion/react';
 import { useEffect } from 'react';
 

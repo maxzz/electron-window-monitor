@@ -19,6 +19,13 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         type: 'r2mi:get-target-hwnd';
     };
 
+    export type HighlightTargetHwnd = {
+        type: 'r2mi:highlight-target-hwnd';
+        hwnd: string;
+        rect: TargetClientRect;
+        showOrHide: boolean;
+    };
+
     export type GetSecondWindowContent = {
         type: 'r2mi:get-window-controls';
         hwnd: string;
@@ -64,6 +71,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         | DoLoadfiles
         | DoLoadfiles2/* | DoLoadfiles3*/
         | GetSecondWindowHandle
+        | HighlightTargetHwnd
         | GetSecondWindowContent
         | GetSecondWindowIcon
         | GetSecondWindowMani
@@ -85,6 +93,9 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         // napi
 
         : T extends GetSecondWindowHandle    //'r2mi:get-target-hwnd'
+        ? string
+
+        : T extends HighlightTargetHwnd      //'r2mi:highlight-target-hwnd'
         ? string
 
         : T extends GetSecondWindowContent   //'r2mi:get-window-controls'

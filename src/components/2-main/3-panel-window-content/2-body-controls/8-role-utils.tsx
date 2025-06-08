@@ -1,6 +1,21 @@
 import { type Meta, getRoleStateNames } from "@/store/manifest";
 import { type EngineControlWithMeta } from "@/store";
 
+/**
+ * Correct name for listitems
+ */
+export function getItemName(item: EngineControlWithMeta) {
+    let name = item.control.dispname;
+    if (!name) {
+        const lastRole = getRoleStateNames(item.meta.path.p4a?.at(-1)?.roleString);
+        const prevRole = getRoleStateNames(item.meta.path.p4a?.at(-2)?.roleString);
+        if (lastRole && prevRole && lastRole?.role === 'text' && prevRole?.role === 'listitem') {
+            name = item.meta.path.p4a?.at(-2)?.name || 'aa';
+        }
+    }
+    return name;
+}
+
 export function printRoles(path: Meta.Path) {
     /*
     path.p4a.roleString 
@@ -27,19 +42,4 @@ export function printRoles(path: Meta.Path) {
         return s;
     }).join(',\n');
     console.log('%cpath.p4a.roleString', 'color: blue', '\n', res);
-}
-
-/**
- * Correct name for listitems
- */
-export function getItemName(item: EngineControlWithMeta) {
-    let name = item.control.dispname;
-    if (!name) {
-        const lastRole = getRoleStateNames(item.meta.path.p4a?.at(-1)?.roleString);
-        const prevRole = getRoleStateNames(item.meta.path.p4a?.at(-2)?.roleString);
-        if (lastRole && prevRole && lastRole?.role === 'text' && prevRole?.role === 'listitem') {
-            name = item.meta.path.p4a?.at(-2)?.name || 'aa';
-        }
-    }
-    return name;
 }

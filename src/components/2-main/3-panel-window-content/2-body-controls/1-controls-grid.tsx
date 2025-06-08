@@ -29,7 +29,7 @@ function ControlsGridItem({ item }: { item: EngineControlWithMeta; }) {
         setLocalHighlight(true);
     }
 
-    printRoles(item.meta.path);
+    //printRoles(item.meta.path);
 
     const role = item.meta.role?.role || item.meta.role?.raw;
     const states = item.meta.role?.states ? `${item.meta.role?.states.join(', ')}` : '';

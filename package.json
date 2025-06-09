@@ -39,7 +39,7 @@
         "jotai": "2.12.2",
         "jotai-valtio": "^0.6.0",
         "lucide-react": "^0.513.0",
-        "pm-manifest": "1.4.2",
+        "pm-manifest": "1.4.3",
         "pm-manifest-icons": "1.0.3",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",

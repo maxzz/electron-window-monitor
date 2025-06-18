@@ -55,11 +55,16 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         accId?: number;                 // We accId (not be profile id) as ordered in manifest (accId does not skip buttons).
     };
 
-    export type HighlightTarget = {
-        type: 'r2mi:highlight-target';
-        showOrHide: boolean;
-        params: WindowHighlighterParams;
-    };
+    export type HighlightTarget =
+        | {
+            type: 'r2mi:highlight-target';
+            showOrHide: true;
+            params: WindowHighlighterParams;
+        }
+        | {
+            type: 'r2mi:highlight-target';
+            showOrHide: false;
+        };
 
     export type GetWindowExtras = {
         type: 'r2mi:get-window-extras';
@@ -115,7 +120,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         : T extends HighlightField           //'r2mi:highlight-field'
         ? string
 
-        : T extends HighlightTarget //'r2mi:highlight-target'
+        : T extends HighlightTarget          //'r2mi:highlight-target'
         ? string
 
         : T extends GetWindowExtras          //'r2mi:get-window-extras'
@@ -137,3 +142,17 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
     export const allowedExt = ['dpm', 'dpn'];
 
 } //namespace R2MInvoke
+
+export namespace R2MInvokeParams {
+    export type DoLoadfiles = Omit<R2MInvoke.DoLoadfiles, 'type'>;
+    export type GetSecondWindowHandle = Omit<R2MInvoke.GetSecondWindowHandle, 'type'>;
+    export type GetSecondWindowContent = Omit<R2MInvoke.GetSecondWindowContent, 'type'>;
+    export type GetSecondWindowIcon = Omit<R2MInvoke.GetSecondWindowIcon, 'type'>;
+    export type GetSecondWindowMani = Omit<R2MInvoke.GetSecondWindowMani, 'type'>;
+    export type GetWindowPos = Omit<R2MInvoke.GetWindowPos, 'type'>;
+    export type GetTlwInfos = Omit<R2MInvoke.GetTlwInfos, 'type'>;
+    export type GetTlwScreenshots = Omit<R2MInvoke.GetTlwScreenshots, 'type'>;
+    export type HighlightField = Omit<R2MInvoke.HighlightField, 'type'>;
+    export type HighlightTarget = Omit<R2MInvoke.HighlightTarget, 'type'>;
+    export type GetWindowExtras = Omit<R2MInvoke.GetWindowExtras, 'type'>;
+}

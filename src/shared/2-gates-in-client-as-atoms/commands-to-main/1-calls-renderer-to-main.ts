@@ -1,5 +1,5 @@
 import { type R2MParams } from "@/shared/ipc-types";
-import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type Rect4 } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { sendToMain } from "../3-to-main-apis";
 
 export namespace R2MCalls {
@@ -24,7 +24,7 @@ export namespace R2MCalls {
         sendToMain({ type: 'r2m:cancel-detection' });
     }
 
-    export function highlightRect({ hwnd, rect }: { hwnd: string; rect: TargetClientRect; }): void {
+    export function highlightRect({ hwnd, rect }: { hwnd: string; rect: Rect4; }): void {
         sendToMain({ type: 'r2m:highlight-rect', hwnd, rect });
     }
 }

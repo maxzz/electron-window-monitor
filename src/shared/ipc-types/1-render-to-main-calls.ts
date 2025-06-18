@@ -1,4 +1,4 @@
-import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type Rect4 } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace R2M { // Main from Renderer
     export type NotifyMessage = {
@@ -27,7 +27,7 @@ export namespace R2M { // Main from Renderer
     export type HighlightRect = {
         type: 'r2m:highlight-rect';
         hwnd: string;
-        rect: TargetClientRect;
+        rect: Rect4;
     };
 
     export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions | CancelDetection | HighlightRect;

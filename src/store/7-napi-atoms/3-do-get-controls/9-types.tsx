@@ -1,10 +1,10 @@
 import { type Meta, type RoleStateNames } from "pm-manifest";
-import { type EngineControl, type TargetClientRect, type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type EngineControl, type Rect4, type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export type EngineControlMeta = {
     uuid: number;
     path: Meta.Path;
-    rect?: TargetClientRect;
+    rect?: Rect4;
     role?: RoleStateNames;
 };
 

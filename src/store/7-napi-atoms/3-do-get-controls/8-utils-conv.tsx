@@ -1,5 +1,5 @@
 import { FieldPath, type MPath, type RoleStateNames, getRoleStateNames } from "@/store/manifest";
-import { type TargetClientRect } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type Rect4 } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export function getRoleAndStates(p4a: MPath.p4a[] | undefined): RoleStateNames | undefined {
     if (!p4a?.length) {
@@ -9,7 +9,7 @@ export function getRoleAndStates(p4a: MPath.p4a[] | undefined): RoleStateNames |
     return getRoleStateNames(lastP4a?.roleString);
 }
 
-export function getControlTaretRect(pathLoc: string | undefined): TargetClientRect | undefined {
+export function getControlTaretRect(pathLoc: string | undefined): Rect4 | undefined {
     const loc = FieldPath.loc.getControlRect(pathLoc);
     if (loc) {
         return {

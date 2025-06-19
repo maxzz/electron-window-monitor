@@ -1,5 +1,5 @@
 import { type R2MInvoke } from "@/shared/ipc-types";
-import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getWindowPos, getTlwInfos, getTlwScreenshots, highlightField, highlightTargetWindow, getWindowExtras } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getTlwInfos, getTlwScreenshots, highlightField, highlightTargetWindow, getWindowExtras, dndAction } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 import { loadWin32FilesContent } from "../../x-electron/xternal-to-renderer/2-commands-in-main";
 
 export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Promise<any> {
@@ -23,7 +23,7 @@ export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Prom
             return rv;
         }
         case 'r2mi:get-window-pos': {
-            const rv: R2MInvoke.InvokeResult<R2MInvoke.GetWindowPos> = await getWindowPos(data.hwnd);
+            const rv: R2MInvoke.InvokeResult<R2MInvoke.GetWindowPos> = await dndAction(data.params);
             return rv;
         }
         case 'r2mi:get-window-mani': {

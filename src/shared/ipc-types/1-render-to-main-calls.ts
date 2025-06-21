@@ -30,7 +30,12 @@ export namespace R2M { // Main from Renderer
         rect: Rect4;
     };
 
-    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions | CancelDetection | HighlightRect;
+    export type GetWindowPosAction = {  // For manual mode position tracking inside target window
+        type: 'r2mi:get-window-pos-init';
+        params: 'move' | 'stop';
+    };
+
+    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions | CancelDetection | HighlightRect | GetWindowPosAction;
 }
 
 export namespace R2MParams {
@@ -39,6 +44,7 @@ export namespace R2MParams {
     export type SetNapiOptions = Omit<R2M.SetClientOptions, 'type'>;
     export type CancelDetection = Omit<R2M.CancelDetection, 'type'>;
     export type HighlightRect = Omit<R2M.HighlightRect, 'type'>;
+    export type GetWindowPosAction = Omit<R2M.GetWindowPosAction, 'type'>;
 }
 
 // Size, position, and bounds

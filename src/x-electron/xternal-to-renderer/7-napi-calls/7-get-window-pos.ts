@@ -1,5 +1,5 @@
 import { addon } from "./0-addon";
-import { mainToRenderer } from "../1-gates-in-main";
+import { mainToRenderer } from "./9-external";
 import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult } from "./pmat-plugin-types";
 
 /**
@@ -60,7 +60,7 @@ export function dndAction(actionName: DragAndDropActionParams): void {
     gDragAndDropper[actionName]('');
 }
 
-export type DragAndDropInitParams = Prettify<{ what: 'init'; } & DragAndDropParams>;
+export type DragAndDropInitParams = DragAndDropParams;
 export type DragAndDropActionParams = 'move' | 'stop';
 
 let gDragAndDropper: DragAndDropper | null = null;

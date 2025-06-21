@@ -27,4 +27,8 @@ export namespace R2MCalls {
     export function highlightRect({ hwnd, rect }: { hwnd: string; rect: Rect4; }): void {
         sendToMain({ type: 'r2m:highlight-rect', hwnd, rect });
     }
+
+    export function getWindowPosAction(params: 'move' | 'stop'): void {
+        sendToMain({ type: 'r2m:get-window-pos-action', params });
+    }
 }

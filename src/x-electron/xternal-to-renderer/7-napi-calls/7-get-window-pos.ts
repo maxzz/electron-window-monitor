@@ -1,7 +1,7 @@
 import { addon } from "./0-addon";
 import { mainToRenderer } from "./9-external";
 import { debounce } from "@/x-electron/app/3-utils-main";
-import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OKIfEmptyString } from "./pmat-plugin-types";
+import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OKIfEmptyString, type TargetPosition } from "./pmat-plugin-types";
 
 /**
  * Init get position inside window operation by drag and drop for manual mode 'position' action.
@@ -54,7 +54,7 @@ export type DragAndDropActionParams = 'move' | 'stop';
 
 let dragAndDropper: DragAndDropper | null = null;
 
-function sendToClient(res: DragAndDropResult) {
+function sendToClient(res: TargetPosition) {
     res.point.x = Math.round(res.point.x);
     res.point.y = Math.round(res.point.y);
     mainToRenderer({ type: 'm2r:position-progress', progress: res });

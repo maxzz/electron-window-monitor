@@ -1,12 +1,12 @@
 import { addon } from "./0-addon";
 import { mainToRenderer } from "./9-external";
 import { debounce } from "@/x-electron/app/3-utils-main";
-import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OKIfEmptyString, type TargetPosition } from "./pmat-plugin-types";
+import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OkIfEmptyString, type TargetPosition } from "./pmat-plugin-types";
 
 /**
  * Init get position inside window operation by drag and drop for manual mode 'position' action.
  */
-export function dndActionInit(params: DragAndDropParams): OKIfEmptyString {
+export function dndActionInit(params: DragAndDropParams): OkIfEmptyString {
     if (!dragAndDropper) {
         dragAndDropper = new addon.DragAndDropper();
         if (!dragAndDropper) {

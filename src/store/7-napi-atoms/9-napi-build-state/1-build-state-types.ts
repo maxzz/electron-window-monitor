@@ -1,7 +1,7 @@
 import { proxy } from 'valtio';
 import { atomWithProxy } from 'jotai-valtio';
-import { type PointXY, type TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
 import { debounce, roundInt } from '@/utils';
+import { type PosTrackerCbType, type PointXY, type TargetPosition } from '@/x-electron/xternal-to-renderer/7-napi-calls';
 
 // Build state
 
@@ -35,17 +35,29 @@ export const napiBuildProgress = proxy<NapiBuildProgress>({
     dragIsRunning: false,
 });
 
-// Utilities
-
 export function setNapiGetPosXY(x: number, y: number) {
     const xyNew: PointXY = { x: roundInt(x), y: roundInt(y) };
     const xyOld = napiBuildProgress.getPosProgress?.point || { x: 0, y: 0 };
 
     if (xyNew.x !== xyOld.x || xyNew.y !== xyOld.y) {
-        napiBuildProgress.getPosProgress = { point: xyNew };
+        napiBuildProgress.getPosProgress = { point: xyNew, clientRect: { left: 0, top: 0, right: 0, bottom: 0 }, windowRect: { left: 0, top: 0, right: 0, bottom: 0 } }; //TODO: this is temp and wrong; get is from main
 
         console.log(`napi-xy-progress {x:${xyNew.x}, y:${xyNew.y}}`);
     }
 }
 
 export const debouncedSetNapiGetPosXY = debounce(setNapiGetPosXY, 100);
+
+// State of napi pos tracker
+
+type StateNapiPosTracker = {
+    current: PosTrackerCbType;
+};
+
+export const stateNapiPosTracker = proxy<StateNapiPosTracker>({
+    current: {
+        x: 0,
+        y: 0,
+        isInside: false,
+    },
+});

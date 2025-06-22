@@ -2,7 +2,8 @@ import { type ComponentPropsWithoutRef } from "react";
 import { useSnapshot } from "valtio";
 import { motion } from "motion/react";
 import { IconDndTarget } from "@/components/ui";
-import { napiBuildProgress, debouncedSetNapiGetPosXY } from "@/store/7-napi-atoms";
+import { stateNapiPosTracker } from "@/store/7-napi-atoms";
+import { debouncedSetNapiGetPosXY } from "./8-set-position";
 
 export function TestTargetWindowPositionWoDrag({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -13,14 +14,14 @@ export function TestTargetWindowPositionWoDrag({ className, ...rest }: Component
 }
 
 function MovingIcon() {
-    const { getPosProgress } = useSnapshot(napiBuildProgress);
+    const { dragIsRunning } = useSnapshot(stateNapiPosTracker);
     return (<>
-        {getPosProgress && (
+        {dragIsRunning && (
             <motion.div
                 className="size-12"
-                onPointerDown={() => { napiBuildProgress.dragIsRunning = true; debouncedSetNapiGetPosXY(0, 0); }}
-                onPointerUp={() => { napiBuildProgress.dragIsRunning = false; }}
-                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => napiBuildProgress.dragIsRunning && debouncedSetNapiGetPosXY(event.pageX, event.pageY)}
+                onPointerDown={() => { stateNapiPosTracker.dragIsRunning = true; debouncedSetNapiGetPosXY(0, 0, false); }}
+                onPointerUp={() => { stateNapiPosTracker.dragIsRunning = false; }}
+                onPointerMove={(event: React.PointerEvent<HTMLDivElement>) => stateNapiPosTracker.dragIsRunning && debouncedSetNapiGetPosXY(event.pageX, event.pageY, false)}
                 drag
             >
                 <IconDndTarget className="text-primary-200" />

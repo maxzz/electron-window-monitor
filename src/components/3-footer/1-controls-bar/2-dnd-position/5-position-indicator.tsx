@@ -1,13 +1,13 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { useSnapshot } from "valtio";
-import { napiBuildProgress } from "@/store/7-napi-atoms";
+import { stateNapiPosTracker } from "@/store/7-napi-atoms";
 
 export function PositionIndicator(props: ComponentPropsWithoutRef<"div">) {
-    const { getPosProgress } = useSnapshot(napiBuildProgress);
+    const { current, dragIsRunning } = useSnapshot(stateNapiPosTracker);
     return (<>
-        {getPosProgress && (
+        {dragIsRunning && (
             <div {...props}>
-                {getPosProgress.point.x}, {getPosProgress.point.y}
+                {current.x}, {current.y}
             </div>
         )}
     </>);

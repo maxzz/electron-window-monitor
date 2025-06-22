@@ -1,4 +1,4 @@
-import { type TargetPosition } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type PosTrackerCbType } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type R2MInvoke } from "./2-render-to-main-invoke";
 
 export namespace M2R { // Main to Renderer
@@ -26,7 +26,7 @@ export namespace M2R { // Main to Renderer
 
     export type PositionProgress = {
         type: 'm2r:position-progress';
-        progress: TargetPosition;
+        progress: PosTrackerCbType;
     };
 
     export type FailedRawContent = {

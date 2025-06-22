@@ -1,7 +1,7 @@
 import { addon } from "./0-addon";
 import { mainToRenderer } from "./9-external";
-import { debounce } from "@/x-electron/app/3-utils-main";
-import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OkIfEmptyString, type TargetPosition } from "./pmat-plugin-types";
+import { debounce, isPointInsideRect } from "@/x-electron/app/3-utils-main";
+import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OkIfEmptyString, type TargetPosition, type PointXY, type Rect4 } from "./pmat-plugin-types";
 
 /**
  * Init get position inside window operation by drag and drop for manual mode 'position' action.
@@ -31,6 +31,7 @@ export function dndActionInit(params: DragAndDropParams): OkIfEmptyString {
 
                 if (res.status === 'progress') {
                     debouncedSendToClient(res);
+                    debouncedPrintProgress(res);
                 } else {
                     console.log('dnd.utility res', res);
                 }
@@ -45,14 +46,18 @@ export function dndActionInit(params: DragAndDropParams): OkIfEmptyString {
     return error;
 }
 
-export function dndAction(actionName: DragAndDropActionParams): void {
+export function dndAction(actionName: 'move' | 'stop'): void {
     dragAndDropper?.[actionName](''); // console.log('call.init.fisrt');
 }
 
-export type DragAndDropInitParams = DragAndDropParams;
-export type DragAndDropActionParams = 'move' | 'stop';
-
 let dragAndDropper: DragAndDropper | null = null;
+
+// Call to client
+
+export type DndCallbackType = {
+    pt: PointXY;        // rounded to int point coordinates
+    isInside: boolean;  // point is inside client rect of the window defined in init params
+};
 
 function sendToClient(res: TargetPosition) {
     res.point.x = Math.round(res.point.x);
@@ -61,3 +66,24 @@ function sendToClient(res: TargetPosition) {
 }
 
 const debouncedSendToClient = debounce(sendToClient, 100);
+
+// Print utilities
+
+function Rect4ToString(rect: Rect4) {
+    const [l, t, r, b] = Object.values(rect).map((v, idx) => `${Math.round(v)}`[idx === 0 || idx === 2 ? 'padStart' : 'padEnd'](4, ' '));
+    return `lt: ${l},${t}, rb: ${r},${b}`;
+}
+
+function printProgress(res: TargetPosition) {
+    console.log(
+        `dnd.progress [IS: %s] pointXY: {%s, %s} CLIENT: {%s}, WINDOW: {%s}, MSG: %o`,
+        isPointInsideRect(res.point, res.clientRect) ? ' IN' : 'OUT',
+        `${Math.round(res.point.x)}`.padStart(4, ' '),
+        `${Math.round(res.point.y)}`.padStart(4, ' '),
+        Rect4ToString(res.clientRect),
+        Rect4ToString(res.windowRect),
+        { data: JSON.stringify(res) }
+    );
+}
+
+const debouncedPrintProgress = debounce(printProgress, 1000);

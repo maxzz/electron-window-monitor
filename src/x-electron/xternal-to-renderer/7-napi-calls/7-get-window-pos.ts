@@ -15,13 +15,13 @@ export function dndActionInit(params: DragAndDropParams): OkIfEmptyString {
     }
 
     const actionParams = JSON.stringify({ hwnd: params.hwnd });
-    let rv_error: string = '';
+    let error: string = '';
 
     dragAndDropper.init(actionParams,
         (err: any, data?: string) => {
             if (err) {
                 console.error('dnd.error 1');
-                rv_error = `'dnd.error 1': ${err}`;
+                error = `'dnd.error 1': ${err}`;
                 return;
             }
 
@@ -37,12 +37,12 @@ export function dndActionInit(params: DragAndDropParams): OkIfEmptyString {
             }
             catch (error) {
                 console.error('dnd.error 2', error, data);
-                rv_error = `'dnd.error 2': ${error}`;
+                error = `'dnd.error 2': ${error}`;
             }
         }
     );
 
-    return rv_error;
+    return error;
 }
 
 export function dndAction(actionName: DragAndDropActionParams): void {

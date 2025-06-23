@@ -2,7 +2,7 @@ import { basename, extname, join, normalize } from 'node:path';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { R2MInvoke } from '@/shared/ipc-types';
 
-export function loadWin32FilesContent(filenames: string[], allowedExt?: string[]): R2MInvoke.FileContent[] {
+export function loadWin32FilesContent(filenames: string[], allowedExt?: string[]): R2MInvoke.FileContent[] { // call 'r2mi:load-files' and 'r2mi:load-files2' in main
     let files: Partial<R2MInvoke.FileContent>[] = [];
     collect(filenames, files);
 

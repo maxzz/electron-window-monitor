@@ -1,4 +1,4 @@
-import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams, type Rect4, type TargetPosition, type WindowHighlighterParams, DragAndDropParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams, type Rect4, type WindowHighlighterParams, DragAndDropParams, type OkIfEmptyString } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace R2MInvoke { // Main from Renderer invoke and get result
 
@@ -103,7 +103,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         ? string
 
         : T extends GetWindowPosInit         //'r2mi:get-window-pos-init-init'
-        ? string                             // in case of 'move' this is DragAndDropResult otherwise it is empty string if no error
+        ? OkIfEmptyString
 
         : T extends GetTlwInfos              //'r2mi:get-tlw-infos'
         ? string
@@ -115,7 +115,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         ? string
 
         : T extends HighlightTarget          //'r2mi:highlight-target'
-        ? string
+        ? OkIfEmptyString
 
         : T extends GetWindowExtras          //'r2mi:get-window-extras'
         ? string

@@ -1,4 +1,4 @@
-import { type Rect4 } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type Rect4 } from "../../xternal-to-renderer/7-napi-calls";
 
 export function compareRect(rect1: Rect4, rect2: Rect4) {
     return (

@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
-import { doGetTargetHwndAtom, secondsCounterAtom, useMonitoring } from "@/store";
+import { doGetTargetHwndAtom, secondsCounterAtom, useMonitoring, useSawRectMonitor } from "@/store";
 
 export function ButtonStartStopMonitor() {
 
@@ -16,9 +16,15 @@ export function ButtonStartStopMonitor() {
             <MonitorButtonText isMonitoring={isMonitoring} />
             <MonitorCounter className="absolute -top-3" />
 
+            {isMonitoring && <TargetWindowFrame />}
             <Tests />
         </button>
     );
+}
+
+function TargetWindowFrame() {
+    useSawRectMonitor();
+    return null;
 }
 
 function MonitorButtonText({ isMonitoring }: { isMonitoring: boolean; }) {

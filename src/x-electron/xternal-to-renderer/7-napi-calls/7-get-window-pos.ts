@@ -1,6 +1,6 @@
 import { addon } from "./0-addon";
 import { mainToRenderer } from "./9-external";
-import { debounce, ptInsideRect } from "@/x-electron/app/3-utils-main";
+import { debounce } from "../../app/3-utils-main";
 import { type DragAndDropper, type DragAndDropParams, type DragAndDropResult, type OkIfEmptyString, type TargetPosition, type PointXY, type Rect4 } from "./pmat-plugin-types";
 
 /**

@@ -1,6 +1,6 @@
 import { atom, type Getter, type Setter } from "jotai";
 import { proxy } from "valtio";
-import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
+import { hasMain, invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { debugSettings } from "@/store/1-atoms";
 import { type TlwInfo, type GetTlwScreenshotsParams, type TlwScreenshot } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { uuid } from "../../manifest";
@@ -35,7 +35,7 @@ export const doSetScreenshotsAtom = atom(
 async function doLiveScreenshots(width: number | undefined, set: Setter) {
     try {
         // 1. get all tlw infos
-        const infosStr = await invokeMain<string>({ type: 'r2mi:get-tlw-infos' });
+        const infosStr = await invokeMainTyped<string>({ type: 'r2mi:get-tlw-infos' });
         const infos = JSON.parse(infosStr || '[]') as TlwInfo[];
         const hwnds = infos.map(obj => obj.hwnd);
 
@@ -49,7 +49,7 @@ async function doLiveScreenshots(width: number | undefined, set: Setter) {
         };
 
         // 2. get all tlw screenshots
-        const res = await invokeMain<string>({ type: 'r2mi:get-tlw-screenshots', tlwInfos });
+        const res = await invokeMainTyped<string>({ type: 'r2mi:get-tlw-screenshots', tlwInfos });
         let screenshots = JSON.parse(res || '{}') as TlwScreenshot[];
 
         screenshots = correlateScreenshotsOrder(infos, screenshots);

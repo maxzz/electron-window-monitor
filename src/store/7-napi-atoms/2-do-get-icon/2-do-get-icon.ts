@@ -1,6 +1,6 @@
 import { atom, type Getter, type Setter } from "jotai";
 import { errorToString } from "@/utils";
-import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
+import { hasMain, invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowIconGetterResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { napiBuildState, napiLock, splitTypedError, typedErrorToString } from "../9-napi-build-state";
 //import { sawHandleAtom } from "./do-get-hwnd";
@@ -34,7 +34,7 @@ async function doLiveIcon(hwnd: string, get: Getter, set: Setter) {
 
         const cached = iconsCache.get(hwnd);
 
-        const str = cached ? cached : await invokeMain<string>({ type: 'r2mi:get-window-icon', hwnd });
+        const str = cached ? cached : await invokeMainTyped<string>({ type: 'r2mi:get-window-icon', hwnd });
 
         if (str && str !== cached) {
             iconsCache.set(hwnd, str);

@@ -1,4 +1,6 @@
+export * from "./util-hooks";
 export * from "./classnames";
+export * from "./compare-rect";
 export * from "./debounce";
 export * from "./delay";
 export * from "./error-to-string";

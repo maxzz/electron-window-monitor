@@ -1,6 +1,6 @@
 import { atom, type Getter, type Setter } from "jotai";
-import { errorToString } from "@/utils";
-import { hasMain, invokeMain } from "@/shared/2-gates-in-client-as-atoms";
+import { atomWithListeners, errorToString } from "@/utils";
+import { hasMain, invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { debugSettings } from "@/store/1-atoms";
 import { doGetWindowIconAtom } from "../2-do-get-icon";
@@ -9,7 +9,7 @@ import { doLoadFakeHwndAtom, type TestHwnd } from "../8-create-mani-tests-w-fetc
 import { napiBuildStateAtom, napiLock } from "../9-napi-build-state";
 
 export const sawHandleStrAtom = atom<string | undefined>('');
-export const sawHandleAtom = atom<GetTargetWindowResult | null>(null);
+export const [sawHandleAtom, useSawHandleListener] = atomWithListeners<GetTargetWindowResult | null>(null);
 
 export const doGetTargetHwndAtom = atom(
     null,
@@ -32,7 +32,7 @@ export const doGetTargetHwndAtom = atom(
 
 async function doLiveHwnd(get: Getter, set: Setter) {
     try {
-        const res = await invokeMain<string>({ type: 'r2mi:get-target-hwnd' });
+        const res = await invokeMainTyped<string>({ type: 'r2mi:get-target-hwnd' });
 
         const prev = get(sawHandleStrAtom);
         if (prev === res) {

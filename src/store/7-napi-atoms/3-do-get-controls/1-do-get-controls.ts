@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 import { errorToString } from "@/utils";
-import { invokeMain } from "@/shared/2-gates-in-client-as-atoms";
+import { invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { type WindowControlsCollectFinalAfterParse } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { type EngineControlsWithMeta } from "./9-types";
 import { controlsReplyToEngineControlWithMeta } from "./2-conv-controls-meta";
@@ -25,7 +25,7 @@ export const doGetWindowControlsAtom = atom(
 
             setBuildState({ progress: 0, isRunning: true, error: '', failedBody: '' });
 
-            const res = await invokeMain<string>({ type: 'r2mi:get-window-controls', hwnd });
+            const res = await invokeMainTyped<string>({ type: 'r2mi:get-window-controls', hwnd });
 
             const prev = get(sawContentStrAtom);
             if (prev === res) {

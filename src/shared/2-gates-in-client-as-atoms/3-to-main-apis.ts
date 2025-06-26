@@ -21,7 +21,10 @@ export function sendToMain(data: R2M.ToMainCalls): void {
 
 // invoke
 
-export async function invokeMain<TResult>(data: R2MInvoke.AllInvokes): Promise<TResult | undefined> {
+export async function invokeMainTyped<TResult>(data: R2MInvoke.AllInvokes): Promise<TResult | undefined> {
+    if (!mainApi) {
+        throw new Error('no.main.api');
+    }
     return mainApi?.invokeMain<R2MInvoke.AllInvokes, TResult>(data);
 }
 

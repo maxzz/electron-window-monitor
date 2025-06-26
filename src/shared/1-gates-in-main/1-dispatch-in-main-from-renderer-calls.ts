@@ -1,7 +1,7 @@
 import { Notification } from "electron";
 import { type R2M } from "@/shared/ipc-types";
 import { electronState } from "../../x-electron/app/2-electron-globals";
-import { dndAction, highlightField } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { dndAction, highlightControl } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 
 export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<void> {
     switch (data.type) {
@@ -22,7 +22,7 @@ export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<voi
             break;
         }
         case 'r2m:highlight-rect': {
-            highlightField(data);
+            highlightControl(data);
             break;
         }
         case 'r2m:get-window-pos-action': {

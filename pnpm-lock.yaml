@@ -21,11 +21,11 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       jotai:
-        specifier: 2.12.2
-        version: 2.12.2(@types/react@19.1.6)(react@19.1.0)
+        specifier: 2.12.5
+        version: 2.12.5(@types/react@19.1.6)(react@19.1.0)
       jotai-valtio:
         specifier: ^0.6.0
-        version: 0.6.0(jotai@2.12.2(@types/react@19.1.6)(react@19.1.0))(valtio@2.1.4(@types/react@19.1.6)(react@19.1.0))
+        version: 0.6.0(jotai@2.12.5(@types/react@19.1.6)(react@19.1.0))(valtio@2.1.5(@types/react@19.1.6)(react@19.1.0))
       lucide-react:
         specifier: ^0.513.0
         version: 0.513.0(react@19.1.0)
@@ -48,8 +48,8 @@ importers:
         specifier: ^3.3.0
         version: 3.3.0
       valtio:
-        specifier: 2.1.4
-        version: 2.1.4(@types/react@19.1.6)(react@19.1.0)
+        specifier: 2.1.5
+        version: 2.1.5(@types/react@19.1.6)(react@19.1.0)
     devDependencies:
       '@tailwindcss/forms':
         specifier: ^0.5.10
@@ -1555,8 +1555,8 @@ packages:
       jotai: '>=2.0.0'
       valtio: '>=2.0.0'
 
-  jotai@2.12.2:
-    resolution: {integrity: sha512-oN8715y7MkjXlSrpyjlR887TOuc/NLZMs9gvgtfWH/JP47ChwO0lR2ijSwBvPMYyXRAPT+liIAhuBavluKGgtA==}
+  jotai@2.12.5:
+    resolution: {integrity: sha512-G8m32HW3lSmcz/4mbqx0hgJIQ0ekndKWiYP7kWVKi0p6saLXdSoye+FZiOFyonnd7Q482LCzm8sMDl7Ar1NWDw==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=17.0.0'
@@ -2343,8 +2343,8 @@ packages:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
-  valtio@2.1.4:
-    resolution: {integrity: sha512-O6U79SacltN5E5XOwLNixrGSAc4+TNkQw8AWSqjcpvvRjvFbfMvdbFW98g/VgxKoT8v9kb8WQkD8lvf+Dcme8w==}
+  valtio@2.1.5:
+    resolution: {integrity: sha512-vsh1Ixu5mT0pJFZm+Jspvhga5GzHUTYv0/+Th203pLfh3/wbHwxhu/Z2OkZDXIgHfjnjBns7SN9HNcbDvPmaGw==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -4047,12 +4047,12 @@ snapshots:
   jiti@2.4.2:
     optional: true
 
-  jotai-valtio@0.6.0(jotai@2.12.2(@types/react@19.1.6)(react@19.1.0))(valtio@2.1.4(@types/react@19.1.6)(react@19.1.0)):
+  jotai-valtio@0.6.0(jotai@2.12.5(@types/react@19.1.6)(react@19.1.0))(valtio@2.1.5(@types/react@19.1.6)(react@19.1.0)):
     dependencies:
-      jotai: 2.12.2(@types/react@19.1.6)(react@19.1.0)
-      valtio: 2.1.4(@types/react@19.1.6)(react@19.1.0)
+      jotai: 2.12.5(@types/react@19.1.6)(react@19.1.0)
+      valtio: 2.1.5(@types/react@19.1.6)(react@19.1.0)
 
-  jotai@2.12.2(@types/react@19.1.6)(react@19.1.0):
+  jotai@2.12.5(@types/react@19.1.6)(react@19.1.0):
     optionalDependencies:
       '@types/react': 19.1.6
       react: 19.1.0
@@ -4813,7 +4813,7 @@ snapshots:
 
   uuid@11.1.0: {}
 
-  valtio@2.1.4(@types/react@19.1.6)(react@19.1.0):
+  valtio@2.1.5(@types/react@19.1.6)(react@19.1.0):
     dependencies:
       proxy-compare: 3.0.1
     optionalDependencies:

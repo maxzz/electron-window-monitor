@@ -30,8 +30,8 @@ importers:
         specifier: ^0.513.0
         version: 0.513.0(react@19.1.0)
       pm-manifest:
-        specifier: 1.4.3
-        version: 1.4.3
+        specifier: 1.4.10
+        version: 1.4.10
       pm-manifest-icons:
         specifier: 1.0.3
         version: 1.0.3(react@19.1.0)
@@ -1917,8 +1917,8 @@ packages:
     peerDependencies:
       react: ^16.x || ^17.x || ^18.x
 
-  pm-manifest@1.4.3:
-    resolution: {integrity: sha512-ph9Bp6OXNtEQLF73tIFoTi/YAr+xwvatEKCwcyrZDXE66H6t+fNWTjXMNGZnQDwdcr6RAblrNr/WlRYaSc1GIw==}
+  pm-manifest@1.4.10:
+    resolution: {integrity: sha512-Vyvf/4ngBkaXhu0bqFGIoH+ybUqPvPppVaXxCJHrpzMKHKEJStpeTcplRriyOn291byjXZZA+voJGJrPlxVgog==}
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -2167,8 +2167,8 @@ packages:
     resolution: {integrity: sha512-Fgl0YPZ902wEsAyiQ+idGd1A7rSFx/ayC1CQVMw5P+EQx2V0SgpGtf6OKFhVjPflPUl9YMmEOnmfjCdMUsygww==}
     engines: {node: '>= 10'}
 
-  socks@2.8.4:
-    resolution: {integrity: sha512-D3YaD0aRxR3mEcqnidIs7ReYJFVzWdd6fXJYUM8ixcQcJRGTka/b3saV0KflYhyVJXKhb947GndU35SxYNResQ==}
+  socks@2.8.5:
+    resolution: {integrity: sha512-iF+tNDQla22geJdTyJB1wM/qrX9DMRwWrciEPwWLPRWAUEM8sQiyxgckLxWT1f7+9VabJS0jTGGr4QgBuvi6Ww==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
   sonner@2.0.3:
@@ -4366,7 +4366,7 @@ snapshots:
     dependencies:
       react: 19.1.0
 
-  pm-manifest@1.4.3:
+  pm-manifest@1.4.10:
     dependencies:
       '@types/uuid': 10.0.0
       fast-xml-parser: 5.2.3
@@ -4606,11 +4606,11 @@ snapshots:
     dependencies:
       agent-base: 6.0.2
       debug: 4.4.0
-      socks: 2.8.4
+      socks: 2.8.5
     transitivePeerDependencies:
       - supports-color
 
-  socks@2.8.4:
+  socks@2.8.5:
     dependencies:
       ip-address: 9.0.5
       smart-buffer: 4.2.0

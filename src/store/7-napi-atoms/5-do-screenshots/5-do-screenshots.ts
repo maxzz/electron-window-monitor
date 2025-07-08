@@ -35,7 +35,7 @@ export const doSetScreenshotsAtom = atom(
 async function doLiveScreenshots(width: number | undefined, set: Setter) {
     try {
         // 1. get all tlw infos
-        const infosStr = await invokeMainTyped<string>({ type: 'r2mi:get-tlw-infos' });
+        const infosStr = await invokeMainTyped({ type: 'r2mi:get-tlw-infos' });
         const infos = JSON.parse(infosStr || '[]') as TlwInfo[];
         const hwnds = infos.map(obj => obj.hwnd);
 
@@ -49,7 +49,7 @@ async function doLiveScreenshots(width: number | undefined, set: Setter) {
         };
 
         // 2. get all tlw screenshots
-        const res = await invokeMainTyped<string>({ type: 'r2mi:get-tlw-screenshots', tlwInfos });
+        const res = await invokeMainTyped({ type: 'r2mi:get-tlw-screenshots', tlwInfos });
         let screenshots = JSON.parse(res || '{}') as TlwScreenshot[];
 
         screenshots = correlateScreenshotsOrder(infos, screenshots);

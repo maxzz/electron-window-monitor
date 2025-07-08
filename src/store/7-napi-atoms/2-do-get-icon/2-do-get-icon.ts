@@ -34,7 +34,7 @@ async function doLiveIcon(hwnd: string, get: Getter, set: Setter) {
 
         const cached = iconsCache.get(hwnd);
 
-        const str = cached ? cached : await invokeMainTyped<string>({ type: 'r2mi:get-window-icon', hwnd });
+        const str = cached ? cached : await invokeMainTyped({ type: 'r2mi:get-window-icon', hwnd });
 
         if (str && str !== cached) {
             iconsCache.set(hwnd, str);

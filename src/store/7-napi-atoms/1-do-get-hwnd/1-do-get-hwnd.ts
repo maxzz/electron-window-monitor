@@ -32,7 +32,7 @@ export const doGetTargetHwndAtom = atom(
 
 async function doLiveHwnd(get: Getter, set: Setter) {
     try {
-        const res = await invokeMainTyped<string>({ type: 'r2mi:get-target-hwnd' });
+        const res = await invokeMainTyped({ type: 'r2mi:get-target-hwnd' });
 
         const prev = get(sawHandleStrAtom);
         if (prev === res) {

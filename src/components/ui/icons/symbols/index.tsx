@@ -1,8 +1,8 @@
-import { UISymbolDefsInject } from 'pm-manifest-icons';
-import { DefFieldTypes } from 'pm-manifest-icons/src/symbols/field';
-import { DefAllOtherTypes } from './all-other';
+import { UISymbolDefsInject } from "pm-manifest-icons";
+import { DefFieldTypes } from "pm-manifest-icons";
+import { DefAllOtherTypes } from "./all-other";
 
-export * from 'pm-manifest-icons/src/symbols/field';
+export * from "pm-manifest-icons";
 export * from "./all-other";
 
 export function UISymbolDefs() {

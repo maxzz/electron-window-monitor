@@ -1,5 +1,5 @@
 import { type R2MInvoke } from "@/shared/ipc-types";
-import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getTlwInfos, getTlwScreenshots, highlightControl, highlightWindow, getWindowExtras, dndActionInit } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getTlwInfos, getTlwScreenshots, highlightControl, highlightWindow, getWindowExtras, dndActionInit, getGeneralInfo, performCommand } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 import { loadWin32FilesContent } from "../../x-electron/xternal-to-renderer/2-commands-in-main";
 
 export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Promise<any> {
@@ -10,6 +10,9 @@ export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Prom
         case 'r2mi:load-files2': {
             return loadWin32FilesContent(data.filenames);
         }
+
+        // napi
+
         case 'r2mi:get-target-hwnd': {
             const rv: R2MInvoke.InvokeResult<R2MInvoke.GetSecondWindowHandle> = await getTargetHwnd();
             return rv;
@@ -48,6 +51,15 @@ export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Prom
         }
         case 'r2mi:get-window-extras': {
             const rv: R2MInvoke.InvokeResult<R2MInvoke.GetWindowExtras> = await getWindowExtras(data);
+            return rv;
+        }
+
+        case 'r2mi:get-general-info': {
+            const rv: R2MInvoke.InvokeResult<R2MInvoke.GeneralInfo> = await getGeneralInfo();
+            return rv;
+        }
+        case 'r2mi:perform-command': {
+            const rv: R2MInvoke.InvokeResult<R2MInvoke.PerformCommand> = await performCommand(data.params);
             return rv;
         }
         default: {

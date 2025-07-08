@@ -1,4 +1,4 @@
-import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams, type Rect4, type WindowHighlighterParams, DragAndDropParams, type OkIfEmptyString } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { type ManifestForWindowCreatorParams, type GetTlwScreenshotsParams, type Rect4, type WindowHighlighterParams, type DragAndDropParams, type OkIfEmptyString, type PerformCommandParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export namespace R2MInvoke { // Main from Renderer invoke and get result
 
@@ -71,6 +71,15 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         hwnds: string[];
     };
 
+    export type GeneralInfo = {
+        type: 'r2mi:get-general-info';
+    };
+
+    export type PerformCommand = {
+        type: 'r2mi:perform-command';
+        params: PerformCommandParams;
+    };
+
     export type AllInvokes =
         | DoLoadfiles
         | DoLoadfiles2/* | DoLoadfiles3*/
@@ -84,6 +93,9 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         | HighlightField
         | HighlightTarget
         | GetWindowExtras
+        
+        | GeneralInfo
+        | PerformCommand
         ;
 
     export type InvokeResult<T extends R2MInvoke.AllInvokes> =
@@ -126,6 +138,12 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         : T extends GetWindowExtras          //'r2mi:get-window-extras'
         ? string
 
+        : T extends GeneralInfo              //'r2mi:get-general-info'
+        ? string
+
+        : T extends PerformCommand           //'r2mi:perform-command'
+        ? string
+
         : never;
 
     export type FileContent = {
@@ -155,4 +173,6 @@ export namespace R2MInvokeParams {
     export type HighlightField = Omit<R2MInvoke.HighlightField, 'type'>;
     export type HighlightTarget = Omit<R2MInvoke.HighlightTarget, 'type'>;
     export type GetWindowExtras = Omit<R2MInvoke.GetWindowExtras, 'type'>;
+    export type GeneralInfo = Omit<R2MInvoke.GeneralInfo, 'type'>;
+    export type PerformCommand = Omit<R2MInvoke.PerformCommand, 'type'>;
 }

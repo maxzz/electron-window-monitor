@@ -4,10 +4,12 @@ import { appWindow } from "./7-app-window-instance";
 import { log } from "node:console";
 
 //import TrayIconDarkWin from '../../resources/trayDark.ico?asset';
-import TrayIconDarkWin from '../../../assets/icons/favicon.svg?asset';
+// import TrayIconDarkWin from '../../../assets/icons/favicon.svg?asset';
+import TrayIconDarkWin from '../../../assets/icons/favicon.ico?asset';
+log('----------TrayIconDarkWin', TrayIconDarkWin);
 
 const isDarkMode = nativeTheme.shouldUseDarkColors;
-log('----------isDarkMode', isDarkMode);
+//log('----------isDarkMode', isDarkMode);
 
 export function createTray() {
     // Create the tray icon

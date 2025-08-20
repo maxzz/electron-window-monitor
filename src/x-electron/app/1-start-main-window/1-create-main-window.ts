@@ -1,11 +1,10 @@
 import path from "node:path";
 import { BrowserWindow, app, shell } from "electron";
 import { loadIniFileOptions, saveIniFileOptions } from "./8-ini-file-options";
+import { appWindow } from "./8-app-window-instance";
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
-
-export let winApp: BrowserWindow | null;
 
 export async function createWindow() {
     const iniFileOptions = loadIniFileOptions();
@@ -13,7 +12,7 @@ export async function createWindow() {
 
     //console.log('__dirname', __dirname);
 
-    winApp = new BrowserWindow({
+    appWindow.wnd = new BrowserWindow({
         title: 'PMAT Monitor',
         ...(iniFileOptions?.bounds),
         show: false,
@@ -27,37 +26,37 @@ export async function createWindow() {
     });
 
     if (VITE_DEV_SERVER_URL) {
-        winApp.loadURL(VITE_DEV_SERVER_URL);
+        appWindow.wnd.loadURL(VITE_DEV_SERVER_URL);
     } else {
-        winApp.loadFile(path.join(process.env.DIST, 'index.html'));
+        appWindow.wnd.loadFile(path.join(process.env.DIST, 'index.html'));
     }
 
-    winApp.once('ready-to-show', () => {
-        if (iniFileOptions?.devTools && !winApp?.webContents.isDevToolsOpened()) {
-            winApp?.webContents.toggleDevTools();
+    appWindow.wnd.once('ready-to-show', () => {
+        if (iniFileOptions?.devTools && !appWindow.wnd?.webContents.isDevToolsOpened()) {
+            appWindow.wnd?.webContents.toggleDevTools();
         }
-        winApp?.show();
+        appWindow.wnd?.show();
     });
 
-    winApp.on('close', () => {
-        winApp && saveIniFileOptions(winApp);
+    appWindow.wnd.on('close', () => {
+        appWindow.wnd && saveIniFileOptions(appWindow.wnd);
     });
 
-    winApp.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
+    appWindow.wnd.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application
         if (url.startsWith('https:')) {
             shell.openExternal(url);
         }
         return { action: 'deny' };
     });
 
-    winApp.webContents.on('did-finish-load', () => {
-        winApp?.webContents.send('main-process-message', (new Date).toLocaleString()); // Test active push message to Renderer-process.
+    appWindow.wnd.webContents.on('did-finish-load', () => {
+        appWindow.wnd?.webContents.send('main-process-message', (new Date).toLocaleString()); // Test active push message to Renderer-process.
     });
 }
 
 export function connect_MainWindowListeners() {
     app.on('window-all-closed', () => {
-        winApp = null;
+        appWindow.wnd = null;
         if (process.platform !== 'darwin') {
             app.quit();
         }

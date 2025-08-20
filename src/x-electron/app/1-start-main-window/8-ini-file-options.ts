@@ -8,7 +8,7 @@ export type IniOptions = {
     devTools: boolean;  // is devTools open
 };
 
-export function loadIniFileOptions(): IniOptions | undefined {
+function loadIniFileOptions(): IniOptions | undefined {
     try {
         const cnt = fs.readFileSync(INI_FNAME, 'utf8');
         const data = JSON.parse(cnt) as IniOptions;
@@ -20,7 +20,7 @@ export function loadIniFileOptions(): IniOptions | undefined {
     }
 }
 
-export function saveIniFileOptions(win: BrowserWindow) {
+function saveIniFileOptions(win: BrowserWindow) {
     const data = {
         bounds: win.getNormalBounds(),
         devTools: win.webContents.isDevToolsOpened(),
@@ -29,3 +29,20 @@ export function saveIniFileOptions(win: BrowserWindow) {
 }
 
 const INI_FNAME = path.join(app.getPath('userData'), "init.json"); // c:\users\maxzz\appdata\roaming\electron-window-monitor\ini-options.json
+
+export const iniFileOptions = {
+    get options() {
+        return _options;
+    },
+    set options(value: IniOptions | undefined) {
+        _options = value;
+    },
+    load() {
+        _options = loadIniFileOptions();
+    },
+    save(appWindow: BrowserWindow | null) {
+        appWindow && saveIniFileOptions(appWindow);
+    }
+};
+
+let _options: IniOptions | undefined = undefined;

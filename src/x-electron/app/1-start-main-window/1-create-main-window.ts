@@ -1,45 +1,21 @@
 import path from "node:path";
-import { BrowserWindow, app, shell } from "electron";
-import { loadIniFileOptions, saveIniFileOptions } from "./8-ini-file-options";
+import { app, shell } from "electron";
 import { appWindow } from "./8-app-window-instance";
-
-// 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
-const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
+import { iniFileOptions } from "./8-ini-file-options";
+import { initMainWindow } from "./2-init-main-window";
 
 export async function createWindow() {
-    const iniFileOptions = loadIniFileOptions();
-    const preloadPath = path.join(__dirname, 'preload.js');
-
-    //console.log('__dirname', __dirname);
-
-    appWindow.wnd = new BrowserWindow({
-        title: 'PMAT Monitor',
-        ...(iniFileOptions?.bounds),
-        show: false,
-        icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
-        webPreferences: {
-            preload: preloadPath,
-            nodeIntegration: false, //https://www.electronjs.org/docs/latest/tutorial/security process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
-            contextIsolation: true, //https://www.electronjs.org/docs/latest/tutorial/context-isolation
-            //...(iniOptions?.devTools && { devTools: iniOptions.devTools }) enable during runtime
-        },
-    });
-
-    if (VITE_DEV_SERVER_URL) {
-        appWindow.wnd.loadURL(VITE_DEV_SERVER_URL);
-    } else {
-        appWindow.wnd.loadFile(path.join(process.env.DIST, 'index.html'));
-    }
+    appWindow.wnd = initMainWindow();
 
     appWindow.wnd.once('ready-to-show', () => {
-        if (iniFileOptions?.devTools && !appWindow.wnd?.webContents.isDevToolsOpened()) {
+        if (iniFileOptions.options?.devTools && !appWindow.wnd?.webContents.isDevToolsOpened()) {
             appWindow.wnd?.webContents.toggleDevTools();
         }
         appWindow.wnd?.show();
     });
 
     appWindow.wnd.on('close', () => {
-        appWindow.wnd && saveIniFileOptions(appWindow.wnd);
+        iniFileOptions.save(appWindow.wnd);
     });
 
     appWindow.wnd.webContents.setWindowOpenHandler(({ url }) => { // Make all links open with the browser, not with the application

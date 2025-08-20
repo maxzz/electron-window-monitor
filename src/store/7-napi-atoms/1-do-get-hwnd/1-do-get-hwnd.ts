@@ -53,17 +53,17 @@ async function doLiveHwnd(get: Getter, set: Setter) {
 }
 
 async function doTestHwnd(get: Getter, set: Setter) {
-    // if (lastTestCreateHwnd === debugSettings.testCreate.hwnd) {
-    //     return;
-    // }
-    // lastTestCreateHwnd = debugSettings.testCreate.hwnd;
+    if (lastTestCreateHwnd === debugSettings.testCreate.hwnd) {
+        return;
+    }
+    lastTestCreateHwnd = debugSettings.testCreate.hwnd;
 
     const testHwnd = (await set(doLoadFakeHwndAtom, debugSettings.testCreate.hwnd)) as unknown as TestHwnd;
     set(sawHandleStrAtom, JSON.stringify(testHwnd));
     set(sawHandleAtom, testHwnd?.hwnd ? testHwnd.hwnd : null);
 }
 
-// let lastTestCreateHwnd: typeof debugSettings.testCreate.hwnd = 'none';
+let lastTestCreateHwnd: typeof debugSettings.testCreate.hwnd = 'none';
 
 export const doClearSawHandleAtom = atom(
     null,

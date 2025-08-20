@@ -1,5 +1,5 @@
 import path from "node:path";
-import { app, nativeTheme, Tray } from "electron";
+import { app, nativeImage, nativeTheme, Tray } from "electron";
 import { appWindow } from "./7-app-window-instance";
 import { log } from "node:console";
 
@@ -14,7 +14,12 @@ const isDarkMode = nativeTheme.shouldUseDarkColors;
 export function createTray() {
     // Create the tray icon
     // const tray = new Tray(path.join(app.getAppPath(), 'resources', 'icon.png'));
-    const tray = new Tray(TrayIconDarkWin);
+    //const tray = new Tray(TrayIconDarkWin);
+
+    // const img: Electron.NativeImage = nativeTheme.trayIcon.resize({ width: 16, height: 16 });
+    const img: Electron.NativeImage = nativeImage.createFromDataURL(TrayIconDarkWin);
+
+    const tray = new Tray(img);
 
     // Set the context menu for the tray icon
     tray.setToolTip('Win-Mon');

@@ -1,5 +1,8 @@
 import { useCallback, useEffect } from "react";
 import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
+import { napiLock } from "../9-napi-build-state";
+import { doGetTargetHwndAtom, sawHandleAtom } from "../1-do-get-hwnd";
+import { doGetWindowIconAtom } from "../2-do-get-icon";
 
 // export const startMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { willStart: true }));
 export const stopMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { doStart: false }));
@@ -59,6 +62,19 @@ const timesPerSecond = 2;
 
 export const secondsCounterAtom = atom(
     (get) => Math.ceil(get(_monitorCounterAtom) / timesPerSecond)
+);
+
+// Update hwnd and icon
+
+export const doUpdateHwndAndIconAtom = atom(
+    null,
+    async (get, set) => {
+        if (!napiLock.isLocked) { // Avoid attempt to get hwnd by timer when napi is locked
+            await set(doGetTargetHwndAtom);
+            const sawHandle = get(sawHandleAtom);
+            set(doGetWindowIconAtom, sawHandle?.hwnd);
+        }
+    }
 );
 
 /**

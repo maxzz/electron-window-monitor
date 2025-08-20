@@ -7,10 +7,10 @@ import { log } from "node:console";
 import TrayIconDarkWin from '../../../assets/icons/icon.png?asset';
 // import TrayIconDarkWin from '../../../assets/icons/favicon.svg?asset';
 //import TrayIconDarkWin from '../../../assets/icons/favicon.ico?asset';
-log('----------TrayIconDarkWin', TrayIconDarkWin);
+//log('----------TrayIconDarkWin', TrayIconDarkWin);
 
 const isDarkMode = nativeTheme.shouldUseDarkColors;
-//log('----------isDarkMode', isDarkMode);
+log('----------isDarkMode', isDarkMode);
 
 export function createTray() {
     // Create the tray icon
@@ -19,6 +19,7 @@ export function createTray() {
 
     // const img: Electron.NativeImage = nativeTheme.trayIcon.resize({ width: 16, height: 16 });
     const img: Electron.NativeImage = nativeImage.createFromDataURL(TrayIconDarkWin);
+    //img.resize({ width: 16, height: 16 });
 
     const tray = new Tray(img);
 

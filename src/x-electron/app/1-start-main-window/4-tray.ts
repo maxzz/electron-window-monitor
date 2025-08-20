@@ -1,5 +1,5 @@
 import path from "node:path";
-import { app, nativeImage, nativeTheme, Tray } from "electron";
+import { app, Menu, MenuItem, nativeImage, nativeTheme, Tray } from "electron";
 import { appWindow } from "./7-app-window-instance";
 import { log } from "node:console";
 
@@ -27,6 +27,8 @@ export function createTray() {
     tray.setToolTip('Win-Mon');
     //tray.setContextMenu(contextMenu);
 
+    tray.setContextMenu(createContextMenu());
+
     // Show the tray icon
     tray.on('click', () => {
         if (appWindow.wnd?.isVisible()) {
@@ -35,4 +37,12 @@ export function createTray() {
             appWindow.wnd?.show();
         }
     });
+}
+
+function createContextMenu() {
+    const contextMenu = new Menu();
+    contextMenu.append(new MenuItem({ label: 'Show App', click: () => { appWindow.wnd?.show(); } }));
+    contextMenu.append(new MenuItem({ type: 'separator' }));
+    contextMenu.append(new MenuItem({ label: 'Quit', role: 'quit' }));
+    return contextMenu;
 }

@@ -1,4 +1,4 @@
-import { atom, type Getter, type Setter } from "jotai";
+import { atom } from "jotai";
 import { atomWithListeners, errorToString } from "@/utils";
 import { hasMain, invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
@@ -21,12 +21,12 @@ export const doGetTargetHwndAtom = atom(
                 ? await doLiveHwnd(get, set)
                 : await doTestHwnd(get, set);
 
+            napiLock.unlock();
+
             // 2. Update icon
             if (debugSettings.uiState.iconAutoUpdate) {
                 set(doGetWindowIconAtom, get(sawHandleAtom)?.hwnd);
             }
-
-            napiLock.unlock();
         }
     }
 );

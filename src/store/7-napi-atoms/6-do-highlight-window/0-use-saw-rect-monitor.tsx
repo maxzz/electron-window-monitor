@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
+import { atom, useSetAtom } from "jotai";
 import { compareRect } from "@/utils";
-import { type Getter, type Setter, atom, useSetAtom } from "jotai";
 import { type GetTargetWindowResult, type WindowHighlighterParams } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 import { invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { useSawHandleListener } from "../1-do-get-hwnd";

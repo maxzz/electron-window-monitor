@@ -4,7 +4,8 @@ import { napiLock } from "../9-napi-build-state";
 import { doGetTargetHwndAtom, sawHandleAtom } from "../1-do-get-hwnd";
 import { doGetWindowIconAtom } from "../2-do-get-icon";
 
-// export const startMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { willStart: true }));
+export const isMonitorRunningAtom = atom((get) => get(_isMonitoringTimerAtom));
+// export const startMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { doStart: true }));
 export const stopMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { doStart: false }));
 
 const doMonitoringTimerAtom = atom(
@@ -41,10 +42,6 @@ const doMonitoringTimerAtom = atom(
 );
 
 const _isMonitoringTimerAtom = atom(false);
-
-export const isMonitorRunningAtom = atom(
-    (get) => get(_isMonitoringTimerAtom),
-);
 
 const timeoutId = {
     id: undefined as undefined | ReturnType<typeof setTimeout>,
@@ -98,7 +95,7 @@ export const doUpdateHwndAndIconAtom = atom(
         if (!napiLock.isLocked) { // Avoid attempt to get hwnd by timer when napi is locked
             await set(doGetTargetHwndAtom);
             const sawHandle = get(sawHandleAtom);
-            set(doGetWindowIconAtom, sawHandle?.hwnd);
+            //set(doGetWindowIconAtom, sawHandle?.hwnd);
         }
     }
 );

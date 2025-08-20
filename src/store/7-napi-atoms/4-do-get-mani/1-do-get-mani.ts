@@ -1,4 +1,4 @@
-import { atom, type Getter, type Setter } from "jotai";
+import { atom } from "jotai";
 import { errorToString } from "@/utils";
 import { hasMain, invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { type ManifestForWindowCreatorParams, type WindowControlsCollectResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";

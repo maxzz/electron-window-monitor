@@ -1,4 +1,4 @@
-import { atom, type Getter, type Setter } from "jotai";
+import { atom } from "jotai";
 import { proxy } from "valtio";
 import { hasMain, invokeMainTyped } from "@/shared/2-gates-in-client-as-atoms";
 import { debugSettings } from "@/store/1-atoms";

@@ -1,36 +1,47 @@
 import { useCallback, useEffect } from "react";
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useAtomValue, useSetAtom } from "jotai";
 
-export const doMonitoringTimerAtom = atom(
-    (get) => get(_isMonitoringTimerAtom),
+// export const startMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { willStart: true }));
+export const stopMonitorTimerAtom = atom(null, async (get, set) => set(doMonitoringTimerAtom, { doStart: false }));
+
+const doMonitoringTimerAtom = atom(
+    (get) => null,
     (get, set, { doStart, callback }: { doStart: boolean, callback?: Function; }) => {
         const isMonitoring = get(_isMonitoringTimerAtom);
 
         if (isMonitoring) {
-            if (!doStart) {
-                set(_isMonitoringTimerAtom, false);
-                set(_monitorCounterAtom, -1);
-                timeoutId.clear();
-            }
-        } else {
             if (doStart) {
-                set(_isMonitoringTimerAtom, true);
-                timeoutId.clear();
+                return;
+            }
 
-                set(_monitorCounterAtom, 1);
+            set(_isMonitoringTimerAtom, false);
+            set(_monitorCounterAtom, -1);
+            timeoutId.clear();
+        } else {
+            if (!doStart) {
+                return;
+            }
+
+            set(_isMonitoringTimerAtom, true);
+            timeoutId.clear();
+
+            set(_monitorCounterAtom, 1);
+            timeoutId.id = setTimeout(runTimeout, 1000 / timesPerSecond);
+
+            function runTimeout() {
+                callback?.();
+                set(_monitorCounterAtom, get(_monitorCounterAtom) + 1);
                 timeoutId.id = setTimeout(runTimeout, 1000 / timesPerSecond);
-
-                function runTimeout() {
-                    callback?.();
-                    set(_monitorCounterAtom, get(_monitorCounterAtom) + 1);
-                    timeoutId.id = setTimeout(runTimeout, 1000 / timesPerSecond);
-                }
             }
         }
     }
 );
 
 const _isMonitoringTimerAtom = atom(false);
+
+export const isMonitorRunningAtom = atom(
+    (get) => get(_isMonitoringTimerAtom),
+);
 
 const timeoutId = {
     id: undefined as undefined | ReturnType<typeof setTimeout>,
@@ -54,7 +65,8 @@ export const secondsCounterAtom = atom(
  * Combines monitoring atom and clearing timeout on unmount
  */
 export function useMonitoring(callback?: () => void) {
-    const [isMonitoring, doMonitoring] = useAtom(doMonitoringTimerAtom);
+    const isMonitoring = useAtomValue(isMonitorRunningAtom);
+    const doMonitoring = useSetAtom(doMonitoringTimerAtom);
 
     useEffect(
         () => {

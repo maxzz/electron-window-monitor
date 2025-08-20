@@ -3,11 +3,11 @@ import { useSetAtom, useAtomValue } from "jotai";
 import { AnimatePresence, motion } from "motion/react";
 import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
-import { doGetTargetHwndAtom, doMonitoringTimerAtom } from "@/store";
+import { doGetTargetHwndAtom, isMonitorRunningAtom } from "@/store";
 
 export function ButtonGetSawHandle({ className, ...rest }: ComponentPropsWithoutRef<typeof motion.button>) {
 
-    const isMonitoring = useAtomValue(doMonitoringTimerAtom);
+    const isMonitoring = useAtomValue(isMonitorRunningAtom);
     const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
 
     return (

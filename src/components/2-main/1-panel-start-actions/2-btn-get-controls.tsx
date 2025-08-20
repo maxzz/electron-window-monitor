@@ -1,13 +1,13 @@
 import { useSetAtom, useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { doGetWindowControlsAtom, doMonitoringTimerAtom, sawHandleAtom } from "@/store";
+import { doGetWindowControlsAtom, stopMonitorTimerAtom, sawHandleAtom } from "@/store";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { buttonClasses } from "./8-button-classes";
 
 export function ButtonGetControls() {
 
-    const doMonitoring = useSetAtom(doMonitoringTimerAtom);
+    const stopMonitorTimer = useSetAtom(stopMonitorTimerAtom);
     const doGetWindowControls = useSetAtom(doGetWindowControlsAtom);
 
     const secondActiveWindow = useAtomValue(sawHandleAtom);
@@ -23,7 +23,7 @@ export function ButtonGetControls() {
             disabled={isDisabled}
             title={title}
             onClick={() => {
-                doMonitoring({ doStart: false });
+                stopMonitorTimer();
                 doGetWindowControls(hwnd);
             }}
         >

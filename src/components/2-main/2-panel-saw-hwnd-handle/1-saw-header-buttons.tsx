@@ -4,10 +4,10 @@ import { classNames } from "@/utils";
 import { debugSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
 import { utilityButtonClasses } from "../1-panel-start-actions/8-button-classes";
-import { doClearSawHandleAtom, sawHandleStrAtom, doMonitoringTimerAtom, sawIconAtom } from "@/store";
+import { doClearSawHandleAtom, sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom } from "@/store";
 
 export function SawHeaderButtons() {
-    const isMonitoring = useAtomValue(doMonitoringTimerAtom);
+    const isMonitoring = useAtomValue(isMonitorRunningAtom);
     const { iconsLarge } = useSnapshot(debugSettings.uiState);
 
     const raw = useAtomValue(sawHandleStrAtom);

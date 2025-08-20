@@ -20,12 +20,13 @@ export const doGetTargetHwndAtom = atom(
             hasMain()
                 ? await doLiveHwnd(get, set)
                 : await doTestHwnd(get, set);
-            napiLock.unlock();
-        }
 
-        // 2. Update icon
-        if (debugSettings.uiState.iconAutoUpdate) {
-            set(doGetWindowIconAtom, get(sawHandleAtom)?.hwnd);
+            // 2. Update icon
+            if (debugSettings.uiState.iconAutoUpdate) {
+                set(doGetWindowIconAtom, get(sawHandleAtom)?.hwnd);
+            }
+
+            napiLock.unlock();
         }
     }
 );

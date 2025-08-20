@@ -1,8 +1,8 @@
 import { shell } from "electron";
 import { iniFileOptions } from "./8-ini-file-options";
-import { type AppWindow } from "./8-app-window-instance";
+import { type AppWindow } from "./7-app-window-instance";
 
-export function setMainWindowListeners(appWindow: AppWindow) {
+export function setAppWindowListeners(appWindow: AppWindow) {
     if (!appWindow.wnd) {
         return;
     }

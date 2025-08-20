@@ -21,7 +21,7 @@ const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
 const preloadPath = path.join(__dirname, 'preload.js');
 
-export function initMainWindow(): BrowserWindow {
+export function initAppWindow(): BrowserWindow {
     const rv = new BrowserWindow({
         title: 'PMAT Monitor',
         ...(iniFileOptions.options?.bounds),

@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from "electron";
-import { appWindow } from "./8-app-window-instance";
-import { createWindow } from "./1-create-main-window";
+import { appWindow } from "./7-app-window-instance";
+import { createAppWindow } from "./1-create-app-window";
 //import { optimizer } from "@electron-toolkit/utils";
 
 export function setAppListeners() {
@@ -18,7 +18,7 @@ export function setAppListeners() {
                 // On macOS it's common to re-create a window in the app when the
                 // dock icon is clicked and there are no other windows open.
                 if (BrowserWindow.getAllWindows().length === 0) {
-                    createWindow();
+                    createAppWindow();
                 }
             }
         );

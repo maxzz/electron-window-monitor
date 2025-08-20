@@ -64,19 +64,6 @@ export const secondsCounterAtom = atom(
     (get) => Math.ceil(get(_monitorCounterAtom) / timesPerSecond)
 );
 
-// Update hwnd and icon
-
-export const doUpdateHwndAndIconAtom = atom(
-    null,
-    async (get, set) => {
-        if (!napiLock.isLocked) { // Avoid attempt to get hwnd by timer when napi is locked
-            await set(doGetTargetHwndAtom);
-            const sawHandle = get(sawHandleAtom);
-            set(doGetWindowIconAtom, sawHandle?.hwnd);
-        }
-    }
-);
-
 /**
  * Combines monitoring atom and clearing timeout on unmount
  */
@@ -102,3 +89,16 @@ export function useMonitoring(callback?: () => void) {
 
     return [isMonitoring, toggleStartStop] as const;
 }
+
+// Update hwnd and icon
+
+export const doUpdateHwndAndIconAtom = atom(
+    null,
+    async (get, set) => {
+        if (!napiLock.isLocked) { // Avoid attempt to get hwnd by timer when napi is locked
+            await set(doGetTargetHwndAtom);
+            const sawHandle = get(sawHandleAtom);
+            set(doGetWindowIconAtom, sawHandle?.hwnd);
+        }
+    }
+);

@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "motion/react";
 import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
-import { doGetTargetHwndAtom, secondsCounterAtom, useMonitoring, useSawRectMonitor } from "@/store";
+import { doGetTargetHwndAtom, doUpdateHwndAndIconAtom, secondsCounterAtom, useMonitoring, useSawRectMonitor } from "@/store";
 
 export function ButtonStartStopMonitor() {
 
-    const doGetTargetHwnd = useSetAtom(doGetTargetHwndAtom);
+    const doGetTargetHwnd = useSetAtom(doUpdateHwndAndIconAtom);
     const [isMonitoring, startStop] = useMonitoring(doGetTargetHwnd);
 
     return (

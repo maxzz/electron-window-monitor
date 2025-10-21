@@ -27,6 +27,7 @@
         "rollup-plugin-visualizer": "^6.0.5",
         "tailwindcss": "^3.4.17",
         "typescript": "5.9.3",
+        "upen": "^1.0.2",
         "vite": "7.1.11",
         "vite-plugin-electron": "^0.29.0",
         "vite-plugin-electron-renderer": "^0.14.6"
@@ -51,7 +52,7 @@
         "dev": "vite",
         "tsc": "tsc -w",
         "preview": "vite preview",
-        "build": "tsc && vite build && electron-builder --win",
+        "build": "tsc && upen && vite build && electron-builder --win",
         "build:exe": "tsc && vite build && electron-builder --windows portable",
         "debug-vite": "set VITE_CJS_TRACE=true && vite dev",
         "....................................................................................a": ".......................................................",

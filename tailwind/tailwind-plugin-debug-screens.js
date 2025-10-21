@@ -24,10 +24,14 @@ module.exports = function ({ addComponents, theme }) {
         .filter(([screen]) => !ignoredScreens.includes(screen))
         .forEach(
             ([screen, size]) => {
-                components[`@screen ${screen}`] = {
-                    [`${selector}::before`]: {
-                        content: `'${prefix}${screen} (${size})'`,
-                    },
+                // components[`@screen ${screen}`] = {
+                //     [`${selector}::before`]: {
+                //         content: `'${prefix}${screen} (${size})'`,
+                //     },
+                // };
+
+                [`${selector}::before`][`${components[`@screen ${screen}`]}`] = {
+                    content: `'${prefix}${screen} (${size})'`,
                 };
             }
         );

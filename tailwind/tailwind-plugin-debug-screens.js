@@ -17,33 +17,40 @@ module.exports = function ({ addComponents, theme }) {
     const screenEntries = Object.entries(screens);
 
     const components = {
-        [`${selector}::before`]: Object.assign({
-            position: 'fixed',
-            zIndex: '2147483647',
-            [positionY]: '6px',
-            [positionX]: '4px',
-            padding: '.5em',
-            fontSize: '12px',
-            lineHeight: '1',
-            fontFamily: 'sans-serif',
-            borderRadius: '3px',
-            border: '1px solid #b1b1b1',
-            backgroundColor: '#0008',
-            color: '#ddd',
-            boxShadow: '0 0 2px 2px #fff5',
-            content: `'${prefix}${screenEntries?.[0]?.[0] ? `less then ${screenEntries?.[0]?.[0]} (${screenEntries?.[0]?.[1]})` : '_'}'`,
-        }, userStyles),
+        [`${selector}::before`]: Object.assign(getDebugDisplayCss(prefix, positionY, positionX, screenEntries), userStyles),
     };
 
     screenEntries
         .filter(([screen]) => !ignoredScreens.includes(screen))
-        .forEach(([screen, size]) => {
-            components[`@screen ${screen}`] = {
-                [`${selector}::before`]: {
-                    content: `'${prefix}${screen} (${size})'`,
-                },
-            };
-        });
+        .forEach(
+            ([screen, size]) => {
+                components[`@screen ${screen}`] = {
+                    [`${selector}::before`]: {
+                        content: `'${prefix}${screen} (${size})'`,
+                    },
+                };
+            }
+        );
 
     addComponents(components);
 };
+
+function getDebugDisplayCss(prefix, positionY, positionX, screenEntries) {
+    const rv = {
+        position: 'fixed',
+        zIndex: '2147483647',
+        [positionY]: '6px',
+        [positionX]: '4px',
+        padding: '.5em',
+        fontSize: '12px',
+        lineHeight: '1',
+        fontFamily: 'sans-serif',
+        borderRadius: '3px',
+        border: '1px solid #b1b1b1',
+        backgroundColor: '#0008',
+        color: '#ddd',
+        boxShadow: '0 0 2px 2px #fff5',
+        content: `'${prefix}${screenEntries?.[0]?.[0] ? `less then ${screenEntries?.[0]?.[0]} (${screenEntries?.[0]?.[1]})` : '_'}'`,
+    };
+    return rv;
+}

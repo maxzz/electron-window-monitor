@@ -36,6 +36,20 @@
             "webRoot": "${workspaceFolder}",
             "timeout": 60000,
             "userDataDir": "c:/Users/maxzz/AppData/Roaming/Code/User/workspaceStorage/2bd09df41c757ca0ea1d0935b57d0cc7/ms-vscode.js-debug/.profile"
+        },
+        {
+            "name": "Debug Tailwind Plugin",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/tailwind/test-debug-screens.js",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            }
         }
     ],
     // "compounds": [

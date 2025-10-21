@@ -29,7 +29,7 @@ module.exports = function ({ addComponents, theme }) {
     const components = {
         [`${selector}::before`]: Object.assign(
             getDebugDisplayCss(prefix, positionY, positionX, screenEntries),
-            ...mediaQueries,
+            mediaQueries,
             userStyles
         ),
     };

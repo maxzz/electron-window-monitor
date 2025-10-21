@@ -16,25 +16,39 @@ module.exports = function ({ addComponents, theme }) {
 
     const screenEntries = Object.entries(screens);
 
+    const mediaQueries = {};
+
+    Object.entries(screens).forEach(
+        ([name, size]) => {
+            mediaQueries[`@media (min-width: ${size})`] = {
+                content: `'${prefix}${name} (${size})'`,
+            };
+        }
+    );
+
     const components = {
-        [`${selector}::before`]: Object.assign(getDebugDisplayCss(prefix, positionY, positionX, screenEntries), userStyles),
+        [`${selector}::before`]: Object.assign(
+            getDebugDisplayCss(prefix, positionY, positionX, screenEntries),
+            ...mediaQueries,
+            userStyles
+        ),
     };
 
-    screenEntries
-        .filter(([screen]) => !ignoredScreens.includes(screen))
-        .forEach(
-            ([screen, size]) => {
-                // components[`@screen ${screen}`] = {
-                //     [`${selector}::before`]: {
-                //         content: `'${prefix}${screen} (${size})'`,
-                //     },
-                // };
+    // screenEntries
+    //     .filter(([screen]) => !ignoredScreens.includes(screen))
+    //     .forEach(
+    //         ([screen, size]) => {
+    //             // components[`@screen ${screen}`] = {
+    //             //     [`${selector}::before`]: {
+    //             //         content: `'${prefix}${screen} (${size})'`,
+    //             //     },
+    //             // };
 
-                [`${selector}::before`][`${components[`@screen ${screen}`]}`] = {
-                    content: `'${prefix}${screen} (${size})'`,
-                };
-            }
-        );
+    //             [`${selector}::before`][`${components[`@screen ${screen}`]}`] = {
+    //                 content: `'${prefix}${screen} (${size})'`,
+    //             };
+    //         }
+    //     );
 
     addComponents(components);
 };

@@ -2,7 +2,7 @@ module.exports = function ({ addComponents, theme }) {
     //https://github.com/jorenvanhee/tailwindcss-debug-screens
     //use: add class 'debug-screens' on any top element
 
-    const screens = theme('screens'); // {sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px'}
+    const screens = theme('screens') || {}; // {sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px'}
 
     const userStyles = theme('debugScreens.style', {});
     const ignoredScreens = theme('debugScreens.ignore', ['dark']);

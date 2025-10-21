@@ -29,7 +29,7 @@ module.exports = function ({ addComponents, theme }) {
             const pxs = size.includes('rem') ? `${parseInt(size.replace('rem', ''), 10) * 16}px` : '';
 
             mediaQueries[`@media (min-width: ${size})`] = {
-                content: `'${prefix}${name} ${pxs} (${size})'`,
+                content: `'${prefix}${name} ${pxs} is ${size}'`,
             };
         }
     );
@@ -51,15 +51,15 @@ function getDebugDisplayCss(prefix, positionY, positionX, screenEntries) {
         zIndex: '2147483647',
         [positionY]: '6px',
         [positionX]: '4px',
-        padding: '.5em',
+        padding: '0.75rem 0.25rem',
         fontSize: '12px',
         lineHeight: '1',
         fontFamily: 'sans-serif',
-        borderRadius: '3px',
-        border: '1px solid #b1b1b1',
-        backgroundColor: '#0008',
-        color: '#ddd',
-        boxShadow: '0 0 2px 2px #fff5',
+        borderRadius: '5px',
+        border: '2px solid #6f84f9ff',
+        backgroundColor: '#162ba35f',
+        color: '#2e3982ff',
+        boxShadow: '0 0 2px 2px rgba(124, 117, 253, 0.24)',
         content: `'${prefix}${screenEntries?.[0]?.[0] ? `less then ${screenEntries?.[0]?.[0]} (${screenEntries?.[0]?.[1]})` : '_'}'`,
     };
     return rv;

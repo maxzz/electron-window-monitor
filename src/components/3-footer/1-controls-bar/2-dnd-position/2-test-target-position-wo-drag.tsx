@@ -7,7 +7,7 @@ import { debouncedSetNapiGetPosXY } from "./8-set-position";
 
 export function TestTargetWindowPositionWoDrag({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
-        <div className="relative size-12 bg-primary-900 rounded cursor-pointer" {...rest}>
+        <div className="relative size-12 bg-primary-900 rounded-sm cursor-pointer" {...rest}>
             <MovingIcon />
         </div>
     );

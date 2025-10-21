@@ -30,7 +30,7 @@ export function ButtonCopyContent() {
                 setShow={setShowNotice}
                 items={[
                     '', // <div className="absolute -left-5 -top-12 text-xs opacity-25">💎</div>,
-                    <div className="absolute -left-5 -top-[50px] px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded">
+                    <div className="absolute -left-5 -top-[50px] px-2 py-1 w-fit text-xs text-white bg-primary-600 border-primary-800 border rounded-sm">
                         Copied
                     </div>
                 ]}

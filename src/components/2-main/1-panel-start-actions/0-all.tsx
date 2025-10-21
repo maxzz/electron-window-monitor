@@ -11,7 +11,7 @@ import { ButtonGetManifest } from "./3-btn-get-mani";
 
 export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className={classNames("grid grid-cols-[auto,auto,1fr,auto] gap-2 select-none", className)} {...rest}>
+        <div className={classNames("grid grid-cols-[auto_auto_1fr_auto] gap-2 select-none", className)} {...rest}>
             <ButtonStartStopMonitor />
 
             <ActionsGroup_Get />
@@ -55,6 +55,6 @@ rounded shadow-inner \
 flex items-center \
 ";
 
-const labelGetClasses = "absolute -left-[1px] -top-[14px] px-2 pb-[1px] text-[.6rem] bg-primary-200 border-primary-500/20 border rounded-sm";
+const labelGetClasses = "absolute -left-px -top-[14px] px-2 pb-px text-[.6rem] bg-primary-200 border-primary-500/20 border rounded-xs";
 
 //text-sm [@media_(min-width:_480px)]:text-base

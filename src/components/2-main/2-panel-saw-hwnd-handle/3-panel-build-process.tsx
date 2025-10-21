@@ -16,7 +16,7 @@ export function PanelBuildProcess(props: ComponentPropsWithoutRef<"div">) {
 
 function BuildError({ buildError, className, ...rest }: { buildError: string; } & ComponentPropsWithoutRef<"div">) {
     return (
-        <div className={classNames("my-2 px-2 text-[.65rem] text-white bg-red-600 rounded-sm flex items-center gap-x-1", className)} {...rest}>
+        <div className={classNames("my-2 px-2 text-[.65rem] text-white bg-red-600 rounded-xs flex items-center gap-x-1", className)} {...rest}>
             {buildError}
         </div>
     );
@@ -35,7 +35,7 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
                 controls detection progress
             </div>
 
-            <div className="pt-0.5 min-w-[2.5rem] font-semibold font-mono">
+            <div className="pt-0.5 min-w-10 font-semibold font-mono">
                 {buildCounter}
             </div>
 

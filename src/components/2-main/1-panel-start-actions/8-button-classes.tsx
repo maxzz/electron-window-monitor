@@ -40,9 +40,9 @@ export const utilityButtonClasses = "\
 p-1 text-xs \
 \
 hover:bg-primary-300 \
-hover:border-primary-600 hover:shadow \
+hover:border-primary-600 hover:shadow-sm \
 border-primary-500 border \
 \
-rounded shadow-sm select-none \
+rounded shadow-xs select-none \
 active:scale-[.97] transition-transform \
 ";

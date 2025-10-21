@@ -6,7 +6,7 @@ import { SawControlsPanel } from "../3-panel-window-content";
 
 export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
-        <div className={classNames("min-h-0 text-primary-900 flex flex-col gap-4 divide-y-1 divide-sky-500/50", className)} {...rest}>
+        <div className={classNames("min-h-0 text-primary-900 flex flex-col gap-4 divide-y divide-sky-500/50", className)} {...rest}>
             <StartActionsPanel className="py-4 1border-b border-primary-500/50" />
 
             <SawHwndInfo className="border-b 1border-primary-500/50" />

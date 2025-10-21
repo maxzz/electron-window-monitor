@@ -11,7 +11,7 @@ export function SawHwndPropsGrid() {
         {secondActiveWindow && (
             <div className="relative text-xs">
 
-                <div className="border-primary-500 border rounded grid grid-cols-[auto_1fr]">
+                <div className="border-primary-500 border rounded-sm grid grid-cols-[auto_1fr]">
                     <GridRow name="caption"   /**/ value={secondActiveWindow.caption} className="font-semibold" highlight={true} />
                     <GridRow name="classname" /**/ value={secondActiveWindow.classname} />
                     <GridRow name="process"   /**/ value={secondActiveWindow.process} />

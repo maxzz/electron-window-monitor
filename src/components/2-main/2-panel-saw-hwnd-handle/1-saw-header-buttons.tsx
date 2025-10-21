@@ -60,12 +60,12 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
 
     return (
         <div className="relative group cursor-default">
-            <div className={classNames(utilityButtonClasses, "active:!scale-100 !transition-none")}>
+            <div className={classNames(utilityButtonClasses, "active:scale-100! transition-none!")}>
                 Raw
             </div>
 
             <div className="absolute hidden group-hover:block right-0 py-1">
-                <div className="relative px-2 py-1 text-xs bg-primary-300 border-primary-500 border shadow-md rounded whitespace-pre z-50">
+                <div className="relative px-2 py-1 text-xs bg-primary-300 border-primary-500 border shadow-md rounded-sm whitespace-pre z-50">
                     {`${raw}`}
                 </div>
             </div>

@@ -11,7 +11,7 @@ import { Section3_Footer } from "../2-footer";
 export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
         <div>
-            <div className={classNames("text-xs border border-slate-500/50 rounded flex flex-col select-none", className)} {...rest}>
+            <div className={classNames("text-xs border border-slate-500/50 rounded-sm flex flex-col select-none", className)} {...rest}>
 
                 <TestLinks className="p-2 border-b border-slate-500/50" />
 

@@ -29,4 +29,4 @@ export function ContentScrollArea() {
     );
 }
 
-const gridBorderClasses = `text-xs border-primary-500 border rounded select-none shadow-sm`;
+const gridBorderClasses = `text-xs border-primary-500 border rounded-sm select-none shadow-xs`;

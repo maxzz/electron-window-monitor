@@ -35,7 +35,7 @@ export function TestTargetWindowPosition({ className, ...rest }: ComponentPropsW
 
     return (<>
         <div
-            className="w-12 h-12 bg-primary-900 rounded cursor-pointer"
+            className="w-12 h-12 bg-primary-900 rounded-sm cursor-pointer"
             onPointerDown={startDragging}
             onPointerUp={stopDragging}
             onPointerMove={dragging}

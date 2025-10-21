@@ -13,9 +13,9 @@ module.exports = {
         },
     },
     plugins: [
-        require('@tailwindcss/forms')({ strategy: 'class' }),
-        require('./tailwind/tailwind-plugin-debug-screens'),
-        require('./tailwind/tailwind-plugin-debug-styles'),
-        setInputMarkerColor({ light: twColors.green[900], dark: twColors.green[100] }),
+        // require('@tailwindcss/forms')({ strategy: 'class' }),
+        // require('./tailwind/tailwind-plugin-debug-screens'),
+        // require('./tailwind/tailwind-plugin-debug-styles'),
+        // setInputMarkerColor({ light: twColors.green[900], dark: twColors.green[100] }),
     ],
 };

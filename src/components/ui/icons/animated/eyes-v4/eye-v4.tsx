@@ -122,7 +122,7 @@ flex justify-center items-center";
 //         <motion.div
 //                 whileInView={{ scaleY: ["0%", "100%"] }}
 //                 transition={{ delay: 0.2, duration: 1, type: "spring" }}
-//                 className="bg-gradient-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-left"
+//                 className="bg-linear-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-left"
 //             >
 //                 <EyeSharingan />
 //             </motion.div>
@@ -130,7 +130,7 @@ flex justify-center items-center";
 //             <motion.div
 //                 whileInView={{ scaleY: ["0%", "100%"] }}
 //                 transition={{ delay: 0.2, duration: 1, type: "spring" }}
-//                 className="bg-gradient-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-right"
+//                 className="bg-linear-to-b from-slate-200 to-white flex justify-center items-center overflow-clip eye eye-shape eye-shape-right"
 //             >
 //                 <EyeSharingan />
 //             </motion.div>
@@ -142,14 +142,14 @@ flex justify-center items-center";
 //         <div className=" bg-gradient-radial to-red-950 from-red-600 w-[12svw] h-[12svw] border-4 border-black rounded-full flex justify-center items-center pupil overflow-clip">
 //             <div className="w-[7svw] h-[7svw] pupil">
 //                 <div className="absolute bg-red-700 border border-black w-[7svw] h-[7svw] rounded-full spin">
-//                     <div className=" absolute mt-[13%] bg-black rounded-full w-[1.5svw] h-[1.5svw] -rotate-[60deg]">
-//                         <div className="h-2 w-1 md:h-[18px] md:w-[10px] bg-black relative -top-1 md:-top-[9px] left-1 md:left-[0.4svw] rounded-r-[145%] rounded-l-[90%] rotate-[60deg] skew-y-[30deg]"></div>
+//                     <div className=" absolute mt-[13%] bg-black rounded-full w-[1.5svw] h-[1.5svw] -rotate-60">
+//                         <div className="h-2 w-1 md:h-[18px] md:w-[10px] bg-black relative -top-1 md:-top-[9px] left-1 md:left-[0.4svw] rounded-r-[145%] rounded-l-[90%] rotate-60 skew-y-30"></div>
 //                     </div>
-//                     <div className=" absolute mt-[25%] -right-[7%] bg-black rounded-full w-[1.5svw] h-[1.5svw] rotate-[60deg]">
-//                         <div className="h-2 w-1 md:h-[18px] md:w-[10px] bg-black relative -top-1 d:-top-[9px] left-1 md:left-[0.4svw] rounded-r-[145%] rounded-l-[90%] rotate-[60deg] skew-y-[30deg]"></div>
+//                     <div className=" absolute mt-[25%] -right-[7%] bg-black rounded-full w-[1.5svw] h-[1.5svw] rotate-60">
+//                         <div className="h-2 w-1 md:h-[18px] md:w-[10px] bg-black relative -top-1 d:-top-[9px] left-1 md:left-[0.4svw] rounded-r-[145%] rounded-l-[90%] rotate-60 skew-y-30"></div>
 //                     </div>
-//                     <div className=" absolute mt-[90%] right-[47%] bg-black rounded-full w-[1.5svw] h-[1.5svw] rotate-[160deg]">
-//                         <div className="h-2 w-1 md:h-[18px] md:w-[10px] bg-black relative -top-1 md:-top-[9px] left-1 md:left-[0.4svw] rounded-r-[145%] rounded-l-[90%] rotate-[60deg] skew-y-[30deg]"></div>
+//                     <div className=" absolute mt-[90%] right-[47%] bg-black rounded-full w-[1.5svw] h-[1.5svw] rotate-160">
+//                         <div className="h-2 w-1 md:h-[18px] md:w-[10px] bg-black relative -top-1 md:-top-[9px] left-1 md:left-[0.4svw] rounded-r-[145%] rounded-l-[90%] rotate-60 skew-y-30"></div>
 //                     </div>
 //                     {/* Iris */}
 //                     <div className=" absolute top-[40%] left-[40%] bg-black rounded-full w-[1.5svw] h-[1.5svw]"></div>

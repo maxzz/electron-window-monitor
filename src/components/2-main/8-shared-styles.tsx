@@ -11,7 +11,7 @@ data-[orientation=horizontal]:flex-col \
 \
 flex \
 transition-colors \
-duration-[160ms] ease-out \
+duration-160 ease-out \
 select-none \
 touch-none";
 
@@ -41,6 +41,6 @@ focus:ring-offset-primary-200 \
 dark:focus:ring-offset-primary-800 \
 focus:ring-1 \
 focus:ring-offset-1 \
-focus:outline-none";
+focus:outline-hidden";
 
-export const checkboxClasses = classNames("form-checkbox text-primary-500 bg-primary-400 rounded-sm", focusClasses);
+export const checkboxClasses = classNames("form-checkbox text-primary-500 bg-primary-400 rounded-xs", focusClasses);

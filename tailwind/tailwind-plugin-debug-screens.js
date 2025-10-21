@@ -1,3 +1,5 @@
+const { type } = require("os");
+
 module.exports = function ({ addComponents, theme }) {
     //https://github.com/jorenvanhee/tailwindcss-debug-screens
     //use: add class 'debug-screens' on any top element
@@ -20,13 +22,19 @@ module.exports = function ({ addComponents, theme }) {
 
     Object.entries(screens).forEach(
         ([name, size]) => {
+            console.log('---', name, size);
+            if (typeof size !== 'string' || !size) {
+                return;
+            }
+            const pxs = size.includes('rem') ? `${parseInt(size.replace('rem', ''), 10) * 16}px` : '';
+
             mediaQueries[`@media (min-width: ${size})`] = {
-                content: `'${prefix}${name} (${size})'`,
+                content: `'${prefix}${name} ${pxs} (${size})'`,
             };
         }
     );
 
-    const components = {
+    const debugComponent = {
         [`${selector}::before`]: Object.assign(
             getDebugDisplayCss(prefix, positionY, positionX, screenEntries),
             mediaQueries,
@@ -34,23 +42,7 @@ module.exports = function ({ addComponents, theme }) {
         ),
     };
 
-    // screenEntries
-    //     .filter(([screen]) => !ignoredScreens.includes(screen))
-    //     .forEach(
-    //         ([screen, size]) => {
-    //             // components[`@screen ${screen}`] = {
-    //             //     [`${selector}::before`]: {
-    //             //         content: `'${prefix}${screen} (${size})'`,
-    //             //     },
-    //             // };
-
-    //             [`${selector}::before`][`${components[`@screen ${screen}`]}`] = {
-    //                 content: `'${prefix}${screen} (${size})'`,
-    //             };
-    //         }
-    //     );
-
-    addComponents(components);
+    addComponents(debugComponent);
 };
 
 function getDebugDisplayCss(prefix, positionY, positionX, screenEntries) {

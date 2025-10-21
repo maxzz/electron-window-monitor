@@ -1,8 +1,7 @@
-const { type } = require("os");
+// Custom version of https://github.com/jorenvanhee/tailwindcss-debug-screens for tailwindcss v4.x
+// Usage: add class 'debug-screens' on any top element
 
 module.exports = function ({ addComponents, theme }) {
-    //https://github.com/jorenvanhee/tailwindcss-debug-screens
-    //use: add class 'debug-screens' on any top element
 
     const screens = theme('screens') || {}; // {sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px'}
 
@@ -22,14 +21,11 @@ module.exports = function ({ addComponents, theme }) {
 
     Object.entries(screens).forEach(
         ([name, size]) => {
-            console.log('---', name, size);
             if (typeof size !== 'string' || !size) {
                 return;
             }
-            const pxs = size.includes('rem') ? `${parseInt(size.replace('rem', ''), 10) * 16}px` : '';
-
             mediaQueries[`@media (min-width: ${size})`] = {
-                content: `'${prefix}${name} ${pxs} is ${size}'`,
+                content: `'${prefix}${name} ${sizeInPixels(size)} is ${size}'`,
             };
         }
     );
@@ -46,21 +42,29 @@ module.exports = function ({ addComponents, theme }) {
 };
 
 function getDebugDisplayCss(prefix, positionY, positionX, screenEntries) {
+    const firstScreen = screenEntries?.[0];
+    const [name, size] = firstScreen ? firstScreen : ['_', 0];
+    const content = `'${prefix}${name ? `less then ${name} ${sizeInPixels(size)} is ${size}` : '_'}'`;
     const rv = {
+        content,
         position: 'fixed',
         zIndex: '2147483647',
         [positionY]: '6px',
         [positionX]: '4px',
         padding: '0.75rem 0.25rem',
-        fontSize: '12px',
         lineHeight: '1',
+        fontSize: '12px',
         fontFamily: 'sans-serif',
         borderRadius: '5px',
         border: '2px solid #6f84f9ff',
         backgroundColor: '#162ba35f',
         color: '#2e3982ff',
-        boxShadow: '0 0 2px 2px rgba(124, 117, 253, 0.24)',
-        content: `'${prefix}${screenEntries?.[0]?.[0] ? `less then ${screenEntries?.[0]?.[0]} (${screenEntries?.[0]?.[1]})` : '_'}'`,
+        boxShadow: '0 0 2px 2px #7c75fd3d',
     };
     return rv;
+}
+
+function sizeInPixels(size) {
+    const pxs = (size || '').includes('rem') ? `${parseInt(size.replace('rem', ''), 10) * 16}px` : '';
+    return pxs;
 }

@@ -3,6 +3,7 @@ export * from "./classnames";
 export * from "./compare-rect";
 export * from "./debounce";
 export * from "./delay";
+export * from "./env-date-formatter";
 export * from "./error-to-string";
 export * from "./merge-options";
 export * from "./numbers";

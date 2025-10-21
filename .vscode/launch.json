@@ -35,6 +35,7 @@
             "type": "chrome",
             "webRoot": "${workspaceFolder}",
             "timeout": 60000,
+            "userDataDir": "c:/Users/maxzz/AppData/Roaming/Code/User/workspaceStorage/2bd09df41c757ca0ea1d0935b57d0cc7/ms-vscode.js-debug/.profile"
         }
     ],
     // "compounds": [

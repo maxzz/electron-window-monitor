@@ -45,7 +45,7 @@
         "react-dom": "^19.2.0",
         "sonner": "^2.0.3",
         "tailwind-merge": "^3.3.0",
-        "valtio": "2.1.5"
+        "valtio": "2.1.8"
     },
     "scripts": {
         "dev": "vite",

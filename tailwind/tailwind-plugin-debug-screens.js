@@ -1,13 +1,14 @@
 // Custom version of https://github.com/jorenvanhee/tailwindcss-debug-screens for tailwindcss v4.x
 // Usage: add class 'debug-screens' on any top element
 
+/** @type {import('tailwindcss').Plugin} */
 module.exports = function ({ addComponents, theme }) {
 
     const screens = theme('screens') || {}; // {sm: '640px', md: '768px', lg: '1024px', xl: '1280px', '2xl': '1536px'}
 
     const userStyles = theme('debugScreens.style', {});
     const ignoredScreens = theme('debugScreens.ignore', ['dark']);
-    const prefix = theme('debugScreens.prefix', 'screen: ');
+    const prefix = theme('debugScreens.prefix', 'Screen: ');
     const selector = theme('debugScreens.selector', '.debug-screens');
 
     const defaultPosition = ['bottom', 'left'];
@@ -25,7 +26,7 @@ module.exports = function ({ addComponents, theme }) {
                 return;
             }
             mediaQueries[`@media (min-width: ${size})`] = {
-                content: `'${prefix}${name} ${sizeInPixels(size)} is ${size}'`,
+                content: `"${prefix}<${name}> (${sizeInPixels(size)}:${size})"`,
             };
         }
     );
@@ -44,7 +45,7 @@ module.exports = function ({ addComponents, theme }) {
 function getDebugDisplayCss(prefix, positionY, positionX, screenEntries) {
     const firstScreen = screenEntries?.[0];
     const [name, size] = firstScreen ? firstScreen : ['_', 0];
-    const content = `'${prefix}${name ? `less then ${name} ${sizeInPixels(size)} is ${size}` : '_'}'`;
+    const content = `'${prefix}${name ? `less then <${name}> (${sizeInPixels(size)}:${size})` : '_'}'`;
     const rv = {
         content,
         position: 'fixed',

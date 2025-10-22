@@ -90,6 +90,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.15
         version: 4.1.15
+      tailwindcss-plugin-debug-screens-tw4:
+        specifier: ^1.0.0
+        version: 1.0.0(tailwindcss@4.1.15)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -2198,6 +2201,12 @@ packages:
 
   tailwind-merge@3.3.1:
     resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
+
+  tailwindcss-plugin-debug-screens-tw4@1.0.0:
+    resolution: {integrity: sha512-RFWeQQ6LO+q31Vgt74OldcWiaIkK1wL/iKb5cbAmHAvG3GN4GYDg149r1EnV1qvIMSlbHfrQ8X6+TwYnrmRTYw==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      tailwindcss: ^4.0.0-alpha || ^3.0.0
 
   tailwindcss@4.1.15:
     resolution: {integrity: sha512-k2WLnWkYFkdpRv+Oby3EBXIyQC8/s1HOFMBUViwtAh6Z5uAozeUSMQlIsn/c6Q2iJzqG6aJT3wdPaRNj70iYxQ==}
@@ -4567,6 +4576,10 @@ snapshots:
       has-flag: 4.0.0
 
   tailwind-merge@3.3.1: {}
+
+  tailwindcss-plugin-debug-screens-tw4@1.0.0(tailwindcss@4.1.15):
+    dependencies:
+      tailwindcss: 4.1.15
 
   tailwindcss@4.1.15: {}
 

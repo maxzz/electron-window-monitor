@@ -1,5 +1,6 @@
 const twColors = require('tailwindcss/colors');
 const setInputMarkerColor = require('./tailwind/set-input-marker-color');
+const { debugScreensPlugin } = require('tailwindcss-plugin-debug-screens-tw4');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -14,7 +15,8 @@ module.exports = {
     },
     plugins: [
         require('@tailwindcss/forms')({ strategy: 'class' }),
-        require('./tailwind/tailwind-plugin-debug-screens'),
+        // require('./tailwind/tailwind-plugin-debug-screens'),
+        debugScreensPlugin,
         require('./tailwind/tailwind-plugin-debug-styles'),
         setInputMarkerColor({ light: twColors.green[900], dark: twColors.green[100] }),
     ],

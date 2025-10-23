@@ -3,7 +3,7 @@
 // Test script for tailwind-plugin-debug-screens.js
 // This script can be used with the VS Code debugger to test the plugin
 
-const plugin = require('./tailwind-plugin-debug-screens.js');
+const plugin = require('./nun-tailwind-plugin-debug-screens.js');
 
 // Mock Tailwind CSS theme function
 function createMockTheme() {

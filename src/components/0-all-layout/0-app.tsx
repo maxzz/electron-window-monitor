@@ -15,7 +15,7 @@ export function App() {
 
 function AppLayout() {
     return (
-        <div className="h-screen bg-primary-100 grid grid-rows-[auto_1fr] debug-screens debug-grid-16">
+        <div className="h-screen bg-primary-100 grid grid-rows-[auto_1fr] debug-screens debug-grid-16 smallscroll overflow-overlay resizer">
             <Section1Header />
 
             <div className="h-full min-h-0 grid grid-rows-[1fr_auto] gap-4">

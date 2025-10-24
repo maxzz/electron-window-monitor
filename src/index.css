@@ -2,7 +2,9 @@
 
 @config '../tailwind.config.js';
 
-@plugin "../tailwind/tw-overflow";
+/* @plugin "../tailwind/tw-overflow"; */
+
+@plugin "tailwindcss-plugin-overflow-tw4";
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,

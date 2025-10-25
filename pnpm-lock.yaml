@@ -94,8 +94,11 @@ importers:
         specifier: ^4.1.15
         version: 4.1.15
       tailwindcss-plugin-debug-screens-tw4:
-        specifier: ^1.0.1
-        version: 1.0.1(tailwindcss@4.1.15)
+        specifier: ^1.0.3
+        version: 1.0.3(tailwindcss@4.1.15)
+      tailwindcss-plugin-markers-tw4:
+        specifier: ^1.0.0
+        version: 1.0.0(mini-svg-data-uri@1.4.4)(tailwindcss@4.1.15)
       tailwindcss-plugin-overflow-tw4:
         specifier: ^1.0.0
         version: 1.0.0(tailwindcss@4.1.15)
@@ -2298,11 +2301,18 @@ packages:
   tailwind-merge@3.3.1:
     resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
-  tailwindcss-plugin-debug-screens-tw4@1.0.1:
-    resolution: {integrity: sha512-BKQcVFUSNOkftjn6rGaQX8zDJorqcYUsPFjv1ifybVs6F6dIJgBwFfurbSHRLJ1y9bU/CLwzmojyz1uIcCh5dQ==}
+  tailwindcss-plugin-debug-screens-tw4@1.0.3:
+    resolution: {integrity: sha512-bxZ1Zaur7ZyYMc7TZMI5EKToW5raJD2oeZuNlWyPsF2YwDDU3c5ZTHLKzezBQK80vCu016iGHAxurHMEYV1fPA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       tailwindcss: ^4.0.0-alpha || ^3.0.0
+
+  tailwindcss-plugin-markers-tw4@1.0.0:
+    resolution: {integrity: sha512-E8ePa1DO9wjk8qubNOMUMaW8pQ6AnbYFXDcxior49A2rDPkCZNpGdWFLHc9rpSI+n9HzRPjuRzDPhTJFW84Hjw==}
+    engines: {node: '>=18.0.0', pnpm: '>=10.0.0'}
+    peerDependencies:
+      mini-svg-data-uri: ^1.4.4
+      tailwindcss: ^4.0.0 || ^3.0.0
 
   tailwindcss-plugin-overflow-tw4@1.0.0:
     resolution: {integrity: sha512-5wD7zh7585kkFOpu0vvcwkaMd/oTBCHky6KXFRgabPUW5+nKSSj2hzJ5pxHaAtJ9VGkWbuX/sROgQe/OH2XX6g==}
@@ -4750,8 +4760,13 @@ snapshots:
 
   tailwind-merge@3.3.1: {}
 
-  tailwindcss-plugin-debug-screens-tw4@1.0.1(tailwindcss@4.1.15):
+  tailwindcss-plugin-debug-screens-tw4@1.0.3(tailwindcss@4.1.15):
     dependencies:
+      tailwindcss: 4.1.15
+
+  tailwindcss-plugin-markers-tw4@1.0.0(mini-svg-data-uri@1.4.4)(tailwindcss@4.1.15):
+    dependencies:
+      mini-svg-data-uri: 1.4.4
       tailwindcss: 4.1.15
 
   tailwindcss-plugin-overflow-tw4@1.0.0(tailwindcss@4.1.15):

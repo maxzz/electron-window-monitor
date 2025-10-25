@@ -1,7 +1,9 @@
 import { join, resolve } from 'path';
 import { defineConfig, type PluginOption, type UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from 'rollup-plugin-visualizer';
+
 //console.log('------ electron.vite.config-browser.ts:__dirname =', __dirname);
 
 export default defineConfig((): UserConfig => { // https://vitejs.dev/config
@@ -19,6 +21,7 @@ export default defineConfig((): UserConfig => { // https://vitejs.dev/config
 
         plugins: [
             react(),
+            tailwindcss(),
             visualizer({
                 filename: 'visualization.html',
                 template: 'sunburst', // sunburst - d3 style (good as default as well); treemap - table (default); network - graph (slow to open).

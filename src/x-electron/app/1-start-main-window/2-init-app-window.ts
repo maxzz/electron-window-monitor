@@ -1,4 +1,5 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { app, BrowserWindow } from "electron";
 import icon from "../../../../resources/icon.png?asset"; // This is only for linux
 import { iniFileOptions } from "./8-ini-file-options";
@@ -13,13 +14,15 @@ import { iniFileOptions } from "./8-ini-file-options";
 // │ │ └── preload.js
 // │
 
-process.env.DIST = path.join(__dirname, '../dist');
+const __dirnameEsm = path.dirname(fileURLToPath(import.meta.url));
+
+process.env.DIST = path.join(__dirnameEsm, '../dist');
 process.env.PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.DIST, '../public');
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
-const preloadPath = path.join(__dirname, 'preload.js');
+const preloadPath = path.join(__dirnameEsm, 'preload.js');
 
 export function initAppWindow(): BrowserWindow {
     const rv = new BrowserWindow({

@@ -4,6 +4,7 @@
     "version": "0.1.0",
     "description": "Electron app to test nodejs napi plugins",
     "author": "Max Zakharzhevskiy",
+    "type": "module",
     "main": "dist-electron/main.js",
     "pnpm": {
         "onlyBuiltDependencies": [

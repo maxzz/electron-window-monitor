@@ -3,6 +3,7 @@ import { classNames } from "@/utils";
 import { StartActionsPanel } from "../1-panel-start-actions";
 import { SawHwndInfo } from "../2-panel-saw-hwnd-handle";
 import { SawControlsPanel } from "../3-panel-window-content";
+import { PopoverDemo } from "@/components/ui/ui-tests";
 
 export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -10,6 +11,7 @@ export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"d
             <StartActionsPanel className="py-4 1border-b border-primary-500/50" />
 
             <SawHwndInfo className="border-b 1border-primary-500/50" />
+            <PopoverDemo />
 
             <SawControlsPanel className="border-b 1border-primary-500/50" />
         </div>

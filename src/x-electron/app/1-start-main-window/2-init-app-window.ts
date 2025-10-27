@@ -22,7 +22,7 @@ process.env.PUBLIC = app.isPackaged ? process.env.DIST : path.join(process.env.D
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
-const preloadPath = path.join(__dirnameEsm, 'preload.js');
+const preloadPath = path.join(__dirnameEsm, 'preload.mjs');
 
 export function initAppWindow(): BrowserWindow {
     const rv = new BrowserWindow({

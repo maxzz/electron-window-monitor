@@ -17,7 +17,16 @@ export default defineConfig({
                 entry: 'src/x-electron/main.ts',
             },
             {
-                entry: 'src/x-electron/preload.ts',
+                //entry: 'src/x-electron/preload.ts',
+                vite: {
+                    build: {
+                        lib: {
+                            entry: 'src/x-electron/preload.ts',
+                            formats: ['cjs'],
+                            fileName: (format) => `preload.mjs`,
+                        },
+                    },
+                },
                 onstart(options) {
                     // Notify the Renderer-Process to reload the page when the Preload-Scripts build is complete, 
                     // instead of restarting the entire Electron App.

@@ -8,6 +8,8 @@ Electron app to test nodejs napi plugins and integration with win32 api.
 
 y create electron-vite .
 
+[vite-plugin-electron](https://github.com/electron-vite/vite-plugin-electron)
+
 ```
 copy electron-window-monitor\src\electron\app\plugins to electron-window-monitor\dist-electron
 ```

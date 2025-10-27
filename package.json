@@ -23,6 +23,7 @@
         "@vitejs/plugin-react": "5.0.4",
         "electron": "38.3.0",
         "electron-builder": "26.0.12",
+        "electron-vite": "^4.0.1",
         "mini-svg-data-uri": "^1.4.4",
         "motion": "^12.23.24",
         "postcss": "8.5.6",

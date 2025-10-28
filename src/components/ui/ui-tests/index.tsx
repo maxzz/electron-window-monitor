@@ -13,7 +13,8 @@ export function PopoverDemo() {
             <PopoverTrigger asChild>
                 <Button variant="outline">Open popover</Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80">
+
+            <PopoverContent className="w-80 1text-[.65rem]">
                 <div className="grid gap-4">
                     <div className="space-y-2">
                         <h4 className="leading-none font-medium">Dimensions</h4>
@@ -23,7 +24,7 @@ export function PopoverDemo() {
                     </div>
                     <div className="grid gap-2">
                         <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="width">Width</Label>
+                            <Label className="text-xs font-normal" htmlFor="width">Width</Label>
                             <Input
                                 id="width"
                                 defaultValue="100%"
@@ -31,7 +32,7 @@ export function PopoverDemo() {
                             />
                         </div>
                         <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="maxWidth">Max. width</Label>
+                            <Label className="text-xs font-normal" htmlFor="maxWidth">Max. width</Label>
                             <Input
                                 id="maxWidth"
                                 defaultValue="300px"
@@ -39,7 +40,7 @@ export function PopoverDemo() {
                             />
                         </div>
                         <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="height">Height</Label>
+                            <Label className="text-xs font-normal" htmlFor="height">Height</Label>
                             <Input
                                 id="height"
                                 defaultValue="25px"
@@ -47,7 +48,7 @@ export function PopoverDemo() {
                             />
                         </div>
                         <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="maxHeight">Max. height</Label>
+                            <Label className="text-xs font-normal" htmlFor="maxHeight">Max. height</Label>
                             <Input
                                 id="maxHeight"
                                 defaultValue="none"

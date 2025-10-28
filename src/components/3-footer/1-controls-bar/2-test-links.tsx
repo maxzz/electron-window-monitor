@@ -15,7 +15,7 @@ export function TestLinks({ className, ...rest }: ComponentPropsWithoutRef<"div"
                     tw
                 </a>
 
-                <a className={linkClasses} href="https://www.bankofamerica.com" target="_blank">
+                <a className={linkClasses} href="https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go" target="_blank">
                     bofa
                 </a>
             </div>

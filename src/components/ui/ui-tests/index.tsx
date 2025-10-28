@@ -1,11 +1,7 @@
 import { Button } from "@/components/ui/shadcn/button";
 import { Input } from "@/components/ui/shadcn/input";
 import { Label } from "@/components/ui/shadcn/label";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/shadcn/popover";
+import { Popover, PopoverContent, PopoverTrigger, } from "@/components/ui/shadcn/popover";
 
 export function PopoverDemo() {
     return (
@@ -22,7 +18,7 @@ export function PopoverDemo() {
                             Set the dimensions for the layer.
                         </p>
                     </div>
-                    
+
                     <div className="grid gap-2">
                         <div className={rowClasses}>
                             <Label className={labelClasses} htmlFor="width">Width</Label>

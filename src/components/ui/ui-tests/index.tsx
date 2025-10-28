@@ -22,37 +22,38 @@ export function PopoverDemo() {
                             Set the dimensions for the layer.
                         </p>
                     </div>
+                    
                     <div className="grid gap-2">
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label className="text-xs font-normal" htmlFor="width">Width</Label>
+                        <div className={rowClasses}>
+                            <Label className={labelClasses} htmlFor="width">Width</Label>
                             <Input
                                 id="width"
                                 defaultValue="100%"
-                                className="col-span-2 h-8"
+                                className={inputClasses}
                             />
                         </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label className="text-xs font-normal" htmlFor="maxWidth">Max. width</Label>
+                        <div className={rowClasses}>
+                            <Label className={labelClasses} htmlFor="maxWidth">Max. width</Label>
                             <Input
                                 id="maxWidth"
                                 defaultValue="300px"
-                                className="col-span-2 h-8"
+                                className={inputClasses}
                             />
                         </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label className="text-xs font-normal" htmlFor="height">Height</Label>
+                        <div className={rowClasses}>
+                            <Label className={labelClasses} htmlFor="height">Height</Label>
                             <Input
                                 id="height"
                                 defaultValue="25px"
-                                className="col-span-2 h-8"
+                                className={inputClasses}
                             />
                         </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label className="text-xs font-normal" htmlFor="maxHeight">Max. height</Label>
+                        <div className={rowClasses}>
+                            <Label className={labelClasses} htmlFor="maxHeight">Max. height</Label>
                             <Input
                                 id="maxHeight"
                                 defaultValue="none"
-                                className="col-span-2 h-8"
+                                className={inputClasses}
                             />
                         </div>
                     </div>
@@ -61,3 +62,7 @@ export function PopoverDemo() {
         </Popover>
     );
 }
+
+const rowClasses = "grid grid-cols-3 items-center gap-4";
+const labelClasses = "text-xs font-normal";
+const inputClasses = "col-span-2 h-8";

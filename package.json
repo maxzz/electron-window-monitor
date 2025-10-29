@@ -48,7 +48,7 @@
         "global": "^4.4.0",
         "jotai": "2.15.0",
         "jotai-valtio": "^0.6.0",
-        "lucide-react": "^0.546.0",
+        "lucide-react": "^0.548.0",
         "pm-manifest": "1.5.31",
         "pm-manifest-icons": "1.0.6",
         "react": "^19.2.0",

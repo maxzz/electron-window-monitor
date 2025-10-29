@@ -7,9 +7,6 @@
     "type": "module",
     "main": "dist-electron/main.js",
     "pnpm": {
-        "overrides": {
-            "vite": "npm:rolldown-vite@7.1.19"
-        },
         "onlyBuiltDependencies": [
             "electron",
             "electron-winstaller",

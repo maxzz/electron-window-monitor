@@ -144,3 +144,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 
+https://tweakcn.com/editor/theme
+Modern Minimal
+Graphite
+
+@supports (color:color-mix(in lab, red, red)) {
+    * {
+        outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+    }
+}
+*/

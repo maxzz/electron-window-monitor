@@ -37,7 +37,7 @@ importers:
         version: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
       jotai-valtio:
         specifier: ^0.6.0
-        version: 0.6.0(jotai@2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0))(valtio@2.1.8(@types/react@19.2.2)(react@19.2.0))
+        version: 0.6.0(jotai@2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0))(valtio@2.2.0(@types/react@19.2.2)(react@19.2.0))
       lucide-react:
         specifier: ^0.553.0
         version: 0.553.0(react@19.2.0)
@@ -66,8 +66,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       valtio:
-        specifier: 2.1.8
-        version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
+        specifier: 2.2.0
+        version: 2.2.0(@types/react@19.2.2)(react@19.2.0)
     devDependencies:
       '@tailwindcss/forms':
         specifier: ^0.5.10
@@ -2632,8 +2632,8 @@ packages:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
     hasBin: true
 
-  valtio@2.1.8:
-    resolution: {integrity: sha512-fjTPbJyKEmfVBZUOh3V0OtMHoFUGr4+4XpejjxhNJE/IS2l8rDbyJuzi3w/fZWBDyk7BJOpG+lmvTK5iiVhXuQ==}
+  valtio@2.2.0:
+    resolution: {integrity: sha512-l/zzQahUIm+dfUUP9fIecNVEWJLea9shMC1Bb1aK+v4XNOEzoq796Qax+yzMemmqpltuxfH7kPJy62FVGJDEtw==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=18.0.0'
@@ -4522,10 +4522,10 @@ snapshots:
 
   jiti@2.6.1: {}
 
-  jotai-valtio@0.6.0(jotai@2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0))(valtio@2.1.8(@types/react@19.2.2)(react@19.2.0)):
+  jotai-valtio@0.6.0(jotai@2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0))(valtio@2.2.0(@types/react@19.2.2)(react@19.2.0)):
     dependencies:
       jotai: 2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
-      valtio: 2.1.8(@types/react@19.2.2)(react@19.2.0)
+      valtio: 2.2.0(@types/react@19.2.2)(react@19.2.0)
 
   jotai@2.15.1(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0):
     optionalDependencies:
@@ -5270,7 +5270,7 @@ snapshots:
 
   uuid@11.1.0: {}
 
-  valtio@2.1.8(@types/react@19.2.2)(react@19.2.0):
+  valtio@2.2.0(@types/react@19.2.2)(react@19.2.0):
     dependencies:
       proxy-compare: 3.0.1
     optionalDependencies:

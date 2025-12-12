@@ -47,6 +47,7 @@
         "clsx": "^2.1.1",
         "global": "^4.4.0",
         "jotai": "2.16.0",
+        "jotai-family": "^1.0.1",
         "jotai-valtio": "^0.6.0",
         "lucide-react": "^0.560.0",
         "pm-manifest": "1.5.35",

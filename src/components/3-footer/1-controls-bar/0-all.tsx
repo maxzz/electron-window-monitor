@@ -25,7 +25,7 @@ export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutR
                             <Button variant="outline" size="sm">Options</Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto">
-                            <div className="flex gap-x-4">
+                            <div className="grid gap-3 text-xs">
                                 <InputMaxControls />
                                 <ChkboxXmlFormat />
                                 <ChkboxIconAutoUpdate />

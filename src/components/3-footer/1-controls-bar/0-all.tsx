@@ -7,6 +7,8 @@ import { ChkboxXmlFormat } from "./4-chkbox-xml-format";
 import { ChkboxIconAutoUpdate } from "./5-chkbox-icon-auto-update";
 import { ChkboxLargeIcon } from "./6-chkbox-icon-large";
 import { Section3_Footer } from "../2-footer";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/shadcn/popover";
+import { Button } from "@/components/ui/shadcn/button";
 
 export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -17,11 +19,20 @@ export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutR
 
                 <BlockTargetWindowPosition className="p-2 border-b border-slate-500/50" />
 
-                <div className="p-2 flex gap-x-4">
-                    <InputMaxControls />
-                    <ChkboxXmlFormat />
-                    <ChkboxIconAutoUpdate />
-                    <ChkboxLargeIcon />
+                <div className="p-2">
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button variant="outline" size="sm">Options</Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto">
+                            <div className="flex gap-x-4">
+                                <InputMaxControls />
+                                <ChkboxXmlFormat />
+                                <ChkboxIconAutoUpdate />
+                                <ChkboxLargeIcon />
+                            </div>
+                        </PopoverContent>
+                    </Popover>
                 </div>
 
             </div>

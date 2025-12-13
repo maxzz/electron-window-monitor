@@ -43,4 +43,4 @@ focus:ring-1 \
 focus:ring-offset-1 \
 focus:outline-hidden";
 
-export const checkboxClasses = classNames("form-checkbox text-primary-500 bg-primary-400 rounded-xs", focusClasses);
+export const checkboxClasses = classNames("form-checkbox rounded-xs", focusClasses);

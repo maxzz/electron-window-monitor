@@ -11,7 +11,7 @@ type CheckboxControlProps = {
 
 export function CheckboxControl({ label, title, checked, onCheckedChange }: CheckboxControlProps) {
     return (
-        <label className="w-max flex items-center gap-x-2 cursor-pointer" title={title}>
+        <label className="w-max flex items-center gap-x-1 cursor-pointer" title={title}>
             <Checkbox
                 className={checkboxClasses}
                 checked={checked}

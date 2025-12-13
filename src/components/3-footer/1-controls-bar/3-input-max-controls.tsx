@@ -16,8 +16,8 @@ export function InputMaxControls() {
     }
 
     return (
-        <label className="w-max flex items-center gap-x-2" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
-            <div className="select-none">Max controls</div>
+        <label className="-mt-2 flex items-center justify-between" title="Allowed number of detected controls before rejecting content detection (0 - unlimited).">
+            <div className="select-none">Max detected controls</div>
             <Input
                 className={classNames("px-2 w-20 h-7 text-xs rounded-sm focus-visible:ring-0 focus-visible:border-primary-500", focusClasses)}
                 value={maxControls}

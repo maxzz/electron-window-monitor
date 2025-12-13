@@ -36,10 +36,10 @@ export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutR
                                 </p>
                             </div>
                             <div className="grid gap-3 text-xs">
-                                <InputMaxControls />
-                                <ChkboxXmlFormat />
                                 <ChkboxIconAutoUpdate />
                                 <ChkboxLargeIcon />
+                                <ChkboxXmlFormat />
+                                <InputMaxControls />
                             </div>
                         </PopoverContent>
                     </Popover>

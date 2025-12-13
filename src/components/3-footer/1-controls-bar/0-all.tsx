@@ -9,6 +9,7 @@ import { ChkboxLargeIcon } from "./6-chkbox-icon-large";
 import { Section3_Footer } from "../2-footer";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/shadcn/popover";
 import { Button } from "@/components/ui/shadcn/button";
+import { IconSettings } from "@/components/ui/icons/normal/28-settings";
 
 export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -22,7 +23,9 @@ export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutR
                 <div className="p-2">
                     <Popover>
                         <PopoverTrigger asChild>
-                            <Button variant="outline" size="sm">Options</Button>
+                            <Button variant="ghost" size="icon" className="h-6 w-6" title="Options">
+                                <IconSettings className="w-4 h-4" />
+                            </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-auto">
                             <div className="grid gap-3 text-xs">

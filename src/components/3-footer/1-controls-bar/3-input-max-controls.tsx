@@ -19,7 +19,7 @@ export function InputMaxControls() {
         <label className="w-max flex items-center gap-x-2" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
             <div className="select-none">Max controls</div>
             <Input
-                className={classNames("px-2 py-1 w-20 h-6 text-xs text-primary-900 bg-primary-300 rounded-xs focus-visible:ring-0 focus-visible:border-primary-500", focusClasses)}
+                className={classNames("px-2 w-20 h-7 text-xs rounded-sm focus-visible:ring-0 focus-visible:border-primary-500", focusClasses)}
                 value={maxControls}
                 onChange={(e) => setValue(e.target.value)}
             />

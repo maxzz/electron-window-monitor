@@ -1,6 +1,7 @@
 import { useSnapshot } from "valtio";
 import { debugSettings } from "@/store/1-atoms";
 import { Checkbox } from "@/components/ui/shadcn/checkbox";
+import { checkboxClasses } from "@/components/2-main/8-shared-styles";
 
 export function ChkboxXmlFormat() {
     const { acquireXml } = useSnapshot(debugSettings.uiState);
@@ -8,6 +9,7 @@ export function ChkboxXmlFormat() {
         <label className="w-max flex items-center gap-x-2 cursor-pointer" title="The get manifest request format: JSON/XML">
 
             <Checkbox
+                className={checkboxClasses}
                 checked={acquireXml}
                 onCheckedChange={(v) => debugSettings.uiState.acquireXml = !!v}
             />

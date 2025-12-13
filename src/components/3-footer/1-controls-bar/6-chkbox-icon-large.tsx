@@ -9,7 +9,7 @@ export function ChkboxLargeIcon() {
         <label className="w-max flex items-center gap-x-1" title="The get manifest request format: JSON/XML">
 
             <Checkbox   
-                // className={checkboxClasses}
+                className={checkboxClasses}
                 checked={iconsLarge}
                 onCheckedChange={(v) => debugSettings.uiState.iconsLarge = !!v}
             />

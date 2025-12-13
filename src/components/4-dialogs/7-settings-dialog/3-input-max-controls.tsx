@@ -1,7 +1,7 @@
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { debugSettings } from "@/store/1-atoms";
-import { focusClasses } from "../../../2-main/8-shared-styles";
+import { focusClasses } from "../../2-main/8-shared-styles";
 import { Input } from "@/components/ui/shadcn/input";
 
 export function InputMaxControls() {

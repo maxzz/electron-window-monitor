@@ -2,7 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import { classNames } from "@/utils";
 import { BlockTargetWindowPosition } from "./2-dnd-position";
 import { TestLinks } from "./2-test-links";
-import { PopoverSettings } from "./popover-settings";
+import { PopoverSettings } from "../../4-dialogs/7-settings-dialog";
 import { Section3_Footer } from "../2-footer";
 
 export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutRef<"div">) {

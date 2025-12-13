@@ -2,6 +2,7 @@ import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { debugSettings } from "@/store/1-atoms";
 import { focusClasses } from "../../2-main/8-shared-styles";
+import { Input } from "@/components/ui/shadcn/input";
 
 export function InputMaxControls() {
     const { maxControls } = useSnapshot(debugSettings.uiState);
@@ -17,8 +18,8 @@ export function InputMaxControls() {
     return (
         <label className="w-max flex items-center gap-x-2" title="Allowed number of controls before rejecting content detection (0 - unlimited).">
             <div className="select-none">Max controls</div>
-            <input
-                className={classNames("px-2 py-1 w-20 text-primary-900 bg-primary-300 rounded-xs", focusClasses)}
+            <Input
+                className={classNames("px-2 py-1 w-20 h-6 text-xs text-primary-900 bg-primary-300 rounded-xs focus-visible:ring-0 focus-visible:border-primary-500", focusClasses)}
                 value={maxControls}
                 onChange={(e) => setValue(e.target.value)}
             />

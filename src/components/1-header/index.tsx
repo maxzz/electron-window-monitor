@@ -1,8 +1,9 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { classNames } from "@/utils";
-import { PopoverSettings } from "../4-dialogs/7-settings-dialog";
 import { IconMicroscope } from "../ui/icons/normal";
-import { TopMenu } from "./1-top-menu/0-all";
+import { PopoverSettings } from "../4-dialogs/7-settings-dialog";
+import { TopMenu } from "./1-top-menu";
+import { ButtonTestHighlight } from "../3-footer/1-controls-bar/2-test-links";
 
 export function Section1Header({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -13,6 +14,7 @@ export function Section1Header({ className, ...rest }: ComponentPropsWithoutRef<
                 <span className="text-xs">Second active window (SAW)</span>
 
                 <div>
+                <ButtonTestHighlight />
                     <PopoverSettings />
                     <TopMenu />
                 </div>

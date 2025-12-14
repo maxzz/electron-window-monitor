@@ -25,7 +25,7 @@ export function TestLinks({ className, ...rest }: ComponentPropsWithoutRef<"div"
     );
 }
 
-function ButtonTestHighlight() {
+export function ButtonTestHighlight() {
     const sawHandle = useAtomValue(sawHandleAtom);
     const doHighlightRect = useSetAtom(doHighlightRectAtom);
 

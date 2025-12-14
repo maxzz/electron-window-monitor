@@ -8,25 +8,30 @@ import { ButtonGetControls } from "../2-row-buttons/2-btn-get-controls";
 import { ButtonGetSawHandle } from "../2-row-buttons/5-btn-get-saw-handle";
 import { ButtonGetIcon } from "../2-row-buttons/4-btn-get-icon";
 import { ButtonGetManifest } from "../2-row-buttons/3-btn-get-mani";
+import { SawHeaderButtons } from "../1-row-title/1-saw-header-buttons";
 
 export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className={classNames("grid grid-cols-[auto_auto_1fr_auto] gap-2 select-none", className)} {...rest}>
-            <ButtonStartStopMonitor />
+        <div className="grid grid-rows-[auto_1fr]">
+            <SawHeaderButtons />
 
-            <ActionsGroup_Get />
+            <div className={classNames("grid grid-cols-[auto_auto_1fr_auto] gap-2 select-none", className)} {...rest}>
+                <ButtonStartStopMonitor />
 
-            <ButtonGetSawHandle className="col-start-1 [@media_(min-width:_480px)]:col-start-4" />
+                <ActionsGroup_Get />
+
+                <ButtonGetSawHandle className="" />
+            </div>
         </div>
     );
 }
 
 function ActionsGroup_Get() {
     const isDisabled = useAtomValue(sawGetDisabledAtom);
-    
+
     return (
         <AnimatePresence>
-            <motion.div 
+            <motion.div
                 className={classNames(containerGetClasses)}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isDisabled ? 0 : 1 }}

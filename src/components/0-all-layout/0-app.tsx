@@ -18,7 +18,7 @@ function AppLayout() {
         <div className="h-screen bg-background grid grid-rows-[auto_1fr_auto] 1debug-screens 1debug-grid-16 smallscroll">
             <Section1Header />
 
-            <Section2Main className="mx-4 max-w-2xl" />
+            <Section2Main />
 
             <Section3_Footer />
         </div>

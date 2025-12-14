@@ -8,15 +8,16 @@ import { Panel4DragAndDrop } from "../4-panel-dnd/0-all";
 
 export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
-        <div className={classNames("min-h-0 flex flex-col gap-4 divide-y divide-sky-500/50", className)} {...rest}>
+        <div className={classNames("mx-4 max-w-2xl grid gap-4", className)} {...rest}>
             <StartActionsPanel className="py-4" />
 
-            <SawHwndInfo className="py-4" />
+            {/* <SawHwndInfo className="py-4" /> */}
+
             {/* <PopoverDemo /> */}
             {/* <AccordionDemo /> */}
 
-            <SawControlsPanel className="py-4" />
-            <Panel4DragAndDrop />
+            {/* <SawControlsPanel className="py-4" />
+            <Panel4DragAndDrop /> */}
         </div>
     );
 } 

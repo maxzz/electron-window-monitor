@@ -11,8 +11,8 @@ export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"d
             <StartActionsPanel className="py-4 1border-b border-primary-500/50" />
 
             <SawHwndInfo className="border-b 1border-primary-500/50" />
-            <PopoverDemo />
-            <AccordionDemo />
+            {/* <PopoverDemo /> */}
+            {/* <AccordionDemo /> */}
 
             <SawControlsPanel className="border-b 1border-primary-500/50" />
         </div>

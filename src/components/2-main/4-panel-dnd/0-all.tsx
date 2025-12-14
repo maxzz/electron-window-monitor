@@ -1,7 +1,7 @@
 import { type ComponentPropsWithoutRef } from "react";
 import { classNames } from "@/utils";
 import { BlockTargetWindowPosition } from "./2-dnd-position";
-import { Section3_Footer } from "../2-footer";
+import { Section3_Footer } from "../../3-footer/0-all-footer";
 
 export function Section3FooterAnd({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (

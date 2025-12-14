@@ -4,7 +4,7 @@ import { IconSunnyvale } from "../ui/icons";
 
 export function Section3_Footer({ className, ...rest }: HTMLAttributes<HTMLDivElement>) {
     return (
-        <div className={classNames("pb-1 h-8 text-xs dark:bg-black dark:text-slate-600 flex items-center justify-center overflow-hidden", className)} {...rest}>
+        <div className={classNames("pb-1 h-8 text-xs text-muted-foreground border-t border-border shadow-xs flex items-center justify-center overflow-hidden", className)} {...rest}>
 
             <a className={urlClasses} href="https://github.com/maxzz" target="_blank" rel="noopener">
                 Created by Max Zakharzhevskiy
@@ -12,7 +12,7 @@ export function Section3_Footer({ className, ...rest }: HTMLAttributes<HTMLDivEl
 
             <IconSunnyvale
                 className="pt-1 size-8 hover:scale-150 transition-all duration-300"
-                title={`${envModifiedDate()}\n   Sunnyvale Produce\n\tVersion ${envBuildVersion()}`}
+                title={`${envModifiedDate()}\n   Sunnyvale Produce\n\tversion ${envBuildVersion()}`}
             />
 
             <a className={urlClasses} href="https://github.com/maxzz/electron-window-monitor" target="_blank" rel="noopener">

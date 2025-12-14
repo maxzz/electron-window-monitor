@@ -17,7 +17,9 @@ export function PopoverSettings() {
 
             <PopoverContent className="mx-4 p-2 w-auto">
                 <div className="-mx-2 mb-2 px-2 pb-2 space-y-1 border-b border-slate-500/50">
-                    <h4 className="text-sm leading-none">Options</h4>
+                    <h4 className="text-sm leading-none">
+                        Options
+                    </h4>
                     <p className="text-xs text-muted-foreground">
                         Configure detection and display settings.
                     </p>

@@ -1,1 +1,2 @@
-export * from "./1-controls-bar";
+export * from "./0-all-footer";
+

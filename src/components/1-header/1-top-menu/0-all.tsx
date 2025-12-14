@@ -1,7 +1,6 @@
-import { IconMenuHamburger5, IconSettings } from "@/components/ui/icons/normal";
+import { IconMenuHamburger5 } from "@/components/ui/icons/normal";
 import { Button } from "@/components/ui/shadcn/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/shadcn/dropdown-menu";
-import { Link } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/shadcn/dropdown-menu";
 
 export function TopMenu() {
     return (
@@ -16,10 +15,21 @@ export function TopMenu() {
                     <IconMenuHamburger5 className="size-5" />
                 </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent>
-                <DropdownMenuItem>
-                    <Link href="https://www.google.com">Test link 1</Link>
-                </DropdownMenuItem>
+                {/* TODO: add DropdownMenu with items from testLinks */}
+                <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>
+                        <DropdownMenuLabel>Test links</DropdownMenuLabel>
+                    </DropdownMenuSubTrigger>
+                </DropdownMenuSub>
+                <DropdownMenuSubContent>
+                    {testLinks.map((link) => (
+                        <DropdownMenuItem key={link.href}>
+                            <a href={link.href} target="_blank">{link.label}</a>
+                        </DropdownMenuItem>
+                    ))}
+                </DropdownMenuSubContent>
             </DropdownMenuContent>
         </DropdownMenu>
     );

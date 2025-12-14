@@ -1,31 +1,12 @@
-import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
+import { useSnapshot } from "valtio";
+import { appSettings } from "@/store/1-atoms";
 import { Button } from "@/components/ui/shadcn/button";
+import { Moon, Sun } from "lucide-react";
+import { isThemeDark, toggleTheme } from "@/utils";
 
 export function ButtonQuickToggleThemeMode() {
-    const [isDark, setIsDark] = useState(
-        () => {
-            return document.documentElement.classList.contains("dark");
-        }
-    );
-
-    useEffect(() => {
-        if (typeof window === "undefined") return;
-        const theme = localStorage.getItem("theme");
-        if (theme === "dark") {
-            updateTheme(true);
-            setIsDark(true);
-        } else if (theme === "light") {
-            updateTheme(false);
-            setIsDark(false);
-        }
-    }, []);
-
-    function toggleTheme() {
-        const newIsDark = !isDark;
-        updateTheme(newIsDark);
-        setIsDark(newIsDark);
-    }
+    const { theme } = useSnapshot(appSettings.appUi);
+    const isDark = isThemeDark(theme);
 
     return (
         <Button
@@ -33,7 +14,7 @@ export function ButtonQuickToggleThemeMode() {
             size="icon"
             className="size-6 focus-visible:ring-0"
             title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            onClick={toggleTheme}
+            onClick={() => toggleTheme(theme)}
             type="button"
         >
             {isDark ? (
@@ -44,15 +25,3 @@ export function ButtonQuickToggleThemeMode() {
         </Button>
     );
 }
-
-function updateTheme(isDark: boolean) {
-    if (isDark) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-    }
-}
-
-

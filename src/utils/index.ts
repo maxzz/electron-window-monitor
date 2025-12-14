@@ -11,6 +11,7 @@ export * from "./os-utils";
 export * from "./prepend-url-path";
 export * from "./round-int";
 export * from "./theme-apply";
+export * from "./theme-utils";
 export * from "./web-data-transfer-item-list";
 export * from "./web-drop-utils";
 export * from "./x-sub-error";

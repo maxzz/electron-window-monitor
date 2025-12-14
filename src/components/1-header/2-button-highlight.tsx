@@ -20,9 +20,9 @@ export function ButtonTestHighlight() {
                     transition={{ duration: 0.2 }}
                 >
                     <Button
+                        className="px-1 h-6 font-normal rounded-sm active:scale-x-[.97]"
                         variant="outline"
                         size="sm"
-                        className={linkClasses}
                         onClick={() => {
                             doHighlightRect({ hwnd: sawHandle.hwnd, rect: { left: 0, top: 0, right: 640, bottom: 480, } });
                         }}>
@@ -33,5 +33,3 @@ export function ButtonTestHighlight() {
         </AnimatePresence>
     );
 }
-
-const linkClasses = "h-6 font-normal rounded-sm active:scale-x-[.97]";

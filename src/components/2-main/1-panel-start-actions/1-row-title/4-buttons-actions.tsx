@@ -1,7 +1,7 @@
 import { useSetAtom } from "jotai";
 import { classNames } from "@/utils";
 import { doClearSawHandleAtom } from "@/store";
-import { utilityButtonClasses } from "../1-panel-start-actions/8-button-classes";
+import { utilityButtonClasses } from "../2-row-buttons/8-button-classes";
 
 export function SawHeaderRightActions({ isMonitoring, raw }: { isMonitoring: boolean; raw: string; }) {
     if (isMonitoring) {

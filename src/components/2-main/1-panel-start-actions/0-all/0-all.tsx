@@ -3,11 +3,11 @@ import { useAtomValue } from "jotai";
 import { motion, AnimatePresence } from "motion/react";
 import { classNames } from "@/utils";
 import { sawGetDisabledAtom } from "@/store";
-import { ButtonStartStopMonitor } from "./1-btn-start-stop-monitor";
-import { ButtonGetControls } from "./2-btn-get-controls";
-import { ButtonGetSawHandle } from "./5-btn-get-saw-handle";
-import { ButtonGetIcon } from "./4-btn-get-icon";
-import { ButtonGetManifest } from "./3-btn-get-mani";
+import { ButtonStartStopMonitor } from "../2-row-buttons/1-btn-start-stop-monitor";
+import { ButtonGetControls } from "../2-row-buttons/2-btn-get-controls";
+import { ButtonGetSawHandle } from "../2-row-buttons/5-btn-get-saw-handle";
+import { ButtonGetIcon } from "../2-row-buttons/4-btn-get-icon";
+import { ButtonGetManifest } from "../2-row-buttons/3-btn-get-mani";
 
 export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (

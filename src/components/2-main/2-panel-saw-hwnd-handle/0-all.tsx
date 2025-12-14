@@ -1,6 +1,6 @@
 import { type HTMLAttributes } from "react";
 import { classNames } from "@/utils";
-import { SawHeaderButtons } from "./1-saw-header-buttons";
+import { SawHeaderButtons } from "../1-panel-start-actions/1-row-title/1-saw-header-buttons";
 import { SawHwndPropsGrid } from "./2-saw-hwnd-props-grid";
 import { PanelBuildProcess } from "./3-panel-build-process";
 

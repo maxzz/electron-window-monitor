@@ -6,7 +6,7 @@ import { classNames } from "@/utils";
 import { napiBuildState } from "@/store/7-napi-atoms";
 import { sawContentStrAtom } from "@/store";
 import { IconCopy } from "@/components/ui";
-import { utilityButtonClasses } from "../../1-panel-start-actions/8-button-classes";
+import { utilityButtonClasses } from "../../1-panel-start-actions/2-row-buttons/8-button-classes";
 
 export function ButtonCopyContent() {
     const [showNotice, setShowNotice] = useState(false);

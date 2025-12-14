@@ -4,6 +4,7 @@ import { IconMicroscope } from "../ui/icons/normal";
 import { PopoverSettings } from "../4-dialogs/7-settings-dialog";
 import { TopMenu } from "./1-top-menu";
 import { ButtonTestHighlight } from "./2-button-highlight";
+import { ButtonQuickToggleThemeMode } from "./3-button-theme-toggle";
 
 export function Section1Header({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
@@ -17,7 +18,9 @@ export function Section1Header({ className, ...rest }: ComponentPropsWithoutRef<
 
                 <div className="flex items-center gap-1">
                     <ButtonTestHighlight />
+                    {/* Add here single button to quick toggle dark/light theme without system mode */}
                     <PopoverSettings />
+                    <ButtonQuickToggleThemeMode />
                     <TopMenu />
                 </div>
             </div>

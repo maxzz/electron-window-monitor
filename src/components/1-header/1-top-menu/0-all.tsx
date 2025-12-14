@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/shadcn/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/shadcn/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/shadcn/dropdown-menu";
 import { IconMenuHamburger5 } from "@/components/ui/icons/normal";
+import { TestLinksSubMenu } from "./1-test-links";
+import { ThemeSubMenu } from "./2-theme-sub-menu";
 
 export function TopMenu() {
     return (
@@ -12,36 +14,11 @@ export function TopMenu() {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className="overflow-hidden">
-                <DropdownMenuSub>
-                    <DropdownMenuSubTrigger className="py-0">
-                        <DropdownMenuLabel className="text-xs font-normal">Test links</DropdownMenuLabel>
-                    </DropdownMenuSubTrigger>
-
-                    <DropdownMenuSubContent>
-                        {testLinks.map(
-                            (link) => (
-                                <DropdownMenuItem className="text-xs font-normal" key={link.href}>
-                                    <a href={link.href} target="_blank">
-                                        {link.label}
-                                    </a>
-                                </DropdownMenuItem>
-                            )
-                        )}
-                    </DropdownMenuSubContent>
-                </DropdownMenuSub>
-
+                <TestLinksSubMenu />
+                <DropdownMenuSeparator />
+                <ThemeSubMenu />
             </DropdownMenuContent>
+            
         </DropdownMenu>
     );
 }
-
-const testLinks = [
-    {
-        label: "Tailwind UI login",
-        href: "https://tailwindui.com/login"
-    },
-    {
-        label: "Bank of America login",
-        href: "https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go"
-    },
-];

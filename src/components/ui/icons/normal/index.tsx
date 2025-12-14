@@ -4,5 +4,6 @@ export * from './03-stop';
 export * from './04-target';
 export * from './05-target2';
 export * from './27-dnd-target';
+export * from './27-microscope';
 export * from './28-settings';
 export * from './40-sunnyvale';

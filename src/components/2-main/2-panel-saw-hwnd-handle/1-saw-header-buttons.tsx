@@ -1,10 +1,10 @@
-import { useSetAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
 import { debugSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
-import { utilityButtonClasses } from "../1-panel-start-actions/8-button-classes";
-import { doClearSawHandleAtom, sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom } from "@/store";
+import { sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom } from "@/store";
+import { SawHeaderRightActions } from "./4-buttons-actions";
 
 export function SawHeaderButtons() {
     const isMonitoring = useAtomValue(isMonitorRunningAtom);
@@ -26,49 +26,7 @@ export function SawHeaderButtons() {
                 <ImageHolder className={iconsLarge ? "size-12" : "size-5"} imageAtom={sawIconAtom} />
             </div>
 
-            {!isMonitoring &&
-                <div className="flex items-center space-x-1">
-                    <ButtonClearHandle />
-                    <ButtonShowReplyRawText raw={raw} />
-                </div>
-            }
-        </div>
-    );
-}
-
-function ButtonClearHandle() {
-    const doClearSawHandle = useSetAtom(doClearSawHandleAtom);
-    return (
-        <button
-            className={utilityButtonClasses}
-            onClick={doClearSawHandle}
-            title="Clear Second Active Window handle"
-        >
-            Clear
-        </button>
-    );
-}
-
-function ButtonShowReplyRawText({ raw }: { raw: string; }) {
-    try {
-        const rawObj = JSON.parse(raw);
-        raw = JSON.stringify(rawObj, null, 2);
-    } catch (e) {
-        raw = `Failed to parse: "${raw}"`;
-    }
-    raw = `Second active window info:\n${raw}`;
-
-    return (
-        <div className="relative group cursor-default">
-            <div className={classNames(utilityButtonClasses, "active:scale-100! transition-none!")}>
-                Raw
-            </div>
-
-            <div className="absolute hidden group-hover:block right-0 py-1">
-                <div className="relative px-2 py-1 text-xs bg-primary-300 border-primary-500 border shadow-md rounded-sm whitespace-pre z-50">
-                    {`${raw}`}
-                </div>
-            </div>
+            <SawHeaderRightActions isMonitoring={isMonitoring} raw={raw} />
         </div>
     );
 }

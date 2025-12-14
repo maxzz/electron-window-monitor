@@ -2,6 +2,7 @@ import { type ComponentPropsWithoutRef } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
 import { classNames } from "@/utils";
 import { sawHandleAtom, doHighlightRectAtom } from "@/store";
+import { Button } from "@/components/ui/shadcn/button";
 
 export function ButtonTestHighlight() {
     const sawHandle = useAtomValue(sawHandleAtom);
@@ -12,14 +13,16 @@ export function ButtonTestHighlight() {
     }
 
     return (
-        <button
+        <Button
+            variant="outline"
+            size="sm"
             className={linkClasses}
             onClick={() => {
                 doHighlightRect({ hwnd: sawHandle.hwnd, rect: { left: 0, top: 0, right: 640, bottom: 480, } });
             }}>
             Highlight
-        </button>
+        </Button>
     );
 }
 
-const linkClasses = "px-2 py-0.5 hover:text-green-100 hover:bg-primary-600 border-primary-600 border border-dotted rounded-sm active:scale-x-[.97]";
+const linkClasses = "h-6 font-normal rounded-sm active:scale-x-[.97]";

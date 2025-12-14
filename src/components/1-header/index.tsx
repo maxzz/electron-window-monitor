@@ -13,8 +13,8 @@ export function Section1Header({ className, ...rest }: ComponentPropsWithoutRef<
                 <IconMicroscope className="size-4 stroke-6! text-foreground/50" />
                 <span className="text-xs">Second active window (SAW)</span>
 
-                <div>
-                <ButtonTestHighlight />
+                <div className="flex items-center gap-1">
+                    <ButtonTestHighlight />
                     <PopoverSettings />
                     <TopMenu />
                 </div>

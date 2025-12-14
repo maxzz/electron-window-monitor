@@ -3,7 +3,7 @@ import { classNames } from "@/utils";
 import { IconMicroscope } from "../ui/icons/normal";
 import { PopoverSettings } from "../4-dialogs/7-settings-dialog";
 import { TopMenu } from "./1-top-menu";
-import { ButtonTestHighlight } from "../3-footer/1-controls-bar/2-test-links";
+import { ButtonTestHighlight } from "./2-button-highlight";
 
 export function Section1Header({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (

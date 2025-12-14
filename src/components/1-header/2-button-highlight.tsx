@@ -3,28 +3,6 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { classNames } from "@/utils";
 import { sawHandleAtom, doHighlightRectAtom } from "@/store";
 
-export function TestLinks({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
-    return (
-        <div className={classNames("text-primary-600 flex items-center justify-between", className)} {...rest}>
-            <div className="flex items-center gap-x-1">
-                <div>
-                    Test web logins:
-                </div>
-
-                <a className={linkClasses} href="https://tailwindui.com/login" target="_blank">
-                    tw
-                </a>
-
-                <a className={linkClasses} href="https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go" target="_blank">
-                    bofa
-                </a>
-            </div>
-
-            <ButtonTestHighlight />
-        </div>
-    );
-}
-
 export function ButtonTestHighlight() {
     const sawHandle = useAtomValue(sawHandleAtom);
     const doHighlightRect = useSetAtom(doHighlightRectAtom);

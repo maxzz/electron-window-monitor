@@ -9,7 +9,8 @@ import { Panel4DragAndDrop } from "../4-panel-dnd/0-all";
 export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (
         <div className={classNames("px-4 grid grid-rows-[auto_1fr_auto] gap-4 overflow-hidden", className)} {...rest}>
-            <StartActionsPanel className="py-4" />
+            
+            <StartActionsPanel className="" />
 
             <div className="min-h-0 grid grid-rows-[auto_1fr]">
                 <SawHwndInfo className="" />

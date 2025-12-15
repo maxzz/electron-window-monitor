@@ -5,7 +5,8 @@ import { classNames } from "@/utils";
 import { debugSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
 import { sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom, sawHandleAtom } from "@/store";
-import { SawHeaderRightActions } from "./4-buttons-actions";
+import { SawHeaderRightActions } from "./4-btns-clear-raw";
+import { PanelBuildProcess } from "./3-panel-build-process";
 
 export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     const isMonitoring = useAtomValue(isMonitorRunningAtom);
@@ -26,9 +27,11 @@ export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElem
                 )}
 
                 <div className="text-xs font-semibold truncate">
-                    Second active window: {secondActiveWindow?.caption || "none"}
+                    {secondActiveWindow?.caption || "Second active window: none"}
                 </div>
             </div>
+
+            <PanelBuildProcess className="place-self-end" />
 
             {raw && (
                 <SawHeaderRightActions isMonitoring={isMonitoring} raw={raw} />

@@ -5,6 +5,7 @@ import { classNames } from "@/utils";
 import { animationProps, animationTransition, buttonClasses } from "./8-button-classes";
 import { IconPlayStop, IconPlayStart } from "@/components/ui";
 import { doGetTargetHwndAtom, doUpdateHwndAndIconAtom, secondsCounterAtom, useMonitoring, useSawRectMonitor } from "@/store";
+import { Tests } from "./9-tests";
 
 export function ButtonStartStopMonitor() {
 
@@ -80,30 +81,3 @@ bg-primary-200 border-primary-600 border rounded \
 [-webkit-text-stroke-width:0.5px] \
 [-webkit-text-stroke-color:#173717] \
 ";
-
-import { IconRadarV1 } from "@/components/ui/icons/animated/radar-v1";
-import { IconEyes } from "@/components/ui/icons/animated/eyes";
-import { EyesFollowCursor } from "@/components/ui/icons/animated/eyes-v2";
-import { EyeV3 } from "@/components/ui/icons/animated/eyes-v3";
-import { EyeV4 } from "@/components/ui/icons/animated/eyes-v4";
-import { EyeV5 } from "@/components/ui/icons/animated/eyes-v5";
-import { EyeV6 } from "@/components/ui/icons/animated/eyes-v6";
-import { WaitV1 } from "@/components/ui/icons/animated/wait-v1";
-
-function Tests() {
-    return (<>
-        {/* <div className="flex items-center gap-x-2">
-                <IconRadarV1 />
-                <EyesFollowCursor />
-                <IconEyes />
-                <EyeV3 />
-            </div> */}
-
-        {/* <EyeV4 /> */}
-
-        {/* <EyeV5 />
-            <EyeV6 /> */}
-
-        {/* <WaitV1 /> */}
-    </>);
-}

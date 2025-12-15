@@ -12,7 +12,7 @@ import { SawHeaderButtons } from "../1-row-title/1-saw-header-buttons";
 
 export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className="max-w-3xl grid grid-rows-[auto_1fr]">
+        <div className="max-w-3xl grid grid-rows-[auto_auto]">
             <SawHeaderButtons className="min-w-0" />
 
             <div className={classNames("grid grid-cols-[auto_auto_1fr] gap-2 select-none", className)} {...rest}>

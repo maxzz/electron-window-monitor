@@ -1,6 +1,7 @@
 import { shell } from "electron";
 import { iniFileOptions } from "./8-ini-file-options";
 import { type AppWindow } from "./7-app-window-instance";
+import { registerZoomShortcuts } from "./5-app-menu";
 
 export function setAppWindowListeners(appWindow: AppWindow) {
     if (!appWindow.wnd) {
@@ -28,4 +29,7 @@ export function setAppWindowListeners(appWindow: AppWindow) {
     appWindow.wnd.webContents.on('did-finish-load', () => {
         appWindow.wnd?.webContents.send('main-process-message', (new Date).toLocaleString()); // Test active push message to Renderer-process.
     });
+
+    // Register additional zoom shortcuts (numpad +/-, Ctrl+Shift+=)
+    registerZoomShortcuts(appWindow.wnd);
 }

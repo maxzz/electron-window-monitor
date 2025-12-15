@@ -70,8 +70,30 @@ export function createAppMenu() {
                     }
                 },
                 {
+                    label: 'Zoom In (Numpad)',
+                    accelerator: 'CmdOrCtrl+numadd',
+                    visible: false,
+                    click: (_menuItem, baseWindow) => {
+                        if (baseWindow instanceof BrowserWindow) {
+                            const currentZoom = baseWindow.webContents.getZoomLevel();
+                            baseWindow.webContents.setZoomLevel(currentZoom + 0.5);
+                        }
+                    }
+                },
+                {
                     label: 'Zoom Out',
                     accelerator: 'CmdOrCtrl+-',
+                    click: (_menuItem, baseWindow) => {
+                        if (baseWindow instanceof BrowserWindow) {
+                            const currentZoom = baseWindow.webContents.getZoomLevel();
+                            baseWindow.webContents.setZoomLevel(currentZoom - 0.5);
+                        }
+                    }
+                },
+                {
+                    label: 'Zoom Out (Numpad)',
+                    accelerator: 'CmdOrCtrl+numsub',
+                    visible: false,
                     click: (_menuItem, baseWindow) => {
                         if (baseWindow instanceof BrowserWindow) {
                             const currentZoom = baseWindow.webContents.getZoomLevel();

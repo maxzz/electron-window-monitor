@@ -80,6 +80,10 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         params: PerformCommandParams;
     };
 
+    export type GetZoomLevel = {
+        type: 'r2mi:get-zoom-level';
+    };
+
     export type AllInvokes =
         | DoLoadfiles
         | DoLoadfiles2/* | DoLoadfiles3*/
@@ -96,6 +100,7 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
         
         | GeneralInfo
         | PerformCommand
+        | GetZoomLevel
         ;
 
     export type InvokeResult<T extends R2MInvoke.AllInvokes> =
@@ -143,6 +148,9 @@ export namespace R2MInvoke { // Main from Renderer invoke and get result
 
         : T extends PerformCommand           //'r2mi:perform-command'
         ? string
+
+        : T extends GetZoomLevel             //'r2mi:get-zoom-level'
+        ? number
 
         : never;
 

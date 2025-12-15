@@ -36,3 +36,11 @@ export function invokeLoadFiles(filenames: string[], allowedExt?: string[]): Pro
     };
     return mainApi?.invokeMain(d) as Promise<R2MInvoke.FileContent[]>;
 }
+
+export function zoomAction(action: 'in' | 'out' | 'reset'): void {
+    sendToMain({ type: 'r2m:zoom-action', action });
+}
+
+export function getZoomLevel(): Promise<number> {
+    return invokeMainTyped({ type: 'r2mi:get-zoom-level' });
+}

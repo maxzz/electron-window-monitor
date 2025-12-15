@@ -34,5 +34,10 @@ export namespace M2R { // Main to Renderer
         body: string;
     };
 
-    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles | DetectionProgress | FailedRawContent | PositionProgress;
+    export type ZoomChanged = {
+        type: 'm2r:zoom-changed';
+        level: number;
+    };
+
+    export type RendererCalls = DarkMode | ReloadFiles | OpenedFiles | DetectionProgress | FailedRawContent | PositionProgress | ZoomChanged;
 }

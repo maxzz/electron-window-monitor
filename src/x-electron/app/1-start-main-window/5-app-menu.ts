@@ -1,5 +1,17 @@
 import { app, Menu, BrowserWindow } from "electron";
 
+function changeZoom(win: BrowserWindow, change: number) {
+    const current = win.webContents.getZoomLevel();
+    const next = current + change;
+    win.webContents.setZoomLevel(next);
+    win.webContents.send('send-to-renderer', { type: 'm2r:zoom-changed', level: next });
+}
+
+function resetZoom(win: BrowserWindow) {
+    win.webContents.setZoomLevel(0);
+    win.webContents.send('send-to-renderer', { type: 'm2r:zoom-changed', level: 0 });
+}
+
 export function createAppMenu() {
     const isMac = process.platform === 'darwin';
 
@@ -64,8 +76,7 @@ export function createAppMenu() {
                     accelerator: 'CmdOrCtrl+=',
                     click: (_menuItem, baseWindow) => {
                         if (baseWindow instanceof BrowserWindow) {
-                            const currentZoom = baseWindow.webContents.getZoomLevel();
-                            baseWindow.webContents.setZoomLevel(currentZoom + 0.5);
+                            changeZoom(baseWindow, 0.5);
                         }
                     }
                 },
@@ -75,8 +86,7 @@ export function createAppMenu() {
                     visible: false,
                     click: (_menuItem, baseWindow) => {
                         if (baseWindow instanceof BrowserWindow) {
-                            const currentZoom = baseWindow.webContents.getZoomLevel();
-                            baseWindow.webContents.setZoomLevel(currentZoom + 0.5);
+                            changeZoom(baseWindow, 0.5);
                         }
                     }
                 },
@@ -85,8 +95,7 @@ export function createAppMenu() {
                     accelerator: 'CmdOrCtrl+-',
                     click: (_menuItem, baseWindow) => {
                         if (baseWindow instanceof BrowserWindow) {
-                            const currentZoom = baseWindow.webContents.getZoomLevel();
-                            baseWindow.webContents.setZoomLevel(currentZoom - 0.5);
+                            changeZoom(baseWindow, -0.5);
                         }
                     }
                 },
@@ -96,8 +105,7 @@ export function createAppMenu() {
                     visible: false,
                     click: (_menuItem, baseWindow) => {
                         if (baseWindow instanceof BrowserWindow) {
-                            const currentZoom = baseWindow.webContents.getZoomLevel();
-                            baseWindow.webContents.setZoomLevel(currentZoom - 0.5);
+                            changeZoom(baseWindow, -0.5);
                         }
                     }
                 },
@@ -106,7 +114,7 @@ export function createAppMenu() {
                     accelerator: 'CmdOrCtrl+0',
                     click: (_menuItem, baseWindow) => {
                         if (baseWindow instanceof BrowserWindow) {
-                            baseWindow.webContents.setZoomLevel(0);
+                            resetZoom(baseWindow);
                         }
                     }
                 },
@@ -139,20 +147,17 @@ export function registerZoomShortcuts(win: BrowserWindow) {
     win.webContents.on('before-input-event', (event, input) => {
         // Handle Ctrl+Shift+= (plus key) for zoom in
         if (input.control && input.shift && input.key === '+') {
-            const currentZoom = win.webContents.getZoomLevel();
-            win.webContents.setZoomLevel(currentZoom + 0.5);
+            changeZoom(win, 0.5);
             event.preventDefault();
         }
         // Handle Ctrl+Numpad+ for zoom in
         if (input.control && input.key === 'Add') {
-            const currentZoom = win.webContents.getZoomLevel();
-            win.webContents.setZoomLevel(currentZoom + 0.5);
+            changeZoom(win, 0.5);
             event.preventDefault();
         }
         // Handle Ctrl+Numpad- for zoom out  
         if (input.control && input.key === 'Subtract') {
-            const currentZoom = win.webContents.getZoomLevel();
-            win.webContents.setZoomLevel(currentZoom - 0.5);
+            changeZoom(win, -0.5);
             event.preventDefault();
         }
     });

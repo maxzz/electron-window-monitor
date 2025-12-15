@@ -1,6 +1,7 @@
 import { type R2MInvoke } from "@/shared/ipc-types";
 import { getTargetHwnd, getWindowIcon, getWindowControls, getWindowMani, getTlwInfos, getTlwScreenshots, highlightControl, highlightWindow, getWindowExtras, dndActionInit, getGeneralInfo, performCommand } from "../../x-electron/xternal-to-renderer/7-napi-calls";
 import { loadWin32FilesContent } from "../../x-electron/xternal-to-renderer/2-commands-in-main";
+import { appWindow } from "../../x-electron/app/1-start-main-window/7-app-window-instance";
 
 export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Promise<any> {
     switch (data.type) {
@@ -60,6 +61,10 @@ export async function invokeFromRendererInMain(data: R2MInvoke.AllInvokes): Prom
         }
         case 'r2mi:perform-command': {
             const rv: R2MInvoke.InvokeResult<R2MInvoke.PerformCommand> = await performCommand(data.params);
+            return rv;
+        }
+        case 'r2mi:get-zoom-level': {
+            const rv: R2MInvoke.InvokeResult<R2MInvoke.GetZoomLevel> = appWindow.wnd?.webContents.getZoomLevel() ?? 0;
             return rv;
         }
         default: {

@@ -35,7 +35,12 @@ export namespace R2M { // Main from Renderer
         params: 'move' | 'stop';
     };
 
-    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions | CancelDetection | HighlightRect | GetWindowPosAction;
+    export type ZoomAction = {
+        type: 'r2m:zoom-action';
+        action: 'in' | 'out' | 'reset';
+    };
+
+    export type ToMainCalls = NotifyMessage | DarkMode | SetClientOptions | CancelDetection | HighlightRect | GetWindowPosAction | ZoomAction;
 }
 
 export namespace R2MParams {
@@ -45,6 +50,7 @@ export namespace R2MParams {
     export type CancelDetection = Omit<R2M.CancelDetection, 'type'>;
     export type HighlightRect = Omit<R2M.HighlightRect, 'type'>;
     export type GetWindowPosAction = Omit<R2M.GetWindowPosAction, 'type'>;
+    export type ZoomAction = Omit<R2M.ZoomAction, 'type'>;
 }
 
 // Size, position, and bounds

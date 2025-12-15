@@ -2,6 +2,7 @@ import { M2R } from "@/shared/ipc-types";
 import { atom } from "jotai";
 import { filesContentAtom } from "../../store/atom-dropped-files";
 import { napiBuildProgress, napiBuildState, stateNapiPosTracker } from "../../store/7-napi-atoms";
+import { zoomLevelAtom } from "../../store/1-atoms/atom-zoom";
 
 export const doFromMainAtom = atom(
     null,
@@ -31,6 +32,10 @@ export const doFromMainAtom = atom(
             }
             case 'm2r:failed-raw-content': {
                 napiBuildState.buildFailedBody = data.body;
+                break;
+            }
+            case 'm2r:zoom-changed': {
+                set(zoomLevelAtom, data.level);
                 break;
             }
             default: {

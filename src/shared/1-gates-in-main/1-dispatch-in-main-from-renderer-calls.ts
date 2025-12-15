@@ -2,6 +2,7 @@ import { Notification } from "electron";
 import { type R2M } from "@/shared/ipc-types";
 import { electronState } from "../../x-electron/app/2-electron-globals";
 import { dndAction, highlightControl } from "../../x-electron/xternal-to-renderer/7-napi-calls";
+import { appWindow } from "../../x-electron/app/1-start-main-window/7-app-window-instance";
 
 export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<void> {
     switch (data.type) {
@@ -27,6 +28,22 @@ export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<voi
         }
         case 'r2m:get-window-pos-action': {
             dndAction(data.params);
+            break;
+        }
+        case 'r2m:zoom-action': {
+            const w = appWindow.wnd;
+            if (w) {
+                const current = w.webContents.getZoomLevel();
+                let next = current;
+                if (data.action === 'in') next += 0.5;
+                else if (data.action === 'out') next -= 0.5;
+                else if (data.action === 'reset') next = 0;
+                
+                if (next !== current) {
+                    w.webContents.setZoomLevel(next);
+                    w.webContents.send('send-to-renderer', { type: 'm2r:zoom-changed', level: next });
+                }
+            }
             break;
         }
         default: {

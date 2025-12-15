@@ -12,10 +12,10 @@ import { SawHeaderButtons } from "../1-row-title/1-saw-header-buttons";
 
 export function StartActionsPanel({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     return (
-        <div className="grid grid-rows-[auto_1fr]">
-            <SawHeaderButtons />
+        <div className="max-w-3xl grid grid-rows-[auto_1fr]">
+            <SawHeaderButtons className="min-w-0" />
 
-            <div className={classNames("grid grid-cols-[auto_auto_1fr_auto] gap-2 select-none", className)} {...rest}>
+            <div className={classNames("grid grid-cols-[auto_auto_1fr] gap-2 select-none", className)} {...rest}>
                 <ButtonStartStopMonitor />
 
                 <ActionsGroup_Get />
@@ -37,7 +37,6 @@ function ActionsGroup_Get() {
                 animate={{ opacity: isDisabled ? 0 : 1 }}
                 transition={{ duration: 0.2 }}
             >
-
                 <div className={labelGetClasses}>
                     Get
                 </div>

@@ -1,3 +1,4 @@
+import { type HTMLAttributes } from "react";
 import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
@@ -6,7 +7,7 @@ import { ImageHolder } from "@/components/ui";
 import { sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom, sawHandleAtom } from "@/store";
 import { SawHeaderRightActions } from "./4-buttons-actions";
 
-export function SawHeaderButtons() {
+export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     const isMonitoring = useAtomValue(isMonitorRunningAtom);
     const { iconsLarge } = useSnapshot(debugSettings.uiState);
 
@@ -15,7 +16,7 @@ export function SawHeaderButtons() {
     const raw = useAtomValue(sawHandleStrAtom);
 
     return (
-        <div className={classNames("min-w-0 h-8 max-w-3xl flex items-center justify-between")}>
+        <div className={classNames("h-8 flex items-center justify-between", className)} {...rest}>
 
             <div className="flex items-center gap-2 overflow-hidden">
                 {raw && (

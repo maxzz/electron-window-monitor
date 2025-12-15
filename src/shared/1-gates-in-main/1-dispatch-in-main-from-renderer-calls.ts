@@ -1,4 +1,4 @@
-import { Notification } from "electron";
+import { Notification, app } from "electron";
 import { type R2M } from "@/shared/ipc-types";
 import { electronState } from "../../x-electron/app/2-electron-globals";
 import { dndAction, highlightControl } from "../../x-electron/xternal-to-renderer/7-napi-calls";
@@ -44,6 +44,10 @@ export async function callFromRendererInMain(data: R2M.ToMainCalls): Promise<voi
                     w.webContents.send('send-to-renderer', { type: 'm2r:zoom-changed', level: next });
                 }
             }
+            break;
+        }
+        case 'r2m:exit-app': {
+            app.quit();
             break;
         }
         default: {

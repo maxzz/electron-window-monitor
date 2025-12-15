@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/shadcn/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/shadcn/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/shadcn/dropdown-menu";
 import { IconMenuHamburger5 } from "@/components/ui/icons/normal";
 import { TestLinksSubMenu } from "./1-test-links";
 import { ThemeSubMenu } from "./2-theme-sub-menu";
 import { useAtomValue } from "jotai";
 import { zoomLevelAtom } from "@/store/1-atoms/atom-zoom";
-import { zoomAction } from "@/shared/2-gates-in-client-as-atoms/3-to-main-apis";
+import { zoomAction, exitApp } from "@/shared/2-gates-in-client-as-atoms/3-to-main-apis";
 import { Minus, Plus, RotateCcw } from "lucide-react";
 
 export function TopMenu() {
@@ -62,6 +62,11 @@ export function TopMenu() {
 
                 <DropdownMenuSeparator />
                 <ThemeSubMenu />
+                
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => exitApp()} className="focus:bg-destructive/10 cursor-pointer">
+                    Exit
+                </DropdownMenuItem>
             </DropdownMenuContent>
             
         </DropdownMenu>

@@ -41,6 +41,10 @@ export function zoomAction(action: 'in' | 'out' | 'reset'): void {
     sendToMain({ type: 'r2m:zoom-action', action });
 }
 
+export function exitApp(): void {
+    sendToMain({ type: 'r2m:exit-app' });
+}
+
 export function getZoomLevel(): Promise<number> {
     return invokeMainTyped({ type: 'r2mi:get-zoom-level' });
 }

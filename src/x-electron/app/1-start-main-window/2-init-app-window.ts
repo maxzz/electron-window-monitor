@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { app, BrowserWindow } from "electron";
-import icon from "../../../../resources/icon.png?asset"; // This is only for linux
+//import icon from "../../../../resources/icon.png?asset"; // This is only for linux
 import { iniFileOptions } from "./8-ini-file-options";
 
 // The built directory structure
@@ -29,6 +29,7 @@ export function initAppWindow(): BrowserWindow {
         title: 'PMAT Monitor',
         ...(iniFileOptions.options?.bounds),
         show: false,
+        autoHideMenuBar: !(iniFileOptions.options?.showMenu ?? false), // Default to false (invisible) if undefined
         icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
         webPreferences: {
             preload: preloadPath,

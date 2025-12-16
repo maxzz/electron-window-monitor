@@ -6,6 +6,7 @@ import { fixBounds } from "../3-utils-main";
 export type IniOptions = {
     bounds: Rectangle;  // x, y, width, height
     devTools: boolean;  // is devTools open
+    showMenu?: boolean; // is menu bar visible
 };
 
 function loadIniFileOptions(): IniOptions | undefined {
@@ -21,9 +22,10 @@ function loadIniFileOptions(): IniOptions | undefined {
 }
 
 function saveIniFileOptions(win: BrowserWindow) {
-    const data = {
+    const data: IniOptions = {
         bounds: win.getNormalBounds(),
         devTools: win.webContents.isDevToolsOpened(),
+        showMenu: win.isMenuBarVisible(),
     };
     fs.writeFileSync(INI_FNAME, JSON.stringify(data));
 }

@@ -6,7 +6,7 @@ import { debugSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
 import { sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom, sawHandleAtom } from "@/store";
 import { PanelBuildProcess } from "./3-panel-build-process";
-import { ButtonClearHandle } from "./4-btns-clear-raw";
+import { ButtonClearHandle } from "./4-btn-clear-raw";
 import { ButtonShowReplyRawText } from "./5-btn-show-reply-raw";
 
 export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElement>) {
@@ -32,7 +32,7 @@ export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElem
                 </div>
             </div>
 
-            <PanelBuildProcess className="place-self-end" />
+            <PanelBuildProcess className="1place-self-end" />
 
             {raw && (
                 <SawHeaderRightActions isMonitoring={isMonitoring} raw={raw} />

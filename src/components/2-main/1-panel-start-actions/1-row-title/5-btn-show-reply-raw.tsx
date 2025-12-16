@@ -1,9 +1,8 @@
 import * as React from "react";
 import { AnimatePresence, motion } from "motion/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-// import { X } from "lucide-react";
-import { Button } from "@/components/ui/shadcn/button";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/shadcn/dialog";
+import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { SymbolCross } from "@/components/ui/icons";
 
@@ -63,7 +62,6 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                 </div>
 
                                 <DialogPrimitive.Close className={closeButtonClasses} tabIndex={-1}>
-                                    {/* <X className="size-4" /> */}
                                     <SymbolCross className="size-3 stroke-2 group-hover:stroke-3" />
                                     <span className="sr-only">Close</span>
                                 </DialogPrimitive.Close>
@@ -94,4 +92,3 @@ transition-colors \
 hover:bg-red-500 \
 hover:text-white \
 grid place-items-center";
-

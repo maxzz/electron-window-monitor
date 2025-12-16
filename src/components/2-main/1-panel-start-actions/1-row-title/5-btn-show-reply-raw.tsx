@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { SymbolCross } from "@/components/ui/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
-import { PropsGrid } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
+import { PropsGridOrEmpty } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
 export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
@@ -57,7 +57,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
 
                                 <Tabs defaultValue="raw" className="flex-1 min-h-0 w-full flex flex-col">
 
-                                    <TabsList className="w-max h-8 rounded grid grid-cols-[auto_auto] gap-x-1 justify-start select-none">
+                                    <TabsList className="w-max h-8 rounded grid grid-cols-[auto_auto] gap-x-1 justify-start select-none" tabIndex={-1}>
                                         <TabsTrigger className="text-xs rounded" value="raw">Raw JSON</TabsTrigger>
                                         <TabsTrigger className="text-xs rounded" value="info">Grid</TabsTrigger>
                                     </TabsList>
@@ -73,22 +73,14 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     </TabsContent>
 
                                     <TabsContent value="info" className="flex-1 min-h-0 text-xs">
-                                        {sawObj
-                                            ? (
-                                                <PropsGrid saw={sawObj} />
-                                            )
-                                            : (
-                                                <div className="p-4 text-sm text-muted-foreground text-center border rounded-md">
-                                                    No JSON data
-                                                </div>
-                                            )}
+                                        <PropsGridOrEmpty saw={sawObj} />
                                     </TabsContent>
                                 </Tabs>
 
-                                <DialogPrimitive.Close className={closeButtonClasses} tabIndex={-1}>
+                                {/* <DialogPrimitive.Close className={closeButtonClasses} tabIndex={-1}>
                                     <SymbolCross className="size-3 stroke-2 group-hover:stroke-3" />
                                     <span className="sr-only">Close</span>
-                                </DialogPrimitive.Close>
+                                </DialogPrimitive.Close> */}
 
                             </motion.div>
                         </DialogPrimitive.Content>

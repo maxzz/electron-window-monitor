@@ -1,6 +1,18 @@
 import { classNames } from "@/utils";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
+export function PropsGridOrEmpty({ saw }: { saw: GetTargetWindowResult | null; }) {
+    return (<>
+        {saw
+            ? <PropsGrid saw={saw} />
+            : (
+                <div className="p-4 text-sm text-muted-foreground text-center border rounded-md">
+                    No JSON data
+                </div>
+            )}
+    </>);
+}
+
 export function PropsGrid({ saw }: { saw: GetTargetWindowResult; }) {
     return (
         <div className="border border-border rounded-sm grid grid-cols-[auto_1fr] divide-y divide-border">

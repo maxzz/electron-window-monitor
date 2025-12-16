@@ -58,17 +58,21 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                 </Button>
             </DialogTrigger>
 
-            <DialogContent className="p-2 max-w-lg max-h-[40vh] flex flex-col">
+            <DialogContent className="p-2 max-w-lg h-[52vh] flex flex-col">
                 <DialogHeader>
-                    <DialogTitle className="text-xs">Second active window info</DialogTitle>
+                    <DialogTitle className="text-sm">Second active window info</DialogTitle>
                     <DialogDescription className="text-xs">This is the raw JSON data from the second active window.</DialogDescription>
                 </DialogHeader>
 
-                <ScrollArea className="flex-1 min-h-0 p-1 size-full bg-muted/50 rounded-md border" parentContentWidth fullHeight fixedWidth horizontal>
-                    <pre className="text-xs font-mono whitespace-pre-wrap break-all">
-                        {displayContent}
-                    </pre>
-                </ScrollArea>
+                <div className="relative size-full overflow-hidden">
+                    <div className="absolute inset-0">
+                        <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
+                            <pre className="text-xs font-mono">
+                                {displayContent}
+                            </pre>
+                        </ScrollArea>
+                    </div>
+                </div>
             </DialogContent>
         </Dialog>
     );

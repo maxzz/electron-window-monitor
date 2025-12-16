@@ -64,7 +64,7 @@ function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                     <DialogDescription className="text-xs">This is the raw JSON data from the second active window.</DialogDescription>
                 </DialogHeader>
 
-                <ScrollArea className="flex-1 p-1 w-full bg-muted/50 rounded-md border">
+                <ScrollArea className="flex-1 min-h-0 p-1 size-full bg-muted/50 rounded-md border" parentContentWidth fullHeight fixedWidth horizontal>
                     <pre className="text-xs font-mono whitespace-pre-wrap break-all">
                         {displayContent}
                     </pre>

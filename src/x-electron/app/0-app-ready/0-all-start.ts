@@ -6,8 +6,7 @@ import { createTray } from '../1-start-main-window/4-tray';
 import { createAppMenu } from '../1-start-main-window/5-app-menu';
 
 // Fix for "Request Autofill.enable failed" errors
-// app.commandLine.appendSwitch('enable-features', 'Autofill');
-app.commandLine.appendSwitch('disable-features', 'Autofill');
+app.commandLine.appendSwitch('disable-features', 'Autofill,AutofillServerCommunication,AutofillAssistant,PasswordManager,CreditCard,Address');
 
 app.whenReady().then(() => {
     connect_ListenersForCallFromRenderer();

@@ -66,7 +66,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                         <TabRowContent displayContent={displayContent} />
                                     </TabsContent>
 
-                                    <TabsContent value="info" className="flex-1 min-h-0 text-xs">
+                                    <TabsContent value="info" className="flex-1 min-h-0">
                                         <PropsGridOrEmpty saw={sawObj} />
                                     </TabsContent>
                                 </Tabs>
@@ -93,6 +93,7 @@ function TabRowContent({ displayContent }: { displayContent: string; }) {
                     {displayContent}
                 </pre>
             </ScrollArea>
+            
             <div className="absolute top-1 right-1 z-10">
                 <Button
                     className="p-1 size-7" size="icon" variant="ghost"

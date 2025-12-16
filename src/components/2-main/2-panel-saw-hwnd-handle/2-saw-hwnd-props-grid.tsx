@@ -15,7 +15,7 @@ export function PropsGridOrEmpty({ saw }: { saw: GetTargetWindowResult | null; }
 
 export function PropsGrid({ saw }: { saw: GetTargetWindowResult; }) {
     return (
-        <div className="border border-border rounded-sm grid grid-cols-[auto_1fr] divide-y divide-border">
+        <div className="text-xs border border-border rounded-sm grid grid-cols-[auto_1fr] divide-y divide-border">
             <GridRow name="caption"   /**/ value={saw.caption} />
             <GridRow name="classname" /**/ value={saw.classname} />
             <GridRow name="process"   /**/ value={saw.process} />

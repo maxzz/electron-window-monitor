@@ -1,15 +1,13 @@
-import { useState, type ComponentPropsWithoutRef } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/shadcn/dialog";
 import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
-import { SymbolCross, IconCopy } from "@/components/ui/icons";
-import { Check } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { PropsGridOrEmpty } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { classNames } from "@/utils";
+import { ButtonCopy } from "./6-btn-copy";
 
 export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -84,62 +82,6 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                 )}
             </AnimatePresence>
         </Dialog>
-    );
-}
-
-function ButtonCopy({ text, ...buttonProps }: { text: string; } & ComponentPropsWithoutRef<typeof Button>) {
-    const [showCheck, setShowCheck] = useState(false);
-
-    const handleCopy = () => {
-        const textToCopy = typeof text === "string"
-            ? text
-            : JSON.stringify(text, null, 2);
-        
-        navigator.clipboard.writeText(textToCopy);
-        setShowCheck(true);
-        setTimeout(() => {
-            setShowCheck(false);
-        }, 1000);
-    };
-
-    const { className, title, onClick, ...rest } = buttonProps;
-
-    return (
-        <Button
-            {...rest}
-            className={classNames("p-1 size-7 relative", className)}
-            size="icon"
-            variant="ghost"
-            onClick={(e) => {
-                handleCopy();
-                onClick?.(e);
-            }}
-            title={title || "Copy"}
-        >
-            <AnimatePresence mode="wait">
-                {showCheck ? (
-                    <motion.div
-                        key="check"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <Check className="size-4 text-green-600 dark:text-green-400" />
-                    </motion.div>
-                ) : (
-                    <motion.div
-                        key="copy"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <IconCopy className="size-4 text-muted-foreground" />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </Button>
     );
 }
 

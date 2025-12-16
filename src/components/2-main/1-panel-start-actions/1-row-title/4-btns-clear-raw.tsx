@@ -1,7 +1,16 @@
 import { useSetAtom } from "jotai";
-import { classNames } from "@/utils";
 import { doClearSawHandleAtom } from "@/store";
 import { utilityButtonClasses } from "../2-row-buttons/8-button-classes";
+import { Button } from "@/components/ui/shadcn/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/shadcn/dialog";
+import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 
 export function SawHeaderRightActions({ isMonitoring, raw }: { isMonitoring: boolean; raw: string; }) {
     if (isMonitoring) {
@@ -30,26 +39,38 @@ function ButtonClearHandle() {
 }
 
 function ButtonShowReplyRawText({ raw }: { raw: string; }) {
+    let displayContent = raw;
     try {
         const rawObj = JSON.parse(raw);
-        raw = JSON.stringify(rawObj, null, 2);
+        displayContent = JSON.stringify(rawObj, null, 2);
     } catch (e) {
-        raw = `Failed to parse: "${raw}"`;
+        // keep original raw if parse fails, maybe append error
     }
-    raw = `Second active window info:\n${raw}`;
 
     return (
-        <div className="relative group cursor-default">
-            <div className={classNames(utilityButtonClasses, "active:scale-100! transition-none!")}>
-                Raw
-            </div>
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button
+                    className="h-auto py-1 px-2 text-xs border-primary-500 hover:bg-primary-300 hover:text-foreground"
+                    variant="outline"
+                >
+                    Raw
+                </Button>
+            </DialogTrigger>
 
-            <div className="absolute hidden group-hover:block right-0 py-1">
-                <div className="relative px-2 py-1 text-xs bg-primary-300 border-primary-500 border shadow-md rounded-sm whitespace-pre z-50">
-                    {`${raw}`}
-                </div>
-            </div>
-        </div>
+            <DialogContent className="p-2 max-w-lg max-h-[40vh] flex flex-col">
+                <DialogHeader>
+                    <DialogTitle className="text-xs">Second active window info</DialogTitle>
+                    <DialogDescription className="text-xs">This is the raw JSON data from the second active window.</DialogDescription>
+                </DialogHeader>
+
+                <ScrollArea className="flex-1 p-1 w-full bg-muted/50 rounded-md border">
+                    <pre className="text-xs font-mono whitespace-pre-wrap break-all">
+                        {displayContent}
+                    </pre>
+                </ScrollArea>
+            </DialogContent>
+        </Dialog>
     );
 }
 

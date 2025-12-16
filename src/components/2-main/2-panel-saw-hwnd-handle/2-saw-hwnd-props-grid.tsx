@@ -1,32 +1,16 @@
-import { useAtomValue } from "jotai";
-import { useSnapshot } from "valtio";
 import { classNames } from "@/utils";
-import { napiBuildProgress, sawHandleAtom } from "@/store";
+import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
-export function SawHwndPropsGrid() {
-    const secondActiveWindow = useAtomValue(sawHandleAtom);
-    const lastBuildProgress = useSnapshot(napiBuildProgress).lastProgress;
-
-    return (<>
-        {secondActiveWindow && (
-            <div className="relative text-xs">
-
-                <div className="border-primary-500 border rounded-sm grid grid-cols-[auto_1fr]">
-                    <GridRow name="caption"   /**/ value={secondActiveWindow.caption} className="font-semibold" highlight={true} />
-                    <GridRow name="classname" /**/ value={secondActiveWindow.classname} />
-                    <GridRow name="process"   /**/ value={secondActiveWindow.process} />
-                    <GridRow name="browser"   /**/ value={secondActiveWindow.isBrowser ? 'yes' : 'no'} />
-                    <GridRow name="hwnd"      /**/ value={(secondActiveWindow?.hwnd || '').replace(/^0x00000000/, '0x')} />
-                </div>
-
-                {!!lastBuildProgress && (
-                    <div className="text-[.55rem] opacity-70 absolute right-2 bottom-1.5">
-                        last progress calls: {lastBuildProgress}
-                    </div>
-                )}
-            </div>
-        )}
-    </>);
+export function PropsGrid({ saw }: { saw: GetTargetWindowResult }) {
+    return (
+        <div className="border-primary-500 border rounded-sm grid grid-cols-[auto_1fr]">
+            <GridRow name="caption"   /**/ value={saw.caption} className="font-semibold" highlight={true} />
+            <GridRow name="classname" /**/ value={saw.classname} />
+            <GridRow name="process"   /**/ value={saw.process} />
+            <GridRow name="browser"   /**/ value={saw.isBrowser ? 'yes' : 'no'} />
+            <GridRow name="hwnd"      /**/ value={(saw?.hwnd || '').replace(/^0x00000000/, '0x')} />
+        </div>
+    );
 }
 
 function GridRow({ name, value, className, highlight }: { name: string; value: string; className?: string; highlight?: boolean; }) {

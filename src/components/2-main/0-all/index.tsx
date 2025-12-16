@@ -10,7 +10,7 @@ export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"d
     return (
         <div className={classNames("px-4 grid grid-rows-[auto_1fr_auto] gap-4 overflow-hidden", className)} {...rest}>
             
-            <StartActionsPanel className="" />
+            <StartActionsPanel />
 
             <div className="min-h-0 grid grid-rows-[auto_1fr]">
                 <SawHwndInfo className="" />

@@ -5,14 +5,17 @@ import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } 
 import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { SymbolCross } from "@/components/ui/icons";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
+import { PropsGrid } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
 
 export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     const [isOpen, setIsOpen] = React.useState(false);
 
     let displayContent = raw;
+    let sawObj = null;
     try {
-        const rawObj = JSON.parse(raw);
-        displayContent = JSON.stringify(rawObj, null, 2);
+        sawObj = JSON.parse(raw);
+        displayContent = JSON.stringify(sawObj, null, 2);
     } catch (e) {
         displayContent = `Error parsing JSON: ${e}\n\n${raw}`;
     }
@@ -51,15 +54,34 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     <DialogDescription className="text-xs">This is the raw JSON data from the second active window.</DialogDescription>
                                 </DialogHeader>
 
-                                <div className="relative size-full overflow-hidden">
-                                    <div className="absolute inset-0">
-                                        <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
-                                            <pre className="text-xs font-mono">
-                                                {displayContent}
-                                            </pre>
-                                        </ScrollArea>
-                                    </div>
-                                </div>
+                                <Tabs defaultValue="raw" className="flex-1 flex flex-col min-h-0 w-full">
+                                    <TabsList className="grid w-full grid-cols-2">
+                                        <TabsTrigger value="raw">Raw JSON</TabsTrigger>
+                                        <TabsTrigger value="info">Info Grid</TabsTrigger>
+                                    </TabsList>
+                                    
+                                    <TabsContent value="raw" className="flex-1 min-h-0 relative">
+                                        <div className="absolute inset-0">
+                                            <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
+                                                <pre className="text-xs font-mono">
+                                                    {displayContent}
+                                                </pre>
+                                            </ScrollArea>
+                                        </div>
+                                    </TabsContent>
+                                    
+                                    <TabsContent value="info" className="flex-1 min-h-0">
+                                        {sawObj ? (
+                                            <div className="p-1 border rounded-md">
+                                                <PropsGrid saw={sawObj} />
+                                            </div>
+                                        ) : (
+                                            <div className="p-4 text-sm text-muted-foreground text-center border rounded-md">
+                                                Invalid JSON data
+                                            </div>
+                                        )}
+                                    </TabsContent>
+                                </Tabs>
 
                                 <DialogPrimitive.Close className={closeButtonClasses} tabIndex={-1}>
                                     <SymbolCross className="size-3 stroke-2 group-hover:stroke-3" />

@@ -15,7 +15,7 @@ export function TopMenu() {
                 </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="overflow-hidden min-w-64">
+            <DropdownMenuContent className="mx-1 min-w-64 overflow-hidden">
                 <TestLinksSubMenu />
                 <DropdownMenuSeparator />
 
@@ -24,7 +24,7 @@ export function TopMenu() {
 
                 <DropdownMenuSeparator />
                 
-                <DropdownMenuItem className="focus:bg-destructive/10 cursor-pointer" onClick={() => exitApp()}>
+                <DropdownMenuItem className="focus:text-destructive cursor-pointer" onClick={() => exitApp()}>
                     <DropdownMenuLabel className="py-0 text-xs font-normal">Exit</DropdownMenuLabel>
                 </DropdownMenuItem>
             </DropdownMenuContent>

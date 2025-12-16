@@ -1,22 +1,8 @@
 import { useSetAtom } from "jotai";
 import { doClearSawHandleAtom } from "@/store";
 import { Button } from "@/components/ui/shadcn/button";
-import { ButtonShowReplyRawText } from "./5-btn-show-reply-raw";
 
-export function SawHeaderRightActions({ isMonitoring, raw }: { isMonitoring: boolean; raw: string; }) {
-    if (isMonitoring) {
-        return null;
-    }
-
-    return (
-        <div className="flex items-center space-x-1">
-            <ButtonClearHandle />
-            <ButtonShowReplyRawText raw={raw} />
-        </div>
-    );
-}
-
-function ButtonClearHandle() {
+export function ButtonClearHandle() {
     const doClearSawHandle = useSetAtom(doClearSawHandleAtom);
     return (
         <Button

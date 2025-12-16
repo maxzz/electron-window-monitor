@@ -5,8 +5,9 @@ import { classNames } from "@/utils";
 import { debugSettings } from "@/store/1-atoms";
 import { ImageHolder } from "@/components/ui";
 import { sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom, sawHandleAtom } from "@/store";
-import { SawHeaderRightActions } from "./4-btns-clear-raw";
 import { PanelBuildProcess } from "./3-panel-build-process";
+import { ButtonClearHandle } from "./4-btns-clear-raw";
+import { ButtonShowReplyRawText } from "./5-btn-show-reply-raw";
 
 export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     const isMonitoring = useAtomValue(isMonitorRunningAtom);
@@ -36,6 +37,19 @@ export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElem
             {raw && (
                 <SawHeaderRightActions isMonitoring={isMonitoring} raw={raw} />
             )}
+        </div>
+    );
+}
+
+function SawHeaderRightActions({ isMonitoring, raw }: { isMonitoring: boolean; raw: string; }) {
+    if (isMonitoring) {
+        return null;
+    }
+
+    return (
+        <div className="flex items-center space-x-1">
+            <ButtonClearHandle />
+            <ButtonShowReplyRawText raw={raw} />
         </div>
     );
 }

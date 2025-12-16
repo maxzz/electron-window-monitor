@@ -5,6 +5,7 @@ import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } 
 import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { SymbolCross, IconCopy } from "@/components/ui/icons";
+import { Check } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { PropsGridOrEmpty } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
@@ -86,6 +87,20 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
 }
 
 function TabRowContent({ displayContent }: { displayContent: string; }) {
+    const [showCheck, setShowCheck] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(
+            typeof displayContent === "string"
+                ? displayContent
+                : JSON.stringify(displayContent, null, 2)
+        );
+        setShowCheck(true);
+        setTimeout(() => {
+            setShowCheck(false);
+        }, 1000);
+    };
+
     return (
         <div className="absolute inset-0">
             <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
@@ -96,17 +111,33 @@ function TabRowContent({ displayContent }: { displayContent: string; }) {
             
             <div className="absolute top-1 right-1 z-10">
                 <Button
-                    className="p-1 size-7" size="icon" variant="ghost"
-                    onClick={() => {
-                        navigator.clipboard.writeText(
-                            typeof displayContent === "string"
-                                ? displayContent
-                                : JSON.stringify(displayContent, null, 2)
-                        );
-                    }}
+                    className="p-1 size-7 relative" size="icon" variant="ghost"
+                    onClick={handleCopy}
                     title="Copy JSON"
                 >
-                    <IconCopy className="size-4 text-muted-foreground" />
+                    <AnimatePresence mode="wait">
+                        {showCheck ? (
+                            <motion.div
+                                key="check"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <Check className="size-4 text-green-600 dark:text-green-400" />
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="copy"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <IconCopy className="size-4 text-muted-foreground" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </Button>
             </div>
         </div>

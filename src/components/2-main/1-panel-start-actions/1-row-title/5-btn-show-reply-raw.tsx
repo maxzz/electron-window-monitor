@@ -4,7 +4,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/shadcn/dialog";
 import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
-import { SymbolCross } from "@/components/ui/icons";
+import { SymbolCross, IconCopy } from "@/components/ui/icons";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
 import { PropsGridOrEmpty } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
@@ -69,12 +69,9 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                                     {displayContent}
                                                 </pre>
                                             </ScrollArea>
-                                            <div className="absolute top-2 right-2 z-10">
+                                            <div className="absolute top-1 right-1 z-10">
                                                 <Button
-                                                    size="icon"
-                                                    variant="ghost"
-                                                    className="p-1 size-7"
-                                                    title="Copy JSON"
+                                                    className="p-1 size-7" size="icon" variant="ghost"
                                                     onClick={() => {
                                                         navigator.clipboard.writeText(
                                                             typeof displayContent === "string"
@@ -82,12 +79,9 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                                                 : JSON.stringify(displayContent, null, 2)
                                                         );
                                                     }}
+                                                    title="Copy JSON"
                                                 >
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" />
-                                                        <path d="M5 15v2a2 2 0 0 0 2 2h8" stroke="currentColor"/>
-                                                        <rect x="3" y="3" width="13" height="13" rx="2" ry="2" />
-                                                    </svg>
+                                                    <IconCopy className="size-4 text-muted-foreground" />
                                                 </Button>
                                             </div>
                                         </div>

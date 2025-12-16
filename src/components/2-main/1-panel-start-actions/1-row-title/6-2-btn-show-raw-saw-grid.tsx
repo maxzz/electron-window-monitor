@@ -1,7 +1,7 @@
 import { classNames } from "@/utils";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
 
-export function PropsGridOrEmpty({ saw }: { saw: GetTargetWindowResult | null; }) {
+export function TabContentSawRawGrid({ saw }: { saw: GetTargetWindowResult | null; }) {
     return (<>
         {saw
             ? <PropsGrid saw={saw} />

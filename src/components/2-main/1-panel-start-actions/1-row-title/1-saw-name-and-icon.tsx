@@ -7,7 +7,7 @@ import { ImageHolder } from "@/components/ui";
 import { sawHandleStrAtom, isMonitorRunningAtom, sawIconAtom, sawHandleAtom } from "@/store";
 import { PanelBuildProcess } from "./3-panel-build-process";
 import { ButtonClearHandle } from "./4-btn-clear-raw";
-import { ButtonShowReplyRawText } from "./5-btn-show-reply-raw";
+import { ButtonShowReplyRawText } from "./5-btn-show-raw";
 
 export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElement>) {
     const isMonitoring = useAtomValue(isMonitorRunningAtom);

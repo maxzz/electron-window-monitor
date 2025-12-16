@@ -5,9 +5,9 @@ import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } 
 import { Button } from "@/components/ui/shadcn/button";
 import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
-import { PropsGridOrEmpty } from "../../2-panel-saw-hwnd-handle/2-saw-hwnd-props-grid";
+import { TabContentSawRawGrid } from "./6-2-btn-show-raw-saw-grid";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { ButtonCopy } from "./6-btn-copy";
+import { ButtonCopy } from "../../../ui/ui-local/6-btn-copy";
 
 export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -63,11 +63,11 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     </TabsList>
 
                                     <TabsContent value="raw" className="flex-1 min-h-0 relative">
-                                        <TabRowContent displayContent={displayContent} />
+                                        <TabContentSawRawJson displayContent={displayContent} />
                                     </TabsContent>
 
                                     <TabsContent value="info" className="flex-1 min-h-0">
-                                        <PropsGridOrEmpty saw={sawObj} />
+                                        <TabContentSawRawGrid saw={sawObj} />
                                     </TabsContent>
                                 </Tabs>
 
@@ -85,7 +85,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     );
 }
 
-function TabRowContent({ displayContent }: { displayContent: string; }) {
+function TabContentSawRawJson({ displayContent }: { displayContent: string; }) {
     return (
         <div className="absolute inset-0">
             <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
@@ -102,8 +102,11 @@ function TabRowContent({ displayContent }: { displayContent: string; }) {
 }
 
 const contentClasses = "\
-fixed left-[50%] top-[50%] p-2 w-full max-w-100 lg:max-w-lg h-[56vh] min-h-40 max-h-120 border bg-background shadow dark:shadow-white/20 flex flex-col gap-2 sm:rounded-lg z-50 \
-";
+fixed left-[50%] top-[50%] \
+p-2 w-full max-w-100 lg:max-w-lg h-[56vh] min-h-40 max-h-120 \
+bg-background shadow dark:shadow-white/20 \
+border sm:rounded-lg \
+flex flex-col gap-2 z-50";
 
 const closeButtonClasses = "\
 group \

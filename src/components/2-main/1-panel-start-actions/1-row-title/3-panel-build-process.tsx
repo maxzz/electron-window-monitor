@@ -30,7 +30,7 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     }
 
     return (
-        <div className={classNames("shrink-0 mx-1 text-xs text-foreground bg-orange-100 rounded-tl rounded-bl flex items-center gap-x-1", className)} {...rest}>
+        <div className={classNames("shrink-0 mx-1 text-xs bg-orange-100 dark:bg-orange-950 rounded flex items-center gap-x-1", className)} {...rest}>
             <div className="pl-1 pt-0.5 text-[.55rem]">
                 detecting controls:
             </div>

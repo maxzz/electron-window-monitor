@@ -16,7 +16,7 @@ export function PanelBuildProcess(props: ComponentPropsWithoutRef<"div">) {
 
 function BuildError({ buildError, className, ...rest }: { buildError: string; } & ComponentPropsWithoutRef<"div">) {
     return (
-        <div className={classNames("my-2 px-2 text-[.65rem] text-white bg-red-600 rounded-xs flex items-center gap-x-1", className)} {...rest}>
+        <div className={classNames("flex-1 mx-2 px-2 min-w-16 text-[.65rem] leading-5 text-white bg-red-600 rounded-xs cursor-default truncate flex items-center justify-end gap-x-1", className)} title={buildError} {...rest}>
             {buildError}
         </div>
     );
@@ -30,9 +30,9 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     }
 
     return (
-        <div className={classNames("my-2 text-xs text-primary-700 flex items-center gap-x-1", className)} {...rest}>
-            <div>
-                controls detection progress
+        <div className={classNames("shrink-0 mx-1 text-xs text-foreground bg-orange-100 rounded-tl rounded-bl flex items-center gap-x-1", className)} {...rest}>
+            <div className="pl-1 pt-0.5 text-[.55rem]">
+                detecting controls:
             </div>
 
             <div className="pt-0.5 min-w-10 font-semibold font-mono">
@@ -48,7 +48,7 @@ function BuildCounter({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
 
 const buttonClasses = "\
 px-2 py-1 \
-text-orange-100 bg-orange-500 border-orange-600 \
+text-white bg-orange-500 border-orange-600 \
 hover:text-white \
 hover:bg-orange-600 \
 hover:border-orange-700 \

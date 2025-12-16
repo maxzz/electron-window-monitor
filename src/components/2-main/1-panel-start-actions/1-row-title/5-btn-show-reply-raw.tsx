@@ -69,6 +69,27 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                                     {displayContent}
                                                 </pre>
                                             </ScrollArea>
+                                            <div className="absolute top-2 right-2 z-10">
+                                                <Button
+                                                    size="icon"
+                                                    variant="ghost"
+                                                    className="p-1 size-7"
+                                                    title="Copy JSON"
+                                                    onClick={() => {
+                                                        navigator.clipboard.writeText(
+                                                            typeof displayContent === "string"
+                                                                ? displayContent
+                                                                : JSON.stringify(displayContent, null, 2)
+                                                        );
+                                                    }}
+                                                >
+                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" />
+                                                        <path d="M5 15v2a2 2 0 0 0 2 2h8" stroke="currentColor"/>
+                                                        <rect x="3" y="3" width="13" height="13" rx="2" ry="2" />
+                                                    </svg>
+                                                </Button>
+                                            </div>
                                         </div>
                                     </TabsContent>
 
@@ -92,7 +113,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
 }
 
 const contentClasses = "\
-fixed left-[50%] top-[50%] p-2 h-[56vh] w-full max-w-lg border bg-background shadow dark:shadow-white/20 flex flex-col gap-2 sm:rounded-lg z-50 \
+fixed left-[50%] top-[50%] p-2 h-[56vh] w-full max-w-100 lg:max-w-lg border bg-background shadow dark:shadow-white/20 flex flex-col gap-2 sm:rounded-lg z-50 \
 ";
 
 const closeButtonClasses = "\

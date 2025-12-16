@@ -63,28 +63,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     </TabsList>
 
                                     <TabsContent value="raw" className="flex-1 min-h-0 relative">
-                                        <div className="absolute inset-0">
-                                            <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
-                                                <pre className="text-xs font-mono">
-                                                    {displayContent}
-                                                </pre>
-                                            </ScrollArea>
-                                            <div className="absolute top-1 right-1 z-10">
-                                                <Button
-                                                    className="p-1 size-7" size="icon" variant="ghost"
-                                                    onClick={() => {
-                                                        navigator.clipboard.writeText(
-                                                            typeof displayContent === "string"
-                                                                ? displayContent
-                                                                : JSON.stringify(displayContent, null, 2)
-                                                        );
-                                                    }}
-                                                    title="Copy JSON"
-                                                >
-                                                    <IconCopy className="size-4 text-muted-foreground" />
-                                                </Button>
-                                            </div>
-                                        </div>
+                                        <TabRowContent displayContent={displayContent} />
                                     </TabsContent>
 
                                     <TabsContent value="info" className="flex-1 min-h-0 text-xs">
@@ -106,8 +85,35 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     );
 }
 
+function TabRowContent({ displayContent }: { displayContent: string; }) {
+    return (
+        <div className="absolute inset-0">
+            <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
+                <pre className="text-xs font-mono">
+                    {displayContent}
+                </pre>
+            </ScrollArea>
+            <div className="absolute top-1 right-1 z-10">
+                <Button
+                    className="p-1 size-7" size="icon" variant="ghost"
+                    onClick={() => {
+                        navigator.clipboard.writeText(
+                            typeof displayContent === "string"
+                                ? displayContent
+                                : JSON.stringify(displayContent, null, 2)
+                        );
+                    }}
+                    title="Copy JSON"
+                >
+                    <IconCopy className="size-4 text-muted-foreground" />
+                </Button>
+            </div>
+        </div>
+    );
+}
+
 const contentClasses = "\
-fixed left-[50%] top-[50%] p-2 h-[56vh] w-full max-w-100 lg:max-w-lg border bg-background shadow dark:shadow-white/20 flex flex-col gap-2 sm:rounded-lg z-50 \
+fixed left-[50%] top-[50%] p-2 w-full max-w-100 lg:max-w-lg h-[56vh] min-h-40 max-h-120 border bg-background shadow dark:shadow-white/20 flex flex-col gap-2 sm:rounded-lg z-50 \
 ";
 
 const closeButtonClasses = "\

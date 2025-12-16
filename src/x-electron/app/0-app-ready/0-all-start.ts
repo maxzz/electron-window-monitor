@@ -5,14 +5,11 @@ import { setAppListeners } from '../1-start-main-window/3-2-listeners-of-app';
 import { createTray } from '../1-start-main-window/4-tray';
 import { createAppMenu } from '../1-start-main-window/5-app-menu';
 
-// Fix for "Request Autofill.enable failed" errors
-app.commandLine.appendSwitch('disable-features', 'Autofill,AutofillServerCommunication,AutofillAssistant,PasswordManager,CreditCard,Address');
-
 app.whenReady().then(() => {
     connect_ListenersForCallFromRenderer();
 
     createAppMenu(); // Set up application menu with zoom shortcuts
-    
+
     iniFileOptions.load();
     createAppWindow();
 

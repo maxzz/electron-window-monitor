@@ -34,22 +34,12 @@ export function SawHeaderButtons({ className, ...rest }: HTMLAttributes<HTMLElem
 
             <PanelBuildProcess className="1place-self-end" />
 
-            {raw && (
-                <SawHeaderRightActions isMonitoring={isMonitoring} raw={raw} />
+            {!isMonitoring && raw && (
+                <div className="flex items-center space-x-1">
+                    <ButtonClearHandle />
+                    <ButtonShowReplyRawText />
+                </div>
             )}
-        </div>
-    );
-}
-
-function SawHeaderRightActions({ isMonitoring, raw }: { isMonitoring: boolean; raw: string; }) {
-    if (isMonitoring) {
-        return null;
-    }
-
-    return (
-        <div className="flex items-center space-x-1">
-            <ButtonClearHandle />
-            <ButtonShowReplyRawText raw={raw} />
         </div>
     );
 }

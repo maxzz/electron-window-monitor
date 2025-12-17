@@ -1,28 +1,22 @@
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { useSnapshot } from "valtio";
 import { AnimatePresence, motion } from "motion/react";
+import { appSettings, sawRawDialogOpenAtom } from "@/store/1-atoms";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/shadcn/dialog";
 import { Button } from "@/components/ui/shadcn/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
+import { sawHandleParsedAtom } from "@/store/7-napi-atoms/1-do-get-hwnd/2-saw-handle-parsed";
 import { TabContentSawRawJson } from "./6-1-tab-content-saw-raw-json";
 import { TabContentSawRawGrid } from "./6-2-tab-content-saw-grid";
 import { DialogCloseButton } from "../../../ui/ui-local/6-btn-close-dialog";
-import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { appSettings } from "@/store/1-atoms";
 
-export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
-    const [isOpen, setIsOpen] = useState(false);
+export function ButtonShowReplyRawText() {
+    const [isOpen, setIsOpen] = useAtom(sawRawDialogOpenAtom);
+    
     const { appUi } = useSnapshot(appSettings);
-
-    let displayContent = raw;
-    let sawObj: GetTargetWindowResult | null = null;
-    try {
-        sawObj = JSON.parse(raw);
-        displayContent = JSON.stringify(sawObj, null, 2);
-    } catch (e) {
-        displayContent = `Error parsing JSON: ${e}\n\n${raw}`;
-    }
+    const { displayContent, parsed } = useAtomValue(sawHandleParsedAtom);
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -59,13 +53,10 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                 </DialogHeader>
 
                                 <Tabs 
-                                    value={appUi.sawTab} 
-                                    onValueChange={(value) => {
-                                        appSettings.appUi.sawTab = value as "raw" | "info";
-                                    }}
                                     className="flex-1 min-h-0 w-full flex flex-col"
+                                    value={appUi.sawTab} 
+                                    onValueChange={(value) => appSettings.appUi.sawTab = value as "raw" | "info"}
                                 >
-
                                     <TabsList className="w-max h-8 rounded grid grid-cols-[auto_auto] gap-x-1 justify-start select-none" tabIndex={-1}>
                                         <TabsTrigger className="text-xs rounded" value="raw">Raw JSON</TabsTrigger>
                                         <TabsTrigger className="text-xs rounded" value="info">Grid</TabsTrigger>
@@ -76,7 +67,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     </TabsContent>
 
                                     <TabsContent value="info" className="flex-1 min-h-0">
-                                        <TabContentSawRawGrid saw={sawObj} />
+                                        <TabContentSawRawGrid saw={parsed} />
                                     </TabsContent>
                                 </Tabs>
 

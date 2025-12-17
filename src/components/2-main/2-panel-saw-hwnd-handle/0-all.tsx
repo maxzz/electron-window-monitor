@@ -2,7 +2,7 @@ import { type HTMLAttributes } from "react";
 import { classNames } from "@/utils";
 import { useAtomValue } from "jotai";
 import { sawHandleAtom } from "@/store";
-import { PropsGrid } from "../1-panel-start-actions/1-row-title/6-2-btn-show-raw-saw-grid";
+import { PropsGrid } from "../1-panel-start-actions/1-row-title/6-2-tab-content-saw-grid";
 import { TotalCalls } from "./3-total-calls";
 
 export function SawHwndInfo({ className, ...rest }: HTMLAttributes<HTMLElement>) {

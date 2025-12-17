@@ -3,11 +3,11 @@ import { AnimatePresence, motion } from "motion/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/shadcn/dialog";
 import { Button } from "@/components/ui/shadcn/button";
-import { ScrollArea } from "@/components/ui/shadcn/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/shadcn/tabs";
-import { TabContentSawRawGrid } from "./6-2-btn-show-raw-saw-grid";
+import { TabContentSawRawJson } from "./6-1-tab-content-saw-raw-json";
+import { TabContentSawRawGrid } from "./6-2-tab-content-saw-grid";
+import { DialogCloseButton } from "../../../ui/ui-local/6-btn-close-dialog";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
-import { ButtonCopy } from "../../../ui/ui-local/6-btn-copy";
 
 export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -71,10 +71,7 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     </TabsContent>
                                 </Tabs>
 
-                                {/* <DialogPrimitive.Close className={closeButtonClasses} tabIndex={-1}>
-                                    <SymbolCross className="size-3 stroke-2 group-hover:stroke-3" />
-                                    <span className="sr-only">Close</span>
-                                </DialogPrimitive.Close> */}
+                                <DialogCloseButton />
 
                             </motion.div>
                         </DialogPrimitive.Content>
@@ -85,39 +82,9 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     );
 }
 
-function TabContentSawRawJson({ displayContent }: { displayContent: string; }) {
-    return (
-        <div className="absolute inset-0">
-            <ScrollArea className="p-1 size-full bg-muted/50 rounded-md border" parentContentWidth horizontal>
-                <pre className="text-xs font-mono">
-                    {displayContent}
-                </pre>
-            </ScrollArea>
-            
-            <div className="absolute top-1 right-1 z-10">
-                <ButtonCopy text={displayContent} title="Copy JSON" />
-            </div>
-        </div>
-    );
-}
-
 const contentClasses = "\
 fixed left-[50%] top-[50%] \
 p-2 w-full max-w-100 lg:max-w-lg h-[56vh] min-h-40 max-h-120 \
 bg-background shadow dark:shadow-white/20 \
 border sm:rounded-lg \
 flex flex-col gap-2 z-50";
-
-const closeButtonClasses = "\
-group \
-absolute \
-right-3 \
-top-3 \
-size-7 \
-rounded-sm \
-ring-0 \
-ring-offset-background \
-transition-colors \
-hover:bg-red-500 \
-hover:text-white \
-grid place-items-center";

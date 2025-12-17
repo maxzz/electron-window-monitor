@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSnapshot } from "valtio";
 import { AnimatePresence, motion } from "motion/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/shadcn/dialog";
@@ -8,9 +9,11 @@ import { TabContentSawRawJson } from "./6-1-tab-content-saw-raw-json";
 import { TabContentSawRawGrid } from "./6-2-tab-content-saw-grid";
 import { DialogCloseButton } from "../../../ui/ui-local/6-btn-close-dialog";
 import { type GetTargetWindowResult } from "@/x-electron/xternal-to-renderer/7-napi-calls";
+import { appSettings } from "@/store/1-atoms";
 
 export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
     const [isOpen, setIsOpen] = useState(false);
+    const { appUi } = useSnapshot(appSettings);
 
     let displayContent = raw;
     let sawObj: GetTargetWindowResult | null = null;
@@ -55,7 +58,13 @@ export function ButtonShowReplyRawText({ raw }: { raw: string; }) {
                                     <DialogDescription className="text-xs">This is the raw JSON data from the second active window.</DialogDescription>
                                 </DialogHeader>
 
-                                <Tabs defaultValue="raw" className="flex-1 min-h-0 w-full flex flex-col">
+                                <Tabs 
+                                    value={appUi.sawTab} 
+                                    onValueChange={(value) => {
+                                        appSettings.appUi.sawTab = value as "raw" | "info";
+                                    }}
+                                    className="flex-1 min-h-0 w-full flex flex-col"
+                                >
 
                                     <TabsList className="w-max h-8 rounded grid grid-cols-[auto_auto] gap-x-1 justify-start select-none" tabIndex={-1}>
                                         <TabsTrigger className="text-xs rounded" value="raw">Raw JSON</TabsTrigger>

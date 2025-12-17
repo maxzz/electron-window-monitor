@@ -5,10 +5,12 @@ export type AppUISettings = {
     theme: ThemeMode;
     uiAdvanced: UiAdvancedState;
     accordionsOpened: Record<string, boolean>;
+    sawTab: "raw" | "info";
 };
 
 export const defaultAppUISettings: AppUISettings = {
     theme: 'light',
     uiAdvanced: defaultUiAdvancedState,
     accordionsOpened: {},
+    sawTab: 'raw',
 };

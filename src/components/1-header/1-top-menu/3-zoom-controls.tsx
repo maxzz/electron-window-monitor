@@ -3,7 +3,7 @@ import { DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/shadcn/drop
 import { useAtomValue } from "jotai";
 import { zoomLevelAtom } from "@/store/1-atoms/atom-zoom";
 import { zoomAction } from "@/shared/2-gates-in-client-as-atoms/3-to-main-apis";
-import { Minus, Plus, RotateCcw } from "lucide-react";
+import { IconZoomMinus, IconZoomPlus, IconZoomReset } from "@/components/ui/icons/normal";
 
 export function ZoomControls() {
     const zoomLevel = useAtomValue(zoomLevelAtom);
@@ -24,7 +24,7 @@ export function ZoomControls() {
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); zoomAction('out'); }}
                     title="Zoom Out"
                 >
-                    <Minus className="size-3" />
+                    <IconZoomMinus className="size-3" />
                 </Button>
 
                 <span className="w-10 text-center text-xs tabular-nums">{zoomPercent}%</span>
@@ -34,16 +34,16 @@ export function ZoomControls() {
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); zoomAction('in'); }}
                     title="Zoom In"
                 >
-                    <Plus className="size-3" />
+                    <IconZoomPlus className="size-3" />
                 </Button>
 
                 <Button
-                    className="size-6 rounded-sm ml-1" variant="ghost" size="icon"
+                    className="ml-1 size-6 rounded-sm" variant="ghost" size="icon"
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); zoomAction('reset'); }}
                     disabled={zoomLevel === 0}
                     title="Reset Zoom"
                 >
-                    <RotateCcw className="size-3" />
+                    <IconZoomReset className="size-3" />
                 </Button>
             </div>
         </DropdownMenuItem>

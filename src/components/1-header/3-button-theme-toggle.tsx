@@ -2,7 +2,7 @@ import { useSnapshot } from "valtio";
 import { isThemeDark, toggleTheme } from "@/utils";
 import { appSettings } from "@/store/1-atoms";
 import { Button } from "@/components/ui/shadcn/button";
-import { Moon, Sun } from "lucide-react";
+import { IconThemeMoon, IconThemeSun } from "../ui/icons/normal";
 
 export function ButtonQuickToggleThemeMode() {
     const { theme } = useSnapshot(appSettings.appUi);
@@ -18,8 +18,8 @@ export function ButtonQuickToggleThemeMode() {
             type="button"
         >
             {isDark
-                ? <Sun className="size-5 stroke-1" />
-                : <Moon className="size-5 stroke-1" />
+                ? <IconThemeSun className="size-5 stroke-1!" />
+                : <IconThemeMoon className="size-5 stroke-1!" />
             }
         </Button>
     );

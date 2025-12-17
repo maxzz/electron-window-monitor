@@ -2,8 +2,7 @@ import { useState, type ComponentPropsWithoutRef } from "react";
 import { classNames } from "@/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/shadcn/button";
-import { IconCopy } from "@/components/ui/icons";
-import { Check } from "lucide-react";
+import { IconCopy, IconCheck } from "@/components/ui/icons/normal";
 
 export function ButtonCopy({ text, ...buttonProps }: { text: string; } & ComponentPropsWithoutRef<typeof Button>) {
     const [showCheck, setShowCheck] = useState(false);
@@ -37,7 +36,7 @@ export function ButtonCopy({ text, ...buttonProps }: { text: string; } & Compone
                         exit={{ opacity: 0, scale: 0.5 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <Check className="size-4 text-green-600 dark:text-green-400" />
+                        <IconCheck className="size-4 text-green-600 dark:text-green-400" />
                     </motion.div>
                 ) : (
                     <motion.div

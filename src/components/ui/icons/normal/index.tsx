@@ -11,6 +11,7 @@ export * from './29-2-zoom-plus';
 export * from './29-3-zoom-reset';
 export * from './30-1-theme-moon';
 export * from './30-2-theme-sun';
+export * from './31-check';
 
 export * from './40-sunnyvale';
 

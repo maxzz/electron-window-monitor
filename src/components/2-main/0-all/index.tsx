@@ -4,7 +4,7 @@ import { StartActionsPanel } from "../1-panel-start-actions";
 // import { SawHwndInfo } from "../2-panel-saw-hwnd-handle";
 import { SawControlsPanel } from "../3-panel-window-content";
 import { AccordionDemo, PopoverDemo } from "@/components/ui/ui-tests";
-import { Panel4DragAndDrop } from "../4-panel-dnd/0-all";
+import { Panel4DragAndDrop } from "../4-panel-dnd";
 
 export function Section2Main({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     return (

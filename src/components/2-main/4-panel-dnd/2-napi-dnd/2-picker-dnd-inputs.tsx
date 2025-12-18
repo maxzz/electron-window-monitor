@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import { subscribe } from "valtio";
 import { stateNapiPosTracker } from "@/store/7-napi-atoms";
-import { type PosAtoms } from "./9-state-of-tracker";
+import { type PosAtoms } from "@/store/7-napi-atoms/7-do-pos-tracking/9-state-of-tracker";
 
 export function useStateNapiPosTracker(posAtoms: PosAtoms) {
     const setPosValueX = useSetAtom(posAtoms.xAtom);

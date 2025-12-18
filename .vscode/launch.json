@@ -15,7 +15,7 @@
         
         // Debug Tailwind Plugin
         {
-            "name": "Debug tw plugin",
+            "name": "tw plugin debug",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/tailwind/test-debug-screens.js",

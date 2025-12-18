@@ -4,7 +4,7 @@ import { classNames } from "@/utils";
 import { motion } from "motion/react";
 import { IconDndTarget } from "@/components/ui/icons/normal";
 import { dndActionAtom, dndActionInitAtom } from "@/store/7-napi-atoms/7-do-pos-tracking";
-import { getFileUsConnectedHwndAtom, posAtoms, stateNapiPosTracker } from "./9-state-of-tracker";
+import { getFileUsConnectedHwndAtom, posAtoms, stateNapiPosTracker } from "@/store/7-napi-atoms/7-do-pos-tracking/9-state-of-tracker";
 import { useStateNapiPosTracker } from "./2-picker-dnd-inputs";
 
 export function NewInputXY() {

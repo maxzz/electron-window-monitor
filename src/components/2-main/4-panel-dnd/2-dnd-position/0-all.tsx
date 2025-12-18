@@ -6,6 +6,7 @@ import { PositionIndicator } from "./5-position-indicator";
 import { TestTargetWindowPosition } from "./1-test-target-position";
 import { TestTargetWindowPositionWoDrag } from "./2-test-target-position-wo-drag";
 import { TestTargetWindowPositionWReset } from "./3-test-target-position-w-reset";
+import { NewInputXY } from "../2-napi-dnd/1-picker-dnd-w-napi";
 
 export function BlockTargetWindowPosition({ className, ...rest }: ComponentPropsWithoutRef<"div">) {
     const sawHandle = useAtomValue(sawHandleAtom);
@@ -35,6 +36,8 @@ export function BlockTargetWindowPosition({ className, ...rest }: ComponentProps
                     <TestTargetWindowPositionWReset />
                     w/ reset
                 </div>
+
+                <NewInputXY />
             </div>
         </div>
     );

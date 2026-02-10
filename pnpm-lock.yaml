@@ -81,8 +81,8 @@ importers:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       pm-manifest:
-        specifier: 1.5.35
-        version: 1.5.35
+        specifier: 1.5.39
+        version: 1.5.39
       pm-manifest-icons:
         specifier: 1.0.6
         version: 1.0.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2456,8 +2456,8 @@ packages:
       react: ^18.2.0 || ^19
       react-dom: ^18.2.0 || ^19
 
-  pm-manifest@1.5.35:
-    resolution: {integrity: sha512-NrwFbII+R/47XR5B4FbTsoOO41Ei8/F0Ct1SrVBk9qAkzKOL8HbQdhdf19rWTLa/D3ylTiddhP1dvQ1Bf0+fkw==}
+  pm-manifest@1.5.39:
+    resolution: {integrity: sha512-pAobCkOecrS7yihL76kd674bhvn0fib7wFBGaSX00dwhBJ8HiXJjvlqhPtTeSEDwvcCb/pR7zjIUkwBmlZ1gmg==}
 
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
@@ -2738,8 +2738,8 @@ packages:
     resolution: {integrity: sha512-gmBGslpoQJtgnMAvOVqGZpEz9dyoKTCzy2nfz/n8aIFhN/jCE/rCmcxabB6jOOHV+0WNnylOxaxBQPSvcWklhA==}
     engines: {node: '>=12'}
 
-  strnum@2.1.1:
-    resolution: {integrity: sha512-7ZvoFTiCnGxBtDqJ//Cu6fWtZtc7Y3x+QOirG15wztbdngGSkht27o2pyGWrVy0b4WAy3jbKmnoK6g5VlVNUUw==}
+  strnum@2.1.2:
+    resolution: {integrity: sha512-l63NF9y/cLROq/yqKXSLtcMeeyOfnSQlfMSlzFt/K73oIaD8DGaQWd7Z34X9GPiKqP5rbSh84Hl4bOlLcjiSrQ==}
 
   sumchecker@3.0.1:
     resolution: {integrity: sha512-MvjXzkz/BOfyVDkG0oFOtBxHX2u3gKbMHIF/dXblZsgD3BWOFLmHovIpZY7BykJdAjcqRCBi1WYBNdEC9yI7vg==}
@@ -4736,7 +4736,7 @@ snapshots:
 
   fast-xml-parser@5.2.3:
     dependencies:
-      strnum: 2.1.1
+      strnum: 2.1.2
 
   fd-slicer@1.1.0:
     dependencies:
@@ -5392,7 +5392,7 @@ snapshots:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  pm-manifest@1.5.35:
+  pm-manifest@1.5.39:
     dependencies:
       '@types/uuid': 10.0.0
       fast-xml-parser: 5.2.3
@@ -5674,7 +5674,7 @@ snapshots:
     dependencies:
       ansi-regex: 6.2.2
 
-  strnum@2.1.1: {}
+  strnum@2.1.2: {}
 
   sumchecker@3.0.1:
     dependencies:

@@ -18,7 +18,7 @@
         "@tailwindcss/postcss": "^4.2.1",
         "@tailwindcss/vite": "^4.2.1",
         "@types/node": "^25.3.3",
-        "@types/react": "19.2.13",
+        "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
         "@vitejs/plugin-react": "5.1.4",
         "electron": "40.2.1",
